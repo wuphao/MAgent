@@ -1,171 +1,83 @@
 from __future__ import annotations
 
 import json
-import threading
-from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
 
 from langchain_core.documents import Document
+from langchain_core.runnables import Runnable
 from langchain_core.vectorstores import InMemoryVectorStore
 from langchain_ollama import OllamaEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from agent_app.prompts import SEED_DOCUMENTS
-from agent_app.settings import MANIFEST_PATH, now_iso
-
-
-@dataclass
-class UploadRecord:
-    file_name: str
-    stored_path: str
-    source: str
-    uploaded_at: str
-    text_length: int
+from agent_app.settings import OllamaConfig, RagConfig
 
 
 class LocalKnowledgeBase:
-    def __init__(self, base_url: str, embedding_model: str) -> None:
-        self.base_url = base_url
-        self.embedding_model = embedding_model
-        self._lock = threading.RLock()
-        self._seed_documents = list(SEED_DOCUMENTS)
-        self._user_documents: list[Document] = []
-        self._manifest: list[dict[str, Any]] = []
-        self._vectorstore: InMemoryVectorStore | None = None
-        self._retriever = None
-        self._index_error: str | None = None
-        self._load_manifest()
-        self._rebuild_index()
+    """持久化原始文档，并提供基于内存向量索引的语义检索。"""
 
-    def _load_manifest(self) -> None:
-        if not MANIFEST_PATH.exists():
-            return
+    def __init__(self, ollama: OllamaConfig, config: RagConfig) -> None:
+        self._ollama = ollama
+        self._config = config
+        self._manifest_path = config.data_dir / "documents.json"
+        saved_documents = self._load_documents()
+        self._documents = [*SEED_DOCUMENTS, *saved_documents]
+        self._retriever = self._build_retriever()
 
-        try:
-            payload = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
-        except Exception:
-            return
+    def _load_documents(self) -> list[Document]:
+        if not self._manifest_path.exists():
+            return []
+        records = json.loads(self._manifest_path.read_text(encoding="utf-8"))
+        return [Document(page_content=item["text"], metadata=item["metadata"]) for item in records]
 
-        records = payload.get("records", [])
-        for record in records:
-            text = record.get("text", "")
-            metadata = record.get("metadata", {})
-            if not text:
-                continue
-            metadata = dict(metadata)
-            metadata.setdefault("kind", "upload")
-            self._user_documents.append(Document(page_content=text, metadata=metadata))
-            self._manifest.append(record)
-
-    def _persist_manifest(self) -> None:
-        payload = {
-            "updated_at": now_iso(),
-            "records": self._manifest,
-        }
-        MANIFEST_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-
-    def _all_documents(self) -> list[Document]:
-        return [*self._seed_documents, *self._user_documents]
-
-    def _rebuild_index(self) -> None:
-        with self._lock:
-            documents = self._all_documents()
-            if not documents:
-                self._vectorstore = None
-                self._retriever = None
-                self._index_error = "knowledge base is empty"
-                return
-
-            try:
-                splitter = RecursiveCharacterTextSplitter(
-                    chunk_size=800,
-                    chunk_overlap=120,
-                )
-                split_docs = splitter.split_documents(documents)
-
-                embeddings = OllamaEmbeddings(
-                    model=self.embedding_model,
-                    base_url=self.base_url,
-                )
-                self._vectorstore = InMemoryVectorStore.from_documents(
-                    documents=split_docs,
-                    embedding=embeddings,
-                )
-                self._retriever = self._vectorstore.as_retriever(search_kwargs={"k": 4})
-                self._index_error = None
-            except Exception as exc:
-                self._vectorstore = None
-                self._retriever = None
-                self._index_error = str(exc)
-
-    def add_file(self, file_name: str, text: str, stored_path: Path) -> UploadRecord:
-        if not text.strip():
-            raise ValueError("上传文件没有可用于检索的文本内容。")
-
-        metadata = {
-            "source": file_name,
-            "kind": "upload",
-            "stored_path": str(stored_path),
-            "uploaded_at": now_iso(),
-        }
-
-        document = Document(page_content=text, metadata=metadata)
-        record = {
-            "file_name": file_name,
-            "stored_path": str(stored_path),
-            "source": file_name,
-            "uploaded_at": metadata["uploaded_at"],
-            "text": text,
-            "metadata": metadata,
-        }
-
-        with self._lock:
-            self._user_documents.append(document)
-            self._manifest.append(record)
-            self._persist_manifest()
-            self._rebuild_index()
-
-        return UploadRecord(
-            file_name=file_name,
-            stored_path=str(stored_path),
-            source=file_name,
-            uploaded_at=metadata["uploaded_at"],
-            text_length=len(text),
+    def _save_documents(self) -> None:
+        self._config.data_dir.mkdir(parents=True, exist_ok=True)
+        user_documents = [
+            document
+            for document in self._documents
+            if document.metadata.get("kind") == "file"
+        ]
+        records = [
+            {"text": document.page_content, "metadata": document.metadata}
+            for document in user_documents
+        ]
+        self._manifest_path.write_text(
+            json.dumps(records, ensure_ascii=False, indent=2),
+            encoding="utf-8",
         )
 
-    def search(self, query: str, k: int = 4) -> list[Document]:
-        with self._lock:
-            retriever = self._retriever
-        if retriever is None:
-            return []
+    def _build_retriever(self) -> Runnable:
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=self._config.chunk_size,
+            chunk_overlap=self._config.chunk_overlap,
+        )
+        chunks = splitter.split_documents(self._documents)
+        embeddings = OllamaEmbeddings(
+            model=self._ollama.embedding_model,
+            base_url=self._ollama.base_url,
+        )
+        store = InMemoryVectorStore.from_documents(chunks, embeddings)
+        return store.as_retriever(search_kwargs={"k": self._config.top_k})
 
-        try:
-            docs = retriever.invoke(query)
-        except Exception:
-            return []
-        return list(docs[:k]) if isinstance(docs, list) else list(docs)
+    def add_file(self, path: Path) -> None:
+        """添加一个 UTF-8 文本文件，并重建内存索引。"""
+        text = path.read_text(encoding="utf-8")
+        if not text.strip():
+            raise ValueError("文件内容为空")
+        self._documents.append(
+            Document(page_content=text, metadata={"source": str(path), "kind": "file"})
+        )
+        self._save_documents()
+        self._retriever = self._build_retriever()
 
-    def stats(self) -> dict[str, Any]:
-        with self._lock:
-            return {
-                "seed_documents": len(self._seed_documents),
-                "uploaded_documents": len(self._user_documents),
-                "total_documents": len(self._seed_documents) + len(self._user_documents),
-                "indexed": self._retriever is not None,
-                "manifest_records": len(self._manifest),
-                "index_error": self._index_error,
-            }
+    def search(self, query: str) -> list[Document]:
+        """返回与查询最相关的文档片段。"""
+        return list(self._retriever.invoke(query))
 
-    def list_sources(self) -> list[dict[str, Any]]:
-        with self._lock:
-            records = [
-                {
-                    "source": doc.metadata.get("source", "unknown"),
-                    "kind": doc.metadata.get("kind", "unknown"),
-                    "uploaded_at": doc.metadata.get("uploaded_at", ""),
-                }
-                for doc in self._all_documents()
-            ]
-        return records
-
+    def stats(self) -> dict[str, int]:
+        return {
+            "documents": len(self._documents),
+            "user_documents": sum(
+                doc.metadata.get("kind") == "file" for doc in self._documents
+            ),
+        }

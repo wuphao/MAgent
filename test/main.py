@@ -1,5 +1,5 @@
-from agent_app.server import run_server
+from agent_app.cli import run_console
 
 
 if __name__ == "__main__":
-    run_server()
+    run_console()

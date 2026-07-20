@@ -1,37 +1,43 @@
 from __future__ import annotations
 
-import json
-import os
+import asyncio
 from typing import Any
+
+from agent_app.settings import McpConfig
 
 
 class MCPRegistry:
-    def __init__(self) -> None:
-        self.enabled = os.getenv("MCP_ENABLED", "false").lower() in {"1", "true", "yes", "on"}
-        self.server_url = os.getenv("MCP_SERVER_URL", "").strip()
-        self.server_name = os.getenv("MCP_SERVER_NAME", "local-mcp").strip()
-        self.notes = os.getenv("MCP_NOTES", "MCP bridge reserved for future tool integrations.").strip()
+    """管理配置文件中声明的单个 MCP 服务。"""
+
+    def __init__(self, config: McpConfig) -> None:
+        self.config = config
 
     def status(self) -> dict[str, Any]:
         return {
-            "enabled": self.enabled,
-            "server_name": self.server_name,
-            "server_url": self.server_url,
-            "notes": self.notes,
+            "enabled": self.config.enabled,
+            "server_name": self.config.server_name,
+            "transport": self.config.transport,
+            "server_url": self.config.server_url,
         }
 
-    def call(self, tool_name: str, arguments: str) -> str:
-        if not self.enabled:
-            return (
-                "MCP 尚未启用。你可以通过环境变量 MCP_ENABLED=true、MCP_SERVER_URL 等参数接入外部工具。"
-            )
-        return json.dumps(
-            {
-                "status": "reserved",
-                "tool_name": tool_name,
-                "arguments": arguments,
-                "note": "This project has a stable MCP extension point, but the remote transport is not wired yet.",
-            },
-            ensure_ascii=False,
-        )
+    def load_tools(self) -> list[Any]:
+        """加载 MCP 工具；MCP 未启用时返回空列表。"""
+        if not self.config.enabled:
+            return []
 
+        from langchain_mcp_adapters.client import MultiServerMCPClient
+
+        if self.config.transport == "stdio":
+            connection: dict[str, Any] = {
+                "transport": "stdio",
+                "command": self.config.command,
+                "args": list(self.config.args),
+            }
+        else:
+            connection = {
+                "transport": "streamable_http",
+                "url": self.config.server_url,
+            }
+
+        client = MultiServerMCPClient({self.config.server_name: connection})
+        return asyncio.run(client.get_tools())

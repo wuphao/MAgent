@@ -1,0 +1,19 @@
+[ollama]
+base_url = "http://localhost:11434"
+chat_model = "qwen3:8b"
+embedding_model = "nomic-embed-text"
+temperature = 0.1
+
+[rag]
+data_dir = "data"
+chunk_size = 800
+chunk_overlap = 120
+top_k = 4
+
+[mcp]
+enabled = false
+server_name = "local-mcp"
+transport = "streamable_http" # 可选：streamable_http、stdio
+server_url = ""
+command = ""
+args = []

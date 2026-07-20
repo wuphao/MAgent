@@ -1,70 +1,52 @@
-# Agent Demo
+# 本地控制台 Agent
 
-这是一个本地 Agent Demo，当前包含：
+这是一个只在控制台运行的本地 Agent，保留了以下能力：
 
-- `POST /api/chat`：流式问答接口，支持会话记忆
-- `POST /api/upload`：上传文件并加入本地知识库
-- `GET /health`：健康检查
+- 使用本地 Ollama 对话模型
+- 多轮会话记忆
+- 本地 RAG 知识库
+- 安全计算器工具
+- MCP 配置与扩展入口
 
-## 启动
+## 准备环境
 
-先确保本地 Ollama 已运行，并且可访问：
+安装并启动 Ollama，然后下载配置文件中使用的模型：
 
-- `http://localhost:11434`
+```powershell
+ollama pull qwen3:8b
+ollama pull nomic-embed-text
+pip install -r requirements.txt
+```
 
-然后执行：
+模型名、Ollama 地址、RAG 参数和 MCP 参数都在 `config.toml` 中修改。
 
-```bash
+## 运行
+
+```powershell
 python main.py
 ```
 
-默认监听：
+控制台命令：
 
-- `http://0.0.0.0:8050`
+- `/add <文件路径>`：把 UTF-8 文本文件加入 RAG 知识库
+- `/status`：查看 RAG 和 MCP 状态
+- `/help`：查看帮助
+- `/quit`：退出
 
-## 目录结构
+知识库记录保存在 `data/documents.json`。程序启动时会调用 Ollama 的嵌入模型重建内存向量索引。
 
-- `main.py`：启动入口
-- `agent_app/server.py`：HTTP 接口
-- `agent_app/service.py`：Agent 运行时和会话逻辑
-- `agent_app/knowledge_base.py`：本地知识库、向量索引、上传入库
-- `agent_app/tools.py`：工具定义
-- `agent_app/text_utils.py`：文本处理、流式解析、计算器
-- `agent_app/settings.py`：路径和环境变量配置
-- `agent_app/prompts.py`：系统提示词和种子文档
-- `agent_app/mcp_registry.py`：MCP 预留扩展位
+## MCP 说明
 
-## 问答接口
+MCP 默认关闭。启用 Streamable HTTP 服务：
 
-`POST /api/chat`
-
-请求体示例：
-
-```json
-{
-  "session_id": "user_001",
-  "message": "刘慈欣出生年份加上《三体》出版年份，再除以 3，结果是多少？",
-  "stream": true
-}
+```toml
+[mcp]
+enabled = true
+server_name = "local-mcp"
+transport = "streamable_http"
+server_url = "http://localhost:8000/mcp"
+command = ""
+args = []
 ```
 
-`stream=true` 时返回 SSE 流。
-
-## 上传接口
-
-`POST /api/upload`
-
-使用 `multipart/form-data`，字段名支持：
-
-- `file`
-- `files`
-
-上传后的文件会写入本地 `data/uploads/`，并进入知识库索引。
-
-## 记忆
-
-记忆按 `session_id` 隔离，同一个会话可以继续追问。
-
-## MCP
-
-已经预留 `mcp_status` 和 `mcp_call` 工具入口。当前默认不连真实 MCP 服务，但后续可以通过环境变量扩展。
+也可以把 `transport` 改为 `stdio`，并填写 `command` 和 `args`。启动时加载到的 MCP 工具会和 RAG、计算器工具一起直接交给 Agent 使用。
