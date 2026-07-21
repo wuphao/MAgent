@@ -1,26 +1,32 @@
-from agents.biomarker_agent import BiomarkerAgent
-from agents.biomarker_agent import BiomarkerAgent
+from __future__ import annotations
+
+from typing import Any
+
 from agents.cognitive_agent import CognitiveAgent
-from agents.controller_agent import ControllerAgent
-from agents.followup_agent import FollowUpAgent
+from agents.biomarker_agent import BiomarkerAgent
+from agents.data_quality_agent import DataQualityAgent
+from agents.functional_agent import FunctionalStagingAgent
 from agents.imaging_agent import ImagingAgent
-from agents.knowledge_agent import KnowledgeAgent
+from agents.longitudinal_agent import LongitudinalAgent
+from agents.synthesis_agent import ClinicalSynthesisAgent
 
 
 class Orchestrator:
-    def __init__(self):
-        self.agents = [
-            ImagingAgent(),
-            BiomarkerAgent(),
-            CognitiveAgent(),
-            FollowUpAgent(),
-            KnowledgeAgent(),
-        ]
-        self.controller = ControllerAgent()
+    """Run RWE agents in their evidence dependency order."""
 
-    def run(self, memory):
+    def __init__(self, use_llm: bool = False):
+        self.agents = [
+            DataQualityAgent(use_llm=use_llm),
+            CognitiveAgent(use_llm=use_llm),
+            FunctionalStagingAgent(use_llm=use_llm),
+            LongitudinalAgent(use_llm=use_llm),
+            BiomarkerAgent(use_llm=use_llm),
+            ImagingAgent(use_llm=use_llm),
+            ClinicalSynthesisAgent(use_llm=use_llm),
+        ]
+
+    def run(self, memory: dict[str, Any]) -> dict[str, Any]:
         for agent in self.agents:
             memory = agent.run(memory)
-
-        memory = self.controller.run(memory)
+        memory["final_report"] = memory["agent_outputs"]["临床整合Agent"]
         return memory

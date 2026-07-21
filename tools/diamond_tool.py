@@ -1,12 +1,17 @@
 import csv
-import csv
+import hashlib
 import os
+import re
 import subprocess
-import sys
-import tempfile
 from pathlib import Path
 
-from config import DIAMOND_CHECKPOINT, DIAMOND_OUTPUT_DIR, DIAMOND_PREDICT_SCRIPT
+from config import (
+    DIAMOND_CHECKPOINT,
+    DIAMOND_DEVICE,
+    DIAMOND_OUTPUT_DIR,
+    DIAMOND_PREDICT_SCRIPT,
+    DIAMOND_PYTHON,
+)
 
 
 class DiamondTool:
@@ -19,12 +24,15 @@ class DiamondTool:
         checkpoint_path: str | None = None,
         output_dir: Path | None = None,
         device: str | None = None,
+        python_executable: str | None = None,
         batch_size: int = 1,
     ):
         self.predict_script = Path(predict_script or DIAMOND_PREDICT_SCRIPT)
         self.checkpoint_path = Path(checkpoint_path or DIAMOND_CHECKPOINT) if (checkpoint_path or DIAMOND_CHECKPOINT) else None
         self.output_dir = Path(output_dir or DIAMOND_OUTPUT_DIR)
-        self.device = device or os.getenv("DIAMOND_DEVICE", "cpu")
+        self.device = device or DIAMOND_DEVICE
+        self.python_executable = Path(python_executable or DIAMOND_PYTHON)
+        self.adapter_script = Path(__file__).resolve().with_name("diamond_h5_adapter.py")
         self.batch_size = batch_size
 
     def run(self, inputs):
@@ -40,6 +48,18 @@ class DiamondTool:
             return self._read_prediction_csv(Path(csv_path))
 
         h5_path = inputs.get("diamond_h5_path") or inputs.get("h5_path")
+        mri_path = inputs.get("mri_path")
+        pet_path = inputs.get("pet_path")
+        sample_id = str(inputs.get("sample_id") or inputs.get("patient_number") or "patient")
+        rid = str(inputs.get("rid") or "")
+        if not h5_path and mri_path and pet_path:
+            h5_path, cached_csv, adapter_stdout = self._prepare_from_paths(
+                Path(mri_path), Path(pet_path), sample_id, rid
+            )
+            if cached_csv is not None:
+                result = self._read_prediction_csv(cached_csv)
+                result.update({"cached": True, "h5_path": str(h5_path), "adapter_stdout": adapter_stdout})
+                return result
         if not h5_path:
             return {}
 
@@ -52,15 +72,15 @@ class DiamondTool:
             )
         if not self.checkpoint_path.exists():
             raise FileNotFoundError(f"DiaMond checkpoint 不存在: {self.checkpoint_path}")
+        if not self.python_executable.exists():
+            raise FileNotFoundError(f"DiaMond Python解释器不存在: {self.python_executable}")
 
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        with tempfile.NamedTemporaryFile(
-            suffix=".csv", dir=self.output_dir, delete=False, newline=""
-        ) as tmp:
-            output_csv = Path(tmp.name)
+        h5_path = Path(h5_path)
+        output_csv = h5_path.with_name(h5_path.stem.replace("_input", "") + "_prediction.csv")
 
         command = [
-            sys.executable,
+            str(self.python_executable),
             str(self.predict_script),
             "--h5",
             str(h5_path),
@@ -73,19 +93,61 @@ class DiamondTool:
             "--batch-size",
             str(self.batch_size),
         ]
-        completed = subprocess.run(
-            command,
-            capture_output=True,
-            text=True,
-            check=True,
-        )
+        completed = self._run_command(command, "DiaMond预测")
         result = self._read_prediction_csv(output_csv)
         if completed.stdout:
             result["stdout"] = completed.stdout.strip()
         if completed.stderr:
             result["stderr"] = completed.stderr.strip()
         result["source_csv"] = str(output_csv)
+        result["h5_path"] = str(h5_path)
+        result["checkpoint"] = str(self.checkpoint_path)
+        result["device"] = self.device
+        result["cached"] = False
         return result
+
+    def _prepare_from_paths(
+        self,
+        mri_path: Path,
+        pet_path: Path,
+        sample_id: str,
+        rid: str,
+    ) -> tuple[Path, Path | None, str]:
+        if not self.adapter_script.exists():
+            raise FileNotFoundError(f"DiaMond H5适配器不存在: {self.adapter_script}")
+        if not self.python_executable.exists():
+            raise FileNotFoundError(f"DiaMond Python解释器不存在: {self.python_executable}")
+        if not mri_path.exists():
+            raise FileNotFoundError(f"MRI路径不存在: {mri_path}")
+        if not pet_path.exists():
+            raise FileNotFoundError(f"PET路径不存在: {pet_path}")
+        safe_id = re.sub(r"[^A-Za-z0-9_.-]+", "_", sample_id).strip("._") or "patient"
+        signature_source = "|".join([
+            str(mri_path.resolve()), str(pet_path.resolve()),
+            str(self.checkpoint_path.resolve()) if self.checkpoint_path else "",
+        ])
+        signature = hashlib.sha256(signature_source.encode("utf-8")).hexdigest()[:12]
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        h5_path = self.output_dir / f"{safe_id}_{signature}_input.h5"
+        prediction_csv = self.output_dir / f"{safe_id}_{signature}_prediction.csv"
+        if h5_path.exists() and prediction_csv.exists():
+            return h5_path, prediction_csv, "使用已有H5和预测缓存"
+        command = [
+            str(self.python_executable), str(self.adapter_script),
+            "--mri", str(mri_path), "--pet", str(pet_path),
+            "--output-h5", str(h5_path), "--sample-id", safe_id,
+            "--rid", rid,
+        ]
+        completed = self._run_command(command, "MRI/PET转DiaMond H5")
+        return h5_path, None, completed.stdout.strip()
+
+    @staticmethod
+    def _run_command(command: list[str], label: str) -> subprocess.CompletedProcess[str]:
+        completed = subprocess.run(command, capture_output=True, text=True)
+        if completed.returncode != 0:
+            detail = (completed.stderr or completed.stdout or "无错误输出").strip()
+            raise RuntimeError(f"{label}失败(exit={completed.returncode}): {detail}")
+        return completed
 
     def _read_prediction_csv(self, csv_path: Path):
         if not csv_path.exists():

@@ -1,64 +1,92 @@
-from agents.base_agent import BaseAgent
+from __future__ import annotations
+
+from pathlib import Path
+import re
+from typing import Any
+
 from agents.base_agent import BaseAgent
 from tools.diamond_tool import DiamondTool
-from tools.mri_tool import MRIAtrophyTool
-from tools.pet_tool import PETAmyloidTool
 
 
 class ImagingAgent(BaseAgent):
+    """Run DiaMond on manually supplied MRI/PET paths."""
+
     name = "影像Agent"
 
-    def call_tools(self, memory):
-        pet = PETAmyloidTool().run(memory["raw_inputs"]["pet_path"])
-        mri = MRIAtrophyTool().run(memory["raw_inputs"]["mri_path"])
-        try:
-            diamond = DiamondTool().run(memory["raw_inputs"])
-        except Exception as exc:
-            diamond = {"error": str(exc)}
-        memory["tool_results"]["imaging"] = {"pet": pet, "mri": mri, "diamond": diamond}
-        return {"pet": pet, "mri": mri, "diamond": diamond}
+    def analyze(self, memory: dict[str, Any]) -> dict[str, Any]:
+        imaging = memory["normalized_case"].get("imaging") or {}
+        mri = self._path_status(imaging.get("mri"), "MRI")
+        pet = self._path_status(imaging.get("pet"), "PET")
+        prediction: dict[str, Any] = {}
+        error = None
+        if mri["path_exists"] and pet["path_exists"]:
+            patient = memory["normalized_case"].get("patient") or {}
+            patient_number = str(patient.get("patient_number") or "patient")
+            match = re.search(r"_(\d+)$", patient_number)
+            rid = match.group(1) if match else str(patient.get("patient_id") or "")
+            try:
+                prediction = DiamondTool().run({
+                    "mri_path": mri["path"],
+                    "pet_path": pet["path"],
+                    "sample_id": patient_number,
+                    "rid": rid,
+                })
+            except Exception as exc:
+                error = f"{type(exc).__name__}: {exc}"
 
-    def reason(self, tool_results):
-        pet = tool_results["pet"]
-        mri = tool_results["mri"]
-        diamond = tool_results.get("diamond") or {}
-
-        if diamond.get("risk_signal"):
-            risk_signal = diamond["risk_signal"]
-            abnormal = bool(diamond.get("abnormal", False))
-            evidence = [
-                f"DiaMond预测={diamond.get('pred_label', '未知')}",
-                f"DiaMond概率={diamond.get('probabilities', {})}",
-                f"全脑SUVR={pet['global_suvr']}",
-                f"Centiloid={pet['centiloid']}",
-                f"MRI海马萎缩={mri['hippocampal_atrophy']}",
-            ]
+        if prediction.get("pred_label"):
+            status = "prediction_completed"
+            evidence = [{
+                "form": "imaging_diamond",
+                "record_id": None,
+                "date": None,
+                "finding": (
+                    f"DiaMond预测={prediction.get('pred_label')}，"
+                    f"概率={prediction.get('probabilities')}，"
+                    f"置信度={prediction.get('confidence')}"
+                ),
+            }]
+        elif error:
+            status = "prediction_failed"
+            evidence = []
+        elif mri["path_provided"] or pet["path_provided"]:
+            status = "paths_incomplete_or_not_found"
+            evidence = []
         else:
-            risk_signal = "高" if pet["amyloid_status"] == "阳性" else "低"
-            abnormal = pet["amyloid_status"] == "阳性"
-            evidence = [
-                f"全脑SUVR={pet['global_suvr']}",
-                f"Centiloid={pet['centiloid']}",
-                f"MRI海马萎缩={mri['hippocampal_atrophy']}",
-            ]
-
-        default_output = {
-            "风险信号": risk_signal,
-            "证据": evidence,
-            "异常": abnormal,
+            status = "awaiting_manual_paths"
+            evidence = []
+        return {
+            "domain": "imaging",
+            "status": status,
+            "mri": mri,
+            "pet": pet,
+            "diamond_prediction": prediction or None,
+            "prediction_error": error,
+            "etiology_signal": prediction.get("risk_signal", "undetermined") if prediction else "undetermined",
+            "evidence": evidence,
+            "limitations": [
+                "DiaMond输出是研究模型预测，不是临床诊断",
+                "输入MRI/PET必须与模型训练预处理和模态要求相容",
+                "当前不单独生成PET SUVR/Centiloid或MRI分区体积",
+            ],
         }
 
-        return self.llm_reason(
-            system_prompt=(
-                "你是阿尔茨海默病影像分析 Agent。"
-                "请优先根据 DiaMond 模型预测结果，再结合 PET 和 MRI 结果给出简洁、结构化的中文判断。"
-                "请使用中文键名：风险信号、证据、异常。"
+    @staticmethod
+    def _path_status(value: Any, modality: str) -> dict[str, Any]:
+        if isinstance(value, dict):
+            raw_path = value.get("path")
+        else:
+            raw_path = value
+        path = str(raw_path or "").strip()
+        exists = Path(path).exists() if path else False
+        return {
+            "modality": modality,
+            "path": path,
+            "path_provided": bool(path),
+            "path_exists": exists,
+            "analysis_status": (
+                "path_verified_analysis_pending" if exists
+                else "path_not_found" if path
+                else "path_pending_manual_input"
             ),
-            user_payload=(
-                f"DiaMond 预测结果: {diamond}\n"
-                f"PET 结果: {pet}\n"
-                f"MRI 结果: {mri}\n"
-                "请输出 JSON，键名使用：风险信号、证据、异常。"
-            ),
-            default_output=default_output,
-        )
+        }

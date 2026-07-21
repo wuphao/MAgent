@@ -1,11 +1,14 @@
-def init_case_memory(raw_case):
+from __future__ import annotations
+
+from typing import Any
+
+
+def init_case_memory(raw_case: dict[str, Any]) -> dict[str, Any]:
+    patient = raw_case.get("patient") or {}
     return {
-        "case_id": raw_case["case_id"],
-        "basic_info": raw_case["basic_info"],
-        "raw_inputs": raw_case["raw_inputs"],
-        "tool_results": {},
+        "case_id": patient.get("patient_number") or patient.get("patient_id") or "unknown",
+        "raw_case": raw_case,
+        "normalized_case": {},
         "agent_outputs": {},
-        "conflicts": [],
-        "controller_output": {},
         "final_report": {},
     }
