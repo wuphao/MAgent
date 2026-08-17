@@ -1,70 +1,118 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
 
-from langchain.agents import create_agent
-from langchain_core.messages import HumanMessage
-from langchain_ollama import ChatOllama
-from langgraph.checkpoint.memory import MemorySaver
+from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
+from langchain_openai import ChatOpenAI
 
-from agent_app.knowledge_base import LocalKnowledgeBase
-from agent_app.mcp_registry import MCPRegistry
-from agent_app.prompts import SYSTEM_PROMPT
+from agent_app.memory import Memory, MemoryStore
+from agent_app.rag import create_rag_store
 from agent_app.settings import AppConfig
-from agent_app.tools import create_tools
 
 
-class AgentService:
-    """统一管理模型、知识库、工具和会话记忆。"""
+SYSTEM_PROMPT = """
+你是一个简洁的中文助手。默认使用中文回答。
+如果用户问题附带了“长期记忆”，请把它作为用户偏好或项目背景使用。
+如果用户问题附带了“本地知识库资料”，请优先根据资料回答。
+如果资料不足，请明确说明，不要编造来源。
+""".strip()
+
+
+class ChatService:
+    """DeepSeek chat service with optional long-term memory and local RAG."""
 
     def __init__(self, config: AppConfig) -> None:
-        self.config = config
-        self.knowledge_base = LocalKnowledgeBase(config.ollama, config.rag)
-        self.mcp = MCPRegistry(config.mcp)
-
-        self.agent = self._create_agent()
-
-    def _create_agent(self) -> Any:
-        """创建 Agent，并注册内置工具和 MCP 工具。"""
-        ollama_config = self.config.ollama
-        model = ChatOllama(
-            model=ollama_config.chat_model,
-            base_url=ollama_config.base_url,
-            temperature=ollama_config.temperature,
+        deepseek = config.deepseek
+        self._model = ChatOpenAI(
+            model=deepseek.chat_model,
+            api_key=deepseek.api_key,
+            base_url=deepseek.base_url,
+            temperature=deepseek.temperature,
         )
+        self._rag = create_rag_store(config.rag) if config.rag.enabled else None
+        self._memory = MemoryStore(config.memory) if config.memory.enabled else None
+        self._messages: list[BaseMessage] = [SystemMessage(content=SYSTEM_PROMPT)]
 
-        built_in_tools = create_tools(self.knowledge_base, self.mcp)
-        external_tools = self.mcp.load_tools()
+    def chat(self, message: str) -> str:
+        user_message = self._build_augmented_message(message)
+        self._messages.append(HumanMessage(content=user_message))
+        response = self._model.invoke(self._messages)
+        answer = self._message_text(response)
+        self._messages.append(AIMessage(content=answer))
+        return answer
 
-        return create_agent(
-            model=model,
-            tools=[*built_in_tools, *external_tools],
-            system_prompt=SYSTEM_PROMPT,
-            checkpointer=MemorySaver(),
-        )
+    def add_document(self, path: str) -> int:
+        if self._rag is None:
+            raise RuntimeError("RAG is disabled.")
+        return self._rag.add_file(Path(path).expanduser().resolve())
 
-    def chat(self, message: str, session_id: str = "console") -> str:
-        result = self.agent.invoke(
-            {"messages": [HumanMessage(content=message)]},
-            config={"configurable": {"thread_id": session_id}},
-        )
-        return self._last_message_text(result)
+    def search(self, query: str) -> list[dict[str, object]]:
+        if self._rag is None:
+            return []
+        return self._rag.search(query)
 
-    def add_document(self, path: Path) -> None:
-        self.knowledge_base.add_file(path)
+    def rag_status(self) -> dict[str, object]:
+        if self._rag is None:
+            return {"enabled": False, "chunks": 0}
+        return {"enabled": True, "chunks": self._rag.count()}
 
-    def status(self) -> dict[str, Any]:
-        return {
-            "rag": self.knowledge_base.stats(),
-            "mcp": self.mcp.status(),
-        }
+    def remember(self, content: str, kind: str = "fact") -> Memory:
+        if self._memory is None:
+            raise RuntimeError("Memory is disabled.")
+        return self._memory.add(content, kind=kind)
+
+    def memories(self) -> list[Memory]:
+        if self._memory is None:
+            return []
+        return self._memory.list()
+
+    def forget(self, memory_id: str) -> bool:
+        if self._memory is None:
+            return False
+        return self._memory.forget(memory_id)
+
+    def memory_status(self) -> dict[str, object]:
+        if self._memory is None:
+            return {"enabled": False, "active": 0, "total": 0}
+        return self._memory.status()
+
+    def _build_augmented_message(self, message: str) -> str:
+        sections = []
+
+        if self._memory is not None:
+            memories = self._memory.search(message)
+            if memories:
+                memory_context = "\n".join(
+                    f"- ({memory.kind}) {memory.content}" for memory in memories
+                )
+                sections.append(f"长期记忆：\n{memory_context}")
+
+        if self._rag is not None:
+            documents = self._rag.search(message)
+            if documents:
+                rag_context = "\n\n".join(
+                    "[资料 {index}]\n来源：{source}\n内容：{content}".format(
+                        index=index,
+                        source=document["metadata"].get("source", "未知"),
+                        content=document["content"],
+                    )
+                    for index, document in enumerate(documents, start=1)
+                )
+                sections.append(f"本地知识库资料：\n{rag_context}")
+
+        if not sections:
+            return message
+
+        context = "\n\n".join(sections)
+        return f"{context}\n\n用户问题：\n{message}"
 
     @staticmethod
-    def _last_message_text(result: dict[str, Any]) -> str:
-        content = result["messages"][-1].content
+    def _message_text(message: BaseMessage) -> str:
+        content = message.content
         if isinstance(content, str):
             return content
         if isinstance(content, list):
-            return "".join(item.get("text", "") for item in content if isinstance(item, dict))
+            return "".join(
+                item.get("text", "") for item in content if isinstance(item, dict)
+            )
         return str(content)

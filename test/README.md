@@ -1,52 +1,72 @@
-# 本地控制台 Agent
+# DeepSeek Command Line Chat Demo with Local RAG
 
-这是一个只在控制台运行的本地 Agent，保留了以下能力：
+This is a minimal learning demo. It uses DeepSeek for chat and Chroma for a
+local RAG prototype.
 
-- 使用本地 Ollama 对话模型
-- 多轮会话记忆
-- 本地 RAG 知识库
-- 安全计算器工具
-- MCP 配置与扩展入口
-
-## 准备环境
-
-安装并启动 Ollama，然后下载配置文件中使用的模型：
+## Setup
 
 ```powershell
-ollama pull qwen3:8b
-ollama pull nomic-embed-text
 pip install -r requirements.txt
 ```
 
-模型名、Ollama 地址、RAG 参数和 MCP 参数都在 `config.toml` 中修改。
+Fill in your DeepSeek API key in `config.toml`:
 
-## 运行
+```toml
+[deepseek]
+api_key = "your-api-key"
+base_url = "https://api.deepseek.com"
+chat_model = "deepseek-chat"
+temperature = 0.1
+```
+
+You can also leave `api_key` empty and set `DEEPSEEK_API_KEY` in your environment.
+
+## Run
 
 ```powershell
 python main.py
 ```
 
-控制台命令：
+Type your message and press Enter. Press Ctrl+C, or Ctrl+Z then Enter, to exit.
 
-- `/add <文件路径>`：把 UTF-8 文本文件加入 RAG 知识库
-- `/status`：查看 RAG 和 MCP 状态
-- `/help`：查看帮助
-- `/quit`：退出
+## RAG Commands
 
-知识库记录保存在 `data/documents.json`。程序启动时会调用 Ollama 的嵌入模型重建内存向量索引。
-
-## MCP 说明
-
-MCP 默认关闭。启用 Streamable HTTP 服务：
-
-```toml
-[mcp]
-enabled = true
-server_name = "local-mcp"
-transport = "streamable_http"
-server_url = "http://localhost:8000/mcp"
-command = ""
-args = []
+```powershell
+/add .\notes.txt
+/search your question
+/status
 ```
 
-也可以把 `transport` 改为 `stdio`，并填写 `command` 和 `args`。启动时加载到的 MCP 工具会和 RAG、计算器工具一起直接交给 Agent 使用。
+The Chroma database is persisted under `data/chroma` by default.
+
+The RAG backend is selected in `config.toml`:
+
+```toml
+[rag]
+enabled = true
+provider = "chroma" # chroma, qdrant, or pgvector
+```
+
+- `chroma`: local prototype, no separate database service required.
+- `qdrant`: lightweight production service. Run Qdrant yourself and set `qdrant_url`.
+- `pgvector`: use an existing PostgreSQL database with the pgvector extension and set `postgres_dsn`.
+
+Qdrant and pgvector dependencies are optional. Uncomment them in
+`requirements.txt` only when you switch to that backend.
+
+This project uses a tiny local hash embedding function so the RAG pipeline can
+run without downloading an embedding model. It is useful for learning the flow,
+but production quality retrieval should replace it with a real embedding model
+such as bge-m3, nomic-embed-text, or an API embedding model.
+
+## Memory Commands
+
+Long-term memory is saved to `data/memories.json`.
+
+```powershell
+/remember 用户偏好中文回答，回答要简洁直接
+/memories
+/forget mem_xxxxx
+```
+
+During chat, related memories are retrieved and added to the model context.

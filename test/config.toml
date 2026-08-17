@@ -1,19 +1,22 @@
-[ollama]
-base_url = "http://localhost:11434"
-chat_model = "qwen3:8b"
-embedding_model = "nomic-embed-text"
+[deepseek]
+api_key = 'sk-319c2ac879c644d7affccdaec0c09728'
+base_url = "https://api.deepseek.com"
+chat_model = "deepseek-chat"
 temperature = 0.1
 
 [rag]
-data_dir = "data"
+enabled = true
+provider = "chroma" # chroma, qdrant, or pgvector
+persist_dir = "data/chroma"
+collection_name = "local_docs"
 chunk_size = 800
 chunk_overlap = 120
 top_k = 4
+embedding_dimensions = 384
+qdrant_url = "http://localhost:6333"
+postgres_dsn = ""
 
-[mcp]
-enabled = false
-server_name = "local-mcp"
-transport = "streamable_http" # 可选：streamable_http、stdio
-server_url = ""
-command = ""
-args = []
+[memory]
+enabled = true
+path = "data/memories.json"
+top_k = 5

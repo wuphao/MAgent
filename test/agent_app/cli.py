@@ -1,91 +1,113 @@
 from __future__ import annotations
 
-from pathlib import Path
-
-from agent_app.service import AgentService
+from agent_app.service import ChatService
 from agent_app.settings import load_config
 
 
-HELP_TEXT = """命令：
-  /add <文件路径>  添加 UTF-8 文本文件到 RAG 知识库
-  /status           查看 RAG 和 MCP 状态
-  /help             查看帮助
-  /quit             退出
+HELP_TEXT = """Commands:
+  /add <file>      Add a UTF-8 text file to the local RAG store
+  /search <query>  Search the local RAG store without calling the chat model
+  /remember <text> Save a long-term memory
+  /memories        List active long-term memories
+  /forget <id>     Delete a long-term memory
+  /status          Show RAG and memory status
+  /help            Show this help
+  /quit            Exit
 """
-
-EXIT_COMMANDS = {"/quit", "/exit"}
 
 
 def run_console() -> None:
-    """启动交互式控制台。"""
     config = load_config()
-    print(f"正在连接 Ollama：{config.ollama.chat_model} ({config.ollama.base_url})")
-    service = AgentService(config)
-    print("本地 Agent 已启动。输入 /help 查看命令。")
+    if not config.deepseek.api_key:
+        print("DeepSeek API key is empty. Fill config.toml or set DEEPSEEK_API_KEY.")
+        return
+
+    service = ChatService(config)
+
+    print(f"DeepSeek chat started: {config.deepseek.chat_model}")
+    print("Type /help for commands. Press Ctrl+C or Ctrl+Z then Enter to exit.")
 
     while True:
-        user_input = _read_input()
-        if user_input is None:
-            print("再见！")
+        try:
+            user_input = input("\nYou: ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print("\nBye.")
             return
+
         if not user_input:
             continue
+
         if user_input.startswith("/"):
             if _handle_command(service, user_input):
                 return
             continue
 
-        _answer_question(service, user_input)
+        try:
+            answer = service.chat(user_input)
+        except Exception as error:
+            print(f"Error: {error}")
+            continue
+
+        print(f"Assistant: {answer}")
 
 
-def _read_input() -> str | None:
-    try:
-        return input("\n你：").strip()
-    except (EOFError, KeyboardInterrupt):
-        print()
-        return None
-
-
-def _handle_command(service: AgentService, command_line: str) -> bool:
-    """执行控制台命令；返回 True 表示应该退出程序。"""
+def _handle_command(service: ChatService, command_line: str) -> bool:
     command, _, argument = command_line.partition(" ")
+    argument = argument.strip()
 
-    if command in EXIT_COMMANDS:
-        print("再见！")
+    if command in {"/quit", "/exit"}:
+        print("Bye.")
         return True
     if command == "/help":
         print(HELP_TEXT)
     elif command == "/status":
-        status = service.status()
-        print("RAG：", status["rag"])
-        print("MCP：", status["mcp"])
+        print(f"RAG: {service.rag_status()}")
+        print(f"Memory: {service.memory_status()}")
     elif command == "/add":
-        _add_document(service, argument.strip())
+        if not argument:
+            print("Usage: /add <file>")
+        else:
+            try:
+                chunks = service.add_document(argument)
+                print(f"Added {chunks} chunks to RAG.")
+            except Exception as error:
+                print(f"Add failed: {error}")
+    elif command == "/search":
+        if not argument:
+            print("Usage: /search <query>")
+        else:
+            results = service.search(argument)
+            if not results:
+                print("No results.")
+            for index, result in enumerate(results, start=1):
+                metadata = result["metadata"]
+                print(
+                    f"\n[{index}] source={metadata.get('source', 'unknown')} "
+                    f"distance={result['distance']}"
+                )
+                print(str(result["content"])[:500])
+    elif command == "/remember":
+        if not argument:
+            print("Usage: /remember <text>")
+        else:
+            try:
+                memory = service.remember(argument)
+                print(f"Remembered {memory.id}.")
+            except Exception as error:
+                print(f"Remember failed: {error}")
+    elif command == "/memories":
+        memories = service.memories()
+        if not memories:
+            print("No active memories.")
+        for memory in memories:
+            print(f"{memory.id} [{memory.kind}] {memory.content}")
+    elif command == "/forget":
+        if not argument:
+            print("Usage: /forget <id>")
+        elif service.forget(argument):
+            print(f"Forgot {argument}.")
+        else:
+            print(f"Memory not found: {argument}")
     else:
-        print(f"未知命令：{command}。输入 /help 查看帮助。")
+        print(f"Unknown command: {command}. Type /help for commands.")
     return False
-
-
-def _add_document(service: AgentService, file_name: str) -> None:
-    if not file_name:
-        print("用法：/add <文件路径>")
-        return
-
-    path = Path(file_name).expanduser().resolve()
-    if not path.is_file():
-        print(f"文件不存在：{path}")
-        return
-
-    try:
-        service.add_document(path)
-        print(f"已加入知识库：{path}")
-    except (OSError, UnicodeError, ValueError) as error:
-        print(f"添加失败：{error}")
-
-
-def _answer_question(service: AgentService, question: str) -> None:
-    try:
-        answer = service.chat(question)
-        print(f"助手：{answer}")
-    except Exception as error:
-        print(f"调用失败：{error}")
