@@ -113,7 +113,7 @@ def require_dependencies() -> tuple[Any, Any]:
 
 
 def clean(value: Any) -> str:
-    return "" if value is None else str(value).strip().strip("\ufeff")
+    return "" if value is None else str(value).strip().strip("\N{ZERO WIDTH NO-BREAK SPACE}")
 
 
 def parse_date(value: Any, row_number: int) -> str:

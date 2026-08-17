@@ -11,6 +11,7 @@ HELP_TEXT = """Commands:
   /memories        List active long-term memories
   /forget <id>     Delete a long-term memory
   /status          Show RAG and memory status
+  /eval <jsonl>    Evaluate retrieval Recall@K, MRR, and keyword recall
   /help            Show this help
   /quit            Exit
 """
@@ -83,9 +84,25 @@ def _handle_command(service: ChatService, command_line: str) -> bool:
                 metadata = result["metadata"]
                 print(
                     f"\n[{index}] source={metadata.get('source', 'unknown')} "
-                    f"distance={result['distance']}"
+                    f"page={metadata.get('page') or '-'} "
+                    f"section={metadata.get('section') or '-'} "
+                    f"score={result.get('score', 0)}"
                 )
                 print(str(result["content"])[:500])
+    elif command == "/eval":
+        if not argument:
+            print("Usage: /eval <jsonl>")
+        else:
+            try:
+                summary = service.evaluate(argument)
+                print(
+                    f"questions={summary.questions} "
+                    f"recall@k={summary.recall_at_k:.3f} "
+                    f"mrr={summary.mean_reciprocal_rank:.3f} "
+                    f"keyword_recall={summary.keyword_recall:.3f}"
+                )
+            except Exception as error:
+                print(f"Evaluation failed: {error}")
     elif command == "/remember":
         if not argument:
             print("Usage: /remember <text>")

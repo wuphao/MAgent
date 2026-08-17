@@ -30,6 +30,16 @@ class RagConfig:
     embedding_dimensions: int
     qdrant_url: str
     postgres_dsn: str
+    candidate_k: int
+    keyword_weight: float
+    vector_weight: float
+    max_context_chars: int
+    min_relevance: float
+    log_path: Path
+    embedding_provider: str
+    embedding_model: str
+    reranker_provider: str
+    reranker_model: str
 
 
 @dataclass(frozen=True)
@@ -83,6 +93,16 @@ def load_config(path: Path = CONFIG_PATH) -> AppConfig:
             embedding_dimensions=int(rag_section.get("embedding_dimensions", 384)),
             qdrant_url=str(rag_section.get("qdrant_url", "http://localhost:6333")),
             postgres_dsn=str(rag_section.get("postgres_dsn", "")),
+            candidate_k=int(rag_section.get("candidate_k", 20)),
+            keyword_weight=float(rag_section.get("keyword_weight", 0.35)),
+            vector_weight=float(rag_section.get("vector_weight", 0.65)),
+            max_context_chars=int(rag_section.get("max_context_chars", 12000)),
+            min_relevance=float(rag_section.get("min_relevance", 0.08)),
+            log_path=(path.parent / rag_section.get("log_path", "data/rag_queries.jsonl")).resolve(),
+            embedding_provider=str(rag_section.get("embedding_provider", "sentence_transformers")),
+            embedding_model=str(rag_section.get("embedding_model", "BAAI/bge-m3")),
+            reranker_provider=str(rag_section.get("reranker_provider", "cross_encoder")),
+            reranker_model=str(rag_section.get("reranker_model", "BAAI/bge-reranker-v2-m3")),
         ),
         memory=MemoryConfig(
             enabled=bool(memory_section.get("enabled", True)),
@@ -105,6 +125,18 @@ def _validate_config(config: AppConfig) -> None:
         raise ValueError("rag.top_k must be greater than 0")
     if config.rag.embedding_dimensions < 1:
         raise ValueError("rag.embedding_dimensions must be greater than 0")
+    if config.rag.embedding_provider not in {"sentence_transformers", "hash"}:
+        raise ValueError("rag.embedding_provider must be sentence_transformers or hash")
+    if config.rag.reranker_provider not in {"cross_encoder", "none"}:
+        raise ValueError("rag.reranker_provider must be cross_encoder or none")
+    if config.rag.candidate_k < config.rag.top_k:
+        raise ValueError("rag.candidate_k must be greater than or equal to rag.top_k")
+    if config.rag.keyword_weight < 0 or config.rag.vector_weight < 0:
+        raise ValueError("RAG retrieval weights cannot be negative")
+    if config.rag.keyword_weight + config.rag.vector_weight <= 0:
+        raise ValueError("At least one RAG retrieval weight must be positive")
+    if config.rag.max_context_chars < 500:
+        raise ValueError("rag.max_context_chars must be at least 500")
     if config.rag.provider == "pgvector" and not config.rag.postgres_dsn:
         raise ValueError("rag.postgres_dsn is required when provider is pgvector")
     if config.memory.top_k < 1:

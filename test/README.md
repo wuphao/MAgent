@@ -1,7 +1,7 @@
 # DeepSeek Command Line Chat Demo with Local RAG
 
-This is a minimal learning demo. It uses DeepSeek for chat and Chroma for a
-local RAG prototype.
+This is a learning-oriented RAG application. It uses DeepSeek for chat and
+supports Chroma, Qdrant, and pgvector stores.
 
 ## Setup
 
@@ -37,6 +37,11 @@ Type your message and press Enter. Press Ctrl+C, or Ctrl+Z then Enter, to exit.
 /status
 ```
 
+`/add` supports UTF-8 TXT, Markdown, PDF, DOCX, and CSV. Markdown headings,
+PDF page numbers, DOCX headings, and CSV row numbers are retained as metadata.
+Unchanged files are skipped; changed files replace their old chunks without
+leaving stale trailing chunks.
+
 The Chroma database is persisted under `data/chroma` by default.
 
 The RAG backend is selected in `config.toml`:
@@ -54,10 +59,15 @@ provider = "chroma" # chroma, qdrant, or pgvector
 Qdrant and pgvector dependencies are optional. Uncomment them in
 `requirements.txt` only when you switch to that backend.
 
-This project uses a tiny local hash embedding function so the RAG pipeline can
-run without downloading an embedding model. It is useful for learning the flow,
-but production quality retrieval should replace it with a real embedding model
-such as bge-m3, nomic-embed-text, or an API embedding model.
+Retrieval combines vector candidates with BM25 keyword candidates, applies a
+`bge-reranker-v2-m3` cross-encoder rerank, removes duplicates, enforces a relevance floor,
+and records query diagnostics in `data/rag_queries.jsonl`. Follow-up questions
+are rewritten using recent chat history. Context is length-bounded and answers
+are instructed to cite `[资料 N]` sources.
+
+The default semantic embedding model is `BAAI/bge-m3`. A tiny local hash
+embedding remains available by setting `embedding_provider = "hash"`; it is
+only intended for offline pipeline demonstrations, not retrieval quality.
 
 ## Memory Commands
 
@@ -70,3 +80,10 @@ Long-term memory is saved to `data/memories.json`.
 ```
 
 During chat, related memories are retrieved and added to the model context.
+
+## Retrieval evaluation
+
+`agent_app.rag_evaluator.evaluate_retrieval` reads JSONL cases containing
+`question`, `expected_sources`, and `expected_keywords`, and reports Recall@K,
+MRR, and keyword recall. This makes retrieval changes measurable rather than
+subjective.

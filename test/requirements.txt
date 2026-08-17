@@ -1,5 +1,8 @@
 langchain-openai>=0.3.0
 chromadb>=0.5.0
+pypdf>=5.0.0
+python-docx>=1.1.0
+sentence-transformers>=3.0.0
 
 # Optional RAG backends:
 # qdrant-client>=1.10.0
