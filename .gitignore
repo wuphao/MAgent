@@ -51,4 +51,12 @@ Desktop.ini
 # Logs and generated output
 *.log
 output/
-
+evaluation/stage-*/test-packages/
+evaluation/stage-*/v2-store*/
+evaluation/stage-*/tasks*.sqlite3
+evaluation/stage-*/assets/
+evaluation/stage-*/*.sqlite3
+evaluation/stage-*/*.nii
+evaluation/stage-*/*.nii.gz
+evaluation/stage-*/*store/
+evaluation/stage-*/*tasks.sqlite3

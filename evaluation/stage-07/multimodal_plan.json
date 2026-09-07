@@ -1,0 +1,223 @@
+{
+  "request": {
+    "project_id": "stage07_eval",
+    "subject_scope": [],
+    "goal": "multimodal_summary",
+    "snapshot_id": null,
+    "as_of": "2026-09-07T13:08:11.937785Z",
+    "allowed_capabilities": [],
+    "budget": {
+      "max_calls": 0,
+      "max_tokens": 0,
+      "max_cost": null
+    },
+    "output_format": "json",
+    "cancel_requested": false
+  },
+  "plan": {
+    "run_id": "run_3ac6916737d8ce7eae9f",
+    "project_id": "stage07_eval",
+    "goal": "multimodal_summary",
+    "tasks": [
+      {
+        "task_id": "quality_xx_v1",
+        "capability_id": null,
+        "capability_version": null,
+        "agent_name": "QualityService",
+        "input_refs": [],
+        "depends_on": [],
+        "required": true,
+        "parameters": {
+          "goal": "xx_v1_assessment"
+        },
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      {
+        "task_id": "assessment_xx_v1",
+        "capability_id": "xx_v1_score",
+        "capability_version": "xx_v1_score/1",
+        "agent_name": "AssessmentAgent",
+        "input_refs": [],
+        "depends_on": [
+          {
+            "task_id": "quality_xx_v1",
+            "mode": "required_success"
+          }
+        ],
+        "required": true,
+        "parameters": {},
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      {
+        "task_id": "quality_longitudinal",
+        "capability_id": null,
+        "capability_version": null,
+        "agent_name": "QualityService",
+        "input_refs": [],
+        "depends_on": [],
+        "required": true,
+        "parameters": {
+          "goal": "longitudinal_xx_v1"
+        },
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      {
+        "task_id": "longitudinal_xx_v1",
+        "capability_id": "longitudinal_describe",
+        "capability_version": "longitudinal_describe/1",
+        "agent_name": "LongitudinalAgent",
+        "input_refs": [],
+        "depends_on": [
+          {
+            "task_id": "quality_longitudinal",
+            "mode": "required_success"
+          }
+        ],
+        "required": true,
+        "parameters": {},
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      {
+        "task_id": "laboratory_optional",
+        "capability_id": null,
+        "capability_version": null,
+        "agent_name": "LaboratoryGeneticsAgent",
+        "input_refs": [],
+        "depends_on": [],
+        "required": false,
+        "parameters": {},
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      {
+        "task_id": "text_observations",
+        "capability_id": "text_extract",
+        "capability_version": "text_extract/1",
+        "agent_name": "TextAgent",
+        "input_refs": [],
+        "depends_on": [],
+        "required": false,
+        "parameters": {},
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      {
+        "task_id": "knowledge_candidates",
+        "capability_id": "knowledge_retrieve",
+        "capability_version": "knowledge_retrieve/1",
+        "agent_name": "KnowledgeAgent",
+        "input_refs": [],
+        "depends_on": [],
+        "required": false,
+        "parameters": {},
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      {
+        "task_id": "diamond_compatibility",
+        "capability_id": "diamond_validate",
+        "capability_version": "diamond_validate/1",
+        "agent_name": "ImagingAgent",
+        "input_refs": [],
+        "depends_on": [],
+        "required": false,
+        "parameters": {},
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      {
+        "task_id": "synthesis_report",
+        "capability_id": null,
+        "capability_version": null,
+        "agent_name": "SynthesisAgent",
+        "input_refs": [],
+        "depends_on": [
+          {
+            "task_id": "assessment_xx_v1",
+            "mode": "terminal"
+          },
+          {
+            "task_id": "longitudinal_xx_v1",
+            "mode": "terminal"
+          },
+          {
+            "task_id": "laboratory_optional",
+            "mode": "terminal"
+          },
+          {
+            "task_id": "text_observations",
+            "mode": "terminal"
+          },
+          {
+            "task_id": "knowledge_candidates",
+            "mode": "terminal"
+          },
+          {
+            "task_id": "diamond_compatibility",
+            "mode": "terminal"
+          }
+        ],
+        "required": true,
+        "parameters": {
+          "report_schema": "stage06.report_snapshot/1"
+        },
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      }
+    ],
+    "notes": []
+  },
+  "validation": {
+    "valid": true,
+    "errors": []
+  }
+}

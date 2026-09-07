@@ -1,0 +1,39 @@
+{
+  "instrument_id": "xx-v1",
+  "version": "1",
+  "status": "active",
+  "title": "Synthetic XX-v1",
+  "source": {
+    "kind": "project_fixture",
+    "citation": "tests/fixtures/schema_variants/expected.json"
+  },
+  "item_roles": {
+    "xx_v1.item_1": "item",
+    "xx_v1.item_2": "item",
+    "xx_v1.item_3": "item",
+    "xx_v1.item_4": "item",
+    "xx_v1.total": "total"
+  },
+  "response_encoding": {
+    "type": "integer",
+    "minimum": 0,
+    "maximum": 3
+  },
+  "scoring": {
+    "rule": "sum_four_items",
+    "missing_policy": "do_not_compute_total_when_any_item_missing",
+    "total_minimum": 0,
+    "total_maximum": 12
+  },
+  "score_direction": "higher_is_more",
+  "applicability": {
+    "data_kind": "synthetic_acceptance_fixture"
+  },
+  "concepts": [
+    "xx_v1.item_1",
+    "xx_v1.item_2",
+    "xx_v1.item_3",
+    "xx_v1.item_4",
+    "xx_v1.total"
+  ]
+}

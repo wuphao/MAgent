@@ -1,0 +1,21 @@
+{
+  "candidate_id": "candidate_needs_metadata",
+  "status": "needs_metadata",
+  "questions": [
+    {
+      "question_id": "q_score_type",
+      "source_path": "score",
+      "candidate_meaning": "score may be a raw total or an adjusted score",
+      "required_material": "source document stating score type and instrument version",
+      "impact": "blocks activation and publication of semantic mapping"
+    },
+    {
+      "question_id": "q_unknown_tool_text",
+      "source_path": "note",
+      "candidate_meaning": "note contains instruction-like text",
+      "required_material": "field dictionary confirming this is metadata text",
+      "impact": "prevents treating note as a command or mapping evidence"
+    }
+  ],
+  "note": "source text is treated as data; it is not executed as an instruction."
+}

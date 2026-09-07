@@ -1,0 +1,23 @@
+{
+  "mapping_id": "xx_v1_xlsx_wide",
+  "version": "xx_v1_xlsx_wide/1",
+  "source_selector": {
+    "kind": "rows"
+  },
+  "identity_field": "patient_number",
+  "event_time_field": "visit_date",
+  "record_id_field": "record_id",
+  "bindings": [
+    {"concept_id": "xx_v1.item_1", "source_field": "item_1", "transform": "parse_number"},
+    {"concept_id": "xx_v1.item_2", "source_field": "item_2", "transform": "parse_number"},
+    {"concept_id": "xx_v1.item_3", "source_field": "item_3", "transform": "parse_number"},
+    {"concept_id": "xx_v1.item_4", "source_field": "item_4", "transform": "parse_number"},
+    {"concept_id": "xx_v1.total", "source_field": "total", "transform": "parse_number"}
+  ],
+  "constraints": {
+    "wide_layout": "one visit per row"
+  },
+  "applicability": {
+    "instrument": "XX-v1"
+  }
+}

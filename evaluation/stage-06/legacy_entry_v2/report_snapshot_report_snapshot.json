@@ -1,0 +1,220 @@
+{
+  "schema_version": "stage06.report_snapshot/1",
+  "report_id": "report_2cdb2749f1075ef4b740",
+  "run_id": "run_88f16ee919181c22039c",
+  "project_id": "stage06_eval",
+  "snapshot_id": null,
+  "generated_at": "2026-09-07T11:27:40.575437Z",
+  "status": "completed_with_limitations",
+  "goal": "multi_source_summary",
+  "findings": [
+    {
+      "finding_id": "finding_275076036f39bfc2d6d6",
+      "proposition": "XX-v1 total remains disputed: recomputed total 4 differs from source reported total 0; no source amendment is available in this run.",
+      "status": "unresolved",
+      "support_refs": [
+        {
+          "observation_id": "observation_1aaeaecae31c8ce6b4a9",
+          "revision": 1
+        },
+        {
+          "observation_id": "observation_23e59ee830d162d27647",
+          "revision": 1
+        },
+        {
+          "observation_id": "observation_92d51b41feb0712da2e6",
+          "revision": 1
+        },
+        {
+          "observation_id": "observation_a7cebda6ae00c095e4c4",
+          "revision": 1
+        },
+        {
+          "observation_id": "observation_be6b719164e5e6897561",
+          "revision": 1
+        }
+      ],
+      "artifact_refs": [
+        "artifact_xx_v1_score_1555075505048"
+      ],
+      "assumptions": [],
+      "limitations": [
+        "reported and recomputed totals conflict; both values are retained"
+      ]
+    },
+    {
+      "finding_id": "finding_f8953bb3e582e9fe405b",
+      "proposition": "XX-v1 computed total matches reported total 6 on 2024-07-01.",
+      "status": "active",
+      "support_refs": [
+        {
+          "observation_id": "observation_19b695815fec7c3a1f83",
+          "revision": 1
+        },
+        {
+          "observation_id": "observation_432c2904f85833519680",
+          "revision": 1
+        },
+        {
+          "observation_id": "observation_4709551979d38fa30764",
+          "revision": 1
+        },
+        {
+          "observation_id": "observation_74047f4b62446232bd37",
+          "revision": 1
+        },
+        {
+          "observation_id": "observation_9b198faf4e66cf695c2d",
+          "revision": 1
+        }
+      ],
+      "artifact_refs": [
+        "artifact_xx_v1_score_1555075505048"
+      ],
+      "assumptions": [],
+      "limitations": []
+    },
+    {
+      "finding_id": "finding_longitudinal_subject_a533e9f8d6b72c51ebff_xx_v1.total",
+      "proposition": "XX-v1 total changed by 6 from 2024-01-01 to 2024-07-01 using 2 distinct dates.",
+      "status": "active",
+      "support_refs": [],
+      "artifact_refs": [
+        "artifact_longitudinal_describe_1555075540965"
+      ],
+      "assumptions": [],
+      "limitations": [
+        "two time points support descriptive change only"
+      ]
+    }
+  ],
+  "withdrawn_finding_ids": [
+    "finding_275076036f39bfc2d6d6"
+  ],
+  "challenges": [
+    {
+      "challenge_id": "challenge_0afd25dbe40a82ac004e",
+      "target_finding_ref": {
+        "finding_id": "finding_275076036f39bfc2d6d6",
+        "revision": 1
+      },
+      "category": "scoring",
+      "evidence_refs": [
+        {
+          "observation_id": "observation_1aaeaecae31c8ce6b4a9",
+          "revision": 1
+        },
+        {
+          "observation_id": "observation_23e59ee830d162d27647",
+          "revision": 1
+        },
+        {
+          "observation_id": "observation_92d51b41feb0712da2e6",
+          "revision": 1
+        },
+        {
+          "observation_id": "observation_a7cebda6ae00c095e4c4",
+          "revision": 1
+        },
+        {
+          "observation_id": "observation_be6b719164e5e6897561",
+          "revision": 1
+        }
+      ],
+      "question": "该发现中工具重算总分 4 与来源报告总分 0 不一致；需要复核计分定义、条目完整性以及来源字段是否真的是总分。",
+      "requested_capability": "xx_v1_score",
+      "expected_resolution": "复核条目计算、报告字段语义和记录定位；若无法回查，保留冲突并发布限制。",
+      "severity": "high",
+      "status": "open",
+      "metadata": {
+        "computed_total": 4.0,
+        "reported_total": 0.0
+      }
+    }
+  ],
+  "review_outcomes": [
+    {
+      "review_task_id": "review_d28b876a50304e41bea4",
+      "challenge_id": "challenge_0afd25dbe40a82ac004e",
+      "status": "unresolved",
+      "rationale": "重算结果与来源报告值冲突，但当前没有原始字段定义修订或回查材料；按阶段06规则保留两个值，不任意替换。",
+      "revised_findings": [
+        {
+          "finding_id": "finding_275076036f39bfc2d6d6",
+          "proposition": "XX-v1 total remains disputed: recomputed total 4 differs from source reported total 0; no source amendment is available in this run.",
+          "status": "unresolved",
+          "support_refs": [
+            {
+              "observation_id": "observation_1aaeaecae31c8ce6b4a9",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_23e59ee830d162d27647",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_92d51b41feb0712da2e6",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_a7cebda6ae00c095e4c4",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_be6b719164e5e6897561",
+              "revision": 1
+            }
+          ],
+          "artifact_refs": [
+            "artifact_xx_v1_score_1555075505048"
+          ],
+          "assumptions": [],
+          "limitations": [
+            "reported and recomputed totals conflict; both values are retained"
+          ]
+        }
+      ],
+      "limitations": [
+        "缺少来源字段定义或人工确认，不能断言哪一个总分正确。"
+      ],
+      "metadata": {
+        "computed_total": 4.0,
+        "reported_total": 0.0
+      }
+    }
+  ],
+  "coverage": {
+    "task_count": 5,
+    "succeeded_tasks": [
+      "assessment_xx_v1",
+      "longitudinal_xx_v1",
+      "quality_longitudinal",
+      "quality_xx_v1"
+    ],
+    "failed_tasks": [
+      "laboratory_optional"
+    ],
+    "skipped_tasks": [],
+    "agent_names": [
+      "AssessmentAgent",
+      "LaboratoryGeneticsAgent",
+      "LongitudinalAgent"
+    ],
+    "unread_evidence_count": 0
+  },
+  "limitations": [
+    "no reference rule is applied without platform and method metadata",
+    "重算结果与来源报告值冲突，但当前没有原始字段定义修订或回查材料；按阶段06规则保留两个值，不任意替换。",
+    "发现 1 个待质询或已质询问题，报告结论按限制发布。"
+  ],
+  "recommendations": [
+    "保留每个命题的证据引用、工具产物版本和复核状态，避免只发布自然语言结论。",
+    "对计分冲突补充来源字段定义或人工复核记录，再重新运行受影响分支。",
+    "未决复核项应进入报告限制区，不能被渲染器改写成已解决。"
+  ],
+  "provenance": {
+    "rules_version": "stage06.rules/1",
+    "publisher": "ReportPublisher",
+    "rendering": "json_markdown_txt_from_report_snapshot"
+  }
+}

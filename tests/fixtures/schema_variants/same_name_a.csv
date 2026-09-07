@@ -1,0 +1,2 @@
+patient_number,patient_name,record_id,visit_date,concept_id,value
+A001,shared-name,R1,2024-01-01,xx_v1.total,4

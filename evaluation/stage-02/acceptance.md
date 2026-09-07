@@ -1,0 +1,21 @@
+# 阶段 02 验收记录
+
+- 阶段与提交版本：阶段 02，工作区未提交。
+- 环境、依赖锁定版本、是否真实模型/GPU：Python 3.11.0；Pydantic 2.11.9；openpyxl 3.1.5；pytest 9.1.1 从 `evaluation/stage-01/test-packages/` 临时加入 `sys.path`。本阶段不启用 LLM、DiaMond 或 GPU。
+- 场景 ID、输入指纹、配置/规则/提示词版本：S01、S03、S04、S07、S08、S25 的工程覆盖；解析器 `stage02-parser/1`；人工映射 `xx_v1_legacy_json/1`、`xx_v1_csv_long/1`、`xx_v1_xlsx_wide/1`、`xx_v1_nested_json/1`。
+- 实际执行命令：
+  - `python -c "import sys; sys.path[:0]=['evaluation/stage-01/test-packages','src']; import pytest; raise SystemExit(pytest.main(['tests/unit/test_contracts.py','tests/integration/test_storage.py','tests/integration/test_schema_variants.py','tests/integration/test_mapping_validation.py','-q']))"`
+  - `python -c "import sys, runpy; sys.path.insert(0,'src'); sys.argv=['adapt','tests/fixtures/schema_variants/xx_v1_legacy_rwe.json','--mapping','configs/mappings/xx_v1_legacy_json.json','--project-id','stage02','--source-namespace','legacy-json','--data-dir','evaluation/stage-02/v2-store-verified','--output','evaluation/stage-02/legacy_json_adaptation.json']; runpy.run_module('multi_agent.application.adapt_cli', run_name='__main__')"`
+  - `python -c "import sys, runpy; sys.path.insert(0,'src'); sys.argv=['adapt','tests/fixtures/schema_variants/xx_v1_csv_long.csv','--mapping','configs/mappings/xx_v1_csv_long.json','--project-id','stage02','--source-namespace','csv-long','--data-dir','evaluation/stage-02/v2-store-verified','--output','evaluation/stage-02/csv_long_adaptation.json']; runpy.run_module('multi_agent.application.adapt_cli', run_name='__main__')"`
+  - `python -c "import sys, runpy; sys.path.insert(0,'src'); sys.argv=['adapt','tests/fixtures/schema_variants/xx_v1_wide.xlsx','--mapping','configs/mappings/xx_v1_xlsx_wide.json','--project-id','stage02','--source-namespace','xlsx-wide','--data-dir','evaluation/stage-02/v2-store-verified','--output','evaluation/stage-02/xlsx_wide_adaptation.json']; runpy.run_module('multi_agent.application.adapt_cli', run_name='__main__')"`
+  - `python -c "import sys, runpy; sys.path.insert(0,'src'); sys.argv=['adapt','tests/fixtures/schema_variants/xx_v1_nested.json','--mapping','configs/mappings/xx_v1_nested_json.json','--project-id','stage02','--source-namespace','nested-json','--data-dir','evaluation/stage-02/v2-store-verified','--output','evaluation/stage-02/nested_json_adaptation.json']; runpy.run_module('multi_agent.application.adapt_cli', run_name='__main__')"`
+  - `python -c "import sys, runpy; sys.path.insert(0,'src'); sys.argv=['adapt','tests/fixtures/schema_variants/xx_v1_legacy_rwe.json','--mapping','configs/mappings/xx_v1_legacy_json.json','--project-id','stage02','--source-namespace','legacy-json','--data-dir','evaluation/stage-02/v2-store-verified','--output','evaluation/stage-02/legacy_json_adaptation_repeat.json']; runpy.run_module('multi_agent.application.adapt_cli', run_name='__main__')"`
+  - `python -c "import json; from pathlib import Path; names=['legacy_json','csv_long','xlsx_wide','nested_json']; projections=[]\nfor n in names:\n p=json.loads(Path(f'evaluation/stage-02/{n}_adaptation.json').read_text(encoding='utf-8'))['projection']; projections.append([{k:v for k,v in item.items() if k!='subject_ref'} for item in p])\nprint(all(p==projections[0] for p in projections)); print([len(p) for p in projections])"`
+- 通过、失败、跳过数量及原因：15 个 pytest 用例通过；四种布局各发布 10 条 XX-v1 观测；四份输出在去除来源主体内部引用后语义投影一致；legacy JSON 重复接入复用 10 条观测和 1 条 evidence。
+- 确定性结果及引用检查：旧 JSON、CSV 长表、Excel 宽表、嵌套 JSON 均保留来源定位。CSV 数据行定位以物理文件行号为准，表头为第 1 行，首条数据行为 `row:2`。JSON 数组索引从 0 开始。Excel 定位格式为 `sheet:<sheet>:row:<row>:col:<header>`。
+- 计数对账：旧 JSON 选择 2 条记录并产生 10 条观测；CSV 长表选择 10 行并产生 10 条观测；Excel 宽表选择 2 行并产生 10 条观测；嵌套 JSON 选择 2 条记录并产生 10 条观测。所有正常布局 `quarantined_count=0`。
+- 隔离记录原因：正常四布局无隔离；测试覆盖了非数字转换失败 `CONVERSION_FAILED`，以及缺失值标记 `未测` 被保留为 `TypedValue(value_type="missing")` 而非强转为 0。
+- 与旧版本差异及分类：旧专业 Agent 不需要为了 `xx_v1` 字段名改代码；新适配层先把可变结构投影为统一 Observation。此阶段仍不做专业判断和报告生成。
+- 费用、耗时、资源记录：本阶段未调用 LLM；最终 pytest 用例 1.21 秒；未启动 DiaMond/GPU。
+- 待解决问题、是否满足出口：阶段 02 出口满足。当前实现支持本阶段四种人工映射和声明式转换；LLM 映射提议、映射生命周期、更多单位/枚举规则留到阶段 03。
+- 回退点与数据备份位置：停用对应 `configs/mappings/*.json` 映射版本即可停止新适配；已发布资产与快照不覆盖。演示运行库位于 `evaluation/stage-02/v2-store-verified/`，可再生成。

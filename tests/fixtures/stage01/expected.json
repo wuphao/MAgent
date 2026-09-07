@@ -1,0 +1,17 @@
+{
+  "fixture": "xx_v1_legacy_case.json",
+  "subject": "S001",
+  "instrument": "XX-v1",
+  "basis": "Synthetic XX-v1 has four items, each 0-3. S001 totals are manually specified for baseline reference.",
+  "expected_totals": [
+    {
+      "date": "2024-01-01",
+      "total": 4
+    },
+    {
+      "date": "2024-07-01",
+      "total": 6
+    }
+  ],
+  "expected_delta": 2
+}

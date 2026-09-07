@@ -1,0 +1,29 @@
+{
+  "schema_version": "2.0",
+  "patient": {
+    "patient_number": "S001",
+    "birth_year": 1950,
+    "sex": "F"
+  },
+  "xx_v1": [
+    {
+      "record_id": "XX-S001-2024-01-01",
+      "visit_date": "2024-01-01",
+      "item_1": 1,
+      "item_2": 1,
+      "item_3": 1,
+      "item_4": 1,
+      "total": 4
+    },
+    {
+      "record_id": "XX-S001-2024-07-01",
+      "visit_date": "2024-07-01",
+      "item_1": 2,
+      "item_2": 2,
+      "item_3": 1,
+      "item_4": 1,
+      "total": 6
+    }
+  ],
+  "imaging": {}
+}

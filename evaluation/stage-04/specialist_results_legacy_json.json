@@ -1,0 +1,324 @@
+{
+  "status": "success",
+  "engine": "v2-stage04",
+  "project_id": "stage04",
+  "agent_results": [
+    {
+      "schema_version": "1.0",
+      "agent_name": "AssessmentAgent",
+      "status": "success",
+      "findings": [
+        {
+          "finding_id": "finding_4f1eb223d0f4d25603a0",
+          "proposition": "XX-v1 computed total matches reported total 4 on 2024-01-01.",
+          "status": "active",
+          "support_refs": [
+            {
+              "observation_id": "observation_226f5aed40dc60dc9fd5",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_2e0a1fafc432bae55d7e",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_469a08b655df4f5486bd",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_53fb40a145b207713cd6",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_febe1f439d702113d9f4",
+              "revision": 1
+            }
+          ],
+          "artifact_refs": [
+            "artifact_xx_v1_score_1552812257192"
+          ],
+          "assumptions": [],
+          "limitations": []
+        },
+        {
+          "finding_id": "finding_f8953bb3e582e9fe405b",
+          "proposition": "XX-v1 computed total matches reported total 6 on 2024-07-01.",
+          "status": "active",
+          "support_refs": [
+            {
+              "observation_id": "observation_26ca9e93bc9cb6474cf9",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_7fd91714ee15db2b7db3",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_83246c4919f1a70a3760",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_94988c4e9f387391e8ec",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_c113af48ac03d161dfd0",
+              "revision": 1
+            }
+          ],
+          "artifact_refs": [
+            "artifact_xx_v1_score_1552812257192"
+          ],
+          "assumptions": [],
+          "limitations": []
+        }
+      ],
+      "artifact_refs": [
+        "artifact_xx_v1_score_1552812257192"
+      ],
+      "requested_checks": [],
+      "limitations": [],
+      "output": {
+        "artifact": {
+          "artifact_id": "artifact_xx_v1_score_1552812257192",
+          "capability_id": "xx_v1_score",
+          "capability_version": "xx_v1_score/1",
+          "status": "success",
+          "input_refs": [
+            {
+              "observation_id": "observation_226f5aed40dc60dc9fd5",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_26ca9e93bc9cb6474cf9",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_2e0a1fafc432bae55d7e",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_469a08b655df4f5486bd",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_53fb40a145b207713cd6",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_7fd91714ee15db2b7db3",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_83246c4919f1a70a3760",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_94988c4e9f387391e8ec",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_c113af48ac03d161dfd0",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_febe1f439d702113d9f4",
+              "revision": 1
+            }
+          ],
+          "output": {
+            "instrument": "xx-v1:1",
+            "score_kind": "computed_total",
+            "record_count": 2,
+            "results": [
+              {
+                "subject_ref": "subject_8975278d93438ac886da",
+                "event_time": "2024-01-01",
+                "record_locator": "XX-S001-2024-01-01-A",
+                "status": "scored",
+                "computed_total": 4,
+                "reported_total": 4,
+                "difference": 0,
+                "item_refs": {
+                  "xx_v1.item_4": {
+                    "observation_id": "observation_226f5aed40dc60dc9fd5",
+                    "revision": 1
+                  },
+                  "xx_v1.item_1": {
+                    "observation_id": "observation_2e0a1fafc432bae55d7e",
+                    "revision": 1
+                  },
+                  "xx_v1.item_3": {
+                    "observation_id": "observation_469a08b655df4f5486bd",
+                    "revision": 1
+                  },
+                  "xx_v1.total": {
+                    "observation_id": "observation_53fb40a145b207713cd6",
+                    "revision": 1
+                  },
+                  "xx_v1.item_2": {
+                    "observation_id": "observation_febe1f439d702113d9f4",
+                    "revision": 1
+                  }
+                },
+                "limitations": []
+              },
+              {
+                "subject_ref": "subject_8975278d93438ac886da",
+                "event_time": "2024-07-01",
+                "record_locator": "XX-S001-2024-07-01-A",
+                "status": "scored",
+                "computed_total": 6,
+                "reported_total": 6,
+                "difference": 0,
+                "item_refs": {
+                  "xx_v1.item_2": {
+                    "observation_id": "observation_26ca9e93bc9cb6474cf9",
+                    "revision": 1
+                  },
+                  "xx_v1.item_4": {
+                    "observation_id": "observation_7fd91714ee15db2b7db3",
+                    "revision": 1
+                  },
+                  "xx_v1.total": {
+                    "observation_id": "observation_83246c4919f1a70a3760",
+                    "revision": 1
+                  },
+                  "xx_v1.item_3": {
+                    "observation_id": "observation_94988c4e9f387391e8ec",
+                    "revision": 1
+                  },
+                  "xx_v1.item_1": {
+                    "observation_id": "observation_c113af48ac03d161dfd0",
+                    "revision": 1
+                  }
+                },
+                "limitations": []
+              }
+            ],
+            "limitations": []
+          },
+          "started_at": "2026-09-07T10:49:57.254508Z",
+          "finished_at": "2026-09-07T10:49:57.254508Z",
+          "duration_ms": 0,
+          "limitations": []
+        },
+        "quality": {
+          "goal": "xx_v1_assessment",
+          "status": "pass",
+          "missing_concepts": [],
+          "present_required": [
+            "xx_v1.item_1",
+            "xx_v1.item_2",
+            "xx_v1.item_3",
+            "xx_v1.item_4",
+            "xx_v1.total"
+          ],
+          "note": "missing unrelated modalities do not fail this goal"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "agent_name": "LongitudinalAgent",
+      "status": "success",
+      "findings": [
+        {
+          "finding_id": "finding_longitudinal_subject_8975278d93438ac886da_xx_v1.total",
+          "proposition": "XX-v1 total changed by 2 from 2024-01-01 to 2024-07-01 using 2 distinct dates.",
+          "status": "active",
+          "support_refs": [],
+          "artifact_refs": [
+            "artifact_longitudinal_describe_1552812257419"
+          ],
+          "assumptions": [],
+          "limitations": [
+            "two time points support descriptive change only"
+          ]
+        }
+      ],
+      "artifact_refs": [
+        "artifact_longitudinal_describe_1552812257419"
+      ],
+      "requested_checks": [],
+      "limitations": [],
+      "output": {
+        "artifact": {
+          "artifact_id": "artifact_longitudinal_describe_1552812257419",
+          "capability_id": "longitudinal_describe",
+          "capability_version": "longitudinal_describe/1",
+          "status": "success",
+          "input_refs": [
+            {
+              "observation_id": "observation_53fb40a145b207713cd6",
+              "revision": 1
+            },
+            {
+              "observation_id": "observation_83246c4919f1a70a3760",
+              "revision": 1
+            }
+          ],
+          "output": {
+            "concept_id": "xx_v1.total",
+            "groups": [
+              {
+                "subject_ref": "subject_8975278d93438ac886da",
+                "concept_id": "xx_v1.total",
+                "mapping_revision": "xx_v1_legacy_json/1",
+                "unit": null,
+                "status": "analyzed",
+                "n_observations": 2,
+                "n_distinct_dates": 2,
+                "first": {
+                  "date": "2024-01-01",
+                  "value": 4
+                },
+                "last": {
+                  "date": "2024-07-01",
+                  "value": 6
+                },
+                "delta": 2,
+                "series": [
+                  {
+                    "date": "2024-01-01",
+                    "value": 4,
+                    "record_locator": "$.xx_v1[0]",
+                    "record_key": "XX-S001-2024-01-01-A"
+                  },
+                  {
+                    "date": "2024-07-01",
+                    "value": 6,
+                    "record_locator": "$.xx_v1[1]",
+                    "record_key": "XX-S001-2024-07-01-A"
+                  }
+                ]
+              }
+            ]
+          },
+          "started_at": "2026-09-07T10:49:57.254508Z",
+          "finished_at": "2026-09-07T10:49:57.254508Z",
+          "duration_ms": 0,
+          "limitations": []
+        }
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "agent_name": "LaboratoryGeneticsAgent",
+      "status": "no_data",
+      "findings": [],
+      "artifact_refs": [],
+      "requested_checks": [],
+      "limitations": [
+        "no reference rule is applied without platform and method metadata"
+      ],
+      "output": {
+        "status": "no_data",
+        "measurements": [],
+        "limitations": [
+          "no reference rule is applied without platform and method metadata"
+        ]
+      }
+    }
+  ]
+}

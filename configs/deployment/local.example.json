@@ -1,0 +1,28 @@
+{
+  "deployment": "local-single-worker",
+  "storage": {
+    "data_dir": "data/v2",
+    "task_db": "data/v2/tasks.sqlite3",
+    "asset_store": "data/v2/assets"
+  },
+  "worker": {
+    "max_parallel_tasks": 4,
+    "lease_seconds": 60,
+    "recovery_on_start": true
+  },
+  "budget": {
+    "default_max_calls": 0,
+    "default_max_tokens": 0
+  },
+  "capabilities": {
+    "text_extract": true,
+    "knowledge_retrieve": true,
+    "diamond_validate": true,
+    "real_diamond_predict": false
+  },
+  "environment": {
+    "python": "3.11",
+    "gpu": "optional; required only for verified DiaMond runtime",
+    "secrets": "load from environment variables; do not store in this file"
+  }
+}

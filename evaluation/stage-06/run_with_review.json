@@ -1,0 +1,826 @@
+{
+  "status": "success",
+  "run_id": "run_e3859f29bf5b7f78eea2",
+  "executed": 6,
+  "tasks": [
+    {
+      "run_id": "run_e3859f29bf5b7f78eea2",
+      "spec": {
+        "task_id": "assessment_xx_v1",
+        "capability_id": "xx_v1_score",
+        "capability_version": "xx_v1_score/1",
+        "agent_name": "AssessmentAgent",
+        "input_refs": [],
+        "depends_on": [
+          {
+            "task_id": "quality_xx_v1",
+            "mode": "required_success"
+          }
+        ],
+        "required": true,
+        "parameters": {},
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      "state": "succeeded",
+      "attempts": 1,
+      "result": {
+        "schema_version": "1.0",
+        "agent_name": "AssessmentAgent",
+        "status": "success",
+        "findings": [
+          {
+            "finding_id": "finding_275076036f39bfc2d6d6",
+            "proposition": "XX-v1 computed total 4 differs from reported total 0 on 2024-01-01.",
+            "status": "unresolved",
+            "support_refs": [
+              {
+                "observation_id": "observation_1aaeaecae31c8ce6b4a9",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_23e59ee830d162d27647",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_92d51b41feb0712da2e6",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_a7cebda6ae00c095e4c4",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_be6b719164e5e6897561",
+                "revision": 1
+              }
+            ],
+            "artifact_refs": [
+              "artifact_xx_v1_score_1564354816072"
+            ],
+            "assumptions": [],
+            "limitations": []
+          },
+          {
+            "finding_id": "finding_f8953bb3e582e9fe405b",
+            "proposition": "XX-v1 computed total matches reported total 6 on 2024-07-01.",
+            "status": "active",
+            "support_refs": [
+              {
+                "observation_id": "observation_19b695815fec7c3a1f83",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_432c2904f85833519680",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_4709551979d38fa30764",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_74047f4b62446232bd37",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_9b198faf4e66cf695c2d",
+                "revision": 1
+              }
+            ],
+            "artifact_refs": [
+              "artifact_xx_v1_score_1564354816072"
+            ],
+            "assumptions": [],
+            "limitations": []
+          }
+        ],
+        "artifact_refs": [
+          "artifact_xx_v1_score_1564354816072"
+        ],
+        "requested_checks": [],
+        "limitations": [],
+        "output": {
+          "artifact": {
+            "artifact_id": "artifact_xx_v1_score_1564354816072",
+            "capability_id": "xx_v1_score",
+            "capability_version": "xx_v1_score/1",
+            "status": "success",
+            "input_refs": [
+              {
+                "observation_id": "observation_19b695815fec7c3a1f83",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_1aaeaecae31c8ce6b4a9",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_23e59ee830d162d27647",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_432c2904f85833519680",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_4709551979d38fa30764",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_74047f4b62446232bd37",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_92d51b41feb0712da2e6",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_9b198faf4e66cf695c2d",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_a7cebda6ae00c095e4c4",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_be6b719164e5e6897561",
+                "revision": 1
+              }
+            ],
+            "output": {
+              "instrument": "xx-v1:1",
+              "score_kind": "computed_total",
+              "record_count": 2,
+              "results": [
+                {
+                  "subject_ref": "subject_a533e9f8d6b72c51ebff",
+                  "event_time": "2024-01-01",
+                  "record_locator": "XX-S001-2024-01-01-A",
+                  "status": "scored",
+                  "computed_total": 4,
+                  "reported_total": 0,
+                  "difference": -4,
+                  "item_refs": {
+                    "xx_v1.item_3": {
+                      "observation_id": "observation_1aaeaecae31c8ce6b4a9",
+                      "revision": 1
+                    },
+                    "xx_v1.total": {
+                      "observation_id": "observation_23e59ee830d162d27647",
+                      "revision": 1
+                    },
+                    "xx_v1.item_2": {
+                      "observation_id": "observation_92d51b41feb0712da2e6",
+                      "revision": 1
+                    },
+                    "xx_v1.item_1": {
+                      "observation_id": "observation_a7cebda6ae00c095e4c4",
+                      "revision": 1
+                    },
+                    "xx_v1.item_4": {
+                      "observation_id": "observation_be6b719164e5e6897561",
+                      "revision": 1
+                    }
+                  },
+                  "limitations": []
+                },
+                {
+                  "subject_ref": "subject_a533e9f8d6b72c51ebff",
+                  "event_time": "2024-07-01",
+                  "record_locator": "XX-S001-2024-07-01-A",
+                  "status": "scored",
+                  "computed_total": 6,
+                  "reported_total": 6,
+                  "difference": 0,
+                  "item_refs": {
+                    "xx_v1.item_2": {
+                      "observation_id": "observation_19b695815fec7c3a1f83",
+                      "revision": 1
+                    },
+                    "xx_v1.total": {
+                      "observation_id": "observation_432c2904f85833519680",
+                      "revision": 1
+                    },
+                    "xx_v1.item_3": {
+                      "observation_id": "observation_4709551979d38fa30764",
+                      "revision": 1
+                    },
+                    "xx_v1.item_4": {
+                      "observation_id": "observation_74047f4b62446232bd37",
+                      "revision": 1
+                    },
+                    "xx_v1.item_1": {
+                      "observation_id": "observation_9b198faf4e66cf695c2d",
+                      "revision": 1
+                    }
+                  },
+                  "limitations": []
+                }
+              ],
+              "limitations": []
+            },
+            "started_at": "2026-09-07T14:02:19.814065Z",
+            "finished_at": "2026-09-07T14:02:19.814065Z",
+            "duration_ms": 0,
+            "limitations": []
+          },
+          "quality": {
+            "goal": "xx_v1_assessment",
+            "status": "pass",
+            "missing_concepts": [],
+            "present_required": [
+              "xx_v1.item_1",
+              "xx_v1.item_2",
+              "xx_v1.item_3",
+              "xx_v1.item_4",
+              "xx_v1.total"
+            ],
+            "note": "missing unrelated modalities do not fail this goal"
+          }
+        }
+      },
+      "error_code": null,
+      "message": null
+    },
+    {
+      "run_id": "run_e3859f29bf5b7f78eea2",
+      "spec": {
+        "task_id": "laboratory_optional",
+        "capability_id": null,
+        "capability_version": null,
+        "agent_name": "LaboratoryGeneticsAgent",
+        "input_refs": [],
+        "depends_on": [],
+        "required": false,
+        "parameters": {},
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      "state": "succeeded",
+      "attempts": 1,
+      "result": {
+        "schema_version": "1.0",
+        "agent_name": "LaboratoryGeneticsAgent",
+        "status": "no_data",
+        "findings": [],
+        "artifact_refs": [],
+        "requested_checks": [],
+        "limitations": [
+          "no reference rule is applied without platform and method metadata"
+        ],
+        "output": {
+          "status": "no_data",
+          "measurements": [],
+          "limitations": [
+            "no reference rule is applied without platform and method metadata"
+          ]
+        }
+      },
+      "error_code": null,
+      "message": null
+    },
+    {
+      "run_id": "run_e3859f29bf5b7f78eea2",
+      "spec": {
+        "task_id": "longitudinal_xx_v1",
+        "capability_id": "longitudinal_describe",
+        "capability_version": "longitudinal_describe/1",
+        "agent_name": "LongitudinalAgent",
+        "input_refs": [],
+        "depends_on": [
+          {
+            "task_id": "quality_longitudinal",
+            "mode": "required_success"
+          }
+        ],
+        "required": true,
+        "parameters": {},
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      "state": "succeeded",
+      "attempts": 1,
+      "result": {
+        "schema_version": "1.0",
+        "agent_name": "LongitudinalAgent",
+        "status": "success",
+        "findings": [
+          {
+            "finding_id": "finding_longitudinal_subject_a533e9f8d6b72c51ebff_xx_v1.total",
+            "proposition": "XX-v1 total changed by 6 from 2024-01-01 to 2024-07-01 using 2 distinct dates.",
+            "status": "active",
+            "support_refs": [],
+            "artifact_refs": [
+              "artifact_longitudinal_describe_1564354850985"
+            ],
+            "assumptions": [],
+            "limitations": [
+              "two time points support descriptive change only"
+            ]
+          }
+        ],
+        "artifact_refs": [
+          "artifact_longitudinal_describe_1564354850985"
+        ],
+        "requested_checks": [],
+        "limitations": [],
+        "output": {
+          "artifact": {
+            "artifact_id": "artifact_longitudinal_describe_1564354850985",
+            "capability_id": "longitudinal_describe",
+            "capability_version": "longitudinal_describe/1",
+            "status": "success",
+            "input_refs": [
+              {
+                "observation_id": "observation_23e59ee830d162d27647",
+                "revision": 1
+              },
+              {
+                "observation_id": "observation_432c2904f85833519680",
+                "revision": 1
+              }
+            ],
+            "output": {
+              "concept_id": "xx_v1.total",
+              "groups": [
+                {
+                  "subject_ref": "subject_a533e9f8d6b72c51ebff",
+                  "concept_id": "xx_v1.total",
+                  "mapping_revision": "xx_v1_csv_long/1",
+                  "unit": null,
+                  "status": "analyzed",
+                  "n_observations": 2,
+                  "n_distinct_dates": 2,
+                  "first": {
+                    "date": "2024-01-01",
+                    "value": 0
+                  },
+                  "last": {
+                    "date": "2024-07-01",
+                    "value": 6
+                  },
+                  "delta": 6,
+                  "series": [
+                    {
+                      "date": "2024-01-01",
+                      "value": 0,
+                      "record_locator": "row:6",
+                      "record_key": "XX-S001-2024-01-01-A"
+                    },
+                    {
+                      "date": "2024-07-01",
+                      "value": 6,
+                      "record_locator": "row:11",
+                      "record_key": "XX-S001-2024-07-01-A"
+                    }
+                  ]
+                }
+              ]
+            },
+            "started_at": "2026-09-07T14:02:19.848581Z",
+            "finished_at": "2026-09-07T14:02:19.848581Z",
+            "duration_ms": 0,
+            "limitations": []
+          }
+        }
+      },
+      "error_code": null,
+      "message": null
+    },
+    {
+      "run_id": "run_e3859f29bf5b7f78eea2",
+      "spec": {
+        "task_id": "quality_longitudinal",
+        "capability_id": null,
+        "capability_version": null,
+        "agent_name": "QualityService",
+        "input_refs": [],
+        "depends_on": [],
+        "required": true,
+        "parameters": {
+          "goal": "longitudinal_xx_v1"
+        },
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      "state": "succeeded",
+      "attempts": 1,
+      "result": {
+        "goal": "longitudinal_xx_v1",
+        "status": "pass",
+        "missing_concepts": [],
+        "present_required": [
+          "xx_v1.total"
+        ],
+        "note": "missing unrelated modalities do not fail this goal"
+      },
+      "error_code": null,
+      "message": null
+    },
+    {
+      "run_id": "run_e3859f29bf5b7f78eea2",
+      "spec": {
+        "task_id": "quality_xx_v1",
+        "capability_id": null,
+        "capability_version": null,
+        "agent_name": "QualityService",
+        "input_refs": [],
+        "depends_on": [],
+        "required": true,
+        "parameters": {
+          "goal": "xx_v1_assessment"
+        },
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      "state": "succeeded",
+      "attempts": 1,
+      "result": {
+        "goal": "xx_v1_assessment",
+        "status": "pass",
+        "missing_concepts": [],
+        "present_required": [
+          "xx_v1.item_1",
+          "xx_v1.item_2",
+          "xx_v1.item_3",
+          "xx_v1.item_4",
+          "xx_v1.total"
+        ],
+        "note": "missing unrelated modalities do not fail this goal"
+      },
+      "error_code": null,
+      "message": null
+    },
+    {
+      "run_id": "run_e3859f29bf5b7f78eea2",
+      "spec": {
+        "task_id": "synthesis_report",
+        "capability_id": null,
+        "capability_version": null,
+        "agent_name": "SynthesisAgent",
+        "input_refs": [],
+        "depends_on": [
+          {
+            "task_id": "assessment_xx_v1",
+            "mode": "terminal"
+          },
+          {
+            "task_id": "longitudinal_xx_v1",
+            "mode": "terminal"
+          },
+          {
+            "task_id": "laboratory_optional",
+            "mode": "terminal"
+          }
+        ],
+        "required": true,
+        "parameters": {
+          "report_schema": "stage06.report_snapshot/1"
+        },
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      "state": "succeeded",
+      "attempts": 1,
+      "result": {
+        "schema_version": "1.0",
+        "agent_name": "SynthesisAgent",
+        "status": "success",
+        "findings": [],
+        "artifact_refs": [],
+        "requested_checks": [],
+        "limitations": [
+          "no reference rule is applied without platform and method metadata",
+          "重算结果与来源报告值冲突，但当前没有原始字段定义修订或回查材料；按阶段06规则保留两个值，不任意替换。",
+          "发现 1 个待质询或已质询问题，报告结论按限制发布。"
+        ],
+        "output": {
+          "report_snapshot": {
+            "schema_version": "stage06.report_snapshot/1",
+            "report_id": "report_059b1441ce59fa7748f3",
+            "run_id": "run_e3859f29bf5b7f78eea2",
+            "project_id": "stage06_eval",
+            "snapshot_id": null,
+            "generated_at": "2026-09-07T14:02:19.891211Z",
+            "status": "completed_with_limitations",
+            "goal": "multi_source_summary",
+            "findings": [
+              {
+                "finding_id": "finding_f8953bb3e582e9fe405b",
+                "proposition": "XX-v1 computed total matches reported total 6 on 2024-07-01.",
+                "status": "active",
+                "support_refs": [
+                  {
+                    "observation_id": "observation_19b695815fec7c3a1f83",
+                    "revision": 1
+                  },
+                  {
+                    "observation_id": "observation_432c2904f85833519680",
+                    "revision": 1
+                  },
+                  {
+                    "observation_id": "observation_4709551979d38fa30764",
+                    "revision": 1
+                  },
+                  {
+                    "observation_id": "observation_74047f4b62446232bd37",
+                    "revision": 1
+                  },
+                  {
+                    "observation_id": "observation_9b198faf4e66cf695c2d",
+                    "revision": 1
+                  }
+                ],
+                "artifact_refs": [
+                  "artifact_xx_v1_score_1564354816072"
+                ],
+                "assumptions": [],
+                "limitations": []
+              },
+              {
+                "finding_id": "finding_longitudinal_subject_a533e9f8d6b72c51ebff_xx_v1.total",
+                "proposition": "XX-v1 total changed by 6 from 2024-01-01 to 2024-07-01 using 2 distinct dates.",
+                "status": "active",
+                "support_refs": [],
+                "artifact_refs": [
+                  "artifact_longitudinal_describe_1564354850985"
+                ],
+                "assumptions": [],
+                "limitations": [
+                  "two time points support descriptive change only"
+                ]
+              },
+              {
+                "finding_id": "finding_275076036f39bfc2d6d6_reviewed",
+                "proposition": "XX-v1 total remains disputed: recomputed total 4 differs from source reported total 0; no source amendment is available in this run.",
+                "status": "unresolved",
+                "support_refs": [
+                  {
+                    "observation_id": "observation_1aaeaecae31c8ce6b4a9",
+                    "revision": 1
+                  },
+                  {
+                    "observation_id": "observation_23e59ee830d162d27647",
+                    "revision": 1
+                  },
+                  {
+                    "observation_id": "observation_92d51b41feb0712da2e6",
+                    "revision": 1
+                  },
+                  {
+                    "observation_id": "observation_a7cebda6ae00c095e4c4",
+                    "revision": 1
+                  },
+                  {
+                    "observation_id": "observation_be6b719164e5e6897561",
+                    "revision": 1
+                  }
+                ],
+                "artifact_refs": [
+                  "artifact_xx_v1_score_1564354816072"
+                ],
+                "assumptions": [],
+                "limitations": [
+                  "reported and recomputed totals conflict; both values are retained"
+                ]
+              }
+            ],
+            "withdrawn_finding_ids": [
+              "finding_275076036f39bfc2d6d6"
+            ],
+            "challenges": [
+              {
+                "challenge_id": "challenge_0afd25dbe40a82ac004e",
+                "target_finding_ref": {
+                  "finding_id": "finding_275076036f39bfc2d6d6",
+                  "revision": 1
+                },
+                "category": "scoring",
+                "evidence_refs": [
+                  {
+                    "observation_id": "observation_1aaeaecae31c8ce6b4a9",
+                    "revision": 1
+                  },
+                  {
+                    "observation_id": "observation_23e59ee830d162d27647",
+                    "revision": 1
+                  },
+                  {
+                    "observation_id": "observation_92d51b41feb0712da2e6",
+                    "revision": 1
+                  },
+                  {
+                    "observation_id": "observation_a7cebda6ae00c095e4c4",
+                    "revision": 1
+                  },
+                  {
+                    "observation_id": "observation_be6b719164e5e6897561",
+                    "revision": 1
+                  }
+                ],
+                "question": "该发现中工具重算总分 4 与来源报告总分 0 不一致；需要复核计分定义、条目完整性以及来源字段是否真的是总分。",
+                "requested_capability": "xx_v1_score",
+                "expected_resolution": "复核条目计算、报告字段语义和记录定位；若无法回查，保留冲突并发布限制。",
+                "severity": "high",
+                "status": "open",
+                "metadata": {
+                  "computed_total": 4.0,
+                  "reported_total": 0.0
+                }
+              }
+            ],
+            "review_outcomes": [
+              {
+                "review_task_id": "review_d28b876a50304e41bea4",
+                "challenge_id": "challenge_0afd25dbe40a82ac004e",
+                "status": "unresolved",
+                "rationale": "重算结果与来源报告值冲突，但当前没有原始字段定义修订或回查材料；按阶段06规则保留两个值，不任意替换。",
+                "revised_findings": [
+                  {
+                    "finding_id": "finding_275076036f39bfc2d6d6_reviewed",
+                    "proposition": "XX-v1 total remains disputed: recomputed total 4 differs from source reported total 0; no source amendment is available in this run.",
+                    "status": "unresolved",
+                    "support_refs": [
+                      {
+                        "observation_id": "observation_1aaeaecae31c8ce6b4a9",
+                        "revision": 1
+                      },
+                      {
+                        "observation_id": "observation_23e59ee830d162d27647",
+                        "revision": 1
+                      },
+                      {
+                        "observation_id": "observation_92d51b41feb0712da2e6",
+                        "revision": 1
+                      },
+                      {
+                        "observation_id": "observation_a7cebda6ae00c095e4c4",
+                        "revision": 1
+                      },
+                      {
+                        "observation_id": "observation_be6b719164e5e6897561",
+                        "revision": 1
+                      }
+                    ],
+                    "artifact_refs": [
+                      "artifact_xx_v1_score_1564354816072"
+                    ],
+                    "assumptions": [],
+                    "limitations": [
+                      "reported and recomputed totals conflict; both values are retained"
+                    ]
+                  }
+                ],
+                "limitations": [
+                  "缺少来源字段定义或人工确认，不能断言哪一个总分正确。"
+                ],
+                "metadata": {
+                  "computed_total": 4.0,
+                  "reported_total": 0.0,
+                  "original_finding_id": "finding_275076036f39bfc2d6d6"
+                }
+              }
+            ],
+            "coverage": {
+              "task_count": 5,
+              "succeeded_tasks": [
+                "assessment_xx_v1",
+                "longitudinal_xx_v1",
+                "quality_longitudinal",
+                "quality_xx_v1"
+              ],
+              "failed_tasks": [
+                "laboratory_optional"
+              ],
+              "skipped_tasks": [],
+              "agent_names": [
+                "AssessmentAgent",
+                "LaboratoryGeneticsAgent",
+                "LongitudinalAgent"
+              ],
+              "unread_evidence_count": 0
+            },
+            "limitations": [
+              "no reference rule is applied without platform and method metadata",
+              "重算结果与来源报告值冲突，但当前没有原始字段定义修订或回查材料；按阶段06规则保留两个值，不任意替换。",
+              "发现 1 个待质询或已质询问题，报告结论按限制发布。"
+            ],
+            "recommendations": [
+              "保留每个命题的证据引用、工具产物版本和复核状态，避免只发布自然语言结论。",
+              "对计分冲突补充来源字段定义或人工复核记录，再重新运行受影响分支。",
+              "未决复核项应进入报告限制区，不能被渲染器改写成已解决。"
+            ],
+            "provenance": {
+              "rules_version": "stage06.rules/1",
+              "publisher": "ReportPublisher",
+              "rendering": "json_markdown_txt_from_report_snapshot"
+            }
+          },
+          "report_json": "{\n  \"schema_version\": \"stage06.report_snapshot/1\",\n  \"report_id\": \"report_059b1441ce59fa7748f3\",\n  \"run_id\": \"run_e3859f29bf5b7f78eea2\",\n  \"project_id\": \"stage06_eval\",\n  \"snapshot_id\": null,\n  \"generated_at\": \"2026-09-07T14:02:19.891211Z\",\n  \"status\": \"completed_with_limitations\",\n  \"goal\": \"multi_source_summary\",\n  \"findings\": [\n    {\n      \"finding_id\": \"finding_f8953bb3e582e9fe405b\",\n      \"proposition\": \"XX-v1 computed total matches reported total 6 on 2024-07-01.\",\n      \"status\": \"active\",\n      \"support_refs\": [\n        {\n          \"observation_id\": \"observation_19b695815fec7c3a1f83\",\n          \"revision\": 1\n        },\n        {\n          \"observation_id\": \"observation_432c2904f85833519680\",\n          \"revision\": 1\n        },\n        {\n          \"observation_id\": \"observation_4709551979d38fa30764\",\n          \"revision\": 1\n        },\n        {\n          \"observation_id\": \"observation_74047f4b62446232bd37\",\n          \"revision\": 1\n        },\n        {\n          \"observation_id\": \"observation_9b198faf4e66cf695c2d\",\n          \"revision\": 1\n        }\n      ],\n      \"artifact_refs\": [\n        \"artifact_xx_v1_score_1564354816072\"\n      ],\n      \"assumptions\": [],\n      \"limitations\": []\n    },\n    {\n      \"finding_id\": \"finding_longitudinal_subject_a533e9f8d6b72c51ebff_xx_v1.total\",\n      \"proposition\": \"XX-v1 total changed by 6 from 2024-01-01 to 2024-07-01 using 2 distinct dates.\",\n      \"status\": \"active\",\n      \"support_refs\": [],\n      \"artifact_refs\": [\n        \"artifact_longitudinal_describe_1564354850985\"\n      ],\n      \"assumptions\": [],\n      \"limitations\": [\n        \"two time points support descriptive change only\"\n      ]\n    },\n    {\n      \"finding_id\": \"finding_275076036f39bfc2d6d6_reviewed\",\n      \"proposition\": \"XX-v1 total remains disputed: recomputed total 4 differs from source reported total 0; no source amendment is available in this run.\",\n      \"status\": \"unresolved\",\n      \"support_refs\": [\n        {\n          \"observation_id\": \"observation_1aaeaecae31c8ce6b4a9\",\n          \"revision\": 1\n        },\n        {\n          \"observation_id\": \"observation_23e59ee830d162d27647\",\n          \"revision\": 1\n        },\n        {\n          \"observation_id\": \"observation_92d51b41feb0712da2e6\",\n          \"revision\": 1\n        },\n        {\n          \"observation_id\": \"observation_a7cebda6ae00c095e4c4\",\n          \"revision\": 1\n        },\n        {\n          \"observation_id\": \"observation_be6b719164e5e6897561\",\n          \"revision\": 1\n        }\n      ],\n      \"artifact_refs\": [\n        \"artifact_xx_v1_score_1564354816072\"\n      ],\n      \"assumptions\": [],\n      \"limitations\": [\n        \"reported and recomputed totals conflict; both values are retained\"\n      ]\n    }\n  ],\n  \"withdrawn_finding_ids\": [\n    \"finding_275076036f39bfc2d6d6\"\n  ],\n  \"challenges\": [\n    {\n      \"challenge_id\": \"challenge_0afd25dbe40a82ac004e\",\n      \"target_finding_ref\": {\n        \"finding_id\": \"finding_275076036f39bfc2d6d6\",\n        \"revision\": 1\n      },\n      \"category\": \"scoring\",\n      \"evidence_refs\": [\n        {\n          \"observation_id\": \"observation_1aaeaecae31c8ce6b4a9\",\n          \"revision\": 1\n        },\n        {\n          \"observation_id\": \"observation_23e59ee830d162d27647\",\n          \"revision\": 1\n        },\n        {\n          \"observation_id\": \"observation_92d51b41feb0712da2e6\",\n          \"revision\": 1\n        },\n        {\n          \"observation_id\": \"observation_a7cebda6ae00c095e4c4\",\n          \"revision\": 1\n        },\n        {\n          \"observation_id\": \"observation_be6b719164e5e6897561\",\n          \"revision\": 1\n        }\n      ],\n      \"question\": \"该发现中工具重算总分 4 与来源报告总分 0 不一致；需要复核计分定义、条目完整性以及来源字段是否真的是总分。\",\n      \"requested_capability\": \"xx_v1_score\",\n      \"expected_resolution\": \"复核条目计算、报告字段语义和记录定位；若无法回查，保留冲突并发布限制。\",\n      \"severity\": \"high\",\n      \"status\": \"open\",\n      \"metadata\": {\n        \"computed_total\": 4.0,\n        \"reported_total\": 0.0\n      }\n    }\n  ],\n  \"review_outcomes\": [\n    {\n      \"review_task_id\": \"review_d28b876a50304e41bea4\",\n      \"challenge_id\": \"challenge_0afd25dbe40a82ac004e\",\n      \"status\": \"unresolved\",\n      \"rationale\": \"重算结果与来源报告值冲突，但当前没有原始字段定义修订或回查材料；按阶段06规则保留两个值，不任意替换。\",\n      \"revised_findings\": [\n        {\n          \"finding_id\": \"finding_275076036f39bfc2d6d6_reviewed\",\n          \"proposition\": \"XX-v1 total remains disputed: recomputed total 4 differs from source reported total 0; no source amendment is available in this run.\",\n          \"status\": \"unresolved\",\n          \"support_refs\": [\n            {\n              \"observation_id\": \"observation_1aaeaecae31c8ce6b4a9\",\n              \"revision\": 1\n            },\n            {\n              \"observation_id\": \"observation_23e59ee830d162d27647\",\n              \"revision\": 1\n            },\n            {\n              \"observation_id\": \"observation_92d51b41feb0712da2e6\",\n              \"revision\": 1\n            },\n            {\n              \"observation_id\": \"observation_a7cebda6ae00c095e4c4\",\n              \"revision\": 1\n            },\n            {\n              \"observation_id\": \"observation_be6b719164e5e6897561\",\n              \"revision\": 1\n            }\n          ],\n          \"artifact_refs\": [\n            \"artifact_xx_v1_score_1564354816072\"\n          ],\n          \"assumptions\": [],\n          \"limitations\": [\n            \"reported and recomputed totals conflict; both values are retained\"\n          ]\n        }\n      ],\n      \"limitations\": [\n        \"缺少来源字段定义或人工确认，不能断言哪一个总分正确。\"\n      ],\n      \"metadata\": {\n        \"computed_total\": 4.0,\n        \"reported_total\": 0.0,\n        \"original_finding_id\": \"finding_275076036f39bfc2d6d6\"\n      }\n    }\n  ],\n  \"coverage\": {\n    \"task_count\": 5,\n    \"succeeded_tasks\": [\n      \"assessment_xx_v1\",\n      \"longitudinal_xx_v1\",\n      \"quality_longitudinal\",\n      \"quality_xx_v1\"\n    ],\n    \"failed_tasks\": [\n      \"laboratory_optional\"\n    ],\n    \"skipped_tasks\": [],\n    \"agent_names\": [\n      \"AssessmentAgent\",\n      \"LaboratoryGeneticsAgent\",\n      \"LongitudinalAgent\"\n    ],\n    \"unread_evidence_count\": 0\n  },\n  \"limitations\": [\n    \"no reference rule is applied without platform and method metadata\",\n    \"重算结果与来源报告值冲突，但当前没有原始字段定义修订或回查材料；按阶段06规则保留两个值，不任意替换。\",\n    \"发现 1 个待质询或已质询问题，报告结论按限制发布。\"\n  ],\n  \"recommendations\": [\n    \"保留每个命题的证据引用、工具产物版本和复核状态，避免只发布自然语言结论。\",\n    \"对计分冲突补充来源字段定义或人工复核记录，再重新运行受影响分支。\",\n    \"未决复核项应进入报告限制区，不能被渲染器改写成已解决。\"\n  ],\n  \"provenance\": {\n    \"rules_version\": \"stage06.rules/1\",\n    \"publisher\": \"ReportPublisher\",\n    \"rendering\": \"json_markdown_txt_from_report_snapshot\"\n  }\n}",
+          "report_markdown": "# 多智能体协作分析报告\n\n- 报告ID：report_059b1441ce59fa7748f3\n- Run ID：run_e3859f29bf5b7f78eea2\n- 项目：stage06_eval\n- 目标：multi_source_summary\n- 状态：completed_with_limitations\n\n## 覆盖情况\n\n- 任务数：5\n- 成功任务：assessment_xx_v1, longitudinal_xx_v1, quality_longitudinal, quality_xx_v1\n- 失败任务：laboratory_optional\n- Agent：AssessmentAgent, LaboratoryGeneticsAgent, LongitudinalAgent\n- 未读证据数：0\n\n## 发现\n\n- **finding_f8953bb3e582e9fe405b**（active，引用数 6）：XX-v1 computed total matches reported total 6 on 2024-07-01.\n- **finding_longitudinal_subject_a533e9f8d6b72c51ebff_xx_v1.total**（active，引用数 1）：XX-v1 total changed by 6 from 2024-01-01 to 2024-07-01 using 2 distinct dates.\n  - 限制：two time points support descriptive change only\n- **finding_275076036f39bfc2d6d6_reviewed**（unresolved，引用数 6）：XX-v1 total remains disputed: recomputed total 4 differs from source reported total 0; no source amendment is available in this run.\n  - 限制：reported and recomputed totals conflict; both values are retained\n\n## 质询与复核\n\n- **challenge_0afd25dbe40a82ac004e** [high/scoring]：该发现中工具重算总分 4 与来源报告总分 0 不一致；需要复核计分定义、条目完整性以及来源字段是否真的是总分。\n  - 复核：unresolved；重算结果与来源报告值冲突，但当前没有原始字段定义修订或回查材料；按阶段06规则保留两个值，不任意替换。\n\n## 局限性\n\n- no reference rule is applied without platform and method metadata\n- 重算结果与来源报告值冲突，但当前没有原始字段定义修订或回查材料；按阶段06规则保留两个值，不任意替换。\n- 发现 1 个待质询或已质询问题，报告结论按限制发布。\n\n## 建议\n\n- 保留每个命题的证据引用、工具产物版本和复核状态，避免只发布自然语言结论。\n- 对计分冲突补充来源字段定义或人工复核记录，再重新运行受影响分支。\n- 未决复核项应进入报告限制区，不能被渲染器改写成已解决。\n",
+          "report_text": "多智能体协作分析报告 report_059b1441ce59fa7748f3，状态为completed_with_limitations。本次运行包含5个任务，形成3条发现。系统提出1个质询，并完成1个定向复核；未决问题已保留为报告限制。主要限制：no reference rule is applied without platform and method metadata；重算结果与来源报告值冲突，但当前没有原始字段定义修订或回查材料；按阶段06规则保留两个值，不任意替换。；发现 1 个待质询或已质询问题，报告结论按限制发布。。\n"
+        }
+      },
+      "error_code": null,
+      "message": null
+    }
+  ],
+  "budget_ledger": [
+    {
+      "run_id": "run_e3859f29bf5b7f78eea2",
+      "entry_id": "settle-assessment_xx_v1-1",
+      "task_id": "assessment_xx_v1",
+      "kind": "settle",
+      "calls": 0,
+      "tokens": 0,
+      "cost": null,
+      "usage_unknown": 0,
+      "note": null
+    },
+    {
+      "run_id": "run_e3859f29bf5b7f78eea2",
+      "entry_id": "settle-laboratory_optional-1",
+      "task_id": "laboratory_optional",
+      "kind": "settle",
+      "calls": 0,
+      "tokens": 0,
+      "cost": null,
+      "usage_unknown": 0,
+      "note": null
+    },
+    {
+      "run_id": "run_e3859f29bf5b7f78eea2",
+      "entry_id": "settle-longitudinal_xx_v1-1",
+      "task_id": "longitudinal_xx_v1",
+      "kind": "settle",
+      "calls": 0,
+      "tokens": 0,
+      "cost": null,
+      "usage_unknown": 0,
+      "note": null
+    },
+    {
+      "run_id": "run_e3859f29bf5b7f78eea2",
+      "entry_id": "settle-quality_longitudinal-1",
+      "task_id": "quality_longitudinal",
+      "kind": "settle",
+      "calls": 0,
+      "tokens": 0,
+      "cost": null,
+      "usage_unknown": 0,
+      "note": null
+    },
+    {
+      "run_id": "run_e3859f29bf5b7f78eea2",
+      "entry_id": "settle-quality_xx_v1-1",
+      "task_id": "quality_xx_v1",
+      "kind": "settle",
+      "calls": 0,
+      "tokens": 0,
+      "cost": null,
+      "usage_unknown": 0,
+      "note": null
+    },
+    {
+      "run_id": "run_e3859f29bf5b7f78eea2",
+      "entry_id": "settle-synthesis_report-1",
+      "task_id": "synthesis_report",
+      "kind": "settle",
+      "calls": 0,
+      "tokens": 0,
+      "cost": null,
+      "usage_unknown": 0,
+      "note": null
+    }
+  ]
+}

@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from llm_client import DeepSeekClient
+from explainable_report import render_v2_text
 
 
 AGENT_NAMES = (
@@ -72,6 +73,13 @@ def generate_report(payload: dict[str, Any]) -> str:
 def main() -> int:
     args = parse_args()
     document = json.loads(args.agent_result.read_text(encoding="utf-8"))
+    if document.get("schema_version") == "stage06.report_snapshot/1":
+        report_text = render_v2_text(document)
+        output = args.output or args.agent_result.with_name(args.agent_result.stem + "_report.txt")
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(report_text, encoding="utf-8")
+        print(str(output.resolve()))
+        return 0
     payload = extract_payload(document)
     report_text = generate_report(payload)
     output = args.output or args.agent_result.with_name(
@@ -85,3 +93,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

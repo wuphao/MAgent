@@ -1,0 +1,15 @@
+{
+  "capability_id": "longitudinal_describe",
+  "version": "longitudinal_describe/1",
+  "availability": "active",
+  "input_schema": "Observation[comparable numeric time series]",
+  "output_schema": "ToolArtifact[trajectory_summary]",
+  "applicability": {
+    "minimum_distinct_dates": 2
+  },
+  "resources": {
+    "runtime": "python"
+  },
+  "timeout_seconds": 5,
+  "retryable_errors": []
+}

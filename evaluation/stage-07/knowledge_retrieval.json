@@ -1,0 +1,104 @@
+{
+  "document": {
+    "document_id": "xx_v1_dictionary",
+    "version": "2026-09-07",
+    "title": "xx-v1-data-dictionary",
+    "path": "configs\\knowledge\\xx-v1-data-dictionary.md",
+    "content_hash": "e2c76084248402532a896ddea60556171e6028bfae701be2f024d94faf67053a",
+    "chunks": [
+      {
+        "chunk_id": "chunk_f9e7251f8e21e9748e62",
+        "document_id": "xx_v1_dictionary",
+        "document_version": "2026-09-07",
+        "title": "xx-v1-data-dictionary",
+        "text": "# XX-v1 测试量表说明",
+        "locator": "paragraph:0",
+        "keywords": [
+          "xx-v1"
+        ]
+      },
+      {
+        "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+        "document_id": "xx_v1_dictionary",
+        "document_version": "2026-09-07",
+        "title": "xx-v1-data-dictionary",
+        "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+        "locator": "paragraph:1",
+        "keywords": [
+          "xx-v1",
+          "total",
+          "条目"
+        ]
+      },
+      {
+        "chunk_id": "chunk_64ea5ab1d1defedc5ae9",
+        "document_id": "xx_v1_dictionary",
+        "document_version": "2026-09-07",
+        "title": "xx-v1-data-dictionary",
+        "text": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+        "locator": "paragraph:2",
+        "keywords": [
+          "条目",
+          "缺失"
+        ]
+      }
+    ]
+  },
+  "hits": [
+    {
+      "chunk": {
+        "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+        "document_id": "xx_v1_dictionary",
+        "document_version": "2026-09-07",
+        "title": "xx-v1-data-dictionary",
+        "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+        "locator": "paragraph:1",
+        "keywords": [
+          "xx-v1",
+          "total",
+          "条目"
+        ]
+      },
+      "score": 2,
+      "matched_terms": [
+        "total",
+        "xx-v1"
+      ]
+    },
+    {
+      "chunk": {
+        "chunk_id": "chunk_f9e7251f8e21e9748e62",
+        "document_id": "xx_v1_dictionary",
+        "document_version": "2026-09-07",
+        "title": "xx-v1-data-dictionary",
+        "text": "# XX-v1 测试量表说明",
+        "locator": "paragraph:0",
+        "keywords": [
+          "xx-v1"
+        ]
+      },
+      "score": 1,
+      "matched_terms": [
+        "xx-v1"
+      ]
+    }
+  ],
+  "rule_candidates": [
+    {
+      "candidate_id": "candidate_chunk_8cb2a8e7ca72d5313d30",
+      "rule_type": "instrument_scoring_definition",
+      "statement": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+      "chunk_refs": [
+        "chunk_8cb2a8e7ca72d5313d30"
+      ],
+      "status": "candidate",
+      "limitations": [
+        "candidate must be activated through instrument registry before scoring rules change"
+      ]
+    }
+  ],
+  "activation": {
+    "status": "candidate_only",
+    "reason": "rules must be activated through instrument registry before changing scoring behavior"
+  }
+}
