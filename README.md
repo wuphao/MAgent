@@ -1,84 +1,84 @@
-# Multi-agent RWE分析
+# Multi-agent RWE 分析
 
-## 生成可解释性报告
+本项目当前默认入口已经切换到 v2：以稳定数据契约、证据仓、任务 DAG、质询复核和报告快照为核心。旧 Agent 流程仍保留，可用 `--engine legacy` 显式运行。
 
-大模型解释改为调用 DeepSeek 官方 API，不再依赖本地 Ollama。先在 PowerShell 中配置 API Key：
+## v2 默认流程
 
-```powershell
-$env:DEEPSEEK_API_KEY="你的DeepSeek API Key"
-```
-
-默认模型为 `deepseek-v4-flash`，可按需覆盖：
+CSV/JSON/XLSX 等结构化数据通过 mapping 配置接入，然后运行目标分析：
 
 ```powershell
-$env:DEEPSEEK_MODEL="deepseek-v4-pro"
+python main.py tests\fixtures\stage06\xx_v1_scoring_conflict.csv `
+  --mapping configs\mappings\xx_v1_csv_long.json `
+  --project-id demo `
+  --source-namespace csv `
+  --v2-goal multi_source_summary `
+  --output output\demo_v2.json
 ```
 
-生成 JSON 和 Markdown 报告：
+常用目标：
+
+- `source_inventory`：只做来源盘点，不需要 mapping。
+- `xx_v1_assessment`：运行 XX-v1 质量检查和计分。
+- `longitudinal_xx_v1`：运行 XX-v1 total 纵向描述。
+- `multi_source_summary`：运行专业 Agent、质询复核和报告快照。
+- `multimodal_summary`：在综合报告前额外接入文本、知识和影像兼容性任务。
+
+并行调度：
 
 ```powershell
-python generate_explainable_report.py output\patient_041_S_4060_analysis.json
+python main.py data.csv --mapping configs\mappings\xx_v1_csv_long.json --v2-goal multimodal_summary --parallel
 ```
 
-不调用大模型、仅使用确定性模板：
+## v2 架构能力
+
+已经实现并验收：
+
+- 数据契约：Asset、Observation、Evidence、Finding、Task、Challenge、ReportSnapshot。
+- 多结构适配：JSON、CSV long、XLSX wide、nested JSON。
+- 语义映射候选和元数据补充恢复。
+- 任务 DAG、预算、重试、取消、串行/并行调度。
+- 专业 Agent：质量检查、XX-v1 计分、纵向描述、实验室/遗传描述。
+- 协作闭环：冲突发现、质询、定向复核、限制发布。
+- 文本解析、知识检索、影像兼容性验证。
+- 本地恢复：租约 fencing token、outbox 去重、staging 产物修复、依赖闭包和局部重算计划。
+- 纯 Python API service：项目隔离、幂等键、运行创建、报告、质询和证据查询。
+
+能力边界见：
+
+- `docs/运行与恢复/能力可用清单.md`
+- `evaluation/stage-08/shadow-cutover.md`
+
+## 旧流程
+
+旧流程仍可运行：
+
+```powershell
+python main.py --engine legacy output\patient_041_S_4060_analysis.json --full --output output\patient_041_S_4060_agent_result.json
+```
+
+旧流程可继续生成解释性报告：
 
 ```powershell
 python generate_explainable_report.py output\patient_041_S_4060_analysis.json --no-llm
 ```
 
-报告默认保存在`output/reports`。量表值、日期、record_id、统计量和数据质量结论
-由Python生成并锁定；大模型只解释已经存在的证据。
-
-## Agent 流程
-
-当前处理顺序为：数据质控、认知量表、功能分期、纵向统计、生物标志物、影像、临床整合。
-患者导出 JSON 使用 `schema_version=2.0`，包含 MOCA、MMSE、FAQ、CDR、ADAS、
-DICOM 基本信息、血浆、APOE 和脑脊液九张表。
-
-影像路径需在导出 JSON 中手动填写：
-
-```json
-{
-  "imaging": {
-    "mri": {"path": "D:\\path\\to\\mri"},
-    "pet": {"path": "D:\\path\\to\\pet"}
-  }
-}
-```
-
-`mri.path` 和 `pet.path` 均可填写 NIfTI/MHA/NRRD 文件，或包含 DICOM
-序列的目录。影像 Agent 会自动选择目录中切片数最多的 DICOM 序列，转换为
-DiaMond 所需的 H5，然后调用：
-
-```text
-D:\Python Project\DiaMond\DiaMond
-```
-
-默认使用 `models\DiaMond\mri+pet\DiaMond_multi_split4_bestval.pt` 和
-DiaMond 自带的 `.venv` 在 CUDA 上预测，输出 CN/MCI/AD 及三类概率。可通过
-`DIAMOND_ROOT`、`DIAMOND_PYTHON`、`DIAMOND_CHECKPOINT`、`DIAMOND_DEVICE`
-环境变量覆盖。只有 MRI、PET 两个路径均有效时才运行模型；结果属于研究模型
-输出，不应单独作为临床诊断。
-
-先从 RWE 导出患者 JSON（文件会写入 `output`）：
+v2 报告入口读取同一个 `ReportSnapshot`，不会重新调用模型推断：
 
 ```powershell
-python rwe_data_tools\export_patient_agent_json.py --patient-number "041_S_4060"
+python generate_explainable_report.py evaluation\stage-06\report_snapshot.json --v2-report-snapshot
+python generate_agent_text_report.py evaluation\stage-06\report_snapshot.json --output output\report_from_snapshot.txt
 ```
 
-手工填写该 JSON 的两个影像路径后，再运行完整 Agent 流程：
+## 影像说明
 
-输出包含全部 Agent 中间结果：
+当前 v2 已完成 DiaMond 兼容性验证和拒绝路径。真实 DiaMond 推理需要真实 MRI/PET、模型权重、checkpoint hash、运行环境和资源日志；未满足这些条件时，系统不会把路径存在伪装成模型已运行。
 
-```powershell
-python main.py output\patient_041_S_4060_analysis.json --use-llm --full --output output\patient_041_S_4060_agent_result.json
-```
+详见：`evaluation/stage-07/imaging-compatibility.md`。
 
-最后直接读取上述已包含影像 Agent 结果的 JSON，将五个核心 Agent 结果交给
-DeepSeek，并生成一段式 TXT 报告：
+## 本地部署与恢复
 
-```powershell
-python generate_agent_text_report.py `
-  output\patient_041_S_4060_agent_result.json `
-  --output output\patient_041_S_4060_report.txt
-```
+配置示例：`configs/deployment/local.example.json`。
+
+运维手册：`docs/运行与恢复/本地部署与恢复手册.md`。
+
+默认部署形态是 CLI/API + SQLite + 本地资产仓 + 单机工作进程。共享数据库、对象仓和任务队列属于后续扩展，不把 SQLite 放到共享盘冒充多机可靠数据库。

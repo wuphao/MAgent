@@ -1,0 +1,163 @@
+{
+  "status": "plan",
+  "request": {
+    "project_id": "stage04",
+    "subject_scope": [],
+    "goal": "multi_source_summary",
+    "snapshot_id": null,
+    "as_of": "2026-09-07T11:00:12.365943Z",
+    "allowed_capabilities": [],
+    "budget": {
+      "max_calls": 0,
+      "max_tokens": 0,
+      "max_cost": null
+    },
+    "output_format": "json",
+    "cancel_requested": false
+  },
+  "plan": {
+    "run_id": "run_57de2002e482642fba7c",
+    "project_id": "stage04",
+    "goal": "multi_source_summary",
+    "tasks": [
+      {
+        "task_id": "quality_xx_v1",
+        "capability_id": null,
+        "capability_version": null,
+        "agent_name": "QualityService",
+        "input_refs": [],
+        "depends_on": [],
+        "required": true,
+        "parameters": {
+          "goal": "xx_v1_assessment"
+        },
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      {
+        "task_id": "assessment_xx_v1",
+        "capability_id": "xx_v1_score",
+        "capability_version": "xx_v1_score/1",
+        "agent_name": "AssessmentAgent",
+        "input_refs": [],
+        "depends_on": [
+          {
+            "task_id": "quality_xx_v1",
+            "mode": "required_success"
+          }
+        ],
+        "required": true,
+        "parameters": {},
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      {
+        "task_id": "quality_longitudinal",
+        "capability_id": null,
+        "capability_version": null,
+        "agent_name": "QualityService",
+        "input_refs": [],
+        "depends_on": [],
+        "required": true,
+        "parameters": {
+          "goal": "longitudinal_xx_v1"
+        },
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      {
+        "task_id": "longitudinal_xx_v1",
+        "capability_id": "longitudinal_describe",
+        "capability_version": "longitudinal_describe/1",
+        "agent_name": "LongitudinalAgent",
+        "input_refs": [],
+        "depends_on": [
+          {
+            "task_id": "quality_longitudinal",
+            "mode": "required_success"
+          }
+        ],
+        "required": true,
+        "parameters": {},
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      {
+        "task_id": "laboratory_optional",
+        "capability_id": null,
+        "capability_version": null,
+        "agent_name": "LaboratoryGeneticsAgent",
+        "input_refs": [],
+        "depends_on": [],
+        "required": false,
+        "parameters": {},
+        "resource_class": "cpu",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      },
+      {
+        "task_id": "summary_placeholder",
+        "capability_id": "summary_placeholder",
+        "capability_version": "stage05/1",
+        "agent_name": null,
+        "input_refs": [],
+        "depends_on": [
+          {
+            "task_id": "assessment_xx_v1",
+            "mode": "terminal"
+          },
+          {
+            "task_id": "longitudinal_xx_v1",
+            "mode": "terminal"
+          },
+          {
+            "task_id": "laboratory_optional",
+            "mode": "terminal"
+          }
+        ],
+        "required": false,
+        "parameters": {
+          "status": "skipped_until_stage06"
+        },
+        "resource_class": "none",
+        "timeout_seconds": null,
+        "retry_policy": {
+          "max_attempts": 1,
+          "retryable_errors": []
+        },
+        "budget": {}
+      }
+    ],
+    "notes": [
+      "summary_placeholder skipped: capability summary_placeholder is not registered"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "errors": []
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "missing_or_unverified": {
+    "status": "incompatible",
+    "mri": {
+      "asset_id": "imaging_asset_46213af0558b52302107",
+      "modality": "MRI",
+      "path": "evaluation\\stage-07\\missing_mri.nii.gz",
+      "content_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "exists": false,
+      "acquisition_date": null,
+      "tracer": null,
+      "sequence_identity": null,
+      "spatial_info": {},
+      "preprocessing": {}
+    },
+    "pet": null,
+    "compatibility": {
+      "status": "incompatible",
+      "reasons": [
+        "MRI asset is missing",
+        "PET asset is missing",
+        "DiaMond checkpoint hash is unavailable"
+      ],
+      "cache_key": null,
+      "required_model": "DiaMond",
+      "validated_requirements": [],
+      "unknown_requirements": [
+        "MRI sequence identity is not confirmed"
+      ]
+    },
+    "limitations": [
+      "real DiaMond prediction is not executed until compatibility is proven"
+    ]
+  },
+  "compatible_probe": {
+    "status": "compatible",
+    "reasons": [],
+    "cache_key": "diamond_cache_722b08ae915fab0fa88b36f4",
+    "required_model": "DiaMond",
+    "validated_requirements": [
+      "MRI asset exists",
+      "FDG PET asset exists",
+      "checkpoint hash provided"
+    ],
+    "unknown_requirements": []
+  },
+  "after_content_change": {
+    "status": "compatible",
+    "reasons": [],
+    "cache_key": "diamond_cache_470cb772c43ab6ceeb9667fd",
+    "required_model": "DiaMond",
+    "validated_requirements": [
+      "MRI asset exists",
+      "FDG PET asset exists",
+      "checkpoint hash provided"
+    ],
+    "unknown_requirements": []
+  },
+  "cache_changed": true,
+  "real_runtime": "not verified: requires real MRI/PET, model weights/checkpoint hash, runtime environment and resource log"
+}

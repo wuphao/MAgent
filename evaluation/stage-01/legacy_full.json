@@ -1,0 +1,426 @@
+{
+  "case_id": "S001",
+  "raw_case": {
+    "schema_version": "2.0",
+    "patient": {
+      "patient_number": "S001",
+      "birth_year": 1950,
+      "sex": "F"
+    },
+    "xx_v1": [
+      {
+        "record_id": "XX-S001-2024-01-01",
+        "visit_date": "2024-01-01",
+        "item_1": 1,
+        "item_2": 1,
+        "item_3": 1,
+        "item_4": 1,
+        "total": 4
+      },
+      {
+        "record_id": "XX-S001-2024-07-01",
+        "visit_date": "2024-07-01",
+        "item_1": 2,
+        "item_2": 2,
+        "item_3": 1,
+        "item_4": 1,
+        "total": 6
+      }
+    ],
+    "imaging": {}
+  },
+  "normalized_case": {
+    "schema_version": "2.0",
+    "patient": {
+      "patient_number": "S001",
+      "birth_year": 1950,
+      "sex": "F"
+    },
+    "xx_v1": [
+      {
+        "record_id": "XX-S001-2024-01-01",
+        "visit_date": "2024-01-01",
+        "item_1": 1,
+        "item_2": 1,
+        "item_3": 1,
+        "item_4": 1,
+        "total": 4
+      },
+      {
+        "record_id": "XX-S001-2024-07-01",
+        "visit_date": "2024-07-01",
+        "item_1": 2,
+        "item_2": 2,
+        "item_3": 1,
+        "item_4": 1,
+        "total": 6
+      }
+    ],
+    "imaging": {},
+    "data_quality": {
+      "warnings": [
+        {
+          "code": "MISSING_FORM",
+          "severity": "high",
+          "form": "moca",
+          "record_id": null,
+          "visit_date": null,
+          "message": "量表无记录"
+        },
+        {
+          "code": "MISSING_FORM",
+          "severity": "high",
+          "form": "mmse",
+          "record_id": null,
+          "visit_date": null,
+          "message": "量表无记录"
+        },
+        {
+          "code": "MISSING_FORM",
+          "severity": "high",
+          "form": "faq",
+          "record_id": null,
+          "visit_date": null,
+          "message": "量表无记录"
+        },
+        {
+          "code": "MISSING_FORM",
+          "severity": "high",
+          "form": "cdr",
+          "record_id": null,
+          "visit_date": null,
+          "message": "量表无记录"
+        },
+        {
+          "code": "MISSING_FORM",
+          "severity": "high",
+          "form": "adas",
+          "record_id": null,
+          "visit_date": null,
+          "message": "量表无记录"
+        }
+      ]
+    }
+  },
+  "agent_outputs": {
+    "数据质控Agent": {
+      "status": "fail",
+      "issue_count": 5,
+      "high_severity_count": 5,
+      "quality_issues": [
+        {
+          "code": "MISSING_FORM",
+          "severity": "high",
+          "form": "moca",
+          "record_id": null,
+          "visit_date": null,
+          "message": "量表无记录"
+        },
+        {
+          "code": "MISSING_FORM",
+          "severity": "high",
+          "form": "mmse",
+          "record_id": null,
+          "visit_date": null,
+          "message": "量表无记录"
+        },
+        {
+          "code": "MISSING_FORM",
+          "severity": "high",
+          "form": "faq",
+          "record_id": null,
+          "visit_date": null,
+          "message": "量表无记录"
+        },
+        {
+          "code": "MISSING_FORM",
+          "severity": "high",
+          "form": "cdr",
+          "record_id": null,
+          "visit_date": null,
+          "message": "量表无记录"
+        },
+        {
+          "code": "MISSING_FORM",
+          "severity": "high",
+          "form": "adas",
+          "record_id": null,
+          "visit_date": null,
+          "message": "量表无记录"
+        }
+      ],
+      "limitations": [
+        "量表无记录",
+        "量表无记录",
+        "量表无记录",
+        "量表无记录",
+        "量表无记录"
+      ]
+    },
+    "认知量表Agent": {
+      "domain": "cognition",
+      "status": "no_clear_abnormal_signal",
+      "severity": "none",
+      "score_series": {
+        "mmse": [],
+        "moca": [],
+        "adas13": [],
+        "adas11": []
+      },
+      "domain_findings": {
+        "memory": []
+      },
+      "evidence": [],
+      "limitations": [
+        "量表分数必须结合教育程度、语言文化背景及临床状态解释"
+      ]
+    },
+    "功能分期Agent": {
+      "domain": "function_and_stage",
+      "functional_status": "无法确定",
+      "clinical_stage_signal": "indeterminate",
+      "cdr_series": [],
+      "evidence": [],
+      "conflicts": [],
+      "limitations": []
+    },
+    "纵向统计Agent": {
+      "domain": "longitudinal",
+      "overall_pattern": "未见明确下降",
+      "trajectories": {
+        "mmse": {
+          "n": 0,
+          "status": "unavailable"
+        },
+        "moca": {
+          "n": 0,
+          "status": "unavailable"
+        },
+        "adas13": {
+          "n": 0,
+          "status": "unavailable"
+        },
+        "adas11": {
+          "n": 0,
+          "status": "unavailable"
+        }
+      },
+      "limitations": [
+        "单患者少量时间点的斜率用于描述，不代表因果效应或人群推断"
+      ]
+    },
+    "生物标志物Agent": {
+      "domain": "biomarkers_and_genetic_risk",
+      "status": "unavailable",
+      "plasma": {
+        "record_count": 0,
+        "measurements": {
+          "ptau217": [],
+          "abeta42": [],
+          "abeta40": [],
+          "abeta42_40_ratio": [],
+          "ptau217_abeta42_ratio": [],
+          "nfl": [],
+          "gfap": []
+        },
+        "interpretation": "保留原始检测值；未配置检测平台特异性参考范围，因此不自动标记阳性/阴性。"
+      },
+      "apoe": {
+        "record_count": 0,
+        "results": [],
+        "epsilon4_carrier": null,
+        "risk_modifier": "无法判断",
+        "interpretation": "APOE基因型影响人群风险，但不能单独确定个体病因或诊断。"
+      },
+      "csf_exploratory": {
+        "record_count": 0,
+        "measurements": {
+          "wu_strem2_raw": [],
+          "wu_strem2_cv": [],
+          "wu_strem2_corrected": [],
+          "msd_strem2_raw": [],
+          "msd_strem2_cv": [],
+          "msd_strem2_corrected": [],
+          "msd_pgrn_raw": [],
+          "msd_pgrn_cv": [],
+          "msd_pgrn_corrected": []
+        },
+        "interpretation": "sTREM2和PGRN属于探索性小胶质细胞/神经炎症相关指标，不等同于经典CSF Aβ42、p-tau或t-tau。"
+      },
+      "atn_assessment": {
+        "amyloid": "indeterminate",
+        "tau": "indeterminate",
+        "neurodegeneration": "indeterminate",
+        "reason": "没有可用于A/T/N判定的血浆、经典脑脊液或PET定量结果。"
+      },
+      "etiology_signal": "undetermined",
+      "evidence": [],
+      "limitations": [
+        "没有可用生物标志物记录"
+      ]
+    },
+    "影像Agent": {
+      "domain": "imaging",
+      "status": "awaiting_manual_paths",
+      "mri": {
+        "modality": "MRI",
+        "path": "",
+        "path_provided": false,
+        "path_exists": false,
+        "analysis_status": "path_pending_manual_input"
+      },
+      "pet": {
+        "modality": "PET",
+        "path": "",
+        "path_provided": false,
+        "path_exists": false,
+        "analysis_status": "path_pending_manual_input"
+      },
+      "diamond_prediction": null,
+      "prediction_error": null,
+      "etiology_signal": "undetermined",
+      "evidence": [],
+      "limitations": [
+        "DiaMond输出是研究模型预测，不是临床诊断",
+        "输入MRI/PET必须与模型训练预处理和模态要求相容",
+        "当前不单独生成PET SUVR/Centiloid或MRI分区体积"
+      ]
+    },
+    "临床整合Agent": {
+      "phenotype_summary": "当前结构化数据未显示明确认知下降信号",
+      "clinical_stage": {
+        "label": "indeterminate",
+        "confidence": "low",
+        "note": "这是数据驱动的临床表型信号，不是正式诊断"
+      },
+      "etiology": {
+        "label": "undetermined",
+        "ad_biology_status": {
+          "amyloid": "indeterminate",
+          "tau": "indeterminate",
+          "neurodegeneration": "indeterminate",
+          "reason": "没有可用于A/T/N判定的血浆、经典脑脊液或PET定量结果。"
+        },
+        "apoe_risk_modifier": "无法判断",
+        "reason": "缺少平台特异性阈值，无法自动判定A/T/N状态；MRI/PET路径不完整或尚未提供"
+      },
+      "longitudinal_pattern": "未见明确下降",
+      "biomarker_summary": {
+        "status": "unavailable",
+        "plasma_record_count": 0,
+        "apoe": {
+          "record_count": 0,
+          "results": [],
+          "epsilon4_carrier": null,
+          "risk_modifier": "无法判断",
+          "interpretation": "APOE基因型影响人群风险，但不能单独确定个体病因或诊断。"
+        },
+        "csf_record_count": 0
+      },
+      "imaging_summary": {
+        "status": "awaiting_manual_paths",
+        "mri": {
+          "modality": "MRI",
+          "path": "",
+          "path_provided": false,
+          "path_exists": false,
+          "analysis_status": "path_pending_manual_input"
+        },
+        "pet": {
+          "modality": "PET",
+          "path": "",
+          "path_provided": false,
+          "path_exists": false,
+          "analysis_status": "path_pending_manual_input"
+        }
+      },
+      "key_evidence": [],
+      "conflicting_evidence": [],
+      "data_quality": {
+        "status": "fail",
+        "issue_count": 5,
+        "important_limitations": [
+          "量表无记录",
+          "量表无记录",
+          "量表无记录",
+          "量表无记录",
+          "量表无记录"
+        ]
+      },
+      "recommendations": [
+        "回查并修正量表缺失总分、条目-总分冲突及缺失日期",
+        "在JSON的imaging.mri.path与imaging.pet.path中填写影像路径",
+        "结合教育年限、合并症、用药、临床诊断来源和随访背景进行人工复核"
+      ],
+      "disclaimer": "仅用于研究数据分析和质控，不替代临床诊断。"
+    }
+  },
+  "final_report": {
+    "phenotype_summary": "当前结构化数据未显示明确认知下降信号",
+    "clinical_stage": {
+      "label": "indeterminate",
+      "confidence": "low",
+      "note": "这是数据驱动的临床表型信号，不是正式诊断"
+    },
+    "etiology": {
+      "label": "undetermined",
+      "ad_biology_status": {
+        "amyloid": "indeterminate",
+        "tau": "indeterminate",
+        "neurodegeneration": "indeterminate",
+        "reason": "没有可用于A/T/N判定的血浆、经典脑脊液或PET定量结果。"
+      },
+      "apoe_risk_modifier": "无法判断",
+      "reason": "缺少平台特异性阈值，无法自动判定A/T/N状态；MRI/PET路径不完整或尚未提供"
+    },
+    "longitudinal_pattern": "未见明确下降",
+    "biomarker_summary": {
+      "status": "unavailable",
+      "plasma_record_count": 0,
+      "apoe": {
+        "record_count": 0,
+        "results": [],
+        "epsilon4_carrier": null,
+        "risk_modifier": "无法判断",
+        "interpretation": "APOE基因型影响人群风险，但不能单独确定个体病因或诊断。"
+      },
+      "csf_record_count": 0
+    },
+    "imaging_summary": {
+      "status": "awaiting_manual_paths",
+      "mri": {
+        "modality": "MRI",
+        "path": "",
+        "path_provided": false,
+        "path_exists": false,
+        "analysis_status": "path_pending_manual_input"
+      },
+      "pet": {
+        "modality": "PET",
+        "path": "",
+        "path_provided": false,
+        "path_exists": false,
+        "analysis_status": "path_pending_manual_input"
+      }
+    },
+    "key_evidence": [],
+    "conflicting_evidence": [],
+    "data_quality": {
+      "status": "fail",
+      "issue_count": 5,
+      "important_limitations": [
+        "量表无记录",
+        "量表无记录",
+        "量表无记录",
+        "量表无记录",
+        "量表无记录"
+      ]
+    },
+    "recommendations": [
+      "回查并修正量表缺失总分、条目-总分冲突及缺失日期",
+      "在JSON的imaging.mri.path与imaging.pet.path中填写影像路径",
+      "结合教育年限、合并症、用药、临床诊断来源和随访背景进行人工复核"
+    ],
+    "disclaimer": "仅用于研究数据分析和质控，不替代临床诊断。"
+  }
+}

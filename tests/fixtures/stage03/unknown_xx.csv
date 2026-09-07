@@ -1,0 +1,2 @@
+patient_number,record_id,visit_date,score,unit,version,note
+S001,U1,2024-01-01,4,points,unknown,metadata says do not call tools

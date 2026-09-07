@@ -1,0 +1,24 @@
+{
+  "mapping_id": "xx_v1_csv_long",
+  "version": "xx_v1_csv_long/1",
+  "source_selector": {
+    "kind": "rows"
+  },
+  "identity_field": "patient_number",
+  "event_time_field": "visit_date",
+  "record_id_field": "record_id",
+  "bindings": [
+    {
+      "concept_id": "from_field",
+      "concept_field": "concept_id",
+      "value_field": "value",
+      "transform": "parse_number"
+    }
+  ],
+  "constraints": {
+    "row_format": "one concept per row"
+  },
+  "applicability": {
+    "instrument": "XX-v1"
+  }
+}

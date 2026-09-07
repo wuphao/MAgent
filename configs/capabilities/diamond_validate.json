@@ -1,0 +1,11 @@
+{
+  "capability_id": "diamond_validate",
+  "version": "diamond_validate/1",
+  "availability": "active",
+  "input_schema": "ImagingAssetPair",
+  "output_schema": "CompatibilityResult",
+  "applicability": {"model": "DiaMond", "mode": "validate_only"},
+  "resources": {"cpu": true},
+  "timeout_seconds": 20,
+  "retryable_errors": []
+}

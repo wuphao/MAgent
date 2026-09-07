@@ -1,0 +1,11 @@
+{
+  "questions": [
+    {
+      "question_id": "q_score_type",
+      "source_path": "score",
+      "candidate_meaning": "score may be a raw total or an adjusted score",
+      "required_material": "source document stating score type and instrument version",
+      "impact": "blocks activation and publication of semantic mapping"
+    }
+  ]
+}

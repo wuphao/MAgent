@@ -1,0 +1,34 @@
+{
+  "candidate_id": "candidate_xx_v1",
+  "status_path": ["proposed", "validated", "active"],
+  "prompt_version": "stage03-mapping-candidate/1",
+  "model": "FakeModelGateway",
+  "spec": {
+    "mapping_id": "candidate_xx_v1",
+    "version": "candidate_xx_v1/1",
+    "source_selector": {"kind": "rows"},
+    "identity_field": "patient_number",
+    "event_time_field": "visit_date",
+    "record_id_field": "record_id",
+    "bindings": [
+      {"concept_id": "xx_v1.total", "source_field": "score", "transform": "parse_number"}
+    ],
+    "applicability": {
+      "instrument_version": "1",
+      "score_type": "raw_total",
+      "event_time_role": "measurement_date",
+      "unit": "points"
+    }
+  },
+  "rationales": [
+    {
+      "concept_id": "xx_v1.total",
+      "source_field": "score",
+      "rationale": "source dictionary says score is XX-v1 raw total",
+      "alternatives": ["adjusted score"],
+      "confidence": 0.71
+    }
+  ],
+  "activation_policy": "stage03-default",
+  "note": "confidence is diagnostic only; activation requires structural and semantic validation."
+}

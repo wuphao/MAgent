@@ -1,0 +1,15 @@
+{
+  "projection": [
+    {"source_subject_key": "S001", "record_key": "XX-S001-2024-01-01-A", "event_time": "2024-01-01", "concept_id": "xx_v1.item_1", "value": 1},
+    {"source_subject_key": "S001", "record_key": "XX-S001-2024-01-01-A", "event_time": "2024-01-01", "concept_id": "xx_v1.item_2", "value": 1},
+    {"source_subject_key": "S001", "record_key": "XX-S001-2024-01-01-A", "event_time": "2024-01-01", "concept_id": "xx_v1.item_3", "value": 1},
+    {"source_subject_key": "S001", "record_key": "XX-S001-2024-01-01-A", "event_time": "2024-01-01", "concept_id": "xx_v1.item_4", "value": 1},
+    {"source_subject_key": "S001", "record_key": "XX-S001-2024-01-01-A", "event_time": "2024-01-01", "concept_id": "xx_v1.total", "value": 4},
+    {"source_subject_key": "S001", "record_key": "XX-S001-2024-07-01-A", "event_time": "2024-07-01", "concept_id": "xx_v1.item_1", "value": 2},
+    {"source_subject_key": "S001", "record_key": "XX-S001-2024-07-01-A", "event_time": "2024-07-01", "concept_id": "xx_v1.item_2", "value": 2},
+    {"source_subject_key": "S001", "record_key": "XX-S001-2024-07-01-A", "event_time": "2024-07-01", "concept_id": "xx_v1.item_3", "value": 1},
+    {"source_subject_key": "S001", "record_key": "XX-S001-2024-07-01-A", "event_time": "2024-07-01", "concept_id": "xx_v1.item_4", "value": 1},
+    {"source_subject_key": "S001", "record_key": "XX-S001-2024-07-01-A", "event_time": "2024-07-01", "concept_id": "xx_v1.total", "value": 6}
+  ],
+  "expected_delta_for_total": 2
+}

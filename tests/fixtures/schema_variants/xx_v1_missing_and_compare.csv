@@ -1,0 +1,4 @@
+patient_number,record_id,visit_date,concept_id,value
+S001,XX-S001-MIX-1,2024-01-01,xx_v1.item_1,0
+S001,XX-S001-MIX-1,2024-01-01,xx_v1.item_2,未测
+S001,XX-S001-MIX-1,2024-01-01,xx_v1.item_3,<5

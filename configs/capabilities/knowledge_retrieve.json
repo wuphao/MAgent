@@ -1,0 +1,11 @@
+{
+  "capability_id": "knowledge_retrieve",
+  "version": "knowledge_retrieve/1",
+  "availability": "active",
+  "input_schema": "KnowledgeQuestion",
+  "output_schema": "RuleCandidate[]",
+  "applicability": {"scope": "versioned_documents"},
+  "resources": {"cpu": true},
+  "timeout_seconds": 15,
+  "retryable_errors": []
+}

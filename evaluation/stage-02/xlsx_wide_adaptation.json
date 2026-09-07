@@ -1,0 +1,288 @@
+{
+  "status": "success",
+  "engine": "v2-stage02",
+  "project_id": "stage02",
+  "asset_id": "asset_870e8b3cb5874250",
+  "profile": {
+    "parser_version": "stage02-parser/1",
+    "layout": "xlsx",
+    "record_count": 2,
+    "fields": {
+      "item_1": {
+        "present_count": 2,
+        "missing_count": 0,
+        "sample_values": [
+          "1",
+          "2"
+        ]
+      },
+      "item_2": {
+        "present_count": 2,
+        "missing_count": 0,
+        "sample_values": [
+          "1",
+          "2"
+        ]
+      },
+      "item_3": {
+        "present_count": 2,
+        "missing_count": 0,
+        "sample_values": [
+          "1"
+        ]
+      },
+      "item_4": {
+        "present_count": 2,
+        "missing_count": 0,
+        "sample_values": [
+          "1"
+        ]
+      },
+      "patient_name": {
+        "present_count": 2,
+        "missing_count": 0,
+        "sample_values": [
+          "same-display-name"
+        ]
+      },
+      "patient_number": {
+        "present_count": 2,
+        "missing_count": 0,
+        "sample_values": [
+          "S001"
+        ]
+      },
+      "record_id": {
+        "present_count": 2,
+        "missing_count": 0,
+        "sample_values": [
+          "XX-S001-2024-01-01-A",
+          "XX-S001-2024-07-01-A"
+        ]
+      },
+      "remark": {
+        "present_count": 2,
+        "missing_count": 0,
+        "sample_values": [
+          "not part of scoring"
+        ]
+      },
+      "total": {
+        "present_count": 2,
+        "missing_count": 0,
+        "sample_values": [
+          "4",
+          "6"
+        ]
+      },
+      "visit_date": {
+        "present_count": 2,
+        "missing_count": 0,
+        "sample_values": [
+          "2024-01-01",
+          "2024-07-01"
+        ]
+      }
+    },
+    "top_level_paths": [
+      "rows",
+      "sheet"
+    ],
+    "structure_fingerprint": "097085ba2325ea4f23305d28b5ca35e82f6c3cde396b5f6708c6ea347cab6d2c",
+    "semantic_metadata_fingerprint": "fe3e62c8d1bb8f336ab0d8bfc161ce9479599f2b4ce016eb24c2fa389de63ce1",
+    "facts_from_full_scan": [
+      "record_count",
+      "field_presence",
+      "missing_count"
+    ],
+    "facts_from_sample": [
+      "sample_values"
+    ]
+  },
+  "validation": {
+    "status": "valid",
+    "total_records": 2,
+    "published_count": 10,
+    "quarantined_count": 0,
+    "operator_counts": {
+      "select": {
+        "input": 2,
+        "output": 2,
+        "failed": 0
+      },
+      "transform": {
+        "input": 10,
+        "output": 10,
+        "failed": 0
+      }
+    },
+    "unmapped_fields": [
+      "patient_name",
+      "remark"
+    ],
+    "quarantined": [],
+    "source_locators_checked": 10
+  },
+  "commit": {
+    "inserted_observations": 10,
+    "reused_observations": 0,
+    "inserted_evidence": 1,
+    "reused_evidence": 0
+  },
+  "snapshot": {
+    "snapshot_id": "snapshot_3b4a0f7511bf24b2f720",
+    "member_count": 10
+  },
+  "projection": [
+    {
+      "subject_ref": "subject_08e18a8568d43a2a78f9",
+      "source_subject_key": "S001",
+      "concept_id": "xx_v1.item_1",
+      "value": {
+        "value_type": "number",
+        "value": 1,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "event_time": "2024-01-01",
+      "event_time_precision": "date",
+      "record_key": "XX-S001-2024-01-01-A"
+    },
+    {
+      "subject_ref": "subject_08e18a8568d43a2a78f9",
+      "source_subject_key": "S001",
+      "concept_id": "xx_v1.item_2",
+      "value": {
+        "value_type": "number",
+        "value": 1,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "event_time": "2024-01-01",
+      "event_time_precision": "date",
+      "record_key": "XX-S001-2024-01-01-A"
+    },
+    {
+      "subject_ref": "subject_08e18a8568d43a2a78f9",
+      "source_subject_key": "S001",
+      "concept_id": "xx_v1.item_3",
+      "value": {
+        "value_type": "number",
+        "value": 1,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "event_time": "2024-01-01",
+      "event_time_precision": "date",
+      "record_key": "XX-S001-2024-01-01-A"
+    },
+    {
+      "subject_ref": "subject_08e18a8568d43a2a78f9",
+      "source_subject_key": "S001",
+      "concept_id": "xx_v1.item_4",
+      "value": {
+        "value_type": "number",
+        "value": 1,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "event_time": "2024-01-01",
+      "event_time_precision": "date",
+      "record_key": "XX-S001-2024-01-01-A"
+    },
+    {
+      "subject_ref": "subject_08e18a8568d43a2a78f9",
+      "source_subject_key": "S001",
+      "concept_id": "xx_v1.total",
+      "value": {
+        "value_type": "number",
+        "value": 4,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "event_time": "2024-01-01",
+      "event_time_precision": "date",
+      "record_key": "XX-S001-2024-01-01-A"
+    },
+    {
+      "subject_ref": "subject_08e18a8568d43a2a78f9",
+      "source_subject_key": "S001",
+      "concept_id": "xx_v1.item_1",
+      "value": {
+        "value_type": "number",
+        "value": 2,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "event_time": "2024-07-01",
+      "event_time_precision": "date",
+      "record_key": "XX-S001-2024-07-01-A"
+    },
+    {
+      "subject_ref": "subject_08e18a8568d43a2a78f9",
+      "source_subject_key": "S001",
+      "concept_id": "xx_v1.item_2",
+      "value": {
+        "value_type": "number",
+        "value": 2,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "event_time": "2024-07-01",
+      "event_time_precision": "date",
+      "record_key": "XX-S001-2024-07-01-A"
+    },
+    {
+      "subject_ref": "subject_08e18a8568d43a2a78f9",
+      "source_subject_key": "S001",
+      "concept_id": "xx_v1.item_3",
+      "value": {
+        "value_type": "number",
+        "value": 1,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "event_time": "2024-07-01",
+      "event_time_precision": "date",
+      "record_key": "XX-S001-2024-07-01-A"
+    },
+    {
+      "subject_ref": "subject_08e18a8568d43a2a78f9",
+      "source_subject_key": "S001",
+      "concept_id": "xx_v1.item_4",
+      "value": {
+        "value_type": "number",
+        "value": 1,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "event_time": "2024-07-01",
+      "event_time_precision": "date",
+      "record_key": "XX-S001-2024-07-01-A"
+    },
+    {
+      "subject_ref": "subject_08e18a8568d43a2a78f9",
+      "source_subject_key": "S001",
+      "concept_id": "xx_v1.total",
+      "value": {
+        "value_type": "number",
+        "value": 6,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "event_time": "2024-07-01",
+      "event_time_precision": "date",
+      "record_key": "XX-S001-2024-07-01-A"
+    }
+  ]
+}

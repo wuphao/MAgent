@@ -1,0 +1,9 @@
+{
+  "stage03-metadata-1": {
+    "revision_id": "metadata_54c2b57d2ca6873ea6ae",
+    "question_id": "q_score_type",
+    "answer": "score is raw total for XX-v1 version 1",
+    "source": "tests/fixtures/schema_variants/expected.json",
+    "idempotency_key": "stage03-metadata-1"
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "status": "success",
+  "engine": "v2",
+  "project_id": "stage01",
+  "asset": {
+    "asset_id": "asset_3e833e2b679fadf1",
+    "revision": 1,
+    "content_hash": "3e833e2b679fadf132fd61b1aa65952a9307c01f6c0d78d95ef5a6e7d3bafb50",
+    "media_type": "application/json",
+    "uri": "evaluation\\stage-01\\v2-store-verified\\assets\\3e\\3e833e2b679fadf132fd61b1aa65952a9307c01f6c0d78d95ef5a6e7d3bafb50"
+  },
+  "snapshot": {
+    "snapshot_id": "snapshot_e472b5d6fc3e595344b4",
+    "member_count": 4,
+    "versions": {
+      "mapping": "stage01-inventory/1",
+      "parser": "stage01-json-inventory/1"
+    }
+  },
+  "commit": {
+    "inserted_observations": 0,
+    "reused_observations": 4,
+    "inserted_evidence": 0,
+    "reused_evidence": 1
+  },
+  "inventory": [
+    {
+      "observation_id": "observation_a1b479b6b466036c83bd",
+      "revision": 1,
+      "concept_id": "source.top_level.imaging.count",
+      "value": {
+        "value_type": "number",
+        "value": 1,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "source": {
+        "schema_version": "1.0",
+        "asset_id": "asset_3e833e2b679fadf1",
+        "asset_revision": 1,
+        "record_locator": "$.imaging",
+        "value_locator": "$.imaging.__count__",
+        "parser_version": "stage01-json-inventory/1",
+        "locator_type": "json_path",
+        "extensions": {}
+      }
+    },
+    {
+      "observation_id": "observation_905a8e11493e36a56353",
+      "revision": 1,
+      "concept_id": "source.top_level.patient.count",
+      "value": {
+        "value_type": "number",
+        "value": 1,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "source": {
+        "schema_version": "1.0",
+        "asset_id": "asset_3e833e2b679fadf1",
+        "asset_revision": 1,
+        "record_locator": "$.patient",
+        "value_locator": "$.patient.__count__",
+        "parser_version": "stage01-json-inventory/1",
+        "locator_type": "json_path",
+        "extensions": {}
+      }
+    },
+    {
+      "observation_id": "observation_238b1c10dbaf48015266",
+      "revision": 1,
+      "concept_id": "source.top_level.schema_version.count",
+      "value": {
+        "value_type": "number",
+        "value": 1,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "source": {
+        "schema_version": "1.0",
+        "asset_id": "asset_3e833e2b679fadf1",
+        "asset_revision": 1,
+        "record_locator": "$.schema_version",
+        "value_locator": "$.schema_version.__count__",
+        "parser_version": "stage01-json-inventory/1",
+        "locator_type": "json_path",
+        "extensions": {}
+      }
+    },
+    {
+      "observation_id": "observation_59ad5acd1c95cd70b176",
+      "revision": 1,
+      "concept_id": "source.top_level.xx_v1.count",
+      "value": {
+        "value_type": "number",
+        "value": 2,
+        "unit": null,
+        "comparator": "=",
+        "missing_reason": null
+      },
+      "source": {
+        "schema_version": "1.0",
+        "asset_id": "asset_3e833e2b679fadf1",
+        "asset_revision": 1,
+        "record_locator": "$.xx_v1",
+        "value_locator": "$.xx_v1.__count__",
+        "parser_version": "stage01-json-inventory/1",
+        "locator_type": "json_path",
+        "extensions": {}
+      }
+    }
+  ],
+  "capabilities": [
+    {
+      "capability": "clinical_analysis",
+      "status": "capability_unavailable",
+      "reason": "v2 stage01 has not implemented professional analysis agents."
+    }
+  ]
+}

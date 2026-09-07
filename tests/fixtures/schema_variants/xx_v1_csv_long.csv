@@ -1,0 +1,11 @@
+patient_number,patient_name,record_id,visit_date,concept_id,value,remark
+S001,same-display-name,XX-S001-2024-01-01-A,2024-01-01,xx_v1.item_1,1,not part of scoring
+S001,same-display-name,XX-S001-2024-01-01-A,2024-01-01,xx_v1.item_2,1,not part of scoring
+S001,same-display-name,XX-S001-2024-01-01-A,2024-01-01,xx_v1.item_3,1,not part of scoring
+S001,same-display-name,XX-S001-2024-01-01-A,2024-01-01,xx_v1.item_4,1,not part of scoring
+S001,same-display-name,XX-S001-2024-01-01-A,2024-01-01,xx_v1.total,4,not part of scoring
+S001,same-display-name,XX-S001-2024-07-01-A,2024-07-01,xx_v1.item_1,2,not part of scoring
+S001,same-display-name,XX-S001-2024-07-01-A,2024-07-01,xx_v1.item_2,2,not part of scoring
+S001,same-display-name,XX-S001-2024-07-01-A,2024-07-01,xx_v1.item_3,1,not part of scoring
+S001,same-display-name,XX-S001-2024-07-01-A,2024-07-01,xx_v1.item_4,1,not part of scoring
+S001,same-display-name,XX-S001-2024-07-01-A,2024-07-01,xx_v1.total,6,not part of scoring

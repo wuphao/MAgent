@@ -390,3 +390,24 @@ def render_markdown(report: dict[str, Any]) -> str:
         "", f"> {report['disclaimer']}", "",
     ])
     return "\n".join(lines)
+
+
+def render_v2_markdown(snapshot: dict[str, Any]) -> str:
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
+    from multi_agent.domain.reports import ReportSnapshot
+    from multi_agent.reporting.renderers import render_markdown as render_report_markdown
+
+    return render_report_markdown(ReportSnapshot.model_validate(snapshot))
+
+
+def render_v2_text(snapshot: dict[str, Any]) -> str:
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
+    from multi_agent.domain.reports import ReportSnapshot
+    from multi_agent.reporting.renderers import render_text as render_report_text
+
+    return render_report_text(ReportSnapshot.model_validate(snapshot))
+

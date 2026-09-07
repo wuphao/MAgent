@@ -1,0 +1,16 @@
+{
+  "capability_id": "xx_v1_score",
+  "version": "xx_v1_score/1",
+  "availability": "active",
+  "input_schema": "Observation[xx_v1.item_1..item_4]",
+  "output_schema": "ToolArtifact[xx_v1.computed_total]",
+  "applicability": {
+    "instrument": "xx-v1",
+    "instrument_version": "1"
+  },
+  "resources": {
+    "runtime": "python"
+  },
+  "timeout_seconds": 5,
+  "retryable_errors": []
+}

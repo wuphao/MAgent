@@ -1,0 +1,22 @@
+{
+  "instrument_id": "xx-candidate",
+  "version": "unknown",
+  "status": "candidate",
+  "title": "Unknown XX candidate",
+  "source": {
+    "kind": "metadata_needed",
+    "citation": "No verified scoring or version source has been supplied."
+  },
+  "item_roles": {},
+  "response_encoding": {
+    "type": "unknown"
+  },
+  "scoring": {
+    "rule": "rules_missing"
+  },
+  "score_direction": "unknown",
+  "applicability": {
+    "data_kind": "unknown_structure"
+  },
+  "concepts": []
+}

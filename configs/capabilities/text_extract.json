@@ -1,0 +1,11 @@
+{
+  "capability_id": "text_extract",
+  "version": "text_extract/1",
+  "availability": "active",
+  "input_schema": "TextDocument",
+  "output_schema": "Observation[]",
+  "applicability": {"media_types": ["text/plain", "text/markdown", "application/pdf"]},
+  "resources": {"cpu": true},
+  "timeout_seconds": 30,
+  "retryable_errors": []
+}

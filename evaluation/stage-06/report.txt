@@ -1,0 +1,1 @@
+多智能体协作分析报告 report_059b1441ce59fa7748f3，状态为completed_with_limitations。本次运行包含5个任务，形成3条发现。系统提出1个质询，并完成1个定向复核；未决问题已保留为报告限制。主要限制：no reference rule is applied without platform and method metadata；重算结果与来源报告值冲突，但当前没有原始字段定义修订或回查材料；按阶段06规则保留两个值，不任意替换。；发现 1 个待质询或已质询问题，报告结论按限制发布。。

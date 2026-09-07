@@ -1,0 +1,21 @@
+{
+  "structural": {
+    "status": "valid",
+    "total_records": 1,
+    "published_count": 1,
+    "quarantined_count": 0,
+    "operator_counts": {
+      "transform": {"input": 1, "output": 1, "failed": 0}
+    },
+    "unmapped_fields": [],
+    "quarantined": [],
+    "source_locators_checked": 1
+  },
+  "semantic": {
+    "status": "valid",
+    "issues": [],
+    "instrument_id": "xx-v1",
+    "instrument_definition_version": "xx-v1:1"
+  },
+  "separation": "semantic validation cannot override structural validation failure; both reports are stored as separate objects."
+}
