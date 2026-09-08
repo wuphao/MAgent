@@ -2,13 +2,13 @@ from __future__ import annotations
 
 from typing import Any
 
-from agents.cognitive_agent import CognitiveAgent
-from agents.biomarker_agent import BiomarkerAgent
-from agents.data_quality_agent import DataQualityAgent
-from agents.functional_agent import FunctionalStagingAgent
-from agents.imaging_agent import ImagingAgent
-from agents.longitudinal_agent import LongitudinalAgent
-from agents.synthesis_agent import ClinicalSynthesisAgent
+from archive.legacy_main_chain.agents.cognitive_agent import CognitiveAgent
+from archive.legacy_main_chain.agents.biomarker_agent import BiomarkerAgent
+from archive.legacy_main_chain.agents.data_quality_agent import DataQualityAgent
+from archive.legacy_main_chain.agents.functional_agent import FunctionalStagingAgent
+from archive.legacy_main_chain.agents.imaging_agent import ImagingAgent
+from archive.legacy_main_chain.agents.longitudinal_agent import LongitudinalAgent
+from archive.legacy_main_chain.agents.synthesis_agent import ClinicalSynthesisAgent
 
 
 class Orchestrator:

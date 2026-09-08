@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import date
 from typing import Any
 
-from agents.base_agent import BaseAgent
+from archive.legacy_main_chain.agents.base_agent import BaseAgent
 
 
 class LongitudinalAgent(BaseAgent):

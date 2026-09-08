@@ -1,0 +1,309 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#2563eb" />
+  </marker>
+  <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#f59e0b" />
+  </marker>
+  <style>
+    text { font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif; }
+    .caption { font-family: "Times New Roman", serif; }
+  </style>
+</defs>
+<rect width="1600" height="1000" fill="#ffffff"/>
+
+<rect x="18" y="18" width="286" height="405" rx="10" fill="#eef5ff" stroke="#3b82f6" stroke-width="1.7"/>
+<path d="M 18 52 L 304 52" stroke="#3b82f6" stroke-width="1.4"/>
+<text x="161.0" y="36" font-size="15" font-weight="800" fill="#102a63" text-anchor="middle" dominant-baseline="middle">1. 多源异构数据层</text>
+<rect x="322" y="18" width="286" height="405" rx="10" fill="#eef6ff" stroke="#60a5fa" stroke-width="1.7"/>
+<path d="M 322 52 L 608 52" stroke="#60a5fa" stroke-width="1.4"/>
+<text x="465.0" y="36" font-size="15" font-weight="800" fill="#102a63" text-anchor="middle" dominant-baseline="middle">2. 数据处理与标准化</text>
+<rect x="626" y="18" width="340" height="405" rx="10" fill="#eff9ec" stroke="#84b66f" stroke-width="1.7"/>
+<path d="M 626 52 L 966 52" stroke="#84b66f" stroke-width="1.4"/>
+<text x="796.0" y="36" font-size="15" font-weight="800" fill="#102a63" text-anchor="middle" dominant-baseline="middle">3. 证据与能力建模</text>
+<rect x="984" y="18" width="340" height="405" rx="10" fill="#f4ecff" stroke="#a78bfa" stroke-width="1.7"/>
+<path d="M 984 52 L 1324 52" stroke="#a78bfa" stroke-width="1.4"/>
+<text x="1154.0" y="36" font-size="15" font-weight="800" fill="#102a63" text-anchor="middle" dominant-baseline="middle">4. 多智能体协作层</text>
+<rect x="1342" y="18" width="286" height="405" rx="10" fill="#fff4e8" stroke="#fb923c" stroke-width="1.7"/>
+<path d="M 1342 52 L 1628 52" stroke="#fb923c" stroke-width="1.4"/>
+<text x="1485.0" y="36" font-size="15" font-weight="800" fill="#102a63" text-anchor="middle" dominant-baseline="middle">5. 控制与报告层</text>
+<rect x="36" y="76" width="116" height="70" rx="9" fill="white" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="60" y="111.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">📊</text>
+<text x="86" y="103.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">结构化表格</text>
+<text x="86" y="123.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">CSV / Excel</text>
+<rect x="170" y="76" width="116" height="70" rx="9" fill="white" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="194" y="111.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">{}</text>
+<text x="220" y="103.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">旧 JSON</text>
+<text x="220" y="123.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">导出病例</text>
+<rect x="36" y="166" width="116" height="70" rx="9" fill="white" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="60" y="201.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">📄</text>
+<text x="86" y="193.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">临床文本</text>
+<text x="86" y="213.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">txt / md / PDF</text>
+<rect x="170" y="166" width="116" height="70" rx="9" fill="white" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="194" y="201.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🧠</text>
+<text x="220" y="193.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">影像资产</text>
+<text x="220" y="213.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">MRI / PET</text>
+<rect x="36" y="256" width="116" height="70" rx="9" fill="white" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="60" y="291.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">📚</text>
+<text x="86" y="283.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">知识文档</text>
+<text x="86" y="303.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">数据字典</text>
+<rect x="170" y="256" width="116" height="70" rx="9" fill="white" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="194" y="291.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">✍</text>
+<text x="220" y="283.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">补充说明</text>
+<text x="220" y="303.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">人工元数据</text>
+<text x="161" y="370" font-size="12" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="middle">SourceAsset 记录来源、哈希、版本、项目作用域</text>
+<rect x="346" y="76" width="238" height="46" rx="9" fill="white" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="370" y="99.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">⚙</text>
+<text x="396" y="91.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">格式解析</text>
+<text x="396" y="111.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">CSV / XLSX / JSON / Text / PDF</text>
+<rect x="346" y="136" width="238" height="46" rx="9" fill="white" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="370" y="159.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🔎</text>
+<text x="396" y="151.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">结构画像</text>
+<text x="396" y="171.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">字段、层级、缺失、类型分布</text>
+<rect x="346" y="196" width="238" height="46" rx="9" fill="white" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="370" y="219.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🧩</text>
+<text x="396" y="211.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">声明式 MappingSpec</text>
+<text x="396" y="231.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">select / explode / unpivot / join</text>
+<rect x="346" y="256" width="238" height="46" rx="9" fill="white" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="370" y="279.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">✅</text>
+<text x="396" y="271.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">语义验证</text>
+<text x="396" y="291.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">单位、枚举、日期、来源定位</text>
+<line x1="465" y1="308" x2="465" y2="342" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)"/>
+<ellipse cx="465" cy="348" rx="30" ry="10" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.4"/>
+<rect x="435" y="348" width="60" height="42" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.4"/>
+<ellipse cx="465" cy="390" rx="30" ry="10" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.4"/>
+<text x="465" y="418" font-size="12" font-weight="700" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">统一 Observation 快照</text>
+<rect x="648" y="76" width="138" height="60" rx="9" fill="white" stroke="#cfe6c8" stroke-width="1.2"/>
+<text x="672" y="106.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🧾</text>
+<text x="698" y="98.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">Evidence</text>
+<text x="698" y="118.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">观测证据入库</text>
+<rect x="806" y="76" width="138" height="60" rx="9" fill="white" stroke="#cfe6c8" stroke-width="1.2"/>
+<text x="830" y="106.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">📌</text>
+<text x="856" y="98.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">Finding</text>
+<text x="856" y="118.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">可质询发现</text>
+<rect x="648" y="156" width="138" height="60" rx="9" fill="white" stroke="#cfe6c8" stroke-width="1.2"/>
+<text x="672" y="186.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🛠</text>
+<text x="698" y="178.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">CapabilitySpec</text>
+<text x="698" y="198.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">工具能力注册</text>
+<rect x="806" y="156" width="138" height="60" rx="9" fill="white" stroke="#cfe6c8" stroke-width="1.2"/>
+<text x="830" y="186.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">📋</text>
+<text x="856" y="178.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">InstrumentSpec</text>
+<text x="856" y="198.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">量表/规则注册</text>
+<rect x="648" y="236" width="138" height="60" rx="9" fill="white" stroke="#cfe6c8" stroke-width="1.2"/>
+<text x="672" y="266.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🗂</text>
+<text x="698" y="258.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">ToolArtifact</text>
+<text x="698" y="278.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">运行产物</text>
+<rect x="806" y="236" width="138" height="60" rx="9" fill="white" stroke="#cfe6c8" stroke-width="1.2"/>
+<text x="830" y="266.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🧷</text>
+<text x="856" y="258.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">ReportSnapshot</text>
+<text x="856" y="278.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">报告快照</text>
+<text x="796" y="344" font-size="12" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="middle">统一语义对象让 Agent 不再直接依赖源字段结构</text>
+<rect x="1006" y="74" width="136" height="54" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="1030" y="101.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🧮</text>
+<text x="1056" y="93.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">量表 Agent</text>
+<text x="1056" y="113.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">评分与异常</text>
+<rect x="1162" y="74" width="136" height="54" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="1186" y="101.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">📈</text>
+<text x="1212" y="93.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">纵向 Agent</text>
+<text x="1212" y="113.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">时间变化</text>
+<rect x="1006" y="150" width="136" height="54" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="1030" y="177.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">📝</text>
+<text x="1056" y="169.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">文本 Agent</text>
+<text x="1056" y="189.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">文本观测</text>
+<rect x="1162" y="150" width="136" height="54" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="1186" y="177.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">📚</text>
+<text x="1212" y="169.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">知识 Agent</text>
+<text x="1212" y="189.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">规则检索</text>
+<rect x="1006" y="226" width="136" height="54" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="1030" y="253.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🧠</text>
+<text x="1056" y="245.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">影像 Agent</text>
+<text x="1056" y="265.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">兼容性验证</text>
+<rect x="1162" y="226" width="136" height="54" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="1186" y="253.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🧭</text>
+<text x="1212" y="245.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">综合 Agent</text>
+<text x="1212" y="265.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">快照发布</text>
+<ellipse cx="1154" cy="320" rx="30" ry="10" fill="#ede9fe" stroke="#a78bfa" stroke-width="1.4"/>
+<rect x="1124" y="320" width="60" height="42" fill="#ede9fe" stroke="#a78bfa" stroke-width="1.4"/>
+<ellipse cx="1154" cy="362" rx="30" ry="10" fill="#ede9fe" stroke="#a78bfa" stroke-width="1.4"/>
+<text x="1154" y="390" font-size="12" font-weight="700" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">证据仓 / 任务状态库</text>
+<text x="1154" y="398" font-size="12" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="middle">Agent 读写共享证据，不直接互相改内存</text>
+<rect x="1366" y="76" width="238" height="46" rx="9" fill="white" stroke="#fed7aa" stroke-width="1.2"/>
+<text x="1390" y="99.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🎯</text>
+<text x="1416" y="91.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">目标驱动规划</text>
+<text x="1416" y="111.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">生成任务 DAG</text>
+<rect x="1366" y="136" width="238" height="46" rx="9" fill="white" stroke="#fed7aa" stroke-width="1.2"/>
+<text x="1390" y="159.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">⏱</text>
+<text x="1416" y="151.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">预算与调度</text>
+<text x="1416" y="171.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">状态、重试、取消</text>
+<rect x="1366" y="196" width="238" height="46" rx="9" fill="white" stroke="#fed7aa" stroke-width="1.2"/>
+<text x="1390" y="219.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">⚠</text>
+<text x="1416" y="211.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">冲突检测</text>
+<text x="1416" y="231.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">Challenge 与定向复核</text>
+<rect x="1366" y="256" width="238" height="46" rx="9" fill="white" stroke="#fed7aa" stroke-width="1.2"/>
+<text x="1390" y="279.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">📑</text>
+<text x="1416" y="271.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">报告渲染</text>
+<text x="1416" y="291.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">JSON / Markdown / TXT</text>
+<line x1="1485" y1="310" x2="1485" y2="344" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="1384" y="348" width="202" height="54" rx="9" fill="#fff7ed" stroke="#fb923c" stroke-width="1.2"/>
+<text x="1408" y="375.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">📦</text>
+<text x="1434" y="367.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">最终输出</text>
+<text x="1434" y="387.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">结构化结果 + 证据链 + 能力边界</text>
+<line x1="308" y1="223" x2="318" y2="223" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="612" y1="223" x2="622" y2="223" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="970" y1="223" x2="980" y2="223" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="1328" y1="223" x2="1338" y2="223" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)"/>
+<text x="800" y="452" font-size="18" font-weight="400" fill="#111827" text-anchor="middle" dominant-baseline="middle">Figure 1. 当前 v2 系统总体架构：从多源异构输入到证据驱动的多智能体协作与报告发布。</text>
+<rect x="18" y="486" width="380" height="390" rx="10" fill="#f5f0ff" stroke="#a78bfa" stroke-width="1.7"/>
+<path d="M 18 520 L 398 520" stroke="#a78bfa" stroke-width="1.4"/>
+<text x="208.0" y="504" font-size="15" font-weight="800" fill="#102a63" text-anchor="middle" dominant-baseline="middle">1. 输入与语义适配</text>
+<rect x="420" y="486" width="240" height="390" rx="10" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.7"/>
+<path d="M 420 520 L 660 520" stroke="#60a5fa" stroke-width="1.4"/>
+<text x="540.0" y="504" font-size="15" font-weight="800" fill="#102a63" text-anchor="middle" dominant-baseline="middle">2. 证据仓与共享状态</text>
+<rect x="690" y="486" width="190" height="390" rx="10" fill="#fff7ed" stroke="#f59e0b" stroke-width="1.7"/>
+<path d="M 690 520 L 880 520" stroke="#f59e0b" stroke-width="1.4"/>
+<text x="785.0" y="504" font-size="15" font-weight="800" fill="#102a63" text-anchor="middle" dominant-baseline="middle">3. Agent 交互循环</text>
+<rect x="900" y="486" width="676" height="390" rx="10" fill="#fff1f2" stroke="#fb7185" stroke-width="1.7"/>
+<path d="M 900 520 L 1576 520" stroke="#fb7185" stroke-width="1.4"/>
+<text x="1238.0" y="504" font-size="15" font-weight="800" fill="#102a63" text-anchor="middle" dominant-baseline="middle">4. 质询复核与报告生成</text>
+<rect x="36" y="542" width="155" height="50" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="60" y="567.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">📥</text>
+<text x="86" y="559.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">数据上传</text>
+<text x="86" y="579.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">CSV / Excel / JSON / Text / Image</text>
+<line x1="213" y1="567" x2="253" y2="567" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="258" y="542" width="120" height="50" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="318.0" y="559.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">产物</text>
+<text x="318.0" y="579.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="middle" dominant-baseline="middle">资产登记</text>
+<rect x="36" y="618" width="155" height="50" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="60" y="643.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🧾</text>
+<text x="86" y="635.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">Manifest</text>
+<text x="86" y="655.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">SourceAsset + source_locator</text>
+<line x1="213" y1="643" x2="253" y2="643" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="258" y="618" width="120" height="50" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="318.0" y="635.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">产物</text>
+<text x="318.0" y="655.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="middle" dominant-baseline="middle">结构画像</text>
+<rect x="36" y="694" width="155" height="50" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="60" y="719.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🧩</text>
+<text x="86" y="711.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">MappingSpec</text>
+<text x="86" y="731.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">人工/候选映射，经验证后激活</text>
+<line x1="213" y1="719" x2="253" y2="719" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="258" y="694" width="120" height="50" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="318.0" y="711.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">产物</text>
+<text x="318.0" y="731.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="middle" dominant-baseline="middle">语义观测</text>
+<rect x="36" y="770" width="155" height="50" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="60" y="795.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">✅</text>
+<text x="86" y="787.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">Adaptation</text>
+<text x="86" y="807.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">发布 Observation 与接入报告</text>
+<rect x="258" y="770" width="120" height="50" rx="9" fill="white" stroke="#ddd6fe" stroke-width="1.2"/>
+<text x="318.0" y="787.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">产物</text>
+<text x="318.0" y="807.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="middle" dominant-baseline="middle">快照</text>
+<ellipse cx="540" cy="554" rx="30" ry="10" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.4"/>
+<rect x="510" y="554" width="60" height="42" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.4"/>
+<ellipse cx="540" cy="596" rx="30" ry="10" fill="#dbeafe" stroke="#60a5fa" stroke-width="1.4"/>
+<text x="540" y="624" font-size="12" font-weight="700" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">SQLite Evidence Store</text>
+<rect x="448" y="638" width="184" height="42" rx="9" fill="white" stroke="#bfdbfe" stroke-width="1.2"/>
+<text x="540.0" y="651.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">Observations</text>
+<text x="540.0" y="671.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="middle" dominant-baseline="middle">统一观测</text>
+<rect x="448" y="690" width="184" height="42" rx="9" fill="white" stroke="#bfdbfe" stroke-width="1.2"/>
+<text x="540.0" y="703.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">Evidence / Findings</text>
+<text x="540.0" y="723.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="middle" dominant-baseline="middle">证据与发现</text>
+<rect x="448" y="742" width="184" height="42" rx="9" fill="white" stroke="#bfdbfe" stroke-width="1.2"/>
+<text x="540.0" y="755.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">Tasks / Budget</text>
+<text x="540.0" y="775.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="middle" dominant-baseline="middle">状态与预算</text>
+<rect x="448" y="794" width="184" height="42" rx="9" fill="white" stroke="#bfdbfe" stroke-width="1.2"/>
+<text x="540.0" y="807.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">Snapshots / Reports</text>
+<text x="540.0" y="827.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="middle" dominant-baseline="middle">版本化输出</text>
+<rect x="714" y="548" width="142" height="46" rx="9" fill="white" stroke="#fed7aa" stroke-width="1.2"/>
+<text x="738" y="571.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">👁</text>
+<text x="764" y="563.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">observe</text>
+<text x="764" y="583.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">读取证据</text>
+<line x1="785" y1="598" x2="785" y2="624" stroke="#f59e0b" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="714" y="628" width="142" height="46" rx="9" fill="white" stroke="#fed7aa" stroke-width="1.2"/>
+<text x="738" y="651.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">💭</text>
+<text x="764" y="643.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">think</text>
+<text x="764" y="663.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">调用能力/规则</text>
+<line x1="785" y1="678" x2="785" y2="704" stroke="#f59e0b" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="714" y="708" width="142" height="46" rx="9" fill="white" stroke="#fed7aa" stroke-width="1.2"/>
+<text x="738" y="731.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">✍</text>
+<text x="764" y="723.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">act</text>
+<text x="764" y="743.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">写入 Finding</text>
+<line x1="785" y1="758" x2="785" y2="784" stroke="#f59e0b" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="714" y="788" width="142" height="46" rx="9" fill="white" stroke="#fed7aa" stroke-width="1.2"/>
+<text x="738" y="811.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">💾</text>
+<text x="764" y="803.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">update</text>
+<text x="764" y="823.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">提交快照</text>
+<rect x="918" y="540" width="150" height="292" rx="8" fill="#ffffff" stroke="#fecdd3" stroke-width="1.2"/>
+<text x="993.0" y="564" font-size="13" font-weight="800" fill="#991b1b" text-anchor="middle" dominant-baseline="middle">4.1 聚合</text>
+<text x="993.0" y="591" font-size="11" font-weight="400" fill="#64748b" text-anchor="middle" dominant-baseline="middle">收集各 Agent 输出</text>
+<rect x="1080" y="540" width="150" height="292" rx="8" fill="#ffffff" stroke="#fecdd3" stroke-width="1.2"/>
+<text x="1155.0" y="564" font-size="13" font-weight="800" fill="#991b1b" text-anchor="middle" dominant-baseline="middle">4.2 冲突检测</text>
+<text x="1155.0" y="591" font-size="11" font-weight="400" fill="#64748b" text-anchor="middle" dominant-baseline="middle">评分、时间、引用、能力</text>
+<rect x="1242" y="540" width="150" height="292" rx="8" fill="#ffffff" stroke="#fecdd3" stroke-width="1.2"/>
+<text x="1317.0" y="564" font-size="13" font-weight="800" fill="#991b1b" text-anchor="middle" dominant-baseline="middle">4.3 定向复核</text>
+<text x="1317.0" y="591" font-size="11" font-weight="400" fill="#64748b" text-anchor="middle" dominant-baseline="middle">重算 / 撤回 / 修订</text>
+<rect x="1404" y="540" width="150" height="292" rx="8" fill="#ffffff" stroke="#fecdd3" stroke-width="1.2"/>
+<text x="1479.0" y="564" font-size="13" font-weight="800" fill="#991b1b" text-anchor="middle" dominant-baseline="middle">4.4 报告发布</text>
+<text x="1479.0" y="591" font-size="11" font-weight="400" fill="#64748b" text-anchor="middle" dominant-baseline="middle">同源快照渲染</text>
+<rect x="936" y="624" width="112" height="26" rx="9" fill="white" stroke="#e5e7eb" stroke-width="1.2"/>
+<text x="992.0" y="629.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">量表发现</text>
+<rect x="936" y="658" width="112" height="26" rx="9" fill="white" stroke="#e5e7eb" stroke-width="1.2"/>
+<text x="992.0" y="663.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">纵向发现</text>
+<rect x="936" y="692" width="112" height="26" rx="9" fill="white" stroke="#e5e7eb" stroke-width="1.2"/>
+<text x="992.0" y="697.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">文本证据</text>
+<rect x="936" y="726" width="112" height="26" rx="9" fill="white" stroke="#e5e7eb" stroke-width="1.2"/>
+<text x="992.0" y="731.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">影像状态</text>
+<rect x="936" y="760" width="112" height="26" rx="9" fill="white" stroke="#e5e7eb" stroke-width="1.2"/>
+<text x="992.0" y="765.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">知识片段</text>
+<rect x="1098" y="618" width="112" height="44" rx="9" fill="white" stroke="#fee2e2" stroke-width="1.2"/>
+<text x="1122" y="640.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">🔍</text>
+<text x="1148" y="632.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">规则审查</text>
+<text x="1148" y="652.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">score/time/source</text>
+<rect x="1098" y="694" width="112" height="44" rx="9" fill="white" stroke="#fee2e2" stroke-width="1.2"/>
+<text x="1122" y="716.0" font-size="22" font-weight="400" fill="#1f2937" text-anchor="middle" dominant-baseline="middle">⚠</text>
+<text x="1148" y="708.0" font-size="13" font-weight="700" fill="#111827" text-anchor="start" dominant-baseline="middle">Challenge</text>
+<text x="1148" y="728.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="start" dominant-baseline="middle">生成质询</text>
+<line x1="1155" y1="664" x2="1155" y2="690" stroke="#ef4444" stroke-width="2.2" marker-end="url(#arrow)"/>
+<text x="1272" y="628" font-size="16" font-weight="800" fill="#2563eb" text-anchor="middle" dominant-baseline="middle">✓</text>
+<text x="1324" y="628" font-size="12" font-weight="600" fill="#334155" text-anchor="middle" dominant-baseline="middle">重算能力</text>
+<text x="1272" y="670" font-size="16" font-weight="800" fill="#2563eb" text-anchor="middle" dominant-baseline="middle">✓</text>
+<text x="1324" y="670" font-size="12" font-weight="600" fill="#334155" text-anchor="middle" dominant-baseline="middle">撤回旧发现</text>
+<text x="1272" y="712" font-size="16" font-weight="800" fill="#2563eb" text-anchor="middle" dominant-baseline="middle">✓</text>
+<text x="1324" y="712" font-size="12" font-weight="600" fill="#334155" text-anchor="middle" dominant-baseline="middle">发布修订发现</text>
+<text x="1272" y="754" font-size="16" font-weight="800" fill="#2563eb" text-anchor="middle" dominant-baseline="middle">✓</text>
+<text x="1324" y="754" font-size="12" font-weight="600" fill="#334155" text-anchor="middle" dominant-baseline="middle">记录限制</text>
+<text x="1434" y="616" font-size="15" font-weight="800" fill="#16a34a" text-anchor="middle" dominant-baseline="middle">☑</text>
+<text x="1490" y="616" font-size="12" font-weight="600" fill="#334155" text-anchor="middle" dominant-baseline="middle">结构化 JSON</text>
+<text x="1434" y="652" font-size="15" font-weight="800" fill="#16a34a" text-anchor="middle" dominant-baseline="middle">☑</text>
+<text x="1490" y="652" font-size="12" font-weight="600" fill="#334155" text-anchor="middle" dominant-baseline="middle">Markdown 报告</text>
+<text x="1434" y="688" font-size="15" font-weight="800" fill="#16a34a" text-anchor="middle" dominant-baseline="middle">☑</text>
+<text x="1490" y="688" font-size="12" font-weight="600" fill="#334155" text-anchor="middle" dominant-baseline="middle">TXT 报告</text>
+<text x="1434" y="724" font-size="15" font-weight="800" fill="#16a34a" text-anchor="middle" dominant-baseline="middle">☑</text>
+<text x="1490" y="724" font-size="12" font-weight="600" fill="#334155" text-anchor="middle" dominant-baseline="middle">证据链引用</text>
+<text x="1434" y="760" font-size="15" font-weight="800" fill="#16a34a" text-anchor="middle" dominant-baseline="middle">☑</text>
+<text x="1490" y="760" font-size="12" font-weight="600" fill="#334155" text-anchor="middle" dominant-baseline="middle">能力边界说明</text>
+<rect x="1424" y="792" width="110" height="28" rx="9" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2"/>
+<text x="1479.0" y="798.0" font-size="13" font-weight="700" fill="#111827" text-anchor="middle" dominant-baseline="middle">ReportSnapshot</text>
+<text x="1479.0" y="818.0" font-size="11" font-weight="400" fill="#64748b" text-anchor="middle" dominant-baseline="middle">published</text>
+<line x1="402" y1="691" x2="412" y2="691" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="664" y1="691" x2="682" y2="691" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="884" y1="691" x2="892" y2="691" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="1230" y1="840" x2="540" y2="840" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrowOrange)"/>
+<text x="800" y="905" font-size="18" font-weight="400" fill="#111827" text-anchor="middle" dominant-baseline="middle">Figure 2. 当前 v2 协作机制：Agent 通过证据仓交互，控制层发现冲突后触发定向复核，并从同一快照生成最终结果。</text>
+<rect x="18" y="928" width="1564" height="50" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="50" y="930" width="30" height="18" rx="3" fill="#eef5ff" stroke="#3b82f6" stroke-width="1.2"/>
+<text x="122" y="940" font-size="13" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="middle">数据层</text>
+<rect x="220" y="930" width="30" height="18" rx="3" fill="#eff9ec" stroke="#84b66f" stroke-width="1.2"/>
+<text x="292" y="940" font-size="13" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="middle">证据/能力层</text>
+<rect x="390" y="930" width="30" height="18" rx="3" fill="#f4ecff" stroke="#a78bfa" stroke-width="1.2"/>
+<text x="462" y="940" font-size="13" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="middle">Agent 层</text>
+<rect x="560" y="930" width="30" height="18" rx="3" fill="#fff1f2" stroke="#fb7185" stroke-width="1.2"/>
+<text x="632" y="940" font-size="13" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="middle">控制复核层</text>
+<rect x="730" y="930" width="30" height="18" rx="3" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.2"/>
+<text x="802" y="940" font-size="13" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="middle">存储层</text>
+<rect x="900" y="930" width="30" height="18" rx="3" fill="#fff7ed" stroke="#f59e0b" stroke-width="1.2"/>
+<text x="972" y="940" font-size="13" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="middle">输出层</text>
+<line x1="1135" y1="940" x2="1185" y2="940" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)"/>
+<text x="1245" y="940" font-size="13" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="middle">数据流</text>
+<line x1="1300" y1="940" x2="1350" y2="940" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrowOrange)"/>
+<text x="1428" y="940" font-size="13" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="middle">复核/控制流</text>
+</svg>
