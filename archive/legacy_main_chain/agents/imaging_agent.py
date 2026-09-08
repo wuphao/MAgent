@@ -4,7 +4,7 @@ from pathlib import Path
 import re
 from typing import Any
 
-from agents.base_agent import BaseAgent
+from archive.legacy_main_chain.agents.base_agent import BaseAgent
 from tools.diamond_tool import DiamondTool
 
 

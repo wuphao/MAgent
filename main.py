@@ -6,8 +6,6 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from case_memory import init_case_memory
-from orchestrator import Orchestrator
 
 
 DEFAULT_CASE = Path("output/patient_041_S_4060_analysis.json")
@@ -54,11 +52,7 @@ def main() -> int:
         print(rendered)
         return 0
 
-    with args.case.open("r", encoding="utf-8") as stream:
-        raw = json.load(stream)
-
-    memory = Orchestrator(use_llm=args.use_llm).run(init_case_memory(raw))
-    result = memory if args.full else memory["final_report"]
+    result = _run_legacy(args)
     rendered = json.dumps(result, ensure_ascii=False, indent=2)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -66,6 +60,17 @@ def main() -> int:
     print(rendered)
     return 0
 
+
+
+def _run_legacy(args: argparse.Namespace) -> dict:
+    from archive.legacy_main_chain.case_memory import init_case_memory
+    from archive.legacy_main_chain.orchestrator import Orchestrator
+
+    with args.case.open("r", encoding="utf-8") as stream:
+        raw = json.load(stream)
+
+    memory = Orchestrator(use_llm=args.use_llm).run(init_case_memory(raw))
+    return memory if args.full else memory["final_report"]
 
 def _run_v2(args: argparse.Namespace) -> dict:
     src_path = Path(__file__).resolve().parent / "src"

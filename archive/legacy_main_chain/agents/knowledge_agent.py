@@ -1,6 +1,6 @@
-from agents.base_agent import BaseAgent
+from archive.legacy_main_chain.agents.base_agent import BaseAgent
 
-from agents.base_agent import BaseAgent
+from archive.legacy_main_chain.agents.base_agent import BaseAgent
 
 
 class KnowledgeAgent(BaseAgent):

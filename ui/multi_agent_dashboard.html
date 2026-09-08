@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>多智能体分析工作台 · 静态原型</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --soft: #f9fafb;
+      --blue: #2563eb;
+      --green: #16a34a;
+      --amber: #d97706;
+      --red: #dc2626;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      font-size: 14px;
+    }
+    header {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 650;
+    }
+    header span { color: var(--muted); font-size: 13px; }
+    main {
+      display: grid;
+      grid-template-columns: 300px minmax(420px, 1fr) 360px;
+      gap: 16px;
+      padding: 16px;
+      height: calc(100vh - 58px);
+      min-height: 720px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .section-title {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      font-weight: 650;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .section-title small { color: var(--muted); font-weight: 400; }
+    .content { padding: 16px; overflow: auto; }
+    label {
+      display: block;
+      margin: 0 0 7px;
+      color: #374151;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px 10px;
+      font: inherit;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+    }
+    textarea { min-height: 86px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { border-color: var(--blue); }
+    .field { margin-bottom: 14px; }
+    .file-box {
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 14px;
+      background: var(--soft);
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .btn-row { display: flex; gap: 8px; margin-top: 16px; }
+    button {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 9px 12px;
+      cursor: default;
+      font-weight: 600;
+      color: var(--text);
+    }
+    button.primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+      flex: 1;
+    }
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+    .data-list { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 14px; }
+    .data-item {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: #fff;
+    }
+    .data-item strong { display:block; font-size: 13px; margin-bottom: 4px; }
+    .data-item span { color: var(--muted); font-size: 12px; }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+    }
+    .status.done { color: var(--green); background: #f0fdf4; border-color: #bbf7d0; }
+    .status.running { color: var(--blue); background: #eff6ff; border-color: #bfdbfe; }
+    .status.warn { color: var(--amber); background: #fffbeb; border-color: #fde68a; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .process-step {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .process-step:last-child { border-bottom: none; }
+    .num {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #eff6ff;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .step-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 7px;
+    }
+    .step-head h3 { margin: 0; font-size: 14px; }
+    .step-body { color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .artifact {
+      margin-top: 10px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      font-family: Consolas, monospace;
+      font-size: 12px;
+      color: #374151;
+      white-space: pre-wrap;
+    }
+    .tabs {
+      display: flex;
+      gap: 6px;
+      padding: 10px 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .tab {
+      padding: 8px 10px;
+      border-radius: 8px 8px 0 0;
+      border: 1px solid transparent;
+      border-bottom: none;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .tab.active {
+      color: var(--blue);
+      background: #fff;
+      border-color: var(--line);
+      margin-bottom: -1px;
+    }
+    .result-card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: #fff;
+    }
+    .result-card h3 { margin: 0 0 8px; font-size: 14px; }
+    .result-card p { margin: 0; color: var(--muted); line-height: 1.6; font-size: 13px; }
+    .kv {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 7px 10px;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .kv span:nth-child(odd) { color: var(--muted); }
+    pre {
+      margin: 0;
+      background: #0f172a;
+      color: #dbeafe;
+      padding: 14px;
+      border-radius: 10px;
+      overflow: auto;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    @media (max-width: 1180px) {
+      main { grid-template-columns: 1fr; height: auto; }
+      section { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>多智能体分析工作台</h1>
+    <span>静态页面原型 / 暂未接后端</span>
+  </header>
+
+  <main>
+    <section>
+      <div class="section-title">输入数据 <small>Input</small></div>
+      <div class="content">
+        <div class="field">
+          <label>项目 / 病例编号</label>
+          <input value="patient_002_S_5018" />
+        </div>
+
+        <div class="field">
+          <label>分析目标</label>
+          <select>
+            <option>多源综合分析</option>
+            <option>单次量表分析</option>
+            <option>纵向变化分析</option>
+            <option>多模态综合分析</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>映射配置</label>
+          <select>
+            <option>configs/mappings/xx_v1_csv_long.json</option>
+            <option>configs/mappings/xx_v1_xlsx_wide.json</option>
+            <option>configs/mappings/xx_v1_nested_json.json</option>
+          </select>
+        </div>
+
+        <label>上传 / 选择数据</label>
+        <div class="file-box">
+          选择 CSV、Excel、JSON、文本或影像文件<br />
+          当前为静态原型，文件选择仅展示界面。
+        </div>
+
+        <div class="field">
+          <label>补充说明</label>
+          <textarea>本次分析关注量表评分、纵向变化、文本证据与影像可用性。</textarea>
+        </div>
+
+        <div class="btn-row">
+          <button>保存草稿</button>
+          <button class="primary">开始分析</button>
+        </div>
+
+        <div class="hint">后续接后端时，这里会调用数据登记、映射适配和任务创建接口。</div>
+
+        <div class="data-list">
+          <div class="data-item"><strong>scale_long.csv</strong><span>量表数据 · 42 行 · 已选择</span></div>
+          <div class="data-item"><strong>clinical_note.txt</strong><span>临床文本 · 可解析</span></div>
+          <div class="data-item"><strong>pet_image.nii.gz</strong><span>影像资产 · 待验证</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">中间分析过程 <small>Process</small></div>
+      <div class="content">
+        <div class="process-step">
+          <div class="num">1</div>
+          <div>
+            <div class="step-head"><h3>数据资产登记</h3><span class="status done"><i class="dot"></i>完成</span></div>
+            <div class="step-body">记录文件类型、哈希、来源范围和项目作用域，生成 SourceAsset。</div>
+            <div class="artifact">assets: 3
+scope: project_demo
+snapshot: source_inventory_001</div>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="num">2</div>
+          <div>
+            <div class="step-head"><h3>结构画像与语义映射</h3><span class="status done"><i class="dot"></i>完成</span></div>
+            <div class="step-body">根据 MappingSpec 将不同字段和布局投影为统一 Observation，不让专业 Agent 读取原始字段名。</div>
+            <div class="artifact">observations: 18
+mapping: xx_v1_csv_long
+invalid_rows: 0</div>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="num">3</div>
+          <div>
+            <div class="step-head"><h3>任务规划</h3><span class="status done"><i class="dot"></i>完成</span></div>
+            <div class="step-body">系统按分析目标生成 DAG，拆分为量表、纵向、文本、知识、影像兼容性和综合报告任务。</div>
+            <div class="artifact">tasks: 6
+parallel_ready: 4
+budget_policy: local_demo</div>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="num">4</div>
+          <div>
+            <div class="step-head"><h3>专业 Agent 分析</h3><span class="status running"><i class="dot"></i>运行中</span></div>
+            <div class="step-body">各 Agent 只基于证据仓和能力返回结果，输出结构化 Finding、Evidence 和 ToolArtifact。</div>
+            <div class="artifact">assessment_agent: finished
+longitudinal_agent: finished
+text_agent: finished
+imaging_agent: capability_unavailable</div>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="num">5</div>
+          <div>
+            <div class="step-head"><h3>质询与定向复核</h3><span class="status warn"><i class="dot"></i>有修订</span></div>
+            <div class="step-body">发现评分冲突和时间边界问题后，系统生成 Challenge，并路由到对应能力重新计算。</div>
+            <div class="artifact">challenges: 2
+withdrawn_findings: 1
+revised_findings: 1</div>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="num">6</div>
+          <div>
+            <div class="step-head"><h3>报告快照发布</h3><span class="status done"><i class="dot"></i>完成</span></div>
+            <div class="step-body">所有出口结果来自同一个 ReportSnapshot，保留证据引用、限制说明和修订链。</div>
+            <div class="artifact">report_snapshot: report_001
+formats: json / md / txt
+traceable: true</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">最终分析结果 <small>Result</small></div>
+      <div class="tabs">
+        <div class="tab active">摘要</div>
+        <div class="tab">结构化 JSON</div>
+        <div class="tab">证据</div>
+      </div>
+      <div class="content">
+        <div class="result-card">
+          <h3>分析结论</h3>
+          <p>量表观测已完成统一映射，纵向结果显示存在可比较时间点。文本证据提供补充说明。影像数据因缺少完整 DiaMond 运行条件，本次只返回兼容性状态。</p>
+        </div>
+
+        <div class="result-card">
+          <h3>关键指标</h3>
+          <div class="kv">
+            <span>观测数</span><strong>18</strong>
+            <span>发现数</span><strong>5</strong>
+            <span>质询数</span><strong>2</strong>
+            <span>撤回发现</span><strong>1</strong>
+            <span>报告状态</span><strong>已发布</strong>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <h3>能力边界</h3>
+          <p>真实影像推理、OCR、生产级 LLM 自动映射尚未接入。系统会返回能力不足状态，而不是生成伪结果。</p>
+        </div>
+
+        <pre>{
+  "run_id": "run_20260907_demo",
+  "status": "published",
+  "snapshot_id": "report_001",
+  "observations": 18,
+  "findings": [
+    {
+      "agent": "assessment_agent",
+      "type": "scale_score",
+      "status": "accepted"
+    },
+    {
+      "agent": "imaging_agent",
+      "type": "diamond_compatibility",
+      "status": "capability_unavailable"
+    }
+  ],
+  "challenges": 2,
+  "traceable": true
+}</pre>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
