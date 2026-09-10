@@ -32,7 +32,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--mapping", type=Path, help="v2 mapping config. When omitted, v2 runs source inventory only.")
     parser.add_argument(
         "--v2-goal",
-        choices=["source_inventory", "xx_v1_assessment", "longitudinal_xx_v1", "multi_source_summary", "multimodal_summary"],
+        choices=["source_inventory", "xx_v1_assessment", "longitudinal_xx_v1", "multi_source_summary", "multimodal_summary", "rwe_patient_summary"],
         default="source_inventory",
         help="v2 analysis goal after deterministic adaptation. Requires --mapping except for source_inventory.",
     )
@@ -76,6 +76,17 @@ def _run_v2(args: argparse.Namespace) -> dict:
     src_path = Path(__file__).resolve().parent / "src"
     if str(src_path) not in sys.path:
         sys.path.insert(0, str(src_path))
+    if args.v2_goal == "rwe_patient_summary":
+        from uuid import uuid4
+        from multi_agent.application.rwe_service import analyze_file
+
+        document = json.loads(args.case.read_text(encoding="utf-8-sig"))
+        patient_number = (document.get("patient") or {}).get("patient_number")
+        if not patient_number:
+            raise SystemExit("RWE JSON 缺少 patient.patient_number")
+        run_dir = args.data_dir / "rwe" / uuid4().hex
+        run_dir.mkdir(parents=True)
+        return analyze_file(args.case, run_dir, patient_number)
     if args.v2_goal == "source_inventory" and args.mapping is None:
         from multi_agent.application.cli import run_inventory
 

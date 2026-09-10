@@ -1,0 +1,459 @@
+
+
+===== PAGE 1 =====
+arXiv:2506.11150v1  [eess.IV]  11 Jun 2025
+ADAgent: LLM Agent for Alzheimer’s Disease
+Analysis with Collaborative Coordinator
+Wenlong Hou1, Gangqian Yang1, Ye Du1, Yeung Lau1, Lihao Liu2,
+Junjun He3, Ling Long4, Shunjun Wang1, 5( B)
+1 Department of Biomedical Engineering, The Hong Kong Polytechnic University,
+Hong Kong SAR, China
+2 Amazon, USA
+3 Shanghai Artificial Intelligence Laboratory, China
+4 Department of Geriatrics, Third Affiliated Hospital of Sun Yat-sen University, China
+5 Research Institute for Smart Ageing, The Hong Kong Polytechnic University, Hong
+Kong SAR, China
+shu-jun.wang@polyu.edu.hk
+Abstract. Alzheimer’s disease (AD) is a progressive and irreversible
+neurodegenerative disease. Early and precise diagnosis of AD is crucial
+for timely intervention and treatment planning to alleviate the progres-
+sive neurodegeneration. However, most existing methods rely on single-
+modality data, which contrasts with the multifaceted approach used by
+medical experts. While some deep learning approaches process multi-
+modal data, they are limited to specific tasks with a small set of input
+modalities and cannot handle arbitrary combinations. This highlights
+the need for a system that can address diverse AD-related tasks, process
+multi-modal or missing input, and integrate multiple advanced methods
+for improved performance. In this paper, we propose ADAgent, the first
+specialized AI agent for AD analysis, built on a large language model
+(LLM) to address user queries and support decision-making. ADAgent
+integrates a reasoning engine, specialized medical tools, and a collabora-
+tive outcome coordinator to facilitate multi-modal diagnosis and prog-
+nosis tasks in AD. Extensive experiments demonstrate that ADAgent
+outperforms SOTA methods, achieving significant improvements in ac-
+curacy, including a 2.7% increase in multi-modal diagnosis, a 0.7% im-
+provementinmulti-modalprognosis,andenhancementsinMRIandPET
+diagnosis tasks.
+Keywords: Alzheimer’s Disease· AI Agent · Multi-modality.
+1 Introduction
+Alzheimer’s disease (AD) is a neurodegenerative disorder characterized by the
+progressive decline in cognitive function, memory, and behavior [11,17]. It af-
+fects millions of people worldwide, leading to a significant burden on patients,
+families, and healthcare systems. The impact of AD is not only detrimental to
+
+===== PAGE 2 =====
+2 W. Hou et al.
+the patient’s quality of life but also has profound social and economic conse-
+quences [2,16]. Early diagnosis plays a crucial role in slowing down the disease’s
+progression and providing patients and families with opportunities for better
+care planning, treatment, and support [1]. Traditional methods for diagnosing
+AD include cognitive tests, clinical assessments, and neuroimaging techniques
+such as magnetic resonance imaging (MRI) and positron emission tomography
+(PET) scans [5]. In the early stage of AD, subtle changes in the brain and
+mild cognitive decline would occur, which are also common in the normal ageing
+cases,leadingdifficultytodirectlyjudgefromanytraditionalmethodsmentioned
+above. In addition, the heterogeneity of data from different methods and the sub-
+jectivity in doctors’ assessments increase the difficulty of extracting multi-modal
+information to identify early-stage AD patients.
+With the recent advancements in deep learning (DL), new DL algorithms
+have emerged, offering more objective and efficient ways to automatically detect
+early AD instead of subjective assessments based on humans. Most methods [4,9,
+10,13–15,18,24,25] in the AD domain rely on data from a single modality, which
+is contrary to the multifaceted approach that medical experts use to detect the
+disease. Despite several DL methods attempting to process multi-modal data [19,
+21,22], they remain limited in only handling a specific range of tasks with a
+small set of input modalities, and cannot tackle multiple tasks with arbitrary
+input modalities. In addition, even if multiple existing methods are designed for
+the same task, they cannot be collaboratively integrated to fully utilize their
+advantages for performance improvement. This highlights the need for a system
+with these three properties: (1) can address a wide range of AD-related tasks, (2)
+can process multi-modal input or missing modality input, and (3) can achieve
+objective assessments by collaborative coordinator of existing multiple methods.
+The emergence of AI Agents driven by LLMs has fundamentally changed how
+we approach autonomous reasoning, planning, and tool-using [6]. This paradigm
+shift has enabled AI Agents to surpass traditional task-specific models by dy-
+namically adapting to diverse applications without additional training. There are
+several medical agents for medical reasoning on chest and abdomen X-rays [6,12],
+showing notable performance on a wide range of tasks. Motivated by these, we
+aim to develop a solution via building an LLM-driven Agent integrated with
+multiple tools.
+In this paper, we propose the Alzheimer’s Disease Analysis Agent (ADA-
+gent), the first specialized AI agent for AD analysis. Specifically, it is a large
+language model (LLM)-based system that could solve user (i.e. doctors) queries
+(e.g., determining the disease stage) by incorporating reasoning, planning, and
+tool-using capabilities to facilitate task execution and support decision-making.
+ADAgent consists of three primary components: (1) a reasoning engine driven
+by the LLM, which serves as a tool action planner; (2) a set of specialized med-
+ical tools, each targeting specific tasks in AD detection; and (3) a collaborative
+outcome coordinator, which leverages the LLM’s reasoning capabilities to make
+informed decisions based on aggregated results. ADAgent is integrated with four
+tools capable of processing multi-modal input data for both the diagnosis and
+
+===== PAGE 3 =====
+ADAgent 3
+S1: Observation
+Intent 1
+Intent-related Queries
+Intent 2
+S4: Collaborative OutcomeCoordinator
+Multi-modal Data
+MRI Scan
+S2: Thought
+Diagnosis
+Prognosis
+Multi-modal
+Diagnosis tool
+Single-modal
+Diagnosis tool
+S3: Action
+nnMamba
+Intent n
+Model 
+Collaboration
+Tool 
+Collaboration
+History chatUser Query
+Comprehensive Response
+ADAgent
+PET Scan
+Data Extraction Identify Tasks Tool Search
+Action List
+Execute Tool Based on ActionList
+Model 
+Collaboration
+Single-modal 
+Diagnosis Tool
+Multi-modal
+Prognosis Tool
+Multimodal 
+Diagnosis Tool
+MedicalNet
+User Query
+Intend Analysis
+𝐐
+Ƭ
+𝑨
+𝐶
+𝐑
+Fig.1. Overall workflow of ADAgent. Given a use query, the framework per-
+forms reasoning in four stages: (i) observation, (ii) thought, (iii) action, and (iv)
+collaborative outcome coordinator.
+prognosis of AD. ADAgent can be extended to more tasks by accessing more
+tools/methods seamlessly without extra training. To access the performance of
+the proposed ADAgent, we extensively compared the result of ADAgent against
+multiple baseline methods on multi-modal tasks and missing modality diagnosis
+tasks. The results show that with the help of the collaborative outcome coordi-
+nator of ADAgent, the accuracy performance improves 2.7%, 0.7%, 0.7%, and
+4.4% on multi-modal diagnosis task, multi-modal prognosis task, MRI diagnosis
+task, and PET diagnosis task, respectively.
+2 ADAgent
+In this section, we first present the overall workflow of ADAgent in Section
+2.1, followed by a detail description of all four modules in Section 2.2. The
+extensibility analysis and the interaction example of ADAgent are described in
+Section 2.3 and 2.4, respectively.
+2.1 Overall Workflow of ADAgent
+Our developed ADAgent processes multi-modal use queries, including MRI scan
+and/or PET scan, along with text-based intents from users, to perform advanced
+
+===== PAGE 4 =====
+4 W. Hou et al.
+analysis and generate diagnostic and prognostic results. ADAgent employs a
+large language model (LLM), denoted byL, as the core to drive a reasoning and
+acting loop, which decomposes complex medical queries into sequential analyti-
+cal steps. The loop is formalized asR for reasoning andA for acting, inspired by
+MedRAX approach [6], which is a medical reasoning agent for chest X-ray. To
+address a user queryQ, ADAgent follows a four-step process, as shown in Fig. 1:
+(1) Observation – The system observes the current states ∈ S and interprets
+the user’s queryQ, where S represents the state space. (2)Thought – The
+system determines the necessary actionsA to proceed, where A is the action
+set. (3)Action – The system executes relevant toolsTi to gather outcomesOi
+from each tool, whereTi ∈ T are the tools in the tool setT . (4) Collabora-
+tive Outcome Coordinator– The system synthesizes the findings from the
+previous steps to generate a comprehensive responseR for the user.
+2.2 Observation, Thought, Action, and Collaborative Outcome
+Coordinator
+Observation Module -The Observation module divides the user query into
+more refined sub-queries based on the user’s intentions and then gathers the
+necessary text and image for the next Thought module.
+Thought Module with Tool Integration -ADAgent integrates a diverse set
+of tools T = {T1, T2, . . . ,Tn} designed to address various AD-related analysis
+tasks. For each tool Ti, we attempt to find multiple public models, denoted
+by Mi = {Mi1, Mi2, . . . ,Mik}, for collaboration to enhance task execution.
+ADAgent primarily focuses on two core tasks: diagnosis and prognosis.
+(i) Diagnosis taskaims to assess the current stage of AD based on user
+input, such as MRI or PET scan data. Formally, the diagnosis task can be
+expressed as
+ˆydiag = D(X , M), (1)
+where ˆydiag represents the predicted stage of AD,X = {X1, X2} denotes the
+multi-modal inputs (e.g., MRI and PET scans), andM is the set of models used
+for diagnosis (e.g., CMViM, MCAD, etc.).
+(ii)Prognosistask focusesonpredictingthefutureprogressionofAlzheimer’s
+disease. The prognosis task can be modeled as
+ˆyprog = P(X , M), (2)
+where ˆyprog is the predicted progression, andX and M are the same as in the
+diagnosis task, but with models specialized for prognosis.
+(iii) Missing modality scenario is common in clinical practice, where
+certain modalities may be unavailable or incomplete. In such cases, ADAgent
+integrates single-modal tools. If only one modality, say MRIXMRI, is available,
+the system uses the MRI Diagnosis ToolTMRI, and the prediction is made as
+ˆydiag = TMRI(XMRI). (3)
+
+===== PAGE 5 =====
+ADAgent 5
+Please help me diagnosis whether the patient 
+has AD or not based on these two uploaded 
+files?
+User
+Query
+ADAgent 
+Response
+<Response>  
+Interpretation: (1) Strong evidence for Alzheimer's Disease (AD): Four models 
+(CMViM, MCAD, nnMamba, MedicalNet) strongly favor the AD stage with 
+probabilities ranging from ~85% to ~99%. (2)ResNet50 is the exception, 
+with a higher probability for the Cognitively Normal (CN) stage, but its results 
+are inconsistent with the other models.
+Final Decision: Alzheimer's Disease (AD) . The majority of models strongly 
+support the diagnosis of AD for this patient. If you have additional clinical 
+data or symptoms, please share them for a more comprehensive assessment.
+<Thought> This is diagnosis task with multi-modal data.
+<Action>  Executing tool: {‘name’: ‘mri_pet_diagnosis’ , ‘args’:{‘mri_path’: …, 
+‘pet_path’: ...}, …}
+<T ool> {‘CMViM': [0.0001, 0.0294, 0.9705], 'MCAD': [0.0000, 0.0010, 0.999O], 
+'nnMamba': [0.0007, 0.0718, 0.9275], 'MedicalNet': [0.0089,  0.1419, 0.8492], 
+'ResNet50': [0.5903, 0.3705, 0.0393]}
+Fig.2. ADAgent Interaction Example. An example of how ADAgent handles a
+conversation through its workflow (<thought>, <action>, <Tool>) along with
+tool outputs and final response.
+Similarly, if only the PET modality is available, the PET Diagnosis ToolTPET
+is used to processXPET and make predictions.
+Although ADAgent currently integrates existing tools for AD diagnosis and
+prognosis, its architecture is highly extensible to integrate new tools. Integrating
+a new tool requires only a class definition that specifies the tool’s input/output
+formats without any extra training, which are mentioned in detail in Section 2.3.
+Action Module -The Action module follows the planning and executes the
+task by utilizing relevant tools to get necessary outcomes for further analysis.
+Collaborative Outcome Coordinator Module - The Collaborative Out-
+come Coordinator is responsible for synthesizing the response from the various
+specialized tools in ADAgent. Each toolTi is designed to handle a distinct AD-
+related analysis task, and the tool collaborates with multiple models to ensure
+accurate and efficient task execution. The collaborative outcome coordinator
+leverages the reasoning capabilities of the LLML to make informed decisions
+based on the aggregated results from the different tools. Mathematically, this
+process can be expressed as
+R = C (O1(M1), O2(M2), . . . ,On(Mn)) , (4)
+where C represents the coordinator function that combines the results from se-
+lected tools, andOi(Mi) denotes the output of toolTi based on Mi.
+
+===== PAGE 6 =====
+6 W. Hou et al.
+2.3 Extensibility
+ADAgentisbuiltusingtheLangChainandLangGraphframeworks.Itsreasoning
+engine can be powered by any LLM, supporting both text-only and multi-modal
+models, whether open-source or proprietary. This flexibility allows ADAgent to
+be deployed in various environments, from local installations to cloud-based so-
+lutions, while accommodating diverse healthcare privacy requirements [6]. Each
+tool in ADAgent functions as an independent module, with clearly defined input,
+output, and specific capability. The modular design allows tools to be modified,
+replaced, or repurposed without affecting the overall system. Integrating a new
+tool requires only a class definition that specifies the tool’s input/output formats
+and capabilities, enabling the LLM to learn its usage without extra training.
+2.4 Interface and Interaction Example
+ADAgent includes a production-ready interface built with Gradio, facilitating
+seamless deployment in clinical settings. The interface supports the uploading of
+MRI and PET scans in NIFTI format and maintains an interactive chat session
+fornaturalinteractions.Theinterfacealsoprovidestransparencybytrackingand
+displaying intermediate outputs during tool execution. An example interaction
+is shown in Fig. 2.
+Table 1.Quantitative comparison on multi-modal tasks
+Method ACC SPE SEN F1
+Multi-modal diagnosis task
+MedicalNet [3] 0.571 ±0.009 0.768 ±0.009 0.591 ±0.030 0.586 ±0.015
+nnMamba [7] 0.527 ±0.016 0.753 ±0.008 0.572 ±0.021 0.541 ±0.028
+ResNet50 [8] 0.567 ±0.039 0.771 ±0.018 0.599 ±0.036 0.581 ±0.043
+MCAD [23] 0.548 ±0.029 0.766 ±0.014 0.591 ±0.027 0.556 ±0.026
+CMViM [18] 0.617 ±0.014 0.659 ±0.003 0.630 ±0.013 0.633 ±0.010
+ADAgent (Ours) 0.644 ±0.014 0.794 ±0.010 0.644 ±0.021 0.647 ±0.018
+Multi-modal prognosis task
+MedicalNet [3] 0.763 ±0.026 0.902 ±0.017 0.333 ±0.052 0.407 ±0.064
+nnMamba [7] 0.733 ±0.038 0.843 ±0.068 0.394 ±0.189 0.405 ±0.147
+ResNet50 [8] 0.726 ±0.034 0.853 ±0.029 0.333 ±0.052 0.374 ±0.065
+MCAD [23] 0.719 ±0.026 0.892 ±0.061 0.182 ±0.091 0.231 ±0.080
+CMViM [18] 0.815 ±0.046 0.912 ±0.029 0.515 ±0.105 0.575±0.109
+ADAgent (Ours) 0.822 ±0.010 0.941 ±0.019 0.545 ±0.043 0.561±0.030
+
+===== PAGE 7 =====
+ADAgent 7
+3 Experiments
+3.1 Dataset
+This study was conducted on the Alzheimer’s Disease Neuroimaging Initiative
+(ADNI) dataset [20], and focused on T1-MRI and PET-FDG scans. As for the
+diagnosis task, we aim to determine the current stage of AD process based on
+use input from three stages: Cognitively normal (CN), Mild Cognitive Impair-
+ment (MCI), and AD. The prognosis task is to predict whether an MCI patient
+will convert to AD within 36 months or remain stable. ADAgent can directly
+integrate existing models without extra training. However, since there are few
+open-source models, we trained some models for integration in this work.
+Table 2.Quantitative comparison on missing modality diagnosis tasks
+Method ACC SPE SEN F1
+Diagnosis with MRI
+MedicalNet [3] 0.521 ±0.022 0.760 ±0.004 0.569 ±0.007 0.553 ±0.024
+ResNet50 [8] 0.536 ±0.012 0.762±0.002 0.571 ±0.004 0.565 ±0.014
+ResNet34 [8] 0.487 ±0.006 0.726 ±0.008 0.504 ±0.026 0.479 ±0.027
+ResNet18 [8] 0.515 ±0.016 0.739 ±0.010 0.533 ±0.024 0.522 ±0.016
+ADAgent (Ours) 0.543 ±0.007 0.754±0.003 0.562 ±0.013 0.553 ±0.011
+Diagnosis with PET
+MedicalNet [3] 0.550 ±0.022 0.760 ±0.004 0.569 ±0.007 0.553 ±0.024
+ResNet50 [8] 0.550 ±0.035 0.755 ±0.014 0.554 ±0.030 0.554 ±0.040
+ResNet34 [8] 0.524 ±0.028 0.751 ±0.008 0.555 ±0.014 0.523 ±0.028
+ResNet18 [8] 0.520 ±0.015 0.747 ±0.010 0.552 ±0.031 0.529 ±0.022
+ADAgent (Ours) 0.594 ±0.034 0.785 ±0.014 0.631 ±0.027 0.611 ±0.034
+3.2 Experimental Settings
+ADAgent uses GPT-4o as its backbone LLM and is deployed on a single NVIDIA
+RTX 4090 GPU. ADAgent integrates four tools: (1) multi-modal diagnosis tool,
+and (2) multi-modal prognosis tool, both integrating five models: MedicalNet,
+nnMamba, ResNet50, MCAD, CMViM; (3) MRI diagnosis tool, and (4) PET
+diagnosis tool, both embedding MedicalNet, ResNet50, ResNet34 and ResNet18
+for missing modality tasks. All experiments are conducted three times, and the
+average and standard deviation are reported for analysis.
+3.3 Experimental Results
+To access the performance of the proposed ADAgent, we extensively compared
+the result of ADAgent against multiple baseline methods on multi-modal tasks
+
+===== PAGE 8 =====
+8 W. Hou et al.
+and missing modality diagnosis tasks. To ascertain whether the performance
+improvement is attributable to the LLM’s capability to aggregate the results
+of multiple models, we conducted the ablation study on multi-modal tasks and
+missing modality diagnosis tasks against two baseline methods.
+Table 3.Ablation study on ADAgent
+Method ACC SPE SEN F1 ACC SPE SEN F1
+Multi-modality Diagnosis task Prognosis task
+Average 0.593 0.786 0.631 0.613 0.770 0.931 0.273 0.355
+Vote 0.575 0.778 0.615 0.589 0.763 0.941 0.212 0.301
+ADAgent (Ours) 0.644 0.794 0.644 0.647 0.822 0.941 0.545 0.561
+Missing Modality MRI diagnosis task PET diagnosis task
+Average 0.519 0.743 0.546 0.530 0.582 0.782 0.623 0.595
+Vote 0.536 0.757 0.570 0.546 0.582 0.782 0.619 0.595
+ADAgent (Ours) 0.543 0.754 0.561 0.553 0.644 0.794 0.644 0.647
+ResultsonMulti-modalTasks. Table1presentstheresultcomparisonsof
+ADAgent against five baselines: MedicalNet, nnMamba, ResNet50, MCAD, and
+CMViM, in terms of Accuracy (ACC), Specificity (SPE), Sensitivity (SEN), and
+F1-score (F1) on multi-modal tasks. ADAgent outperforms baseline methods on
+accuracy by 7.3%, 11.7%, 7.7%, 9.6%, and 2.7% for the diagnosis task, and by
+5.9%, 8.9%, 9.6%, 10.3%, and 0.7% for the prognosis task. Especially, ADAgent
+achieves the best results in almost all metrics for these two tasks. These results
+validate ADAgent’s reasoning ability in analyzing different models’ results and
+can indeed improve performance.
+Results on Missing Modality Diagnosis Tasks.Similarly, Table 2 com-
+pares the ADAgent against four baseline approaches, MedicalNet, ResNet50,
+ResNet34, and ResNet18 on missing modality diagnosis tasks. As for the accu-
+racy metric, ADAgent outperforms baseline methods by 2.2%, 0.7%, 5.6%, and
+2.8% for MRI diagnosis tools and by 4.4%, 4.4%, 7.0%, and 7.4% for the PET di-
+agnosis tool. It is noted that although ResNet34 demonstrates poor performance
+in MRI diagnosis tool, ADAgent still has accuracy improvement and retains rel-
+atively good performance in other metrics. By contrast, ADAgent achieves the
+best results in all metrics on the PET diagnosis task. These results show that
+ADAgent has reasoning ability when integrating the results of different models,
+bringing performance improvement and robustness.
+Ablation Study.We conducted the ablation study on all tasks against two
+baseline methods, and the detailed results are shown in Table 3. The Average
+methodistoaveragethepredictionprobabilitiesforallclassesandselecttheclass
+with the largest probability as the final prediction. The Vote method involves
+each model providing a decision, and the result that occurs most frequently is
+
+===== PAGE 9 =====
+ADAgent 9
+taken as the final outcome. ADAgent yields the best overall performance on all
+tasks. This suggests that ADAgent can fully leverage the capability of LLM to
+analyze the results of multiple models.
+4 Conclusion
+In conclusion, ADAgent introduces the first AI agent framework integrated with
+multiple tools for AD analysis, powered by an LLM as both a tool action plan-
+ner and a collaborative outcomes coordinator. Experimental results demonstrate
+that ADAgent outperforms existing methods, showcasing its potential for ad-
+vanced AD diagnosis and prognosis. However, the current implementation of
+ADAgent is limited by the number of integrated tools and input modalities. Fu-
+ture work will focus on expanding the tool set, incorporating additional modal-
+ities, and enhancing the model’s generalization to further improve its clinical
+applicability.
+References
+1. Alberdi, A., Aztiria, A., Basarab, A.: On the early diagnosis of alzheimer’s disease
+from multimodal signals: A survey. Artificial intelligence in medicine 71, 1–29
+(2016)
+2. Better, M.A.: Alzheimer’s disease facts and figures. Alzheimers Dement19(4),
+1598–1695 (2023)
+3. Chen, S., Ma, K., Zheng, Y.: Med3d: Transfer learning for 3d medical image anal-
+ysis. arXiv preprint arXiv:1904.00625 (2019)
+4. Cui, R., Liu, M.: Hippocampus analysis by combination of 3-d densenet and shapes
+foralzheimer’sdiseasediagnosis.IEEEjournalofbiomedicalandhealthinformatics
+23(5), 2099–2107 (2018)
+5. Dubois, B., Villain, N., Frisoni, G.B., Rabinovici, G.D., Sabbagh, M., Cappa, S.,
+Bejanin, A., Bombois, S., Epelbaum, S., Teichmann, M., et al.: Clinical diagnosis
+of alzheimer’s disease: recommendations of the international working group. The
+Lancet Neurology 20(6), 484–496 (2021)
+6. Fallahpour, A., Ma, J., Munim, A., Lyu, H., Wang, B.: Medrax: Medical reasoning
+agent for chest x-ray (2025),https://arxiv.org/abs/2502.02673
+7. Gong, H., Kang, L., Wang, Y., Wan, X., Li, H.: nnmamba: 3d biomedical image
+segmentation, classification and landmark detection with state space model (2024),
+https://arxiv.org/abs/2402.03526
+8. He,K.,Zhang,X.,Ren,S.,Sun,J.:Deepresiduallearningforimagerecognition.In:
+Proceedings of the IEEE conference on computer vision and pattern recognition.
+pp. 770–778 (2016)
+9. Hoang, G.M., Kim, U.H., Kim, J.G.: Vision transformers for the prediction of
+mild cognitive impairment to alzheimer’s disease progression using mid-sagittal
+smri. Frontiers in Aging Neuroscience15, 1102869 (2023)
+10. Huang, F., Qiu, A., Initiative, A.D.N., et al.: Ensemble vision transformer for
+dementia diagnosis. IEEE Journal of Biomedical and Health Informatics (2024)
+11. Joe, E., Ringman, J.M.: Cognitive symptoms of alzheimer’s disease: clinical man-
+agement and prevention. bmj367 (2019)
+
+===== PAGE 10 =====
+10 W. Hou et al.
+12. Li, B., Yan, T., Pan, Y., Luo, J., Ji, R., Ding, J., Xu, Z., Liu, S., Dong, H., Lin, Z.,
+et al.: Mmedagent: Learning to use medical tools with multi-modal agent. arXiv
+preprint arXiv:2407.02483 (2024)
+13. Lian, C., Liu, M., Zhang, J., Shen, D.: Hierarchical fully convolutional network for
+joint atrophy localization and alzheimer’s disease diagnosis using structural mri.
+IEEE transactions on pattern analysis and machine intelligence42(4), 880–893
+(2018)
+14. Liu, L., Dou, Q., Chen, H., Qin, J., Heng, P.A.: Multi-task deep model with margin
+ranking loss for lung nodule analysis. IEEE transactions on medical imaging39(3),
+718–728 (2019)
+15. Liu, L., Hong, C., Aviles-Rivero, A.I., Schönlieb, C.B.: Simultaneous semantic
+and instance segmentation for colon nuclei identification and counting. In: Annual
+Conference on Medical Image Understanding and Analysis. pp. 130–138. Springer
+(2022)
+16. Organization, W.H., et al.: Global status report on the public health response to
+dementia (2021)
+17. Scheltens, P., De Strooper, B., Kivipelto, M., Holstege, H., Chételat, G., Teunis-
+sen, C.E., Cummings, J., van der Flier, W.M.: Alzheimer’s disease. The Lancet
+397(10284), 1577–1590 (2021)
+18. Sibilano, E., Buongiorno, D., Lassi, M., Grippo, A., Bessi, V., Sorbi, S., Mazzoni,
+A., Bevilacqua, V., Brunetti, A.: Understanding the role of self-attention in a
+transformer model for the discrimination of scd from mci using resting-state eeg.
+IEEE Journal of Biomedical and Health Informatics (2024)
+19. Wang, S., Aviles-Rivero, A.I., Kourtzi, Z., Schönlieb, C.B.: Hgib: Prognosis
+for alzheimer’s disease via hypergraph information bottleneck. arXiv preprint
+arXiv:2303.10390 (2023)
+20. Weiner, M.W., Veitch, D.P., Aisen, P.S., Beckett, L.A., Cairns, N.J., Green, R.C.,
+Harvey, D., Jack, C.R., Jagust, W., Liu, E., et al.: The alzheimer’s disease neu-
+roimaging initiative: a review of papers published since its inception. Alzheimer’s
+& Dementia 9(5), e111–e194 (2013)
+21. Yang, G., Du, K., Yang, Z., Du, Y., Zheng, Y., Wang, S.: Cmvim: Contrastive
+masked vim autoencoder for 3d multi-modal representation learning for ad classi-
+fication. arXiv preprint arXiv:2403.16520 (2024)
+22. Yu, Q., Ma, Q., Da, L., Li, J., Wang, M., Xu, A., Li, Z., Li, W., Initiative, A.D.N.,
+et al.: A transformer-based unified multimodal framework for alzheimer’s disease
+assessment. Computers in Biology and Medicine180, 108979 (2024)
+23. Zhang, J., He, X., Liu, Y., Cai, Q., Chen, H., Qing, L.: Multi-modal cross-attention
+network for alzheimer’s disease diagnosis with multi-modality data. Computers
+in Biology and Medicine 162, 107050 (05 2023). https://doi.org/10.1016/j.
+compbiomed.2023.107050
+24. Zhang, X., Han, L., Zhu, W., Sun, L., Zhang, D.: An explainable 3d residual self-
+attention deep neural network for joint atrophy localization and alzheimer’s disease
+diagnosis using structural mri. IEEE journal of biomedical and health informatics
+26(11), 5289–5297 (2021)
+25. Zhang, Y., Teng, Q., Liu, Y., Liu, Y., He, X.: Diagnosis of alzheimer’s disease
+based on regional attention with smri gray matter slices. Journal of neuroscience
+methods 365, 109376 (2022)

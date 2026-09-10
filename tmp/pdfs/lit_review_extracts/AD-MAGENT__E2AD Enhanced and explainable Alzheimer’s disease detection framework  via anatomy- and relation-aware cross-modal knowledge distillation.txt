@@ -1,0 +1,1273 @@
+
+
+===== PAGE 1 =====
+ 
+Contents lists available at ScienceDirect
+Medical Image Analysis
+journal homepage: www.elsevier.com/locate/media  
+E2AD: Enhanced and explainable Alzheimer’s disease detection framework 
+via anatomy- and relation-aware cross-modal knowledge distillation
+Chenhui Wang a
+ , Sirong Piao b,c, Zhihao Chen a
+ , Tao Chen a
+ , Zhaoyang Li a
+ , 
+Tongrui Zhang a
+ , Yuxin Li b, Xing-Ming Zhao a,d,e,f, Hongming Shan a,d,g
+ ,∗, the Alzheimer’s 
+Disease Neuroimaging Initiative1, the Australian Imaging Biomarkers and Lifestyle flagship 
+study of aging2
+a Institute of Science and Technology for Brain-inspired Intelligence, Fudan University, Shanghai 200433, China
+b Department of Radiology, Huashan Hospital, Fudan University, Shanghai 200040, China
+c Department of Radiology, Peking Union Medical College Hospital, Chinese Academy of Medical Sciences and Peking Union Medical 
+College, Beijing 100730, China
+d MOE Frontiers Center for Brain Science, Fudan University, Shanghai 200433, China
+e College of Biomedical Engineering, Fudan University, Shanghai 200433, China
+f State Key Laboratory of Brain Function and Disorders, Institutes of Brain Science, Fudan University, Shanghai 200032, China
+g Shanghai Center for Brain Science and Brain-inspired Technology, Shanghai 201210, China
+A R T I C L E  I N F O
+Keywords:
+Alzheimer’s disease (AD)
+Knowledge distillation (KD)
+Magnetic resonance imaging (MRI)
+Positron emission tomography (PET)
+ A B S T R A C T
+Alzheimer’s disease (AD) is a progressive neurodegenerative disorder for which MRI and PET provide 
+complementary structural and molecular information. Yet PET remains costly and often unavailable, motivating 
+MRI-only diagnostic systems that still benefit from multimodal supervision. Existing methods either synthesize 
+PET from MRI or limit cross-modal learning to low-dimensional spaces, underutilizing MRI–PET complementar-
+ity and leading to limited robustness and generalizability. To address these challenges, we introduce E2AD, an
+Enhanced and Explainable AD detection framework that leverages anatomy- and relation-aware cross-modal 
+knowledge distillation (KD). Using paired MRI–PET data during training but only MRI at inference, E2AD 
+augments traditional logit-based KD through two synergistic components: (1) anatomy-aware distillation that 
+transfers within-subject anatomical dependencies through an anatomical Mixture-of-Mappers, yielding spatially 
+meaningful and clinically traceable cues; and (2) relation-aware distillation that promotes stable between-subject 
+structural relations through generalizable pairwise alignment, yielding a representation space with better cross-
+cohort generalization. To enhance clinical utility, we further introduce a tailored multi-agent workflow that 
+translates E2AD’s anatomical attention into structured, clinician-oriented MRI reports. Extensive experimental 
+results on the internal ADNI cohort and two external cohorts (AIBL and NACC) demonstrate that E2AD 
+outperforms state-of-the-art baselines, offering faster convergence, improved data efficiency, stronger cross-
+cohort generalization, and enhanced explainability. Source code is available at https://github.com/thibault-
+wch/E2AD-for-Alzheimer-disease.
+1. Introduction
+Alzheimer’s disease (AD) affects over 55 million people and is pro-
+jected to surpass 150 million by 2050 (Alzheimer’s Association, 2024). 
+Early detection and longitudinal monitoring are pivotal for timely 
+∗ Corresponding author at: Institute of Science and Technology for Brain-inspired Intelligence, Fudan University, Shanghai 200433, China.
+E-mail addresses: chenhuiwang21@m.fudan.edu.cn (C. Wang), hmshan@fudan.edu.cn (H. Shan).
+1 Data used in preparation of this article was obtained from the Alzheimer’s Disease Neuroimaging Initiative (ADNI) database (https://adni.loni.usc.edu). The 
+investigators within the ADNI contributed to the design and implementation of ADNI and/or provided data but did not participate in analysis or writing of this 
+report. A complete listing of ADNI investigators can be found at: https://adni.loni.usc.edu/wp-content/uploads/how_to_apply/ADNI_Acknowledgement_List.pdf.
+2 Data used in the preparation of this article was obtained from the Australian Imaging Biomarkers and Lifestyle flagship study of ageing (AIBL) funded by the 
+Commonwealth Scientific and Industrial Research Organisation (CSIRO) which was made available at the ADNI database (https://adni.loni.usc.edu). The AIBL 
+researchers contributed data but did not participate in analysis or writing of this report. AIBL researchers are listed at www.aibl.csiro.au.
+intervention, yet AD’s progressive and heterogeneous neuropathology 
+poses challenges to reliable assessment in routine clinical practice.
+Among neuroimaging modalities, magnetic resonance imaging
+(MRI) is widely accessible and captures structural atrophy, whereas 
+https://doi.org/10.1016/j.media.2026.104099
+Received 19 November 2025; Received in revised form 19 April 2026; Accepted 20 April 2026
+Medical Image Analysis 112 (2026) 104099 
+Available online 22 April 2026 
+1361-8415/© 2026 Elsevier B.V. All rights are reserved, including those for text and data mining, AI training, and similar technologies. 
+
+===== PAGE 2 =====
+C. Wang et al.
+positron emission tomography (PET) provides pathophysiological read-
+outs. In principle, both imaging modalities are complementary; how-
+ever, PET is often unavailable due to access constraints, radiation 
+exposure, and cost. Current deep-learning pipelines gravitate toward 
+two extremes: (1) multimodality models (Yang et al., 2022; Qiu et al., 
+2024; H. Zhou et al., 2024; Zhang et al., 2024) that presuppose 
+full-modality inference-complete on curated datasets but are brittle 
+when PET is absent, as often occurs in clinical workflows; and (2)
+single-modality models (Liu et al., 2018; Jabason et al., 2024; C. Wang 
+et al., 2024; Song et al., 2026) that embrace the MRI-only input and 
+thus avoid missing data, but leave complementary cross-modal signal 
+untapped, limiting differential diagnosis.
+Recent efforts to bridge this discrepancy fall into two lines. First, 
+MRI-to-PET scan synthesis for modality completion (Pan et al., 2020; 
+Ou et al., 2024; Wang et al., 2024; Xu et al., 2025) prioritizes image 
+fidelity and therefore only indirectly supports clinical discrimination. 
+The second learns cross-modal differences in a low-dimensional space,
+e.g. logits or global features (Guan et al., 2021; Chen et al., 2023; 
+Yang et al., 2024; Kwak et al., 2025; Liu et al., 2025), yet fails 
+to capture disease-relevant anatomy and cohort-level knowledge. As 
+a result, both strategies underuse multimodal supervision, yielding 
+overconfident predictions and brittle generalization.
+To address this, we propose E2AD, an Enhanced and Explainable AD
+detection framework via anatomy- and relation-aware knowledge dis-
+tillation (KD). Trained with paired MRI+PET yet requiring only MRI at 
+deployment (Fig.  1), E2AD operationalizes a simple principle: learning
+where diagnostic evidence resides within a case and how cases should 
+be organized across the cohort. Specifically, E2AD extends traditional 
+logit-based KD (LogitKD) via two synergistic components at orthogonal 
+levels of diagnostic knowledge: (1) anatomy-aware KD (AnaKD), which 
+transfers within-subject anatomical weights from teacher to student 
+via an anatomical Mixture-of-Mappers (A-MoM) with ROI-specific and 
+ROI-shared mappers, yielding spatially meaningful, clinically traceable 
+cues; and (2) relation-aware KD (RelKD), which fosters stable between-
+subject structural consistency by aligning student-related relations to 
+the teacher–teacher relation, yielding better cross-cohort generaliza-
+tion. Additionally, we propose a tailored 3D MRI report agent workflow 
+that provides detailed analysis towards practical utility.
+The contributions of this work are summarized as follows.
+1. We propose E2AD, a cross-modal KD framework that aligns 
+anatomy- and relation-aware capabilities from an MRI+PET mul-
+timodal teacher to an MRI-only student, enabling enhanced and 
+explainable AD assessment.
+2. We propose anatomy-aware distillation, which distills within-
+subject anatomical weights via an A-MoM, yielding spatially 
+meaningful and clinically traceable cues.
+3. We propose relation-aware distillation, which promotes stable 
+between-subject structural relations through generalizable pair-
+wise alignment, yielding a representation space with better 
+cross-cohort generalization.
+4. We propose a tailored MRI report multi-agent workflow that 
+converts E2AD’s anatomical weights and demographic context 
+into clinician-facing, region-level narratives for decision support.
+5. Extensive experiments on ADNI and two external cohorts (AIBL 
+and NACC) show that E2AD achieves state-of-the-art (SOTA) 
+Fig. 1. Conceptual illustration and performance of 𝐄2AD. (a) E2AD 
+augments logit-level KD (LogitKD) with anatomy-aware (AnaKD) and relation-
+aware (RelKD), trained on MRI–PET pairs but using only MRI at inference. (b)
+Performance improvement of E2AD over the baseline.
+performance with faster convergence, improved data efficiency, 
+and enhanced explainability.
+2. Methodology
+To enhance and explain AD detection, we propose an anatomy- 
+and relation-aware cross-modal KD framework that transfers multi-
+modal knowledge to MRI (Fig.  2(a)). Section 2.1 formalizes conven-
+tional KD in our setting; Section 2.2 and Section 2.3 describe the 
+proposed anatomy- and relation-aware distillations, respectively; Sec-
+tion 2.4 summarizes E2AD; and Section 2.5 outlines a tailored multi-
+agent workflow that converts E2AD’s anatomical routing weights into 
+clinician-facing MRI reports.
+2.1. Problem formulation and conventional KD
+We define two training partitions: (1) a multimodal dataset Multi =
+{(𝑿M
+𝑖 , 𝑿P
+𝑖 , 𝑦𝑖)}𝑁1
+𝑖=1, where each subject has an MRI 𝑿M
+𝑖 ∈ R1×𝐷×𝐻×𝑊 , a 
+PET scan 𝑿P
+𝑖 ∈ R1×𝐷×𝐻×𝑊 , and a diagnostic label 𝑦𝑖; and (2) an MRI-
+only dataset Single = {( 𝑿M
+𝑗 , 𝑦𝑗 )}𝑁2
+𝑗=1. Let   and  be the multimodal 
+teacher and MRI-only student, yielding logits ̂𝒑 , ̂𝒑 ∈ R𝑘 for 𝑘 classes.
+Standard KD combines a hard-label cross-entropy (CE) loss on all 
+𝑁1 + 𝑁2 MRI-available subjects with a logit-level alignment term on 
+the 𝑁1 paired subjects:
+logitKD = −SM( ̂𝒑 ) log(SM( ̂𝒑 )), (1)
+KD = CE + 𝜆logitlogitKD, (2)
+where SM denotes the softmax and 𝜆logit weights the loss terms. Mean-
+while, feature-level KD represents another mainstream paradigm that 
+aligns pre-logit features between teacher and student via L1/L2 losses.
+Nevertheless, both logit- and feature-level KD compress multimodal 
+supervision into low-dimensional representations, underutilizing rich 
+multimodal signals; in contrast, E2AD adds complementary anatomy- 
+and relation-aware distillations.
+2.2. Anatomy-aware distillation
+AD is characterized by widespread cerebral atrophy, with regionally 
+heterogeneous progression across brain ROIs (Holland et al., 2009; 
+Poulakis et al., 2018). To leverage this clinical prior, we align teacher–
+student anatomical knowledge across ROIs. We operationalize this idea 
+with anatomical Mixture-of-Mappers (A-MoM), organized into three 
+steps: (1) ROI tokenization, (2) anatomical mapper extraction, and (3) 
+anatomy-aware fusion and distillation, as shown in Fig.  2(b).
+Medical Image Analysis 112 (2026) 104099 
+2 
+
+===== PAGE 3 =====
+C. Wang et al.
+Fig. 2. Detailed illustration of the proposed 𝐄2AD. (a) Overall framework architecture. (b) Anatomy-aware distillation employs an anatomical mixture-of-
+mappers to tokenize ROIs, route features to specialized mappers, and achieve anatomy-aware fusion and distillation. (c) Relation-aware distillation aligns diverse 
+student-related relations with the teacher–teacher relation, producing a more stable structural organization.
+2.2.1. ROI tokenization
+To replace conventional undifferentiated voxel-wise features with 
+anatomically informed representations, we introduce an anatomical 
+tokenizer (A-Tok) that converts a 3D feature map 𝑽 ∈ R𝐶×𝑑×ℎ×𝑤
+produced by an encoder (⋅) to 𝐽 ROI features, where 𝐶, 𝑑, ℎ, and 𝑤 are 
+channels, depth, height, and width, respectively. Given a downsampled, 
+pre-registered atlas mask 𝑴 d indexing ROI voxels, we flatten 𝑽  over 
+space to 𝑽 f lat ∈ R𝐶×(𝑑ℎ𝑤) and form a binary ROI-voxel assignment 
+matrix 𝑴 d ∈ {0 , 1}𝐽 ×(𝑑ℎ𝑤) with (𝑴 d)𝑗,𝑣 = 1 iff voxel 𝑣 belongs to ROI 
+𝑗. Let 𝐷 = diag(𝑴 d𝟏) be the diagonal matrix of per-ROI voxel counts (𝟏
+is an all-ones vector of length 𝑑ℎ𝑤). ROI features are masked averages 
+with row-wise layer normalization LN(⋅): 
+𝑭 = LN( 𝑴 d (𝑽 f lat)⊤
+𝐷 ), (3)
+where ⊤ denotes the matrix transpose.
+2.2.2. Anatomical mapper extraction
+Instantiation. We instantiate A-MoM with 𝐽 ROI-specific map-
+pers {Mappersp
+𝑗 (⋅)}𝐽
+𝑗=1 and an ROI-shared mapper Mappersh(⋅), all im-
+plemented as multilayer perceptrons (MLPs). Each ROI-specific mapper 
+maps its ROI features to a 𝐶-dimensional vector; stacking yields ROI-
+specific features 𝑭 sp ∈ R𝐽 ×𝐶 . In parallel, the ROI-shared mapper jointly 
+processes all ROI features to produce ROI-shared features 𝑭 sh ∈ R𝐽 ×𝐶 , 
+capturing global, ROI-shared disease signals (e.g. overall atrophy burden 
+or diffuse patterns) and amplifying discriminability among ROI-specific 
+features. Formally,
+𝑭 sp = 𝚌𝚘𝚗𝚌(Mappersp
+1 (𝑭 1,∶), … , Mappersp
+𝐽 (𝑭 𝐽 ,∶)), (4)
+𝑭 sh = Mappersh(𝑭 ), (5)
+where 𝚌𝚘𝚗𝚌 denotes the column-wise (vertical) concatenation.
+Mapper Regulation. To better regulate mappers, we propose 
+mapper regulation loss Reg that encourages similarity among ROI-
+shared features, disentangles ROI-specific ones, and ensures reconstruc-
+tion fidelity, as shown in Fig.  3.
+Define the overall shared feature as the ROI mean 𝒇 sh = 1
+𝐽 𝟏⊤𝑭 sh, 
+where 𝟏 ∈ R𝐽 is the all-ones vector. The shared loss sh aligns each 
+Fig. 3. Illustration of the mapper regulation loss.
+ROI-shared feature to 𝒇 sh: 
+sh = 1
+𝐽
+∑ 𝐽
+𝑗=1
+(
+1 − Cos(𝑭 sh
+𝑗,∶, 𝒇 sh)
+)
+, (6)
+where Cos(⋅, ⋅) is the cosine similarity.
+The disentanglement loss dis encourages both inter-ROI separation 
+of ROI-specific features and intra-ROI decorrelation between shared 
+and specific features: 
+dis = 1
+𝐽 2
+(∑ 𝐽
+𝑗1≠𝑗2
+| Cos(𝑭 sp
+𝑗1,∶, 𝑭 sp
+𝑗2,∶)|
+⏟⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏟⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏟
+inter-ROI separation
++ ∑ 𝐽
+𝑗 | Cos(𝑭 sh
+𝑗,∶, 𝑭 sp
+𝑗,∶)|
+⏟ ⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞ ⏟ ⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞⏞ ⏟
+intra-ROI decorrelation
+)
+, (7)
+where | ⋅|  denotes the absolute value function.
+The reconstruction loss rec ensures information fidelity by mini-
+mizing the reconstruction error with a network MLPrec(⋅): 
+rec = ‖‖‖𝑭 − MLPrec
+([𝑭 sh, 𝑭 sp])‖‖‖
+2
+. (8)
+Thus, the mapper regulation loss Reg is defined as: 
+Reg = sh + dis + rec. (9)
+Medical Image Analysis 112 (2026) 104099 
+3 
+
+===== PAGE 4 =====
+C. Wang et al.
+Fig. 4. Illustration of the differential anatomical router module.
+2.2.3. Anatomy-aware fusion and distillation
+To learn inter-ROI dependencies and enhance the explainability, 
+we propose a differential anatomical router (DA-Router) module that 
+assigns anatomical routing weights to adaptively route and fuse ROI-
+specific features, as shown in Fig.  4. Specifically, we first project 
+the ROI features 𝑭 into global queries 𝑸1, 𝑸2 ∈ R𝐶 and ROI keys 
+𝑲 1, 𝑲 2 ∈ R𝐽 ×𝐶 . The DA-Router then computes anatomical weights as a 
+probability distribution 𝒘ana = SM(⋅) ∈ 𝛥𝐽 −1 via a differential architec-
+ture. By computing the difference between attention maps rather than 
+relying on absolute scores, this approach effectively suppresses vanilla 
+attention noise (Vaswani et al., 2017) and facilitates a sharper focus on 
+discriminative information (Ye et al., 2025; Cao et al., 2026):
+𝒘ana = DA-Router(𝑭 )
+= SM
+(
+SM(
+𝑸1𝑲 ⊤
+1√
+𝐶
+) − 𝜆SM(
+𝑸2𝑲 ⊤
+2√
+𝐶
+)
+)
+, (10)
+where [𝑸1; 𝑸2] = Proj𝑄(𝑭 ), [𝑲 1; 𝑲 2] = 𝑭 𝑾 𝐾 .
+Here, 𝑾 𝐾 ∈ R𝐶×2𝐶 is ROI key parameters, 𝜆 is a learnable scalar, 
+and Proj𝑄(⋅) is the global query projector that integrates intra- and 
+inter-ROI information to derive global scan information. To synchro-
+nize the learning dynamics of different query and key projectors, we 
+re-parameterize the scalar 𝜆 as: 
+𝜆 = exp(𝝀⊤
+q1
+𝝀k1 ) − exp(𝝀⊤
+q2
+𝝀k2 ) + 𝜆init , (11)
+where 𝝀q1 , 𝝀q2 , 𝝀k1 , 𝝀k2 ∈ R𝐶 are learnable vectors, and 𝜆init ∈ (0, 1) is a 
+constant used for the initialization of 𝜆. DA-Router adopts a multi-head 
+mechanism to stabilize anatomical weights.
+Thus, the ROI-specific features 𝑭 sp are weighted by 𝒘ana to derive 
+the overall specific feature 𝒇 sp = 𝒘⊤
+ana𝑭 sp. Finally, A-MoM uses a 
+classifier Cls(⋅) to predict the label ̂ 𝑦 based on the concatenated overall 
+shared and specific features: 
+̂ 𝑦𝑖 = Cls ([𝒇 sh, 𝒇 sp]), (12)
+where [⋅, ⋅] denotes row-wise (horizontal) concatenation.
+Let 𝒘
+ana and 𝒘
+ana be the teacher and student anatomical routing 
+weights. Thus, we introduce an anatomy-aware distillation loss anaKD
+that aligns their fine-grained attention distributions: 
+anaKD = −𝒘
+ana log (𝒘
+ana
+). (13)
+2.3. Relation-aware distillation
+To learn stable between-subject relations, we propose a relation-
+aware distillation that performs generalizable pairwise alignment be-
+tween student-related relations and the more powerful teacher–teacher 
+relation, yielding better cross-cohort generalization, as shown in
+Fig.  2(c). Inspired by DINO v3’s Gram Anchoring (Siméoni et al., 2025), 
+we treat any role-specific (teacher or student) feature within a batch 
+as an anchor. Taking the teacher–teacher relation as an example, it 
+captures how each teacher anchor relates to other teacher anchors. We then 
+align the student–student relation 𝑹 and two cross-role relations,
+i.e. student–teacher 𝑹 , and teacher–student 𝑹  , to this reference 
+teacher–teacher relation 𝑹  .
+Let 𝒇 
+𝑖 = [ 𝒇 sh( )
+𝑖 , 𝒇 sp( )
+𝑖 ] ∈ R2𝐶1 and 𝒇 
+𝑖 = [ 𝒇 sh()
+𝑖 , 𝒇 sp()
+𝑖 ] ∈ R2𝐶2
+denote the overall teacher and student features, where 𝐶1 and 𝐶2 are 
+their respective feature dimensions. To characterize between-subject 
+relations, we use the normalized Gram matrix Gr(𝑨) = 𝑨𝑨⊤
+‖𝑨‖⋅‖𝑨‖ for 
+𝑨 ∈ R𝐵×𝐶 , where ‖ ⋅ ‖ denotes the 𝑙2 norm of the column vectors, 
+yielding a 𝐵 × 𝐵 pairwise similarity matrix over a minibatch of size 
+𝐵. Thus, the teacher–teacher and student–student relations are:
+𝑹  = Gr
+(
+𝚌𝚘𝚗𝚌(𝒇 
+1 , 𝒇 
+2 , … , 𝒇 
+𝐵 )
+)
+, (14)
+𝑹 = Gr (𝚌𝚘𝚗𝚌(𝒇 
+1 , 𝒇 
+2 , … , 𝒇 
+𝐵)). (15)
+Furthermore, the teacher–student relation 𝑹  and the student–
+teacher relation 𝑹  are constructed via cross-role feature conversions 
+to impose generalizable constraints. Specifically, to resolve dimensional 
+mismatch and isolate ROI-shared and ROI-specific knowledge, we in-
+troduce two learnable matrices, 𝑾 sh ∈ R𝐶1×𝐶2 and 𝑾 sp ∈ R𝐶1×𝐶2 , 
+enabling bidirectional  →   and  →  conversions with tied pa-
+rameters (the reverse solely uses the transpose). The teacher-to-student 
+feature 𝒇 →
+𝑖  and student-to-teacher feature 𝒇  →
+𝑖  are then:
+𝒇 →
+𝑖 = [𝒇 sh()
+𝑖 𝑾 ⊤
+sh, 𝒇 sp()
+𝑖 𝑾 ⊤
+sp], (16)
+𝒇  →
+𝑖 = [𝒇 sh( )
+𝑖 𝑾 sh, 𝒇 sp( )
+𝑖 𝑾 sp]. (17)
+Consequently, the corresponding relations are defined as:
+𝑹 = 1
+𝐵
+∑ 𝐵
+𝑖=1Gr
+(
+𝚌𝚘𝚗𝚌(𝒇 
+1 ,…,𝒇 
+𝑖− 1,𝒇 →
+𝑖 ,𝒇 
+𝑖+ 1,…,𝒇 
+𝐵 )
+)
+, (18)
+𝑹  = 1
+𝐵
+∑ 𝐵
+𝑖=1Gr
+(
+𝚌𝚘𝚗𝚌(𝒇 
+1,…,𝒇 
+𝑖− 1,𝒇 →
+𝑖 ,𝒇 
+𝑖+ 1,… ,𝒇 
+𝐵)
+)
+. (19)
+We then use centered kernel alignment (CKA) (Alvarez, 2023) to quan-
+tify the geometric similarity between student-related relations (𝑹 , 
+𝑹 ) and 𝑹  , and the reference teacher–teacher relation 𝑹  , yield-
+ing the relation-aware distillation loss:
+relKD = 
+relKD + 
+relKD +  
+relKD
+=
+(
+1 − CKA(𝑹 , 𝑹  )
+)
++
+(
+1 − CKA(𝑹 , 𝑹  )
+)
++
+(
+1 − CKA(𝑹  , 𝑹  )
+)
+, (20)
+where CKA(𝑮𝑋,𝑮𝑌 ) =
+‖𝑮⊤
+𝑌 𝑮𝑋 ‖2
+‖𝑮⊤
+𝑋 𝑮𝑋 ‖⋅‖𝑮⊤
+𝑌 𝑮𝑌 ‖ for Gram matrices 𝑮𝑋 and 𝑮𝑌 , 
+with scores in [0, 1] ranging from no correlation to perfect consis-
+tency (Z. Zhou et al., 2024). By aligning pairwise relational structures 
+via CKA, the student is guided to encode relative pathological distances 
+robust to anatomical variability, refining its latent space toward the 
+more faithful disease continuum geometry afforded by PET.
+2.4. Overview of E2AD
+E2AD consists of two sequential stages: pre-training a multimodal 
+teacher and training an MRI-only student through anatomy- and
+relation-aware KD, as shown in Algorithm 1.
+Multimodal Teacher Pre-training. We pre-train the multimodal
+teacher on 𝑁1 MRI–PET pairs by minimizing the CE loss CE and the 
+mapper regularization loss Reg in Eq. (9): 
+Multi = CE + Reg. (21)
+MRI-only Student Distillation. We train the MRI-only student on all 
+𝑁1 + 𝑁2 subjects with CE and Reg for basic discriminative capacity, 
+Medical Image Analysis 112 (2026) 104099 
+4 
+
+===== PAGE 5 =====
+C. Wang et al.
+Fig. 5. Extended 3D MRI report agent workflow customized by our 𝐄2AD. Our workflow employs four specialized LLM agents (rephrase, knowledge, reference, 
+and report) that collaborate to generate the final report. The orange, red, purple, and green text respectively represent demographic-related, brain anatomy-related, 
+established AD knowledge-related, and reference-related content.
+Algorithm 1: Training procedure of E2AD
+Input: Multimodal dataset Multi = {(𝑿M
+𝑖 ,𝑿P
+𝑖 ,𝑦𝑖)}𝑁1
+𝑖=1 and MRI-only dataset 
+Single = {(𝑿M
+𝑗 ,𝑦𝑗 )}𝑁2
+𝑗=1
+Optimize: teacher parameters 𝜽  and student parameters 𝜽
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+⊳ Stage 1: Multimodal Teacher Pre-training
+for each mini-batch do
+Sample (𝑿M
+𝑖 , 𝑿P
+𝑖 , 𝑦𝑖) from Multi;
+Calculate Multi = CE + Reg ←Eq. (21);
+Update 𝜽  via ▿𝜽 Multi;
+end 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+⊳ Stage 2: MRI-only Student Distillation
+for each mini-batch do
+Sample (𝑿M
+𝑖 , 𝑿P
+𝑖 , 𝑦𝑖) from Multi;
+Sample (𝑿M
+𝑗 , 𝑦𝑗 ) from Single;
+// ⊳ Training with all 𝑁1 + 𝑁2 MRI-available data
+Calculate CE and Reg;
+// ⊳ Training with 𝑁1 complete MRI+ PET paired data
+Calculate logitKD ← Eq. (1); ⊳ Logit-level distillation
+Calculate anaKD ←Eq. (13); ⊳ Anatomy-aware distillation
+Calculate relKD via CKA with 𝑹 , 𝑹 , and 𝑹  to 𝑹  ←Eq. (20);
+⊳ Relation-aware distillation
+Calculate Distill via logitKD, anaKD, and relKD ←Eq. (22);
+Calculate Single = CE + Reg + Distill ←Eq. (23);
+Update 𝜽 via ▿𝜽 Single;
+end 
+and transfer the teacher’s diagnostic capability via the distillation loss 
+Distill on the multimodal subset: 
+Distill = 𝜆logitlogitKD + 𝜆anaanaKD + 𝜆relrelKD, (22)
+where 𝜆logit = 1, 𝜆ana = 10, and 𝜆rel = 1 to keep magnitudes comparable. 
+Thus, the final student training objective is: 
+Single = CE +Reg +Distill. (23)
+Note that the teacher and student share identical architectures except 
+for ROI tokenization: the teacher uses two A-Toks for MRI and PET 
+before ROI-wise feature concatenation.
+At inference, we can solely use the MRI-only model to deliver 
+superior diagnostic performance, with each prediction accompanied 
+by a 3D MRI report generated by the multi-agent workflow described 
+below, facilitating clinical adoption.
+2.5. Clinical usage with extended multi-agent workflow
+To further enhance the intuitive explainability and practical usabil-
+ity of E2AD, we extend it, already deployable as an MRI-only model, 
+with a compact multi-agent workflow for automatic report generation 
+(Fig.  5). The workflow comprises four agents: (1) a rephrase agent that 
+organizes patient information into a standardized input format, (2) a
+knowledge agent that integrates modality-specific and guideline-based 
+knowledge, (3) a reference agent that employs retrieval-augmented 
+generation (RAG) (Lewis et al., 2020) to surface clinically similar cases, 
+and (4) a report agent that composes the final report.
+The pipeline proceeds in four phases: (1) Input and feature extraction: 
+given patient demographics and an MRI, E2AD computes anatomical 
+routing weights. (2) Information enhancement : the rephrase agent for-
+mats demographics and exports detailed routing weights
+(Ana_weights.json); the knowledge agent aggregates medical back-
+ground from LLM summaries, PubMed searches, and established guide-
+lines; and the reference agent compares the patient’s anatomical rout-
+ing weights with those from the reference (training) dataset via cosine 
+similarity, yielding the diagnostic distribution of the retrieved cohort. 
+(3) Prompt integration: outputs from all agents are merged into a single, 
+structured prompt. (4) Report generation: the report agent produces a 
+standardized diagnostic report covering patient information, technique, 
+findings, AI-assisted analysis, and diagnostic impressions.
+3. Experiment
+3.1. Experimental setup
+Datasets. This study contains MRI and PET from three public cohorts: 
+Alzheimer’s Disease Neuroimaging Initiative (ADNI), Australian Imag-
+ing, Biomarkers and Lifestyle Study of Ageing (AIBL), and National 
+Alzheimer’s Coordinating Center (NACC). ADNI collects multimodal 
+data across North America to advance AD research, while AIBL is an 
+Australian cohort, and NACC aggregates data from more than 42 U.S. 
+AD Research Centers (ADRCs) (Beekly et al., 2004). All studies received 
+approval from local institutional review boards, and all participants 
+provided informed consent (Petersen et al., 2010).
+Detailed demographic information for each dataset is shown in 
+Table  1. Mild cognitive impairment (MCI) patients were classified as 
+Medical Image Analysis 112 (2026) 104099 
+5 
+
+===== PAGE 6 =====
+C. Wang et al.
+Table 1
+Demographic information of the subjects used in E2AD. Mini-mental state 
+examination (MMSE) and apolipoprotein E4 (APOE4) allele gene are unavail-
+able for some subjects.
+ Type Dataset Status Subj. Gender Age MMSE APOE4  
+ Num. male mean mean positive 
+ (%) (std) (std) (%)  
+ 
+MRI
+ADNI
+NC 673 292 72.22 29.06 186  
+ (43.39) (6.78) (1.15) (30.95) 
+ sMCI 356 220 72.27 28.01 141  
+ (61.8) (7.54) (1.65) (39.61) 
+ pMCI 178 108 73.96 26.88 117  
+ (60.67) (7.02) (1.7) (65.73) 
+ AD 391 218 74.9 23.09 251  
+ (55.75) (7.87) (2.18) (66.93) 
+ 
+AIBL
+NC 464 198 72.57 28.68 126  
+ (42.67) (6.19) (1.25) (27.69) 
+ AD 77 32 74.01 20.6 53  
+ (41.56) (7.66) (5.4) (71.62) 
+ 
+NACC
+sMCI 155 93 72.1 27.85 59  
+ (60) (8.45) (1.6) (39.6)  
+ pMCI 153 86 75.39 26.78 83  
+ (56.21) (8.02) (1.71) (59.29) 
+ 
+PET ADNI
+NC 248 132 74.43 29.02 66  
+ (53.23) (5.81) (1.14) (26.61) 
+ sMCI 196 121 71.95 27.95 78  
+ (61.73) (7.63) (1.64) (39.8)  
+ pMCI 118 69 73.55 26.95 76  
+ (58.47) (6.91) (1.62) (64.41) 
+ AD 228 133 74.96 23.21 151  
+ (58.33) (7.76) (2.13) (66.52) 
+progressive MCI (pMCI) if they progressed to AD within 36 months, 
+and as stable MCI (sMCI) if they did not. ADNI data are used for model 
+development and internal testing, AIBL data for external testing of the 
+NC vs. AD task, and, owing to the limited availability of MCI subjects, 
+the NACC dataset for external testing of pMCI vs. sMCI. We performed 
+stratified five-fold cross-validation on the ADNI dataset, preserving 
+diagnostic class ratios and preventing subject overlap across folds.
+Preprocessing Pipelines. All MRIs were preprocessed with a six-
+step pipeline (Qiu et al., 2020; Wang et al., 2024): (1) anterior and 
+posterior commissures alignment, (2) intensity correction, (3) skull 
+stripping, (4) outlier clipping (values ≥ 99𝑡ℎ percentile), (5) min–max 
+normalization to [−1, 1], and (6) center cropping to 192×224×192 . The 
+first three steps were performed by FreeSurfer (Fischl, 2012). Atlas 
+masks were obtained by FSL registration (Jenkinson et al., 2012) to 
+the Harvard–Oxford cortical and subcortical atlases (Desikan et al., 
+2006), with bilateral merging and pruning to 56 ROIs (brainstem 
+excluded). PET scans underwent five steps: (1) skull stripping with s3 
+algorithm (Lipková et al., 2019) in ANTs 2.1.0 (Avants et al., 2009), 
+(2) MRI registration via FSL, and (3–5) the same outlier clipping, 
+normalization, and center cropping as for MRI.
+Implementation Details. All models were implemented in
+PyTorch (Paszke et al., 2019) with Kaiming initialization (He et al., 
+2015) and trained on NVIDIA V100 GPUs. We use CNN-based residual 
+blocks as the voxel encoder to enhance local spatial features and reduce 
+voxel-level registration errors (Jiang and Miao, 2024). Agents were 
+built on DeepSeek-R1 (Guo et al., 2025). The multimodal teacher was 
+pre-trained for 50 epochs (batch size 6, learning rate 2 × 10 −4) with a 
+5-epoch linear warm-up followed by exponential decay (rate 0.9). The 
+MRI-only student was distilled for 40 epochs (batch size 8, learning 
+rate 5 × 10 −4), with other hyperparameters unchanged. Loss hyper-
+parameters were not tuned to enforce comparable numerical scales. 
+Performance is evaluated by accuracy (ACC), AUC, F1-score (F1S), 
+precision (PRE), and recall (REC), reported as percentages. Detailed 
+ROI information and tailored LLM agent prompts are shown in Supps. A 
+and B, respectively.
+3.2. Comparison to SOTA methods
+We comprehensively evaluate our E2AD on AD diagnosis (NC vs. 
+AD) and MCI progression (pMCI vs. sMCI) tasks against 13 SOTA 
+methods, eight published in the past three years, grouped into five cat-
+egories: (1) CNN-based: 3D ResNet (He et al., 2016), 3D SeNet (Hu 
+et al., 2018), and I3D (Zhang et al., 2023); (2) Transformer-based: 3D 
+Swin (Liu et al., 2022), MadFormer (Ye et al., 2024), and M3T (Jang 
+and Hwang, 2022); (3) Anatomy-related: 3D PIPNet (De Santi et al., 
+2024), AAGN (Jiang and Miao, 2024), and an MRI-only variant of 
+our E2AD without cross-modal distillation, i.e. E2ADsin; (4) Generation-
+related: JointFrame (Wang et al., 2024) and ResDM (Ou et al., 2024), 
+which employ cross-modal MRI-to-PET voxel-level synthesis to enhance 
+diagnostic performance; and (5) Distillation-related: DCFMnet (Xiong 
+et al., 2025) and MDT-student (Kwak et al., 2025), which directly 
+learn more discriminative representations with the help of PET data. 
+To ensure a fair comparison, all competing models were adjusted to 
+ensure a comparable number of parameters.
+3.2.1. Results for AD diagnosis
+Table  2 summarizes the results for AD diagnosis. From these results, 
+we highlight five key observations: (1) CNN-based methods outper-
+form transformer-based methods, likely owing to their local inductive 
+bias, which is particularly advantageous for large-scale 3D volumetric 
+data. (2) Anatomy-related methods, e.g. 3D PIPNet, often underperform 
+when anatomical knowledge is introduced only implicitly; by contrast, 
+explicitly integrating brain atlas masks substantially improves perfor-
+mance, as evidenced by AAGN and E2ADsin. (3) Generation-related 
+methods overemphasize voxel-level synthesis, constraining high-level 
+discriminative capacity and yielding non-robust AUC on the external 
+AIBL dataset; however, because AIBL is severely class-imbalanced, 
+other metrics are less affected. (4) Distillation-related methods achieve 
+superior performance by optimizing directly in representation space. 
+However, despite the use of feature KD in DCFMnet and logit KD 
+in MDT-student, such methods predominantly capture global, subject-
+level representations/logits and overlook anatomical priors. (5) E2AD 
+significantly outperforms all baselines on both internal ADNI and ex-
+ternal AIBL datasets due to its hierarchical KD design, with a two-sided 
+paired 𝑡-test confirming superiority over the second-best MDT-student, 
+given p-values of 3.42 × 10−2 for ADNI and 1.36 × 10−2 for AIBL.
+3.2.2. Results for MCI progression
+Table  3 summarizes MCI progression results, showing that E2AD 
+achieves superior performance on both internal ADNI and external 
+NACC datasets, consistent with findings from AD diagnosis. Further-
+more, transformer-based and generation-related methods perform worse 
+on MCI progression, likely due to greater pathological complexity. 
+Among baselines, the distillation-related MDT-student emerges as the 
+strongest through inter-modality shared information mining and logit 
+KD. Nevertheless, E2AD significantly outperforms MDT-student, as 
+confirmed by a two-sided paired 𝑡-test, with 𝑝-values of 1.96 × 10−2 for 
+ADNI and 1.19 × 10 −2 for NACC. Please refer to Supp. C for results of 
+multimodal teacher and Supp. D for results of specificity metrics.
+3.3. Explainability with agent-generated report analysis
+At the population level, the mean anatomical routing weights for 
+each diagnostic cohort (Fig.  6(a–b)) reveal that the highly discrim-
+inative regions align with established AD-related neurodegeneration. 
+Across tasks, the parahippocampal and inferior temporal gyri (Scheff 
+et al., 2011) are consistently highlighted, reflecting their central role in 
+AD pathophysiology. Yet task-specific contrasts are evident. AD diagno-
+sis places greater weight on ROIs associated with advanced pathology,
+e.g. the temporal fusiform cortex (Bokde et al., 2006) and angular 
+gyrus (Poulin et al., 2011), whereas MCI progression prioritizes ROIs 
+Medical Image Analysis 112 (2026) 104099 
+6 
+
+===== PAGE 7 =====
+C. Wang et al.
+Table 2
+Comparative results for AD diagnosis on internal ADNI and external AIBL datasets. I, II, III, IV, and V represent CNN-based, transformer-based, 
+anatomy-related, generation-related, and distillation-related methods, respectively. Best results are highlighted in bold. (two-sided paired 𝑡-test: E2AD vs. 
+second-best, 𝑝 < 0.05).
+Idx. Methods Param. Type Internal ADNI dataset External AIBL dataset
+ACC ↑ AUC ↑ F1S ↑ PRE ↑ REC ↑ ACC ↑ AUC ↑ F1S ↑ PRE ↑ REC ↑
+1 3D ResNet 33.1M
+I
+83.2±2.3 90.1±1.6 85.2±2.2 85.5±2.2 85.0±2.3 84.6±2.7 83.5±2.8 85.8±2.4 88.0±2.3 84.5±2.6
+2 3D SeNet 34.2M 84.7±2.7 91.0±1.6 86.0±2.5 86.2±2.3 85.8±2.6 85.0±2.6 84.2±2.3 85.8±2.3 88.4±2.0 84.4±2.7
+3 I3D 35.6M 85.9±2.1 91.7±1.8 86.5±1.5 86.6±1.4 86.4±1.6 86.4±2.5 86.5±1.6 86.7±1.9 89.1±1.8 84.8±2.5
+4 3D Swin 30.9M
+II
+82.4±1.9 87.9±1.5 83.5±1.6 83.7±1.4 83.5±1.9 81.7±2.1 80.6±1.9 82.5±1.7 85.2±1.8 80.9±2.0
+5 MadFormer 33.8M 83.5±2.1 90.4±1.8 85.3±2.0 85.8±1.4 85.1±2.3 83.1±2.3 82.5±1.8 84.7±2.0 86.6±1.9 83.4±2.1
+6 M3T 28.4M 82.9±2.1 89.7±2.0 85.0±2.1 85.3±1.9 84.8±2.1 82.9±2.2 82.0±2.2 84.6±2.5 87.1±2.2 83.0±2.4
+7 3D PIPNet 33.2M
+III
+84.3±2.0 90.7±1.8 85.9±1.7 86.3±1.4 85.8±1.8 83.8±2.5 82.9±2.3 85.6±2.1 87.4±1.9 84.2±2.2
+8 AAGN 31.8M 86.5±1.2 91.9±1.5 87.5±1.3 88.0±1.3 86.7±1.5 87.8±1.3 87.6±1.6 87.8±1.4 87.8±1.4 87.9±1.4
+9 E2ADsin 28.0M 87.4±0.9 92.8±1.2 88.3±1.0 88.7±1.0 88.1±1.1 88.9±1.1 88.2±1.3 88.5±1.2 88.3±1.2 88.9±1.2
+10 JointFrame 30.4M IV 86.6±1.8 92.1±2.2 87.7±2.1 87.9±2.1 87.6±1.9 87.4±2.0 87.1±2.0 87.4±2.1 88.7±2.1 86.3±2.3
+11 ResDM 33.2M 87.5±2.1 92.8±1.9 88.4±2.0 89.0±1.9 87.5±2.1 87.8±2.4 87.4±2.4 87.7±2.1 88.7±2.5 86.9±1.7
+12 DCFMnet 44.5M
+V
+86.8±1.9 92.2±1.7 87.9±1.8 89.3±1.7 86.8±1.9 87.5±1.9 87.1±1.8 87.4±2.0 87.9±1.9 87.1±2.2
+13 MDT-student 33.1M 89.0±1.2 93.4±1.5 89.2±1.1 89.4±1.1 89.0±1.3 89.4±2.0 89.4±1.5 89.0±1.7 89.4±1.2 88.6±2.0
+E2AD (ours) 28.0M 90.3±1.1 94.2±1.1 90.0±1.3 90.2±1.4 89.8±1.3 91.0±0.8 90.6±0.7 90.5±0.9 90.7±0.5 90.1±0.5
+Table 3
+Comparative results for MCI progression prediction on internal ADNI and external NACC datasets. I, II, III, IV, and V represent CNN-based, transformer-
+based, anatomy-related, generation-related, and distillation-related methods, respectively. Best results are highlighted in bold. (two-sided paired 𝑡-test: E2AD 
+vs. second-best, 𝑝 < 0.05).
+Idx. Methods Param. Type Internal ADNI dataset External NACC dataset
+ACC ↑ AUC ↑ F1S ↑ PRE ↑ REC ↑ ACC ↑ AUC ↑ F1S ↑ PRE ↑ REC ↑
+1 3D ResNet 33.1M
+I
+65.6±3.1 66.0±2.5 65.3±2.1 65.6±2.7 65.3±2.4 55.2±3.2 60.1±2.9 56.5±2.2 57.3±2.4 55.2±2.4
+2 3D SeNet 34.2M 65.9±2.9 66.2±1.8 65.7±2.5 65.9±2.1 65.5±2.9 56.6±2.8 60.6±2.6 57.4±2.4 57.2±2.5 57.6±2.6
+3 I3D 35.6M 66.6±2.5 67.5±2.6 66.2±2.2 66.5±2.2 65.9±2.3 58.3±2.8 61.7±2.7 60.4±2.3 60.7±2.2 60.5±2.5
+4 3D Swin 30.9M
+II
+61.2±2.4 62.6±2.4 61.8±2.3 62.4±2.8 61.3±3.0 52.6±2.6 56.6±2.6 55.3±2.6 55.7±3.0 54.9±2.5
+5 MadFormer 33.8M 64.9±2.8 65.8±1.9 64.8±2.2 65.5±1.9 64.7±2.0 56.0±2.4 59.3±2.1 58.2±2.3 58.7±2.2 58.0±2.5
+6 M3T 28.4M 62.5±3.0 63.3±2.8 62.5±1.9 62.5±2.3 62.4±2.4 54.8±3.3 57.8±2.1 55.5±2.4 57.0±2.5 54.3±2.4
+7 3D PIPNet 33.1M
+III
+66.0±2.9 66.3±2.0 65.7±2.1 66.1±2.2 65.4±2.1 54.6±2.6 59.8±2.4 55.9±2.1 57.4±2.2 54.2±2.3
+8 AAGN 31.8M 69.8±2.2 70.7±1.8 69.1±2.1 69.4±2.4 68.9±1.9 62.4±2.3 65.4±1.9 64.6±2.1 65.4±2.1 63.9±2.0
+9 E2ADsin 28.0M 71.4±2.0 71.6±1.6 71.1±1.8 71.3±1.6 70.9±1.9 64.2±2.2 66.7±1.9 65.1±1.8 65.6±1.8 65.2±2.1
+10 JointFrame 30.4M IV 69.6±2.3 70.4±2.1 69.0±2.5 69.2±2.4 69.0±2.7 62.0±2.5 65.3±2.3 64.5±2.2 65.7±2.2 63.5±2.4
+11 ResDM 33.2M 70.4±2.4 71.2±2.0 69.9±2.2 70.3±2.0 69.7±2.2 62.6±2.3 65.5±2.0 65.0±2.0 65.3±1.8 64.8±2.1
+12 DCFMnet 44.5M
+V
+71.5±2.4 71.7±2.1 71.5±2.0 71.8±2.2 71.3±2.2 64.4±2.0 66.8±1.9 65.3±2.0 65.7±2.0 64.8±2.1
+13 MDT-student 33.1M 72.6±2.8 72.8±2.7 72.4±2.6 72.7±2.3 72.2±2.5 66.3±2.1 67.7±2.0 66.8±1.9 67.1±2.1 66.5±1.9
+E2AD (ours) 28.0M 73.9±2.1 74.1±1.9 73.8±1.8 74.0±1.6 73.6±2.1 68.0±2.0 69.3±1.9 68.6±1.8 68.8±2.0 68.4±1.7
+implicated in earlier changes and subtle cognitive decline, e.g. the cin-
+gulate gyrus (Jones et al., 2006) and superior temporal gyrus (Liu et al., 
+2013). Furthermore, retraining our E2AD across five random seeds 
+yields highly consistent top-5 routing weights, verifying the population-
+level reliability of our DA-Router. At the individual level, Fig.  6(c) 
+presents a random AD case, where E2AD assigns weights in proportion 
+to observed anatomical alterations: most ROIs cluster near a uniform 
+baseline of 0.0178 (1 divided by the number of brain ROIs), ROIs with 
+greater atrophy receive higher weights, and frontal lobe ROIs, which 
+are typically less affected in AD, receive lower weights. Notably, rather 
+than relying solely on the fixed ROI boundaries of a static atlas, our 
+DA-Router dynamically re-weights each ROI, overcoming atlas rigidity 
+to capture these stage-specific biomarkers.
+An example MRI report is shown in the right panel of Fig.  5, with 
+corresponding anatomical routing weights shown in Fig.  6(c). Our 
+agent workflow demonstrates advanced clinical reasoning by integrat-
+ing multimodal data and leveraging diverse knowledge sources. (1) 
+The findings section converts anatomical routing weights into effec-
+tive textual descriptions validated by radiologists, while incorporating 
+contextual clinical judgment, including age-related confounders and 
+psychosocial factors e.g. widowhood. (2) The AI-assisted analysis sec-
+tion provides a comprehensive evaluation based on established AD 
+knowledge and retrieved reference information, e.g. 77 out of 87 similar 
+subjects had an AD diagnosis, while offering relevant case IDs for 
+reference. (3) The final impression provides an overall assessment with 
+graduated confidence levels.
+We conducted a subjective evaluation to compare our generated 
+reports against the SOTA AutoRG-Brain (Lei et al., 2025). A board-
+certified neuroradiologist (12 years’ experience) evaluated 20 ran-
+domly sampled cases under a strict double-blinded manner. Specifi-
+cally, the neuroradiologist was provided only with demographic data 
+and MRI scans, evaluating anonymized reports in a randomized order. 
+Fig. 6. Explainable results of 𝐄2AD. (a–b) Top-5 population-level anatomical 
+routing weights in the AD diagnosis and MCI progression tasks, respectively. 
+(c) Individual-level result for a random AD patient.
+The assessment utilized a 5-point Likert scale across four dimensions. 
+These included consistency with imaging findings, diagnostic reason-
+ing, structure and readability, and terminology standardization. As Fig. 
+7 demonstrates, E2AD more faithfully captures fine-scale anatomy and 
+clinically salient abnormalities, resulting in evidence-based rather than 
+speculative descriptions. Conversely, AutoRG-Brain often misidentifies 
+imaging modalities and occasionally hallucinates nonexistent findings 
+(e.g. tumors). By conditioning on anatomical routing weights and lever-
+aging a multi-agent referencing architecture, E2AD largely reduces 
+these hallucinations to produce highly structured, clinician-friendly 
+Medical Image Analysis 112 (2026) 104099 
+7 
+
+===== PAGE 8 =====
+C. Wang et al.
+Table 4
+Ablation results of different distillation components for AD diagnosis. Best results are highlighted in bold.
+Idx. LogitKD AnaKD RelKD ACC↑ AUC ↑ F1S ↑ PRE ↑ REC ↑logitKD A-MoM anaKD 
+relKD 
+relKD  
+relKD
+1 – – – – – – 83.2±2.3 90.1±1.6 85.2±2.2 85.5±2.2 85.0±2.3
+2 ✓ – – – – – 84.5±2.1 91.5±1.4 86.8±1.9 87.1±1.5 86.5±1.8
+3 ✓ ✓ – – – – 87.8±0.8 93.0±1.0 88.6±1.0 88.7±1.1 88.5±1.0
+4 ✓ ✓ ✓ – – – 88.6±1.1 93.3±1.3 88.9±1.1 89.2±1.1 88.7±1.2
+5 ✓ ✓ ✓ ✓ – – 89.1±1.0 93.6±1.1 89.3±1.2 89.4±1.3 89.2±1.1
+6 ✓ ✓ ✓ – ✓ – 88.9±1.2 93.4±1.0 89.2±1.3 89.2±1.3 88.9±1.3
+7 ✓ ✓ ✓ – – ✓ 89.4±1.3 93.8±1.2 89.4±1.0 89.7±1.2 89.3±1.2
+8 ✓ ✓ ✓ ✓ ✓ ✓ 90.3±1.1 94.2±1.1 90.0±1.3 90.2±1.4 89.8±1.3
+Table 5
+Ablation study on ROI granularity for AD diagnosis across internal and external datasets. Best results are highlighted in bold.
+Variant Parcellation ROI Internal ADNI dataset External AIBL dataset
+Type Number ACC ↑ AUC ↑ F1S ↑ PRE ↑ REC ↑ ACC ↑ AUC ↑ F1S ↑ PRE ↑ REC ↑
+V1 Coarse Lobe 5 87.5±1.6 91.8±1.5 87.2±1.5 87.4±1.6 87.0±1.7 88.5±1.4 88.2±1.5 88.1±1.4 88.3±1.3 87.8±1.6
+V2 Fine AAL 116 88.9±1.4 92.5±1.3 88.6±1.4 88.8±1.3 88.5±1.5 89.1±1.1 88.6±1.2 88.5±1.2 88.6±1.1 88.3±1.3
+V3 Ours Harvard-Oxford 56 90.3±1.1 94.2±1.1 90.0±1.3 90.2±1.4 89.8±1.3 91.0±0.8 90.6±0.7 90.5±0.9 90.7±0.5 90.1±0.5
+Fig. 7. Subjective evaluation of reports generated by the proposed method 
+and AutoRG-Brain.
+reports. Nonetheless, we acknowledge that the resulting recommenda-
+tions remain relatively generic and are insufficiently personalized to 
+individual patients.
+3.4. Ablation study
+Unless otherwise specified, all ablation studies are conducted on the 
+internal ADNI dataset for AD diagnosis.
+3.4.1. Ablation on different distillation components
+Table  4 summarizes the ablation results for different distillation 
+components, while Fig.  1(b) visualizes the performance gain of E2AD 
+over the baseline (3D ResNet) on AD diagnosis and MCI progression 
+tasks. Conventional logit-level KD (Idx. 2) yields modest improvements 
+due to weak supervisory signals. The anatomy-aware KD integrates 
+anatomical priors through two complementary components: (i) A-MoM, 
+which replaces the last two residual blocks of the 3D ResNet backbone 
+to form the A-MoM architecture (Idx. 3); and (ii) a subsequent distil-
+lation stage that transfers anatomical knowledge from a multimodal 
+teacher (Idx. 4). These two components jointly reinforce anatomi-
+cal representation learning, resulting in consistent performance gains. 
+Building on this, we examine the relation-aware KD by evaluating the 
+individual contributions of 
+relKD, 
+relKD, and  
+relKD (Idxs. 5-7). Among 
+the relational terms,  
+relKD proves most effective via direct cross-role 
+backpropagation. Combining all relKD terms (Idx. 8) consistently yields 
+the best diagnostic performance. These results confirm that AnaKD
+and RelKD provide complementary rather than overlapping supervision: 
+AnaKD alone yields measurable gains, and further incorporating RelKD 
+brings additional improvements. More details on the training dynamics 
+of AnaKD and RelKD are presented in Supp. G.
+Fig. 8. Ablation study of E2ADsin. (a) Modernization results for E2ADsin; solid 
+colors denote the selected configurations, while slashed lines denote those not 
+adopted. (b–c) 𝑡-SNE visualizations of A-MoM features trained (b) without and 
+(c) with the mapper regulation loss; colors indicate different ROIs.
+Fig. 9. Comparison of E2ADsin with competing methods: (a) training con-
+vergence and (b) AUC curves across varying training data sizes.
+3.4.2. Ablation on A-MoM
+Impact of ROI Granularity. To investigate the effect of ROI parcella-
+tion granularity on diagnostic performance and cross-domain generaliz-
+ability, we evaluate three variants: (V1) coarse 5-lobe parcellation, (V2) 
+fine-grained 116-region AAL atlas (Tzourio-Mazoyer et al., 2002), and 
+(V3) our default 56-region Harvard-Oxford atlas (Desikan et al., 2006). 
+All variants are evaluated on both the internal ADNI and external AIBL 
+datasets for the AD diagnostic task. Based on the results in Table  5, 
+we have the following observations. (i) V1 fails to capture the local-
+ized pathological specificity of AD (e.g. subtle hippocampal atrophy), 
+Medical Image Analysis 112 (2026) 104099 
+8 
+
+===== PAGE 9 =====
+C. Wang et al.
+Fig. 10. Batch size sensitivity and latent visualization. (a) Diagnostic 
+performance (ACC/AUC) across varying batch sizes. (b) 𝑡-SNE visualization; 
+colors indicate MMSE scores.
+yielding inferior performance and confirming that a minimum level of 
+spatial granularity is essential for extracting diagnostically relevant fea-
+tures. (ii) The overly fine-grained atlas (V2) does not further improve 
+but rather degrades performance, likely because excessive fragmenta-
+tion amplifies inter-subject anatomical variance and registration errors, 
+introducing spatial noise that hinders stable representation learning. 
+(iii) V3 achieves the best results on both datasets and the smallest cross-
+dataset AUC drop (94.2→90.6) compared to V2’s more pronounced 
+gap (92.5→88.6), confirming that an intermediate granularity balances 
+local spatial sensitivity and cross-domain resilience, and justifying its 
+adoption as the default parcellation in E2AD. Note that AIBL exhibits 
+class imbalance toward NC subjects, making AUC the reliable metric.
+Three complementary design choices collectively confer robustness 
+to E2AD against both atlas granularity variation and registration in-
+accuracies. (i) Local spatial tolerance is ensured by the CNN-based 
+voxel encoder, which aggregates regional context via its receptive 
+field, rendering features robust to minor boundary misalignments. (ii)
+Topological regularization is achieved by treating the atlas as a structural 
+prior, steering the network toward clinically meaningful patterns and 
+suppressing cohort-specific overfitting. (iii) Global failsafe is provided 
+by the shared mapper, which operates independently of ROI boundaries 
+to capture holistic atrophy patterns, guaranteeing a reliable perfor-
+mance floor under severe registration failures. Together, these mecha-
+nisms confer consistent gains across atlases of varying granularity. More 
+boundary perturbation analysis is provided in Supp. E.
+Effectiveness of Anatomical Modules. Fig.  8(a) presents modern-
+ization results for E2ADsin without cross-modal distillation. We begin 
+with a base model using anatomical mappers trained solely with CE
+and vanilla attention (Vaswani et al., 2017) as the anatomical routing 
+module. Our DA-Router consistently enhances diagnostic performance 
+by yielding more stable routing weights across 𝜆init values, with 𝜆init =
+0.7 achieving the best. Incorporating the mapper regulation loss fur-
+ther boosts performance, with the disentanglement loss providing a 
+notable improvement. To illustrate its effect, we visualize features 
+using 𝑡-SNE without and with mapper regulation loss in Figs.  8(b–c). 
+The results show that this loss compacts ROI-shared features while 
+promoting clearer separation of ROI-specific features. These results 
+also highlight the use of ROI-shared features for two purposes: (i) 
+capturing global, ROI-agnostic disease directions and (ii) enhancing 
+ROI-specific discriminability to support anatomy-aware fusion. Feature-
+type ablation further indicates that relying solely on shared or specific 
+features degrades performance, confirming their complementary roles.
+Data and Training Efficiency. Compared to 3D ResNet and 3D Swin, 
+E2ADsin exhibits superior convergence and data efficiency (Fig.  9). In 
+Fig.  9(a), E2ADsin converges faster than all baselines within 40 training 
+epochs, while 3D Swin lags due to limited inductive bias. In Fig.  9(b), 
+E2ADsin achieves competitive performance with only 10% training data, 
+outperforming 3D ResNet, while 3D Swin degrades sharply.
+3.4.3. Further analysis of relation-aware distillation
+Impact of Batch Size. We evaluate the sensitivity of RelKD to batch 
+size, which governs the local context for relational modeling.
+In Fig.  10(a), classification performance (ACC/AUC) improves consis-
+tently as batch size increases from 2 to 8. Given the computational con-
+straints of high-dimensional 3D MRI, a batch size of 8 approaches our 
+hardware limit; nonetheless, performance plateaus beyond 6, confirm-
+ing that this scale suffices for stable relational KD. Further quantitative 
+analysis regarding batch composition is presented in Supp. F.
+Global Disease Manifold Consistency. To verify that batch-level 
+distillation aggregates into a coherent disease progression manifold, 
+we visualize learned features via 𝑡-SNE colored by MMSE scores in 
+Fig.  10(b). The resulting visualization exhibits a continuous biological 
+spectrum aligned with clinical cognitive trajectories, confirming that 
+mini-batch CKA alignment grounds representations in disease biology 
+rather than stochastic batch composition.
+4. Discussion
+Discussion on Related Works. MRI-based AD detection has followed 
+three main directions. (i) Multimodal fusion methods (Wu et al., 2024; 
+Qiu et al., 2024; H. Zhou et al., 2024; Zhang et al., 2024) jointly model 
+MRI and PET (or other modalities) and achieve strong performance, 
+but they assume all modalities are available at test time and degrade 
+sharply when PET is missing, common in routine care. (ii) Modality-
+completion methods (Pan et al., 2020; Ou et al., 2024; Wang et al., 
+2024; Xu et al., 2025) synthesize PET from MRI, but typically trained 
+to maximize voxel-level fidelity rather than diagnostic utility, making 
+them brittle under shifts in PET reconstruction. (iii) Cross-modal dis-
+tillation frameworks (Xiong et al., 2025; Liu et al., 2025; Kwak et al., 
+2025) transfer knowledge from a multimodal teacher to an MRI-only 
+student, yet most act on logits or features, collapsing rich MRI–PET 
+complementarity and ignoring neuroanatomy and population structure.
+E2AD advances this distillation line by unifying cross-modal knowl-
+edge transfer with explainable clinical reporting. An atlas-guided A-
+MoM makes anatomy explicit, while CKA-based relation-aware align-
+ment transfers cohort-level geometry from teacher to student, convert-
+ing multimodal supervision into an MRI-only model that is anatomi-
+cally and relationally grounded. By distilling within-subject and
+between-subject priors into the model (clinical→AI) and turning its 
+outputs into actionable MRI reports (AI→clinical), E2AD establishes a 
+bidirectional loop where clinical knowledge improves AI performance 
+and AI explanations enhance trust in AD assessment.
+Relation to Regularization-based KD Methods. Regularization-
+based KD methods have demonstrated consistent gains in model ro-
+bustness and generalization in medical image analysis, particularly 
+in data-scarce and modality-imbalanced settings. Notable examples 
+include confidence-regularized KD for brain age prediction (Yang et al., 
+2023), patch-level KD with explicit regularization for missing-modality 
+robustness in medical image segmentation (R. Wang et al., 2024), 
+and dynamic modality reweighting as an implicit regularizer within 
+multimodal KD for AD recognition (Dong et al., 2025). E2AD aligns 
+naturally with this line of work, as its mapper regulation loss and 
+CKA-based Gram matrix alignment serve as structural and relational 
+regularizers embedded within the KD process.
+Specialization of Shared and Specific Mappers. The dual-mapper 
+design of A-MoM is motivated by a fundamental duality in AD pathol-
+ogy: diffuse cortical atrophy coexists with focal, region-specific neu-
+rodegeneration (Holland et al., 2009; Poulakis et al., 2018). Accord-
+ingly, the shared mapper captures ROI-agnostic morphometric trends, 
+with the shared regulation loss sh anchoring them to the anatom-
+ical mean. The specific mappers, by contrast, are driven by the dis-
+entanglement loss dis to isolate local heterogeneity while suppress-
+ing redundant global information. This decoupling is empirically con-
+firmed by the 𝑡-SNE analysis in Fig.  8(c): shared features collapse 
+Medical Image Analysis 112 (2026) 104099 
+9 
+
+===== PAGE 10 =====
+C. Wang et al.
+into a cohesive cluster, whereas specific features organize into well-
+separated, ROI-discriminative clusters. By jointly encoding global and 
+local facets of disease progression, this design enables a more complete 
+characterization of the AD trajectory.
+Reliability of Automated Reporting. Generated reports are
+designed as a second-opinion aid that supports rather than replaces 
+clinical judgment, with the practical goal of streamlining reporting 
+workflows and reducing the burden of repetitive drafting in routine 
+care. To mitigate LLM hallucinations and ensure reliability, we adopt 
+three complementary strategies: (i) structured prompts that constrain 
+generative freedom; (ii) conditioning on anatomical routing weights
+rather than raw images, tightly coupling generated text to extracted 
+imaging features; and (iii) specialized multi-agent roles, wherein a 
+knowledge agent grounds findings in clinical guidelines and a ref-
+erence agent draws on RAG to incorporate evidence from relevant 
+cases. Together, this knowledge-grounded architecture substantially 
+reduces hallucinations compared to SOTA end-to-end generators like 
+AutoRG-Brain (Lei et al., 2025).
+Discussion on Advantages. E2AD is a practically deployable MRI-
+only method that leverages multimodal supervision to provide anatomi-
+cally grounded, robust, and clinically interpretable AD assessment, with 
+five key advantages. (i) Robust MRI-only performance. Since existing 
+methods are typically evaluated on heterogeneous cohorts under in-
+consistent protocols, we re-implemented all baselines under a unified 
+protocol across ADNI, AIBL, and NACC. E2AD consistently outperforms 
+recent CNN-, transformer-, anatomy-aware, generative, and distillation-
+based methods while converging faster and using data more efficiently.
+(ii) Anatomy-aware disease modeling. An atlas-guided A-MoM converts 
+encoder features into ROI-wise tokens with shared and specific com-
+ponents, enabling the student to learn structured region-level disease 
+representations instead of merely matching global logits. (iii) Cohort-
+aware latent stability. Relation-aware supervision aligns student-related 
+Gram matrices with a teacher–teacher reference via CKA, transferring 
+both case-wise signals and population-level geometry, yielding more 
+stable latent spaces across cohorts and scanners. (iv) Clinically explain-
+able reporting. Anatomical routing weights expose disease-relevant ROIs 
+at group and subject levels, and a multi-agent LLM uses them to gener-
+ate structured MRI reports, positioning E2AD as a decision-support tool 
+rather than a black-box classifier. (v) Practical real-world deployment.
+Because inference relies only on MRI and the model is data-efficient 
+and robust to cohort shifts, E2AD is well suited for institutions without 
+routine PET or large labeled cohorts and integrates into reporting 
+workflows and multicenter studies.
+Discussion on Limitations. Several limitations warrant discussion.
+(i) E2AD relies on a predefined atlas and accurate inter-subject regis-
+tration to impose neuroanatomical structure, which may reduce robust-
+ness under atypical anatomy (e.g. large lesions or prior surgery) and 
+across heterogeneous acquisition protocols. Future work will explore 
+atlas-light or atlas-free variants that learn anatomical priors in a self-
+supervised manner and explicitly evaluate robustness to registration 
+noise and scanner shifts. Furthermore, although our DA-Router adap-
+tively weights regional importance, relying on a single fixed atlas 
+may fail to fully capture stage-dependent atrophy. Thus, developing 
+dynamic, stage-adaptive parcellation is a valuable direction for future 
+work. (ii) The multimodal teacher is trained on paired MRI-FDG-PET 
+data from ADNI and evaluated mainly on AD and MCI populations. The 
+extent to which the learned anatomical and relational priors transfer 
+across alternative tracers (e.g. amyloid or tau PET), other neurodegener-
+ative conditions, and diverse clinical cohorts remains to be established, 
+necessitating larger, multi-center, and prospective studies. (iii) The 
+multi-agent LLM workflow, while more grounded than single VLMs and 
+less prone to hallucination, operates retrospectively and lacks formal 
+uncertainty estimates. Safety-aware integration with human oversight 
+and well-calibrated confidence will be a prerequisite for responsible 
+clinical deployment. (iv) The distillation stage currently requires paired 
+MRI–PET data, which may not be available in all institutions. Exploring 
+weaker supervision, e.g. semi-supervised or federated distillation, could 
+further lower barriers to adoption.
+5. Conclusion
+This paper presents E2AD, an effective and explainable AD detection 
+framework based on anatomy- and relation-aware cross-modal distil-
+lation to better exploit multimodal supervision. E2AD is trained on 
+paired MRI–PET data but deployed via widely accessible MRI only. 
+From a within-subject perspective, it transfers anatomical dependencies 
+from teacher to student via an anatomical Mixture-of-Mappers, yielding 
+spatially meaningful and clinically traceable cues. From a between-
+subject perspective, it leverages generalizable pairwise alignment of 
+student-related relations to the teacher–teacher relation, yielding better 
+cross-cohort generalization. In addition, a multi-agent LLM workflow 
+translates E2AD’s anatomical attention patterns into clinician-readable 
+MRI reports. By integrating within-subject anatomical cues, between-
+subject structural relations, and agent-driven reporting, E2AD delivers 
+more effective and explainable MRI-only detection.
+CRediT authorship contribution statement
+Chenhui Wang:  Writing – original draft, Visualization, Validation, 
+Software, Methodology, Formal analysis, Data curation, Conceptualiza-
+tion. Sirong Piao: Writing – review & editing, Data curation. Zhihao 
+Chen: Writing – review & editing, Validation, Formal analysis. Tao 
+Chen: Writing – review & editing, Visualization, Validation, Data cu-
+ration. Zhaoyang Li: Writing – review & editing, Validation, Data 
+curation. Tongrui Zhang: Writing – review & editing, Visualization, 
+Validation. Yuxin Li: Writing – review & editing, Supervision. Xing-
+Ming Zhao: Writing – review & editing, Supervision, Resources. Hong-
+ming Shan: Writing – review & editing, Supervision, Resources, Project 
+administration, Funding acquisition, Conceptualization.
+Declaration of competing interest
+The authors declare that they have no known competing finan-
+cial interests or personal relationships that could have appeared to 
+influence the work reported in this paper.
+Acknowledgments
+This work was supported in part by National Natural Science Foun-
+dation of China (Nos. 62471148, T2596013, 62433008, and T2225015), 
+Medical Engineering fund of Fudan University (No. yg2023-14), Shang-
+hai Science and Technology Commission Program (No. 23JS1410100 
+and 24JS2810100), Shanghai Municipal Education Commission (No. 
+24KXZNA11), Key Science and Technology Project of Hainan Province 
+(No. ZDYF2024SHFZ058), and National Key R&D Program of China 
+(Nos. 2023YFF1204800, 2025YFC3409300, and 2025YFA1309200). 
+The computations in this research were performed using the CFFF 
+platform of Fudan University. The authors thank the ADNI, AIBL, and 
+NACC investigators for providing data access. Funding for ADNI data 
+collection and sharing was provided by ADNI, United States (No. U01 
+AG024904) and the DOD (No. W81XWH-12-2-0012). The Canadian 
+Institutes of Health Research supports ADNI clinical sites in Canada. 
+AIBL data was collected by the AIBL study group, with methodology 
+previously reported (Ellis et al., 2009). The NACC database is funded 
+by NIA/NIH Grant U24 AG072122, with contributions from NIA-funded 
+ADRCs.
+Appendix A. Supplementary data
+Supplementary material related to this article can be found online 
+at https://doi.org/10.1016/j.media.2026.104099.
+Medical Image Analysis 112 (2026) 104099 
+10 
+
+===== PAGE 11 =====
+C. Wang et al.
+References
+Alvarez, S.A., 2023. Gaussian RBF centered kernel alignment (CKA) in the 
+large-bandwidth limit. IEEE Trans. Pattern Anal. Mach. Intell. 45 (5), 6587–6593.
+Alzheimer’s Association, 2024. Alzheimer’s Facts and Figures. Alzheimer’s Association, 
+URL https://www.alz.org/media/Documents/alzheimers-facts-and-figures.pdf.
+Avants, B.B., et al., 2009. Advanced normalization tools (ANTs). Insight 2 (365), 1–35.
+Beekly, D.L., et al., 2004. The National Alzheimer’s Coordinating Center (NACC) 
+database: an Alzheimer disease database. Alzheimer Dis. Assoc. Disord. 18 (4), 
+270–277.
+Bokde, A., et al., 2006. Functional connectivity of the fusiform gyrus during a 
+face-matching task in subjects with mild cognitive impairment. Brain 129 (5), 
+1113–1124.
+Cao, B., et al., 2026. Dynamic differential linear attention: Enhancing linear diffusion 
+transformer for high-quality image generation. arXiv:2601.13683.
+Chen, Y., et al., 2023. Disentangle first, then distill: a unified framework for missing 
+modality imputation and Alzheimer’s disease diagnosis. IEEE Trans. Med. Imaging 
+42 (12), 3566–3578.
+De Santi, L.A., Schlötterer, J., Scheschenja, M., Wessendorf, J., Nauta, M., Positano, V., 
+et al., 2024. PIPNet3D: Interpretable detection of Alzheimer in MRI scans. In: 
+MICCAI. pp. 69–78.
+Desikan, R.S., et al., 2006. An automated labeling system for subdividing the human 
+cerebral cortex on MRI scans into gyral based regions of interest. NeuroImage 31 
+(3), 968–980.
+Dong, Z., Xu, W., Xu, X., Zhang, Z., 2025. Modality imbalance? Dynamic multi-
+modal knowledge distillation in automatic Alzheimer’s disease recognition. IEEE 
+J. Biomed. Health Inf. 29 (8), 6029–6042.
+Ellis, K.A., et al., 2009. The Australian Imaging, Biomarkers and Lifestyle (AIBL) study 
+of aging: methodology and baseline characteristics of 1112 individuals recruited for 
+a longitudinal study of Alzheimer’s disease. Int. Psychogeriatr. 21 (4), 672–687.
+Fischl, B., 2012. FreeSurfer. NeuroImage 62 (2), 774–781.
+Guan, H., Wang, C., Tao, D., 2021. MRI-based Alzheimer’s disease prediction via 
+distilling the knowledge in multi-modal data. NeuroImage 244, 118586.
+Guo, D., Yang, D., Zhang, H., Song, J., Zhang, R., et al., 2025. DeepSeek-R1: 
+Incentivizing reasoning capability in LLMs via reinforcement learning. arXiv:2501.
+12948.
+He, K., Zhang, X., Ren, S., Sun, J., 2015. Delving deep into rectifiers: Surpassing 
+human-level performance on ImageNet classification. In: ICCV. pp. 1026–1034.
+He, K., Zhang, X., Ren, S., Sun, J., 2016. Deep residual learning for image recognition. 
+In: CVPR. pp. 770–778.
+Holland, D., Brewer, J.B., Hagler, D.J., Fennema-Notestine, C., Dale, A.M., Initia-
+tive, A.D.N., et al., 2009. Subregional neuroanatomical change as a biomarker for 
+Alzheimer’s disease. Proc. Natl. Acad. Sci. 106 (49), 20954–20959.
+Hu, J., Shen, L., Sun, G., 2018. Squeeze-and-excitation networks. In: CVPR. pp. 
+7132–7141.
+Jabason, E., Ahmad, M.O., Swamy, M., 2024. A lightweight deep convolutional neural 
+network extracting local and global contextual features for the classification of 
+Alzheimer’s disease using structural MRI. IEEE J. Biomed. Health Inf. 29 (3), 
+2061–2073.
+Jang, J., Hwang, D., 2022. M3T: three-dimensional medical image classifier using 
+multi-plane and multi-slice transformer. In: CVPR. pp. 20718–20729.
+Jenkinson, M., Beckmann, C.F., Behrens, T.E., Woolrich, M.W., Smith, S.M., 2012. FSL. 
+NeuroImage 62 (2), 782–790.
+Jiang, H., Miao, C., 2024. Anatomy-aware gating network for explainable Alzheimer’s 
+disease diagnosis. In: MICCAI. pp. 90–100.
+Jones, B.F., et al., 2006. Differential regional atrophy of the cingulate gyrus in 
+Alzheimer disease: a volumetric MRI study. Cereb. Cortex 16 (12), 1701–1708.
+Kwak, M.G., et al., 2025. A cross-modal mutual knowledge distillation framework 
+for Alzheimer’s disease diagnosis: Addressing incomplete modalities. IEEE Trans. 
+Autom. Sci. Eng. 22, 14218–14233.
+Lei, J., Zhang, X., Wu, C., Dai, L., Zhang, Y., Zhang, Y., Wang, Y., Xie, W., Li, Y., 2025. 
+Interpretable brain MRI report generation anchored by lesion topography. IEEE J. 
+Biomed. Health Inf. 1–19.
+Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., et al., 2020. 
+Retrieval-augmented generation for knowledge-intensive NLP tasks. In: NeurIPS. 
+pp. 9459–9474.
+Lipková, J., et al., 2019. Personalized radiotherapy design for glioblastoma: Integrating 
+mathematical tumor models, multimodal scans, and Bayesian inference. IEEE Trans. 
+Med. Imaging 38 (8), 1875–1884.
+Liu, F., Liang, S.N., Jaward, M.H., Ong, H.F., Wang, H., et al., 2025. CRAD: Cognitive 
+aware feature refinement with missing modalities for early Alzheimer’s progression 
+prediction. Comput. Med. Imaging Graph. 102664.
+Liu, Z., Ning, J., Cao, Y., Wei, Y., Zhang, Z., Lin, S., et al., 2022. Video swin transformer. 
+In: CVPR. pp. 3202–3211.
+Liu, M., Zhang, J., Adeli, E., Shen, D., 2018. Landmark-based deep multi-instance 
+learning for brain disease diagnosis. Med. Image Anal. 43, 157–168.
+Liu, T., et al., 2013. Longitudinal changes in sulcal morphology associated with late-life 
+aging and MCI. NeuroImage 74, 337–342.
+Ou, Z., Jiang, C., Pan, Y., Zhang, Y., Cui, Z., Shen, D., 2024. A prior-information-guided 
+residual diffusion model for multi-modal PET synthesis from MRI. In: IJCAI. pp. 
+4769–4777.
+Pan, Y., Liu, M., Lian, C., Xia, Y., Shen, D., 2020. Spatially-constrained Fisher repre-
+sentation for brain disease identification with incomplete multi-modal neuroimages. 
+IEEE Trans. Med. Imaging 39 (9), 2965–2975.
+Paszke, A., et al., 2019. PyTorch: An imperative style, high-performance deep learning 
+library. In: NeurIPS.
+Petersen, R.C., et al., 2010. Alzheimer’s disease neuroimaging initiative (ADNI): Clinical 
+characterization. Neurology 74 (3), 201–209.
+Poulakis, K., Pereira, J.B., Mecocci, P., Vellas, B., Tsolaki, M., Kłoszewska, I., et al., 
+2018. Heterogeneous patterns of brain atrophy in Alzheimer’s disease. Neurobiol. 
+Aging 65, 98–108.
+Poulin, S.P., et al., 2011. Amygdala atrophy is prominent in early Alzheimer’s disease 
+and relates to symptom severity. Psychiatry Res. Neuroimaging 194 (1), 7–13.
+Qiu, Z., Yang, P., Xiao, C., Wang, S., Xiao, X., Qin, J., Liu, C.M., Wang, T., Lei, B., 
+2024. 3D multimodal fusion network with disease-induced joint learning for early 
+Alzheimer’s disease diagnosis. IEEE Trans. Med. Imaging 43 (9), 3161–3175.
+Qiu, S., et al., 2020. Development and validation of an interpretable deep learning 
+framework for Alzheimer’s disease classification. Brain 143 (6), 1920–1933.
+Scheff, S.W., et al., 2011. Synaptic loss in the inferior temporal gyrus in mild cognitive 
+impairment and Alzheimer’s disease. J. Alzheimers Dis. 24 (3), 547–557.
+Siméoni, O., Vo, H.V., Seitzer, M., Baldassarre, F., Oquab, M., Jose, C., Khalidov, V., 
+Szafraniec, M., Yi, S., Ramamonjisoa, M., et al., 2025. DINOv3. arXiv:2508.10104.
+Song, X., Shu, K., Yang, P., Zhao, C., Zhou, F., Frangi, A.F., Cao, J., Xiao, X., Wang, S., 
+Wang, T., et al., 2026. Developing a knowledge-guided federated graph attention 
+learning network with a diffusion module to diagnose Alzheimer’s Disease. Med. 
+Image Anal. 103794.
+Tzourio-Mazoyer, N., Landeau, B., Papathanassiou, D., Crivello, F., Etard, O., Del-
+croix, N., et al., 2002. Automated anatomical labeling of activations in SPM 
+using a macroscopic anatomical parcellation of the MNI MRI single-subject brain. 
+Neuroimage 15 (1), 273–289.
+Vaswani, A., et al., 2017. Attention is all you need. In: NeurIPS.
+Wang, R., Li, X., Tian, M., Yang, F., Zhang, X., 2024. Patch-level knowledge distillation 
+and regularization for missing modality medical image segmentation. In: ICASSP. 
+IEEE, pp. 2240–2244.
+Wang, C., et al., 2024. HOPE: Hybrid-granularity ordinal prototype learning for 
+progression prediction of mild cognitive impairment. IEEE J. Biomed. Health Inf. 
+28 (11), 6429–6440.
+Wang, C., et al., 2024. Joint learning framework of cross-modal synthesis and diagnosis 
+for Alzheimer’s disease by mining underlying shared modality information. Med. 
+Image Anal. 91, 103032.
+Wu, T.R., Jiao, C.N., Cui, X., Wang, Y.L., Zheng, C.H., Liu, J.X., 2024. Deep self-
+reconstruction fusion similarity hashing for the diagnosis of Alzheimer’s disease on 
+multi-modal data. IEEE J. Biomed. Health Inf. 28 (6), 3513–3522.
+Xiong, W., et al., 2025. Disentanglement and codebook learning-induced feature match 
+network to diagnose neurodegenerative diseases on incomplete multimodal data. 
+Pattern Recognit. 165, 111597.
+Xu, H., Wang, J., Feng, Q., Zhang, Y., Ning, Z., 2025. Domain-specific information 
+preservation for alzheimer’s disease diagnosis with incomplete multi-modality 
+neuroimages. Med. Image Anal. 101, 103448.
+Yang, Y., Chen, H., Hu, J., Guo, X., Ma, T., 2024. Advancing brain imaging analysis 
+step-by-step via progressive self-paced learning. In: MICCAI. Springer, pp. 58–68.
+Yang, Y., Guo, X., Ye, C., Xiang, Y., Ma, T., 2023. CReg-KD: Model refinement via 
+confidence regularized knowledge distillation for brain imaging. Med. Image Anal. 
+89, 102916.
+Yang, Y., et al., 2022. Multi-modal dynamic graph network: Coupling structural and 
+functional connectome for disease diagnosis and classification. In: BIBM. pp. 
+1343–1349.
+Ye, J., et al., 2024. MAD-Former: A traceable interpretability model for Alzheimer’s 
+disease recognition based on multi-patch attention. IEEE J. Biomed. Health Inf. 28 
+(6), 3637–3648.
+Ye, T., et al., 2025. Differential transformer. In: ICLR.
+Zhang, Y., Sun, K., Liu, Y., Xie, F., Guo, Q., Shen, D., 2024. A modality-flexible 
+framework for Alzheimer’s disease diagnosis following clinical routine. IEEE J. 
+Biomed. Health Inf. 29 (1), 535–546.
+Zhang, Y., Wang, Q., Bian, J., Liu, Y., Xu, Y., Dou, D., et al., 2023. Video4MRI: an 
+empirical study on brain magnetic resonance image analytics with CNN-based video 
+classification frameworks. In: ISBI. pp. 1–5.
+Zhou, H., He, L., Chen, B.Y., Shen, L., Zhang, Y., 2024. Multi-modal diagnosis of 
+Alzheimer’s disease using interpretable graph convolutional networks. IEEE Trans. 
+Med. Imaging 44 (1), 142–153.
+Zhou, Z., et al., 2024. Rethinking centered kernel alignment in knowledge distillation. 
+In: IJCAI. pp. 5680–5688.
+Medical Image Analysis 112 (2026) 104099 
+11 

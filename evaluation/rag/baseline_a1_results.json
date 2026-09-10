@@ -1,0 +1,1738 @@
+{
+  "schema_version": "rag_a0_baseline/1",
+  "retriever": "ExactRetriever",
+  "dataset": "evaluation\\rag\\dataset_a1.jsonl",
+  "documents": "configs\\knowledge\\documents.json",
+  "summary": {
+    "case_count": 40,
+    "answerable_count": 28,
+    "no_answer_count": 12,
+    "hit_at_10": {
+      "hits": 22,
+      "total": 28,
+      "rate": 0.7857
+    },
+    "mrr_at_10": 0.6726,
+    "correct_no_answer": {
+      "correct": 1,
+      "total": 12,
+      "rate": 0.0833
+    },
+    "status_counts": {
+      "correct_no_answer": 1,
+      "false_positive": 11,
+      "hit": 22,
+      "miss": 6
+    }
+  },
+  "results": [
+    {
+      "case_id": "rag_a1_001",
+      "question": "XX-v1 total 是怎么计算的？",
+      "tags": [
+        "scoring",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 2,
+          "matched_terms": [
+            "total",
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_002",
+      "question": "xx-v1 total scoring definition",
+      "tags": [
+        "scoring",
+        "en",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 2,
+          "matched_terms": [
+            "total",
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_003",
+      "question": "XX-v1 的总分是不是四个 item 相加？",
+      "tags": [
+        "scoring",
+        "mixed-language",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 2,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_004",
+      "question": "XX-v1 有几个条目参与 total？",
+      "tags": [
+        "scoring",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 2,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_005",
+      "question": "四个条目的和对应哪个 XX-v1 字段？",
+      "tags": [
+        "scoring",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 2,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_006",
+      "question": "total 字段和条目和不一致时先做什么？",
+      "tags": [
+        "conflict",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 1,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "total"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_007",
+      "question": "报告里的 total 和重新计算的条目和冲突，可以直接覆盖吗？",
+      "tags": [
+        "conflict",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 1,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "total"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_008",
+      "question": "reported total 和 recomputed item sum 冲突时可以覆盖原始值吗？",
+      "tags": [
+        "conflict",
+        "mixed-language",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 1,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 2,
+          "matched_terms": [
+            "total",
+            "和"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_009",
+      "question": "字段名叫 total 但值不对时，需要复核哪些内容？",
+      "tags": [
+        "conflict",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 1,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "total"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_010",
+      "question": "不一致的 total 能不能替换掉原始报告值？",
+      "tags": [
+        "conflict",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 1,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "total"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_011",
+      "question": "缺失条目能不能按 0 自动填补？",
+      "tags": [
+        "missing",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 1,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_64ea5ab1d1defedc5ae9",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+            "locator": "paragraph:2",
+            "keywords": [
+              "条目",
+              "缺失"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_012",
+      "question": "missing item should not be imputed as zero",
+      "tags": [
+        "missing",
+        "en",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "miss",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 0,
+      "top_hits": []
+    },
+    {
+      "case_id": "rag_a1_013",
+      "question": "条目缺失时可以把缺失项当成 0 分吗？",
+      "tags": [
+        "missing",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 1,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_64ea5ab1d1defedc5ae9",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+            "locator": "paragraph:2",
+            "keywords": [
+              "条目",
+              "缺失"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_014",
+      "question": "缺失原因应该保存在哪里？",
+      "tags": [
+        "metadata",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "miss",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 0,
+      "top_hits": []
+    },
+    {
+      "case_id": "rag_a1_015",
+      "question": "observation metadata 里要保留什么缺失信息？",
+      "tags": [
+        "metadata",
+        "mixed-language",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 1,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_64ea5ab1d1defedc5ae9",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+            "locator": "paragraph:2",
+            "keywords": [
+              "条目",
+              "缺失"
+            ]
+          },
+          "score": 2,
+          "matched_terms": [
+            "metadata",
+            "observation"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_016",
+      "question": "评分能力遇到缺失条目应该返回什么状态？",
+      "tags": [
+        "status",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "miss",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 0,
+      "top_hits": []
+    },
+    {
+      "case_id": "rag_a1_017",
+      "question": "缺失项导致不能评分时返回 insufficient 还是 completed？",
+      "tags": [
+        "status",
+        "mixed-language",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 1,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_64ea5ab1d1defedc5ae9",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+            "locator": "paragraph:2",
+            "keywords": [
+              "条目",
+              "缺失"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_018",
+      "question": "limitation 什么时候会出现在 XX-v1 评分结果里？",
+      "tags": [
+        "status",
+        "mixed-language",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 3,
+      "retrieved_count": 3,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_64ea5ab1d1defedc5ae9",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+            "locator": "paragraph:2",
+            "keywords": [
+              "条目",
+              "缺失"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "limitation"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_019",
+      "question": "缺失条目的处理规则是什么？",
+      "tags": [
+        "missing",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "miss",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 0,
+      "top_hits": []
+    },
+    {
+      "case_id": "rag_a1_020",
+      "question": "XX-v1 评分时缺失原因会不会丢掉？",
+      "tags": [
+        "metadata",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "miss",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_021",
+      "question": "XX-v1 total 的定义是什么？",
+      "tags": [
+        "scoring",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 2,
+          "matched_terms": [
+            "total",
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_022",
+      "question": "XX-v1 总分字段和条目合计冲突时是否要先复核？",
+      "tags": [
+        "conflict",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 2,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_023",
+      "question": "source total can overwrite original value when inconsistent",
+      "tags": [
+        "conflict",
+        "en",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 1,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "total"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_024",
+      "question": "缺失条目按零分处理是否符合 XX-v1 说明？",
+      "tags": [
+        "missing",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "miss",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_025",
+      "question": "missing reason should be stored in observation metadata",
+      "tags": [
+        "metadata",
+        "en",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 1,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_64ea5ab1d1defedc5ae9",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+            "locator": "paragraph:2",
+            "keywords": [
+              "条目",
+              "缺失"
+            ]
+          },
+          "score": 3,
+          "matched_terms": [
+            "in",
+            "metadata",
+            "observation"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_026",
+      "question": "评分能力在缺失数据下应该给出 insufficient 吗？",
+      "tags": [
+        "status",
+        "mixed-language",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 1,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_64ea5ab1d1defedc5ae9",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+            "locator": "paragraph:2",
+            "keywords": [
+              "条目",
+              "缺失"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "insufficient"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_027",
+      "question": "XX-v1 的条目求和规则和缺失处理规则分别在哪里？",
+      "tags": [
+        "multi-evidence",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 2,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_028",
+      "question": "XX-v1 total 冲突和缺失条目这两种限制分别怎么处理？",
+      "tags": [
+        "multi-evidence",
+        "zh",
+        "answerable"
+      ],
+      "expected_answerable": true,
+      "status": "hit",
+      "hit_at_10": true,
+      "first_gold_rank": 1,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 2,
+          "matched_terms": [
+            "total",
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_029",
+      "question": "XX-v1 的 cutoff 阈值是多少？",
+      "tags": [
+        "no-answer",
+        "zh"
+      ],
+      "expected_answerable": false,
+      "status": "false_positive",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 2,
+          "matched_terms": [
+            "xx-v1",
+            "的"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_030",
+      "question": "XX-v1 多少分算异常？",
+      "tags": [
+        "no-answer",
+        "zh"
+      ],
+      "expected_answerable": false,
+      "status": "false_positive",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_031",
+      "question": "XX-v2 total 怎么算？",
+      "tags": [
+        "wrong-version",
+        "zh",
+        "no-answer"
+      ],
+      "expected_answerable": false,
+      "status": "false_positive",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 1,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "total"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_032",
+      "question": "XX-v1 有几级评分？",
+      "tags": [
+        "no-answer",
+        "zh"
+      ],
+      "expected_answerable": false,
+      "status": "false_positive",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_033",
+      "question": "XX-v1 的每个条目取值范围是多少？",
+      "tags": [
+        "no-answer",
+        "zh"
+      ],
+      "expected_answerable": false,
+      "status": "false_positive",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_034",
+      "question": "XX-v1 缺失两个条目时有什么插补公式？",
+      "tags": [
+        "no-answer",
+        "missing",
+        "zh"
+      ],
+      "expected_answerable": false,
+      "status": "false_positive",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_035",
+      "question": "XX-v1 total 是否需要年龄校正？",
+      "tags": [
+        "no-answer",
+        "zh"
+      ],
+      "expected_answerable": false,
+      "status": "false_positive",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 2,
+          "matched_terms": [
+            "total",
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_036",
+      "question": "XX-v1 的英文全称是什么？",
+      "tags": [
+        "no-answer",
+        "zh"
+      ],
+      "expected_answerable": false,
+      "status": "false_positive",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_037",
+      "question": "规则候选激活后是否会自动修改计分定义？",
+      "tags": [
+        "rule-boundary",
+        "zh",
+        "no-answer"
+      ],
+      "expected_answerable": false,
+      "status": "correct_no_answer",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 0,
+      "top_hits": []
+    },
+    {
+      "case_id": "rag_a1_038",
+      "question": "XX-v1 是否支持把缺失原因写入 patient observation value？",
+      "tags": [
+        "wrong-field",
+        "zh",
+        "no-answer"
+      ],
+      "expected_answerable": false,
+      "status": "false_positive",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 3,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_64ea5ab1d1defedc5ae9",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+            "locator": "paragraph:2",
+            "keywords": [
+              "条目",
+              "缺失"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "observation"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_039",
+      "question": "XX-v1 的报告模板在哪里定义？",
+      "tags": [
+        "no-answer",
+        "zh"
+      ],
+      "expected_answerable": false,
+      "status": "false_positive",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "rag_a1_040",
+      "question": "XX-v1 可以从影像模型自动生成 total 吗？",
+      "tags": [
+        "no-answer",
+        "imaging",
+        "zh"
+      ],
+      "expected_answerable": false,
+      "status": "false_positive",
+      "hit_at_10": false,
+      "first_gold_rank": null,
+      "retrieved_count": 2,
+      "top_hits": [
+        {
+          "chunk": {
+            "chunk_id": "chunk_8cb2a8e7ca72d5313d30",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "locator": "paragraph:1",
+            "keywords": [
+              "xx-v1",
+              "total",
+              "条目"
+            ]
+          },
+          "score": 2,
+          "matched_terms": [
+            "total",
+            "xx-v1"
+          ]
+        },
+        {
+          "chunk": {
+            "chunk_id": "chunk_f9e7251f8e21e9748e62",
+            "document_id": "xx_v1_dictionary",
+            "document_version": "2026-09-07",
+            "title": "XX-v1 测试量表说明",
+            "text": "# XX-v1 测试量表说明",
+            "locator": "paragraph:0",
+            "keywords": [
+              "xx-v1"
+            ]
+          },
+          "score": 1,
+          "matched_terms": [
+            "xx-v1"
+          ]
+        }
+      ]
+    }
+  ]
+}

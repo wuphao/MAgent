@@ -24,6 +24,9 @@ class TaskExecutor:
     def execute(self, task: TaskSpec, context: TaskContext, invoker: CapabilityInvoker) -> AgentResult | dict:
         if task.resource_class == "none":
             return {"status": "skipped", "reason": task.parameters.get("status", "not runnable")}
+        if task.agent_name in {"RWEQualityAgent", "RWEAssessmentAgent", "RWELongitudinalAgent", "RWELaboratoryAgent", "RWEModalitiesAgent"}:
+            from multi_agent.agents.rwe import RWEPatientAgent
+            return RWEPatientAgent(task.agent_name).execute(context, invoker)
         if task.agent_name == "QualityService":
             goal = str(task.parameters.get("goal") or context.goal)
             return QualityService().check_goal(goal, context.observations)

@@ -1,5 +1,35 @@
 # Multi-agent RWE 分析
 
+## RWE 患者工作台（本地 8081）
+
+```powershell
+python -m pip install -e ".[rwe]"
+python run_dashboard.py
+```
+
+打开 `http://127.0.0.1:8766`，输入 RWE **患者编号**（例如 `041_S_4060`，不是数据库内部数字 ID）。服务按顺序执行：RWE 导出 → 本地 JSON → 字段观测与证据仓 → v2 Scheduler → ReportSnapshot → 页面展示。
+
+本地连接配置写入被 Git 忽略的 `.env.rwe.local`，支持 `RWE_API_BASE_URL`（默认 `http://localhost:8081`）、`RWE_API_TOKEN`、`RWE_PROJECT_ID`（默认 8）以及 `RWE_DB_HOST`、`RWE_DB_PORT`、`RWE_DB_NAME`、`RWE_DB_USER`、`RWE_DB_PASSWORD`。环境变量优先于配置文件，每次任务重新读取配置。数据库只用于只读解析患者编号；9 张表单通过 `/form/queryData` 读取。
+
+Token 到期时重新登录（交互输入密码，不保存登录密码）：
+
+```powershell
+python tools/rwe_login.py --phone <手机号>
+```
+
+也可以分步导出、分析已保存的 JSON：
+
+```powershell
+python tools/export_rwe_patient.py --patient-number 041_S_4060 --output output/patient.json
+python main.py output/patient.json --v2-goal rwe_patient_summary --data-dir output/rwe-cli --output output/analysis.json
+```
+
+网页运行产物位于 `output/rwe/runs/<job_id>/`：`patient.json` 是完整来源导出，`report.json` 是报告快照，`analysis.json` 包含页面数据、任务结果和字段证据；SQLite 与资产仓保留在同一目录。每次运行独立存储，不混入其他患者或旧版导出的观测。页面可下载来源 JSON 和报告，刷新后恢复最近任务；服务重启会将中断任务标记为失败，需重新运行。
+
+`rwe_patient_summary` 是新增的真实表单描述分支，复用现有任务调度、证据契约、质询发布和报告快照；不将 MOCA/MMSE 等字段映射成测试用 XX-v1。当前输出为来源分数、同字段数值差和实验室/遗传记录，不进行条目重计分、诊断分级或临床变化判定。没有来源总分、文本、影像或已核验量表版本时保留限制；本分支不调用 LLM、RAG 或 DiaMond 推理。原 `multimodal_summary` 与旧 Agent 流程保留。
+
+网页服务只监听 `127.0.0.1`，仅提供指定静态文件与本次任务产物，不暴露仓库和本机配置。
+
 本项目当前默认入口已经切换到 v2：以稳定数据契约、证据仓、任务 DAG、质询复核和报告快照为核心。旧 Agent 流程仍保留，可用 `--engine legacy` 显式运行。
 
 ## v2 默认流程

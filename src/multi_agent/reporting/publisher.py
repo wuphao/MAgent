@@ -41,8 +41,10 @@ class ReportPublisher:
             findings = [item for item in findings if item.finding_id not in withdrawn] + revised_findings
 
         task_count = len(task_results)
-        succeeded = sorted(task_id for task_id, result in task_results.items() if result.get("status") not in {"no_data", "capability_unavailable"})
-        failed = sorted(task_id for task_id, result in task_results.items() if result.get("status") in {"no_data", "capability_unavailable"})
+        unavailable = {"no_data", "capability_unavailable", "failed", "needs_data", "insufficient_points", "not_comparable"}
+        succeeded = sorted(task_id for task_id, result in task_results.items() if result.get("status") not in unavailable | {"skipped"})
+        failed = sorted(task_id for task_id, result in task_results.items() if result.get("status") in unavailable)
+        skipped = sorted(task_id for task_id, result in task_results.items() if result.get("status") == "skipped")
         limitations = self._limitations(task_results, challenges, outcomes)
         report = ReportSnapshot(
             report_id=_stable_id("report", run_id, project_id, goal),
@@ -60,7 +62,7 @@ class ReportPublisher:
                 task_count=task_count,
                 succeeded_tasks=succeeded,
                 failed_tasks=failed,
-                skipped_tasks=[],
+                skipped_tasks=skipped,
                 agent_names=catalog.coverage()["agent_names"],
                 unread_evidence_count=catalog.coverage()["unread_evidence_count"],
             ),

@@ -13,6 +13,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+rwe = [
+  "requests>=2.31,<3",
+  "psycopg2-binary>=2.9,<3",
+]
 dev = [
   "pytest>=8,<9",
 ]
@@ -25,5 +29,6 @@ pythonpath = ["src"]
 testpaths = ["tests"]
 markers = [
   "real_imaging: requires verified DiaMond runtime inputs, model weights, and environment",
+  "real_rag: requires a running Ollama service and the configured embedding model",
 ]
 

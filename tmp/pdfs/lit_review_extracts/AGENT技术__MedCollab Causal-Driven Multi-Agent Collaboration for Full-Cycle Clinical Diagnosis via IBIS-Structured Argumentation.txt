@@ -1,0 +1,520 @@
+
+
+===== PAGE 1 =====
+MedCollab: Causal-Driven Multi-Agent
+Collaboration for Full-Cycle Clinical Diagnosis
+via IBIS-Structured Argumentation
+Yuqi Zhan1∗, Xinyue Wu1∗, Tianyu Lin1, Yutong Bao1, Xiaoyu Wang1,
+Weihao Cheng1, Huangwei Chen2†, Feiwei Qin1†, and Zhu Zhu3†
+1 Hangzhou Dianzi University
+2 Zhejiang University
+3 Children’s Hospital, Zhejiang University School of Medicine, National Clinical
+Research Center for Children and Adolescents’ Health and Diseases
+hovchen0318@gmail.com, qinfeiwei@hdu.edu.cn, zhuzhu_cs@zju.edu.cn
+∗Equal contribution †Corresponding author
+Abstract.Large language models (LLMs) have shown promise in healthcare
+applications, however, their use in clinical practice is still limited by diagnostic
+hallucinations and insufficiently interpretable reasoning. We present MedCol-
+lab, a novel multi-agent framework that emulates the hierarchical consultation
+workflow of modern hospitals to autonomously navigate the full-cycle diagnostic
+process. The framework incorporates a dynamic specialist recruitment mech-
+anism that adaptively assembles clinical and examination agents according to
+patient-specific symptoms and examination results. To ensure the rigor of clinical
+work, we adopt a structured Issue-Based Information System (IBIS) argumen-
+tation protocol that requires agents to provide “Positions” backed by traceable
+evidence from medical knowledge and clinical data. Furthermore, the framework
+constructs a Hierarchical Disease Causal Chain that transforms flattened diag-
+nostic predictions into a structured model of pathological progression through
+explicit logical operators. A multi-round Consensus Mechanism iteratively fil-
+ters low-quality reasoning through logic auditing and weighted voting. Evaluated
+on real-world clinical datasets, MedCollab significantly outperforms pure LLMs
+and medical multi-agent systems in Accuracy and RaTEScore, demonstrating a
+marked reduction in medical hallucinations. These findings indicate that Med-
+Collab provides an extensible, transparent, and clinically compliant approach to
+medical decision-making.
+Keywords:Multi-Agents·Clinical Diagnosis·Causal Reasoning
+1 Introduction
+Accurate clinical diagnosis requires physicians to integrate heterogeneous ev-
+idence, including chief complaints, longitudinal medical histories, and exami-
+nation findings, into a coherent pathological narrative [10,7]. Although LLMs
+have shown strong performance in medical question answering and report gen-
+eration [17,21,26], their application in real clinical workflows remains limited
+arXiv:2603.01131v1  [cs.MA]  1 Mar 2026
+
+===== PAGE 2 =====
+2 Y. Zhan et al.
+Clinical Record
+Chief Complaint
+Medical HistoryPhysical Exam
+Exam Results
+Therapeutic Principle
+Exam Agents
+Specialist Agents
+Structured Exam Reports →Therapeutic Principles & Treatment Plans
+GP and Treatment Plan
+Differential Diagnoses Differential Diagnosis
+GP
+Preliminary Diagnoses Disease 6o
+Causal Chains
+GP
+Specialist Agents
+Disease Causal Chain
+and Diagnostic Basis
+GP-Led
+Compliance SpecialReview Agent
+Review
+and
+Correction
+Fig. 1.MedCollab workflow with key parts of the final report highlighted in red.
+by two fundamental challenges: a propensity for diagnostic hallucination and
+an inability to provide clinically grounded interpretations that align with es-
+tablished pathological reasoning. These shortcomings are particularly acute in
+internet hospital settings, where patients present with complex, unstructured
+clinical records that demand rigorous differential reasoning [25,20] rather than
+pattern-matched responses.
+Recentmulti-agentframeworks[12,11,16,2,3,30]haveadvancedbeyondsingle-
+model pipelines by distributing diagnostic reasoning across specialized agents.
+Nevertheless, existing systems [28,18,24] exhibit a critical structural limitation:
+they treat diagnosis as a collection of independent, associational outputs, identi-
+fying diseases correlated with symptoms without distinguishing correlation from
+causation. Prior work [4,33,23] has shown that this inability to separate as-
+sociation from causation can lead to suboptimal or even dangerous diagnostic
+conclusions. Consequently, generated diagnoses often remain etiologically discon-
+nected [6,13], failing to capture the pathological progression linking conditions
+(e.g., Trauma→Rib Fracture→Lung Hemorrhage→Anemia), while agent
+assertions lack traceable, case-specific grounding for logical auditing [27].
+To address these limitations, we propose MedCollab, a causal-driven multi-
+agent framework that emulates the hierarchical consultation workflow of modern
+hospitals. We implement a structured Issue-Based Information System (IBIS) ar-
+gumentation protocol [8,15] requiring every diagnostic position to be grounded in
+traceable evidence, transforming consultation into a formally verifiable argumen-
+tation graph. MedCollab further constructs a Hierarchical Disease Causal Chain
+(HDCC) that models pathological progression through explicit causal (→) and
+comorbidity (+) relations [23], with a GP-led consensus mechanism that itera-
+tively penalizes logically inconsistent agents to ensure the final diagnosis reflects
+clinically sound reasoning. Fig. 1 shows the output process of this framework
+and the structure of the final report.
+Our contributions are as follows. (1) We formalize the limitations of causally
+unstructured multi-agent diagnosis and introduce a unified framework explicitly
+modeling pathological progression through causal and comorbidity relations. (2)
+We propose the IBIS-based argumentation protocol and HDCC, together form-
+ing a fully auditable reasoning pathway from raw clinical findings to treatment
+plan. (3) Experiments on ClinicalBench and MIMIC-IV demonstrate that Med-
+Collab significantly outperforms leading LLMs and medical agents in diagnostic
+accuracy and logical coherence, with the latter quantified through RaTEScore.
+
+===== PAGE 3 =====
+MedCollab 3
+⑤ Consensus Formation: CONSTRAINT FRAMEWORK
+① Clinical Data Analysis and Triage Multiple rounds of discussion
+Clinical Record Triage Agent Neurology 100
+· Chief Complaint
+· Medical History 'SPulmonology Arg. Irrelevant
+· Physical Exam
+· Exam Results Dynamic Recruitment Arg. o
+Irrelevan
+② Examination Interpretation Arg
+Examinationresults Exam Interpretation Structured
+Agent Exam Reports Ar
+Evidence-Only Protocol Discussion
+③ Preliminary Diagnosis Arg.
+Relevance Filtering Evidence Chain Construction
+69 。。。 ⑤ 古 60 GP
+Diagnosis=Position+
+Specialist Exit Argument(Reasoning,Evidencescore) 6
+6 Preliminary+Differential diagnosis VOTE w
+Optional Chains Weight
+Ⅱ△
+Chains
+④Quality Control and Logic Audit Yes Update
+Lead VoTE日
+Logic Scoring Causal Modeling ≤1?
+Wi=f(reasoning quality, D?→D?→…→Dn 0 Yesevidence validity) dw
+Deduplication— GP D1厂D- →Dn
+Lead VOTE
+Recor ≤1?
+Dunique ={d|d∈Dall,unique(d)} D?一 →D, Exam YesReports
+Evidence-Only
+Rigid source traceability for all diagnosticarguments.
+Logic-Weighted
+GP-audited voting power adjusted byreasoning quality.
+RAG
+Access the medical knowledge base whengenerating evidence
+⑥ Treatment Plan Developing
+Hospitalization SurgicalPlan Recommendations
+Pharmacological Dietary &Therapy Lifestyle
+目 ⑦ Final report generation
+Medical
+compliance reviewand correction
+Compliance SpecialReview Agent
+三
+Clinical Case Summary
+Differential diagnosis
+Disease Causal Chain
+Diagnosis Basis
+Therapeutic Principle
+Treatment Plan
+Fig. 2.The pipeline of MedCollab. The framework autonomously navigates clinical di-
+agnosis through dynamic agent recruitment, IBIS-structured argumentation for trace-
+able reasoning, and the construction of a HDCC optimized by GP-led consensus.
+2 Methodology: MedCollab
+Overview.As shown in Fig. 2, we first introduce dynamic agent recruitment
+as the foundational step (Sec. 2.1). We represent the diagnostic reasoning pro-
+cessusinganIBISprotocoltogeneratestructured,verifiablediagnosticpositions,
+with each agent’s diagnosis modeled through a combination of traceable evidence
+and arguments (Sec. 2.2). We design a HDCC to address the logical inconsis-
+tency of flat predictions and capture pathological progression (Sec. 2.3). Finally,
+we optimize the framework through a General Practitioner (GP)-led consensus
+mechanism that evaluates logic and adjusts agent weights (Sec. 2.4).
+2.1 Preliminaries: Dynamic Agent Recruitment
+Agent recruitment follows a multi-agent framework in a virtual hospital set-
+ting. Given a patient’s clinical caseScontaining the unstructured chief com-
+plaint, medical history, and raw examination findings, a GP agent performs a
+dynamic evaluation to select a subset of relevant clinical specialists and exami-
+nation agentsA={A 1, A2, ..., An}.
+Instead of enforcing rigid data structuring, the framework leverages the nat-
+ural language understanding capabilities of agents to establish evidence priors.
+The recruited examination agents directly interpret the raw medical findings to
+generate professional examination reports. These reports, alongside the patient’s
+foundational clinical record, collectively constitute the Evidence BaseE. This ev-
+idence base provides a factual prior that constrains downstream specialists and
+reduces the risk of hallucinated patient information during reasoning.
+
+===== PAGE 4 =====
+4 Y. Zhan et al.
+2.2 IBIS-Structured Argumentation for Diagnostic Reasoning
+To reconstruct a rigorous diagnostic process, we define diagnostic outputs within
+the IBIS framework, controlling their positions and evidence. Inspired by design
+rationale, each agent’s diagnosisAi is computed from structured tuples rather
+than free-form text. Modeling the diagnostic trajectory of every agent for irrel-
+evant cases would add unnecessary computational overhead and noise. Instead,
+we adopt an efficiency-driven exit strategy to prune the agent pool. If the case
+falls outside a specialist’s expertise, the agent applies the following truncation:
+Output(Ai) =∅,if Domain(S)∩Domain(A i) =∅.(1)
+If the case falls within its domain, the agent must output its differential and
+preliminary diagnoses as a structured IBIS tupleD i ={(P k,Arg k, Ek)|k∈
+1...K}. This tuple is defined through four components.
+Issue (I)represents the implicit clinical problem, namely the illness of the
+patient under investigation.
+Position (Pk)denotes a proposed diagnostic hypothesis, such as “Rib Fracture”.
+Argument (Arg k)provides the clinical rationale that explicitly connects the
+position with the evidence.
+Evidence (E k)consists of traceable facts strictly sourced from the Evidence
+BaseE(from Sec. 2.1) or recognized medical knowledge bases. This structured
+design transforms informal multi-agent dialogue into a formally verifiable di-
+rected acyclic argumentation graph.
+2.3 Hierarchical Disease Causal Chain (HDCC) Construction
+Flat diagnostic labels often provide detailed isolated information but lack eti-
+ological consistency between symptoms, which can lead to illogical treatment
+plans. A potential solution is to map diseases into a chronological network.
+Drawing inspiration from pathological progression, we note that the rela-
+tive order and causality of diseases remain crucial. We propose the Hierarchical
+Disease Causal Chain to aggregate all validated positionsP=S Pk.
+We define two clinical relations: Causality (→) and Comorbidity (+). The
+framework links diagnostic points across different stages, producing structured
+trajectories of disease. A candidate causal chainC j is defined as a directed
+pathological progression of arbitrary length:
+Cj =P 1 →P 2 → · · · →P Lj ,(2)
+whereL j denotes the number of diagnostic positions in the chain. (e.g., Trauma
+→Rib Fracture→Lung Hemorrhage→Anemia). This explicit modeling allows
+the system to differentiate between root causes and downstream complications.
+The confidence score of a chain, Score(Cj), is computed as a weighted combi-
+nation of these basis positions. Specifically, we conduct logical validity analysis
+on the predictions and calculate:
+Score(Cj) =
+X
+Ai∈Sj
+wi ·I(Logic(A i)> τ),(3)
+
+===== PAGE 5 =====
+MedCollab 5
+wherew i is the weight of agentAi andIis the indicator function ensuring that
+only logically sound arguments contribute to the validity of the chain.
+2.4 Consensus Optimization and Logic Auditing
+We employ a logic auditing mechanism to guide the optimization of the causal
+chains, akin to loss optimization in standard networks. The GP agent supervises
+the reasoning across multi-round voting. During each stept, we evaluate the
+arguments Argk against the evidenceEk.
+Agent weights are updated through an exponential penalty applied to logical
+inconsistencies:
+w(t+1)
+i =w (t)
+i ×(1−λ·σ i),(4)
+whereλis the penalty coefficient andσ i quantifies the logical inconsistency of
+agentA i. This function converts the logical difference between the argument and
+medical consensus into a weight reduction, forcing the final diagnostic chain to
+align with strict clinical standards. This iterative process continues until a causal
+chain secures a definitive majority, effectively filtering low-quality reasoning.
+3 Experiments and Results
+3.1 Experimental Setup
+Datasets and Data Processing.We evaluate MedCollab on two clinical
+datasets: (1)ClinicalBench[28], containing 1,500 real-world clinical cases, and
+(2)MIMIC-IV[14], from which we curated a subset of 595 cases. To ensure
+cross-dataset consistency, we reformatted the MIMIC-IV records to align with
+the ClinicalBench consultation schema. Each case was selected through a multi-
+dimensional scoring system that verifies detail richness, key findings, and struc-
+tural completeness. We used DeepSeek-V3 with carefully designed prompting
+to synthesize standardized ground truths, ensuring a strict separation between
+objective clinical findings and subjective impressions.
+Evaluation Metrics.We assess model performance across two primary dimen-
+sions: diagnostic precision and clinical reasoning quality.
+For diagnostic precision, we evaluate triage routing using Department Classi-
+fication Accuracy (DCA) andmonitor hallucination suppression via Medical Fac-
+tual Consistency (Entity-F1) [19]. The core diagnostic performance is measured
+by Accuracy (ACC), which assesses whether the primary diagnosispi generated
+by the system matches the normalized ground truthGi,1:
+ACC= 1
+N
+NX
+i=1
+I(N orm(pi) =N orm(G i,1)),(5)
+whereN orm(·)denotes medical synonym normalization. To evaluate the frame-
+work’s ability to simultaneously predict the correct department routing and dis-
+ease diagnosis in complex cases involving multiple comorbidities, we also report
+
+===== PAGE 6 =====
+6 Y. Zhan et al.
+Comprehensive Diagnostic Rate (CDR):
+CDR=
+PN
+i=1 Sguide(i)×S diagnosis(i)
+N ,(6)
+whereS guide(i)andS diagnosis(i)are indicator functions for correctness of the
+i-th sample in the guide and diagnosis tasks, respectively, taking value 1 if the
+prediction is correct and 0 otherwise, andNis the total number of test samples.
+We also report Department Consistency (Cdept), which measures whether the
+department predicted by the system matches a pre-defined valid department,
+serving as a complementary indicator of triage routing reliability.
+Movingbeyondflatlabels,weassessthelogicalcoherenceofgeneratedreports
+across four structured sections: Diagnostic Basis (DB), Differential Diagnosis
+(DD), Therapeutic Principle (TP), and Treatment Plan (TX). Standard lexical
+overlap metrics such as BLEU and ROUGE-L are reported for textual similar-
+ity, but they often fail to capture medical synonyms or critical negations. We
+therefore prioritize RaTEScore [32], an entity-aware semantic metric designed
+to assess causal logic and clinical truthfulness in reasoning chains.
+3.2 Main Results and Analysis
+We evaluate MedCollab against leading LLMs and specialized medical multi-
+agent systems across both datasets.
+Diagnostic Precision.As shown in Table 1, MedCollab achieves an ACC of
+76.9% on ClinicalBench, outperforming the strongest baseline (ClinicalAgent,
+68.7%) by 8.2 percentage points, and surpasses all competitors on MIMIC-IV
+with an ACC of 57.7%. The CDR of 72.4% on ClinicalBench further demon-
+strates MedCollab’s ability to recover the full set of relevant diagnoses in multi-
+comorbidity cases, exceeding the best baseline by over 13.1 percentage points.
+MedCollab achieves the highest DCA across both datasets, indicating that the
+T able 1.Comparison of Diagnostic Precision on ClinicalBench (CB) and MIMIC-IV.
+Values are scaled by 100 (%). Results are presented asV alueCB / V alueM IM IC.
+Method ACC CDR Entity-F1 DCA Cdept
+Leading LLMs
+HuatuoGPT-o1-8B [5] 42.9/32.6 32.7/23.9 29.1/26.6 76.7/59.8 80.8/82.5
+Baichuan4-Turbo [31] 53.9/47.1 41.3/29.1 35.1/39.7 77.4/59.7 98.0/98.0
+GPT-4o [22] 65.5/53.4 56.5/36.6 32.3/33.7 86.2/64.9 100.0/100.0
+Gemini-3-Flash [9] 66.1/55.0 57.0/41.8 37.2/36.3 87.6/71.6 100.0/100.0
+GLM-4.7 [1] 66.9/51.6 59.3 /37.6 30.5/32.8 88.5 /68.4 100.0/100.0
+Qwen3-Max [29] 66.9/54.1 56.7/37.1 27.8/31.7 84.5/64.0 100.0/100.0
+Qwen3-8B [29] 52.9/44.9 39.6/28.6 31.8/37.8 72.6/65.5 97.6/98.1
+Multi-Agents
+MedLA [18] 63.4/49.6 54.3/35.0 32.1/35.8 85.7/64.7 99.9/100.0
+ClinicalAgent [28] 68.7/51.6 51.3/29.2 25.6/28.8 75.6/54.3 100.0/100.0
+MEDDxAgent [24] 36.9/31.8 -/- 26.8/26.0 -/- -/-
+MedCollab(Ours) 76.9/57.7 72.4/48.336.7 /37.8 94.3/83.7 100.0/100.0
+
+===== PAGE 7 =====
+MedCollab 7
+dynamicrecruitmentmechanismreliablyrouteseachcasetotheappropriateclin-
+ical department prior to specialist reasoning. The consistently higher Entity-F1
+scores confirm that IBIS-structured argumentation effectively constrains agent
+outputs to traceable evidence, yielding a measurable reduction in medical hallu-
+cinations relative to both monolithic LLMs and existing multi-agent baselines.
+Clinical Reasoning Quality .Fig. 3 compares the generation quality across
+four clinical dimensions on both datasets. On ClinicalBench, MedCollab achieves
+the highest RaTEScore in three dimensions, notably reaching 62.0% in Diag-
+nostic Basis, which provides a more reliable measure of clinical accuracy than
+lexical metrics. While leading LLMs such as Gemini-3-Flash and Baichuan4-
+Turbo yield competitive BLEU scores through surface-level linguistic overlap,
+their lower RaTEScore values indicate a lack of sound clinical reasoning. On
+MIMIC-IV, MedCollab continues to outperform other models in Diagnostic Ba-
+sis and Differential Diagnosis, demonstrating consistent performance in founda-
+tional reasoning. The HDCC ensures that the reasoning path from diagnostic
+basis to treatment remains logically coherent.
+ClinicalBench-BLEU ClinicalBench-ROUGE-L ClinicalBench-RaTEScore
+DD DD DD
+2.0 14.0 51.0
+1.5 12.9 48.6
+1.0 11.8 46.2
+0.5 10.6 43.9
+TX 1.0—0.9-0.8--0.6 3.5—5.5—7.5 9.5 DB TX13.0-11.8-10.5-9.2 18.0-20.0-22.0 24.0 DB TX 38.0-36.9-35.8 34.6 52.2 55.5-58.8-62.0 DB
+0.8 13.6 39.9
+1.0 14.8 41.8
+1
+1.2 15.9 43.6
+1.5 17.0 45.5
+TP TP TP
+MIMIC-IV-BLEU MIMIC-IV-ROUGE-L MIMIC-IV-RaTEScore
+DD DD DD
+1.0 8.5 23.0
+0.8 7.1 22.2
+0.5 5.8 21.5
+0.2 4:4 20.8
+TX 1.5—1-.2—41.0—0.8- 2.83.5-4.2—5.0 DB TX17.5-15.4-13.2-11.1- 15.5-18.0-20.5-23.0 DB TX38.0-36.5-35.0-33.5 48.0-49.5-51.0-52.5 DB
+1.0 16.1 38.9
+1.5 18.2 39.8
+2.0 20.4 40.6
+2.5 22.5 41.5
+TP TP TP
+HuatuoGPT-01-8B Baichuan4-Turbo GPT-4o Gemini-3-Flash GLM-4.7
+Qwen3-Max Qwen3-8B MedLA ClinicalAgent MedCollab(Ours)
+Fig. 3.Radar chart comparison of multidimensional report quality metrics (BLEU,
+ROUGE-L, and RaTEScore) across four clinical dimensions (DB, DD, TX, and TP)
+on ClinicalBench and MIMIC-IV.
+
+===== PAGE 8 =====
+8 Y. Zhan et al.
+T able 2.Ablation study on the ClinicalBench and MIMIC-IV dataset.Results are
+presented as ValueCB / ValueM IM IC
+.
+Method ACC Entity-F1 DB RaTE DD RaTE TX RaTE
+w/o Logic Auditing 49.7/41.5 29.6/32.9 51.7/46.8 46.6/22.0 37.5/34.9
+w/o Causal Chain 52.9/40.2 31.0/32.6 51.7/45.3 46.2/21.9 37.0/35.0
+MedCollab (F ull) 76.9/57.7 36.7/37.8 62.0/52.1 50.8/23.0 37.6/36.6
+Multi-Agent Baseline EvaluationDue to task differences, multi-agent base-
+lines were evaluated on primary diagnosis using their core reasoning frameworks.
+MEDDxAgent, originally designed for dialogue-based diagnosis, was adapted
+with top-1 disease extracted for ACC and Entity-F1, and “Final DDx Ratio-
+nale” for text metrics. Its architecture lacks department classification and multi-
+diagnosis capabilities, accounting for missing CDR, DCA, andC dept values.
+MedLA, designed for multiple-choice tasks, was similarly adapted. ClinicalA-
+gent aligns with our full-cycle workflow and was applied directly.
+3.3 Ablation Study
+To evaluate the contribution of each core component, we conducted an ablation
+study on ClinicalBench and MIMIC-IV, with results presented in Table 2.
+Impact of Logic Auditing.Removing the Logic Auditing mechanism causes
+the largest degradation, with ACC dropping from 76.9% to 49.7% on Clini-
+calBench, confirming that the GP-led logic auditing mechanism is essential for
+resolving inter-specialist conflicts and filtering logically flawed reasoning chains.
+Impact of Causal Chain.Excluding the Hierarchical Disease Causal Chain
+reduces ACC from 76.9% to 52.9% and DB RaTEScore from 62.0% to 51.7%,
+demonstrating that causal modeling serves a dual role: it imposes pathological
+coherence on generated reports while providing the reasoning scaffold necessary
+for accurate diagnosis.
+4 Conclusion
+We presentedMedCollab, a causal-driven multi-agent framework that navi-
+gates full-cycle clinical diagnosis through an IBIS-based argumentation proto-
+col and an HDCC that transforms flattened LLM predictions into pathologi-
+cally coherent reasoning models. Experiments on ClinicalBench and MIMIC-IV
+demonstrate significant improvements over leading models and medical agents in
+diagnostic accuracy and clinical consistency. Ablation results confirm that both
+the Logic Auditing mechanism and HDCC are essential for mitigating halluci-
+nations and ensuring logical coherence, establishing MedCollab as a reliable and
+interpretable pathway for AI-assisted clinical decision-making.
+Acknowledgments.We gratefully acknowledge support for this work from the
+National Innovation and Entrepreneurship Training Program for Undergraduate
+(No. 202510336025).
+
+===== PAGE 9 =====
+MedCollab 9
+Disclosure of Interests. The authors declare no competing financial interests
+or personal relationships that could have appeared to influence the work reported
+in this paper.
+References
+1. AI, Z.: GLM-4.7: Advancing the Coding Capability and Complex Reasoning.
+https://z.ai/blog/glm-4.7 (2026)
+2. Al Radi, A.M., Cao, X., Yu, F., Liu, Y., Liu, F., Wang, C., Chen, Y., Chen, J.,
+Wang, H., Meng, Y., et al.: Agentic Large-Language-Model Systems in Medicine:
+A Systematic Review and Taxonomy. Authorea Preprints (2025)
+3. Almansoori, M., Kumar, K., Cholakkal, H.: MedAgentSim: Self-evolving Multi-
+agent Simulations for Realistic Clinical Interactions. In: International Conference
+on Medical Image Computing and Computer-Assisted Intervention. pp. 362–372.
+Springer (2025)
+4. Chen, H., Chen, Y., Yan, Z., Ding, M., Li, C., Zhu, Z., Qin, F.: MMLNB: Multi-
+Modal Learning for Neuroblastoma Subtyping Classification Assisted with Textual
+Description Generation. arXiv preprint arXiv:2503.12927 (2025)
+5. Chen, J., Cai, Z., Ji, K., Wang, X., Liu, W., Wang, R., Hou, J., Wang, B.:
+HuatuoGPT-o1, Towards Medical Complex Reasoning with LLMs. arXiv preprint
+arXiv:2412.18925 (2024)
+6. Chen, R.J., Lu, M.Y., Wang, J., Williamson, D.F., Rodig, S.J., Lindeman, N.I.,
+Mahmood, F.: Pathomic Fusion: An Integrated Framework for Fusing Histopathol-
+ogy and Genomic Features for Cancer Diagnosis and Prognosis. IEEE transactions
+on medical imaging41(4), 757–770 (2020)
+7. Choi, J.J., Gribben, J., Lin, M., Abramson, E.L., Aizer, J.: Using an experiential
+learning model to teach clinical reasoning theory and cognitive bias: an evalua-
+tion of a first-year medical student curriculum. Medical Education Online28(1),
+2153782 (2023)
+8. Conklin, J., Begeman, M.L.: gIBIS: a hypertext tool for exploratory policy discus-
+sion. ACM Transactions on Information Systems (TOIS)6(4), 303–331 (1988)
+9. DeepMind, G.: Gemini 3: Frontier Intelligence Built for Speed and Reasoning.
+https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/
+(2025)
+10. Donroe, J.H., Egger, E., Soares, S., Sofair, A.N., Moriarty, J.: Clinical Reasoning:
+Perspectives of Expert Clinicians on Reasoning Through Complex Clinical Cases.
+Cureus16(1) (2024)
+11. Fan, Z., Wei, L., Tang, J., Chen, W., Siyuan, W., Wei, Z., Huang, F.: AI Hospi-
+tal: Benchmarking Large Language Models in a Multi-agent Medical Interaction
+Simulator. In: Proceedings of the 31st International Conference on Computational
+Linguistics. pp. 10183–10213 (2025)
+12. Huang, G., Chen, W., Yang, J., Lyu, X., Luo, X., Yang, S., Xing, X., Shen, L.: Sur-
+vAgent: Hierarchical CoT-Enhanced Case Banking and Dichotomy-Based Multi-
+AgentSystemforMultimodalSurvivalPrediction.arXivpreprintarXiv:2511.16635
+(2025)
+13. Jaume, G., Vaidya, A., Chen, R.J., Williamson, D.F., Liang, P.P., Mahmood, F.:
+Modeling Dense Multimodal Interactions Between Biological Pathways and His-
+tology for Survival Prediction. In: Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition. pp. 11579–11590 (2024)
+
+===== PAGE 10 =====
+10 Y. Zhan et al.
+14. Johnson, A.E., Bulgarelli, L., Shen, L., Gayles, A., Shammout, A., Horng, S.,
+Pollard, T.J., Hao, S., Moody, B., Gow, B., et al.: MIMIC-IV, a freely accessible
+electronic health record dataset. Scientific Data10(1), 1 (2023)
+15. Kunz,W.,Rittel,H.W.:ISSUESASELEMENTSOFINFORMATIONSYSTEMS
+(1970)
+16. Li, J., Lai, Y., Li, W., Ren, J., Zhang, M., Kang, X., Wang, S., Li, P., Zhang, Y.Q.,
+Ma, W., et al.: Agent Hospital: A Simulacrum of Hospital with Evolvable Medical
+Agents. arXiv preprint arXiv:2405.02957 (2024)
+17. Liévin, V., Hother, C.E., Motzfeldt, A.G., Winther, O.: Can large language models
+reason about medical questions? Patterns5(3) (2024)
+18. Ma, S., Huang, J., Zhang, F., Wu, J., Shen, Y., Fan, G., Zhang, Z., Zang, Z.:
+MedLA: A Logic-Driven Multi-Agent Framework for Complex Medical Reasoning
+with Large Language Models. In: Proceedings of the AAAI Conference on Artificial
+Intelligence (2026), oral Presentation
+19. Manning, C.D.: Introduction to Information Retrieval. Syngress Publishing, (2008)
+20. Meyer, A.N., Giardina, T.D., Khawaja, L., Singh, H.: Patient and clinician expe-
+riences of uncertainty in the diagnostic process: Current understanding and future
+directions. Patient Education and Counseling104(11), 2606–2615 (2021)
+21. Nori, H., Lee, Y.T., Zhang, S., Carignan, D., Edgar, R., Fusi, N., King, N., Larson,
+J., Li, Y., Liu, W., et al.: Can Generalist Foundation Models Outcompete Special-
+Purpose Tuning? Case Study in Medicine. arXiv preprint arXiv:2311.16452 (2023)
+22. OpenAI: Hello GPT-4o (2024), available at: https://openai.com/blog/chatgpt-4o.
+23. Richens, J.G., Lee, C.M., Johri, S.: Improving the accuracy of medical diagnosis
+with causal machine learning. Nature communications11(1), 3923 (2020)
+24. Rose, D., Hung, C.C., Lepri, M., Alqassem, I., Gashteovski, K., Lawrence, C.:
+MEDDxAgent: A Unified Modular Agent Framework for Explainable Automatic
+Differential Diagnosis. arXiv preprint arXiv:2502.19175 (2025)
+25. Rutter, P.: The importance of clinical reasoning in differential diagnosis for non-
+medical prescribers, nurses and pharmacists. Clinics in Integrated Care31, 100271
+(2025)
+26. Singhal, K., Azizi, S., Tu, T., Mahdavi, S.S., Wei, J., Chung, H.W., Scales, N.,
+Tanwani, A., Cole-Lewis, H., Pfohl, S., et al.: Large language models encode clinical
+knowledge. Nature620(7972), 172–180 (2023)
+27. Xiong, G., Jin, Q., Lu, Z., Zhang, A.: Benchmarking Retrieval-Augmented Gener-
+ation for Medicine. In: Findings of the Association for Computational Linguistics:
+ACL 2024. pp. 6233–6251 (2024)
+28. Yan, W., Liu, H., Wu, T., Chen, Q., Wang, W., Chai, H., Wang, J., Zhao, W.,
+Zhang, Y., Zhang, R., et al.: ClinicalLab: Aligning Agents for Multi-Departmental
+Clinical Diagnostics in the Real World. arXiv preprint arXiv:2406.13890 (2024)
+29. Yang, A., Li, A., Yang, B., Zhang, B., Hui, B., Zheng, B., Yu, B., Gao, C., Huang,
+C., Lv, C., et al.: Qwen3 Technical Report. arXiv preprint arXiv:2505.09388 (2025)
+30. Yang, D., Wei, J., Li, M., Liu, J., Liu, L., Hu, M., He, J., Ju, Y., Zhou, W., Liu, Y.,
+et al.: MedAide: Information fusion and anatomy of medical intents via LLM-based
+agent collaboration. Information Fusion p. 103743 (2025)
+31. Zhang, H., Qiu, B., Feng, Y., Li, S., Ma, Q., Zhang, X., Ju, Q., Yan, D., Xie, J.:
+Baichuan4-Finance Technical Report. arXiv preprint arXiv:2412.15270 (2024)
+32. Zhao, W., Wu, C., Zhang, X., Zhang, Y., Wang, Y., Xie, W.: RaTEScore: A Met-
+ric for Radiology Report Generation. In: Proceedings of the 2024 Conference on
+Empirical Methods in Natural Language Processing. pp. 15004–15019 (2024)
+
+===== PAGE 11 =====
+MedCollab 11
+33. Zhong, C., Liao, K., Chen, W., Liu, Q., Peng, B., Huang, X., Peng, J., Wei, Z.:
+Hierarchical reinforcement learning for automatic disease diagnosis. Bioinformatics
+38(16), 3995–4001 (2022)

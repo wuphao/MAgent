@@ -1,0 +1,2484 @@
+
+
+===== PAGE 1 =====
+Received: 15 July 2024 Revised: 18 September 2024 Accepted: 21 September 2024
+DOI: 10.1002/alz.14333
+PERSPECTIVE
+Alzheimer’s Association clinical practice guideline for the
+Diagnostic Evaluation, T esting, Counseling, and Disclosure of
+Suspected Alzheimer’s Disease and Related Disorders
+(DET eCD-ADRD): Executive summary of recommendations for
+primary care
+Alireza Atri1,2 Bradford C. Dickerson3 Carolyn Clevenger4 Jason Karlawish5
+David Knopman6 Pei-Jung Lin7 Mary Norman8 Chiadi Onyike9
+Mary Sano10,11 Susan Scanland12 Maria Carrillo13
+1 Banner Sun Health Research Institute and Banner Alzheimer’s Institute, Sun City, Arizona, USA
+2 Center for Brain/Mind Medicine, Department of Neurology, Brigham and Women’s Hospital and Harvard Medical School, Boston, Massachusetts, USA
+3 Frontotemporal Disorders Unit and Alzheimer’s Disease Research Center, Department of Neurology, Massachusetts General Hospital and Harvard Medical School,
+Boston, Massachusetts, USA
+4 Department of Neurology, Nell Hodgson Woodruff School of Nursing, Emory University, Atlanta, Georgia, USA
+5 Departments of Medicine, Medical Ethics and Health Policy, and Neurology, Perelman School of Medicine, Penn Memory Center, University of Pennsylvania,
+Philadelphia, Pennsylvania, USA
+6 Department of Neurology, Mayo Clinic, Rochester, Minnesota, USA
+7 Center for the Evaluation of Value and Risk in Health, Institute for Clinical Research and Health Policy Studies, Tufts Medical Center, Boston, Massachusetts, USA
+8 Cedars-Sinai Medical Center, Culver City, California, USA
+9 Division of Geriatric Psychiatry and Neuropsychiatry, The Johns Hopkins University School of Medicine, Baltimore, Maryland, USA
+10 James J. Peters VAMC, Bronx, New York, USA
+11 Department of Psychiatry, Alzheimer’s Disease Research Center, Icahn School of Medicine at Mount Sinai, New York, New York, USA
+12 Dementia Connection, Clarks Summit, Pennsylvania, USA
+13 Medical & Scientific Relations Division, Alzheimer’s Association, Chicago, Illinois, USA
+Correspondence
+Alireza Atri, Banner Sun Health Research
+Institute, Bldg A, 10515 W Santa Fe Drive, Sun
+City, AZ 85351, USA.
+Email: alireza.atri@bannerhealth.com
+Bradford C. Dickerson, Frontotemporal
+Disorders Unit, Massachusetts General
+Hospital & Harvard Medical School, 149 13th
+Street, Charlestown, MA 02129, USA.
+Email: brad.dickerson@mgh.harvard.edu
+Abstract
+US clinical practice guidelines for the diagnostic evaluation of cognitive impairment
+due to Alzheimer’s disease (AD) or AD and related dementias (ADRD) are decades old
+and aimed at specialists. This evidence-based guideline was developed to empower
+all—including primary care—clinicians to implement a structured approach for eval-
+uating a patient with symptoms that may represent clinical AD/ADRD. Through a
+modified-Delphi approach and guideline-development process (7374 publications
+were reviewed; 133 met inclusion criteria) an expert workgroup developed recom-
+mendations as steps in a patient-centered evaluation process. This summary focuses
+Alireza Atri and Bradford C. Dickerson contributed equally to this study.
+This is an open access article under the terms of the Creative Commons Attribution-NonCommercial-NoDerivs License, which permits use and distribution in any
+medium, provided the original work is properly cited, the use is non-commercial and no modifications or adaptations are made.
+© 2024 The Author(s). Alzheimer’s & Dementia published by Wiley Periodicals LLC on behalf of Alzheimer’s Association.
+Alzheimer’s Dement. 2025;21:e14333. wileyonlinelibrary.com/journal/alz 1o f3 2
+https://doi.org/10.1002/alz.14333
+
+
+===== PAGE 2 =====
+2o f3 2 ATRI ET AL .
+Funding information
+Alzheimer’s Association on recommendations, appropriate for any practice setting, forming core elements of
+a high-quality, evidence-supported evaluation process aimed at characterizing, diag-
+nosing, and disclosing the patient’s cognitive functional status, cognitive–behavioral
+syndrome, and likely underlying brain disease so that optimal care plans to maximize
+patient/care partner dyad quality of life can be developed; a companion article sum-
+marizes specialist recommendations. If clinicians use this guideline and health-care
+systems provide adequate resources, outcomes should improve in most patients in
+most practice settings.
+KEYWORDS
+Alzheimer’s disease, cerebrospinal fluid, dementia, diagnosis, frontotemporal dementia, Lewy
+body dementia, magnetic resonance imaging, mild cognitive impairment, molecular biomarkers,
+positron emission tomography, vascular cognitive impairment
+Highlights
+∙ US clinical practice guidelines for the diagnostic evaluation of cognitive impairment
+due to Alzheimer’s disease (AD) or AD and related dementias (ADRD) are decades
+old and aimed at specialists.
+∙ This evidence-based guideline was developed to empower all—including primary
+care—clinicians to implement a structured approach for evaluating a patient with
+symptoms that may represent clinical AD/ADRD.
+∙ This summary focuses on recommendations, appropriate for any practice setting,
+forming core elements of a high-quality, evidence-supported evaluation process
+aimed at characterizing, diagnosing, and disclosing the patient’s cognitive functional
+status, cognitive–behavioral syndrome, and likely underlying brain disease so that
+optimal care plans to maximize patient/care partner dyad quality of life can be
+developed; a companion article summarizes specialist recommendations.
+∙ If clinicians use this guideline and health-care systems provide adequate resources,
+outcomes should improve in most patients in most practice settings.
+1 INTRODUCTION
+A major global health challenge is the timely detection, accurate
+diagnosis, appropriate disclosure, and proper management of mild
+cognitive impairment (MCI) or dementia due to Alzheimer’s disease
+(AD) or Alzheimer’s disease related dementias (ADRD), which include
+frontotemporal lobar degeneration (FTLD), Lewy body disease (LBD),
+vascular contributions to cognitive impairment and dementia (VCID),
+mixed etiology dementias, and others. By mid-century, the number of
+Americans living with dementia will more than double from 5.8 to 13.8
+million,1 leading to an explosion of the already exorbitant individual
+and societal costs and burden.2,3
+All too often, cognitive and behavioral symptoms due to AD/ADRD
+are undiagnosed, undisclosed, or misattributed.2,4–11 Am i n o r i t yo fp r i -
+mary care providers (PCPs) report feeling highly confident in making a
+diagnosis of AD or ADRD, 12 39% of PCPs report “never or only some-
+times” being comfortable making a dementia diagnosis, 2 and many
+PCPs say they lack the tools to care for patients with cognitive prob-
+lems and rely on specialists (although recognizing the challenges of
+accessing specialists in many settings). 1 In 50% of individuals with US
+billing records indicating dementia due to AD or ADRD, the patient or
+care partner report not being informed of the diagnosis4—even though
+the vast majority want to know their diagnosis— 4,13–15 despite evi-
+dence supporting individually and societally meaningful medical and
+psychosocial benefits of timely diagnosis.3,4,15–22 As a result of delayed
+diagnosis and disclosure, patients and families experience distressing,
+costly, and potentially harmful delays in receiving appropriate care.4,17
+Barriers to timely and accurate diagnosis and appropriate disclosure
+of MCI or dementia due to AD/ADRD are multifactorial, but many
+could be mitigated by the establishment—followed by effective dissem-
+ination and implementation—of evidence-supported clinical practice
+guidelines for the diagnostic evaluation of suspected MCI or dementia
+in primary as well as specialty care settings.
+T o address these gaps, the Alzheimer’s Association convened a
+Diagnostic Evaluation, T esting, Counseling, and Disclosure Clinical
+Practice Guideline Workgroup (the DET eCD-ADRD CPG Workgroup).
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 3 =====
+ATRI ET AL . 3o f3 2
+Our emphasis is on good clinical practice for the process of evaluating
+a patient presenting with an illness (i.e., symptoms, obtained through
+history, and signs, obtained through examination) that may represent
+the clinical manifestations of common brain diseases, especially AD
+and ADRD—in some cases with exacerbating medical conditions or
+factors. While this guideline applies to a patient with any severity of
+cognitive or behavioral impairment, it does not consider individuals
+who do not have symptoms; therefore, it does not address the topic
+of screening in asymptomatic people. 23–28 This DET eCD-ADRD CPG
+seeks to empower all clinicians, including those in primary, specialty,
+or subspecialty care, to implement a structured yet individualized
+patient-centered approach to diagnostic evaluation that includes clear
+communication with the patient and an informant or care partner(s).
+The guideline also empowers patients and families to expect that symp-
+toms concerning for AD or ADRD should be appropriately evaluated
+and disclosed, and that the health-care system should provide neces-
+sary resources for best practices. The purpose of the patient-centered
+evaluation process is to provide timely, accurate, and compassion-
+ate diagnosis, disclosure, and counseling regarding stage of functional
+impairment (cognitive functional status), the constellation of symp-
+toms and signs of the illness (cognitive–behavioral syndrome), and the
+likely underlying disease(s) and conditions that are contributing to it—
+ultimately to ensure that all potential medical and psychosocial issues
+are considered so that a care plan can be developed to optimize goals,
+function, and quality of life for the patient and family.29–31
+This executive summary distills the core elements of a high-quality,
+evidence-supported, patient-centered evaluation and disclosure pro-
+cess that are appropriate for primary care and any other practice set-
+ting. A companion article summarizes recommendations for specialists
+(Dickerson BC, et al.).32
+2 METHODS
+The Alzheimer’s Association convened a multi-disciplinary DET eCD-
+ADRD CPG expert workgroup composed of 10 voting members from
+primary care, specialty and subspecialty care, long-term and pallia-
+tive care, health economics, and bioethics, and retained a team from
+Avalere Health with expertise in developing clinical appropriate use
+criteria and practice guidelines. Staff from the Alzheimer’s Associa-
+tion and Avalere teams supported the DET eCD-ADRD CPG workgroup
+in developing the guideline through a formalized process modeled
+after that described in the American Academy of Neurology Clinical
+Practice Guideline Process Manual, 33 the American College of Cardi-
+ology Foundation/American Heart Association T ask Force on Clinical
+Practice Guidelines,34 and the Institute of Medicine’s Clinical Practice
+Guidelines We Can Trust,35 ensuring that the process was transparent,
+that conflict of interest was managed appropriately, that the work-
+group was composed of multidisciplinary experts who were engaged
+in all steps of the process, and that the DET eCD-ADRD CPG Recom-
+mendations and Report underwent external peer review by a group
+including a patient advocate (all in accordance with best practices
+described in the Institute of Medicine’s Clinical Practice Guidelines We
+Can Trust). Details of the DET eCD-ADRD CPG developmental process
+and methods, summarized briefly here, can be found in supporting
+information.
+The process included a systematic review of the pub-
+lished evidence focused on the diagnosis of MCI and dementia
+likely due to AD based on six PICOTS (patient popula-
+tion/intervention/comparator/outcome/timing/setting) framework
+questions formulated by the workgroup and was conducted and
+independently graded by the Pacific Northwest Evidence-based
+Practice Center at Oregon Health & Science University. Of the initially
+identified 7374 potentially relevant articles, abstracts, and titles,
+1908 articles underwent full-text review, and 133 primary studies or
+systematic reviews met criteria for inclusion and assessment by the
+GRADE (Grading of Recommendations Assessment, Development,
+and Evaluation) method. In aiming to place the evidence into a realistic
+clinical context, the workgroup also considered non–evidence-based
+clinical experience-informed factors including deductive inferences
+from accepted clinical principles; 36 the relative value of the benefit
+compared to the risk of harm and burden of the action; the availability
+of the resources to perform the action; the cost of the action; and the
+availability of potentially effective alternative approaches, consistent
+with best practices in guideline development.33–35,37,38
+The workgroup attempted to phrase each recommendation as a
+practical action that is considered one of a series of steps in the eval-
+uation and disclosure process. Recommendations 1 through 11 were
+purposefully written (and re-written several times after several rounds
+of modified-Delphi discussions and voting by the workgroup) so that
+they could be assigned the highest strength of recommendation. That
+is, the benefit of performing the recommended action, as part of the
+goal-oriented and dynamic evaluation and disclosure process delin-
+eated in Figures 1 and 2, outweighs the potential harm and burden
+in the majority of circumstances. In so doing, the workgroup sought
+to describe the fundamental principles and steps of the process of a
+patient-centered evaluation that should usually be performed from
+start to finish.
+For each recommendation, a series of bullet points describing
+the rationale and considerations for implementation were written,
+followed by a narrative citing evidence for the recommendation, con-
+siderations for how to operationalize the action(s) represented by
+that recommendation, and specific situations that may be excep-
+tions. The DET eCD-ADRD CPG Report was then circulated to a
+panel of external reviewers for peer review. Based on feedback from
+the external reviewers, and developments in the field (particularly
+related to advances in and accessibility of cerebrospinal fluid [CSF]
+and positron emission tomography [PET] biomarkers in the United
+States from 2020–2023), the 19 DET eCD-ADRD CPG Recommenda-
+tions underwent several revisions and the final 19 DET eCD-ADRD
+CPG Recommendations (Box 1) achieved unanimous consensus for
+adoption on October 25, 2023. The DET eCD-ADRD CPG Report was
+revised accordingly, point-by-point responses to reviews were docu-
+mented, and the final DET eCD-ADRD CPG Comprehensive Report was
+unanimously approved by workgroup members, and is available online
+(https://www.alz.org/clinicalguidelines).
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 4 =====
+4o f3 2 ATRI ET AL .
+FIGURE 1 For patients who may be exhibiting symptoms and/or signs of cognitive impairment due to AD or ADRD, the three steps of the
+diagnostic formulation may be accomplished by following a process of seven core elements. AD, Alzheimer’s disease; ADRD, Alzheimer’s disease
+and related dementias, Dx, diagnosis; Hx, history.
+2.1 Framework of the DET eCD-ADRD guideline
+Recognizing that diagnostic and staging criteria for diseases in this field
+(i.e., AD and ADRD) will evolve, the workgroup focused the scope of this
+practical and clinically focused guideline on the principles of a patient-
+centered diagnostic evaluation and disclosure process in any practice
+setting. The workgroup considered a major goal of the diagnostic
+evaluation process to be the development of a three-step diagnostic
+formulation. The first step is to delineate the cognitive functional status
+(i.e., the overall level of impairment). Regardless of the specific symp-
+toms, a patient with dementia requires a different level of support and
+management from that of a patient with MCI. The second step is to
+characterize the patient’s cognitive–behavioral syndrome. The particu-
+lar cognitive–behavioral syndrome recognized by the clinician provides
+important information about the likely underlying cause(s) and poten-
+tial contributing factors, and therefore may play a critical role in guiding
+diagnostic decision making. Also, the specific cognitive–behavioral syn-
+drome communicates the needs of the patient to other professionals
+and to patients and families who are knowledgeable about these syn-
+dromes. By characterizing the full array of cognitive and behavioral
+symptoms, the clinician establishes the foundation for personalized
+symptom-based care and management. Finally, the third step is for
+the clinician to generate and narrow the differential diagnosis of the
+brain disease(s) or disorder that is the likely cause(s) of the patient’s
+cognitive–behavioral syndrome, recognizing the importance of differ-
+entiating AD from ADRD or other diseases, disorders (e.g., mood disor-
+ders), conditions (e.g., sleep apnea), and factors (e.g., effects of medica-
+tions or alcohol) that may cause or contribute to cognitive or behavioral
+symptoms. Although some segments of the field have evolved to clar-
+ify the importance of separating the clinical syndrome from the likely
+etiology, many diagnostic criteria still consider these conditions clinico-
+pathologic entities; that is, to meet clinical diagnostic criteria, a patient
+is usually required to exhibit a particular clinical syndrome(s) and some
+diagnostic test abnormalities supportive of particular neuropathologic
+changes. The guideline also emphasizes the importance of identifying
+accompanying factors or conditions that may exacerbate symptoms,
+which may or may not be possible to ameliorate with medical or behav-
+ioral treatments; and of promoting brain-healthy behaviors (see Box2).
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 5 =====
+ATRI ET AL . 5o f3 2
+FIGURE 2 In a primary care setting, this diagram shows the implementation of the seven core elements of the diagnostic evaluation process,
+illustrating how each clinical practice recommendation fits into the typical workflow, using the first tier of assessments and diagnostic tests.
+Ultimately, the goal is to evaluate a person with cognitive and/or behavioral symptoms to determine whether they have cognitive impairment and
+if so its impact on daily function (cognitive functional status), the cognitive–behavioral syndrome, and the likely etiology (-ies) of the impairment.
+This diagnostic formulation should then be disclosed clearly and compassionately, and a treatment plan can then be initiated. CBC, complete blood
+count; CRP , C-reactive protein; CT, computed tomography; ESR, erythrocyte sedimentation rate; MRI, magnetic resonance imaging; TSH,
+thyroid-stimulating hormone.
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 6 =====
+6o f3 2 ATRI ET AL .
+BOX 1: DET eCD-ADRD Recommendations
+RECOMMENDATION 1: For patients who self-report or whose care partner or clinician report cognitive, behavioral, or functional
+changes, the clinician should initiate a multi-tiered evaluation focused on the problem (Strength of Recommendation A).
+Rationale
+∙ The timely evaluation of an individual with cognitive or behavioral symptoms concerning for MCI or dementia represents best medical
+practice.
+Considerations for Implementation
+∙ Any middle-aged or older patient who self-reports—or whose spouse, family, or other informant (or clinician) reports concern regard-
+ing symptoms of cognitive, behavioral, or functional decline—should undergo an evaluation to determine whether they might have a
+cognitive–behavioral syndrome arising as a result of a specific neuropathology. A clinician should not assume “normality” or ascribe
+cognitive or behavioral symptoms to “normal aging” without an appropriate evaluation, which would constitute suboptimal care.
+∙ The evaluation process for possible cognitive or behavioral impairment can be initiated and in most cases completed at any of a variety
+of clinical practice settings: primary care, specialty care, or dementia subspecialty care. The practitioner’s proficiency with this patient
+population and the profile of the individual patient should guide the evaluation process.
+∙ The evaluation begins with a history from not only the patient but also—importantly—from someone who knows the patient well (an
+informant).
+RECOMMENDATION 2: The clinician should use patient-centered communication to develop a partnership with the patient or with
+patient and a care partner to (1) establish shared goals for the evaluation process and (2) assess capacity (understanding and appreciation)
+to engage in the goal-setting process for the evaluation (Strength of Recommendation A).
+Rationale
+∙ Competent, hence ethical, medicine relies on a clinician and patient freely and openly exchanging facts as a foundation to allow a patient
+to exercise her or his autonomy.
+∙ Clinicians caring for patients with cognitive–behavioral syndromes may face unique challenges arising from impairments that may be
+present in a patient’s awareness of the illness (anosognosia) or understanding and appreciation of medical facts and the ability to use
+this information to make decisions about medical care or other important activities (capacity).
+∙ Impairments in awareness and capacity can impact the evaluation process, including the ability to provide accurate information and to
+fully participate in the goal-setting process.
+∙ Impairments in awareness and capacity that may be present at the outset or that will arise sooner or later in all patients with dementia
+due to AD or ADRD dictate the need to engage a care partner in the communication of the diagnosis, usually from the beginning.
+Considerations for Implementation
+∙ The clinician should establish a critical triadic clinician–patient–informant/care partner relationship during the evaluation and disclo-
+sure process. This relationship seeks to build a strong foundation to establish shared goals, obtain information necessary for an accurate
+diagnosis, effectively communicate an appropriate explanation of the illness being faced, and help formulate and implement a robust
+plan of care.
+∙ Throughout the process, the clinician should develop a dialogue with the patient and care partner that uses patient-centered
+communication to collaboratively set goals and to adjust them, when necessary, as the process unfolds.
+∙ Throughout the process, the clinician should assess informational and educational needs, capacity, and the impact of the evaluation
+and disclosure process on the patient and care partner, providing structured information and educational resources, while tailoring the
+communication of this information to the individuals; the clinician’s assessment of awareness and capacity should guide the timing and
+content of the information shared with the patient and their care partner.
+RECOMMENDATION 3: The evaluation process should use tiers of assessments and tests based on individual presentation, risk factors,
+and profile to establish a diagnostic formulation, including (1) the overall level of impairment, (2) the cognitive–behavioral syndrome, and
+(3) the likely cause(s) and contributing factors (Strength of Recommendation A).
+Rationale
+∙ A structured yet personalized diagnostic evaluation of cognitive or behavioral symptoms—with hierarchical use of tiers of assessments
+and tests tailored to the patient—balances effectiveness and efficiency.
+∙ This structured yet individualized approach ensures that essential information is collected in all cases while allowing leeway for clinical
+judgment regarding need for further assessments, tests, or consultative input.
+∙ Ultimately, the clinician will integrate available data to arrive at a confident diagnosis based on established clinical criteria (T ables1–4),
+or to exclude such diagnoses.
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 7 =====
+ATRI ET AL . 7o f3 2
+∙ The first step of this three-step approach to diagnostic formulation is fundamentally important: for the clinician to delineate the
+patient’s cognitive functional status—the overall level of functional independence or dependence related to their cognitive or behav-
+ioral condition (i.e., cognitively unimpaired; subjective cognitive decline; mild cognitive impairment; mild, moderate, severe, or terminal
+dementia; T able1). This determination has important implications for the evaluation process and care planning.
+∙ The second step in diagnostic formulation is to characterize the specific clinical profile of the patient’s cognitive–behavioral syndrome
+(i.e., “syndromic diagnosis”; T ables2–4), because this places the patient in an epidemiologic context of prior probabilities of specific dis-
+ease processes that can cause the syndrome (T ables2–4)—influencing next steps in the diagnostic approach—and also heavily impacts
+symptom management and care planning.
+∙ Although each cognitive–behavioral syndrome is probabilistically more associated with specific neurodegenerative pathologic changes
+and diseases than others—most clinical syndromes can be caused by more than one type of pathology or disease—the proba-
+bility/likelihood of a particular syndrome being due to a specific disease is also a function of individual patient demographics,
+characteristics, and dementia risk factors (e.g., age, developmental and educational history, family history, cerebrovascular risk factors).
+∙ The third step in diagnostic formulation is to establish the most likely brain disease (or condition) causing the clinical syndrome (i.e.,
+“etiological diagnosis”; T ables2–4); and to delineate any other conditions or factors that may be contributing to the illness.
+Considerations for Implementation
+∙ A structured and individualized approach, detailed in Recommendations 4 to 9, should be used to first attempt to delineate, charac-
+terize, and establish the status, syndrome, and likely cause(s) of the illness, which in many patients will be sufficient to allow a highly
+confident diagnosis to be made. Some patients may require more specialized assessments and tests.
+∙ For a majority of individuals with a typical presentation of dementia due to AD, a first tier of clinical assessments, laboratory tests, and
+neuroimaging (Figure 2) should be sufficient for the clinician to achieve high probabilistic diagnostic confidence.
+∙ For each individual, the clinician must then decide if sufficient data exist to make a probabilistically confident etiological diagnosis, with
+reference to established clinical diagnostic criteria (T ables1–4), or if additional tests or referrals are needed to achieve the desired level
+of confidence in the diagnosis. Molecular biomarker confirmation may be desired for a variety of reasons.
+∙ T o establish each of the three steps of the diagnostic formulation, in some cases, multiple tiers of assessments or diagnostic testing may
+need to be pursued, depending on the complexity of the patient, the proficiency of the clinician, and the availability of resources.
+∙ Clinicians should consider that there is substantial variability between patients in the clinical manifestations of cognitive impairment or
+dementia arising from AD/ADRD which may relate to factors associated with the disease itself, other comorbid conditions, or patient-
+specific vulnerability or resilience factors.
+∙ While clinicians should weigh that with increasing age, there is greater likelihood that a patient’s cognitive or behavioral symptoms
+may result from multiple neurodegenerative brain diseases or comorbidities, a primary driver(s) or cause(s) of the symptoms—a specific
+primary etiologic diagnosis—that is most likely, should be established and communicated.
+RECOMMENDATION 4: During history taking for a patient being evaluated for cognitive or behavioral symptoms, the clinician should
+obtain reliable information involving an informant regarding changes in (1) cognition, (2) activities of daily living (ADLs and instrumental
+ADLs [IADLs]), (3) mood and other neuropsychiatric symptoms, and (4) sensory and motor function. Use of structured instruments for
+assessing each of these domains is helpful (Strength of Recommendation A).
+Rationale
+∙ The history of present illness (HPI) is the cornerstone of the approach to medical diagnosis. In the evaluation of a patient when a diag-
+nosis of AD or another dementia syndrome is a consideration, the goal of the HPI is to provide a narrative account of the patient’s
+principal cognitive and behavioral symptoms and their impact on their daily function, and community.
+∙ Careful characterization of symptoms of concern, exploration of plausible relationships between symptoms and pertinent events, and
+a comprehensive survey of all major domains (cognition, daily function, behavior/neuropsychiatric, sensorimotor) using a structured
+approach is important for sensitive detection and accurate delineation of potentially clinically relevant changes and syndromes. A
+structured comprehensive approach is critical because patients and care partners often do not possess the knowledge or vocabulary to
+represent changes; may not recognize, or may under-report, misclassify, or misattribute symptoms; and, without a structured approach,
+busy or distracted clinicians may not inquire about all relevant domains.
+Considerations for Implementation
+∙ T o obtain the HPI, the clinician should integrate information from an interview with the patient and an informant (care partner) to: (a)
+characterize the nature of the symptoms about which there is concern; (b) establish the time course of the symptoms (i.e., sequential
+order of onset, frequency, tempo, and nature of change over time); (c) explore plausible relationships between events and the presenting
+symptoms (and any potential triggers or contextual features); (d) evaluate impact of symptoms on the patient’s function in activities of
+daily living, interpersonal relationships, personal and public health and safety, and the need for care partner support.
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 8 =====
+8o f3 2 ATRI ET AL .
+∙ In due course, a structured survey of all major domains of cognition, mood/behavior, and sensorimotor function should be performed
+to try to identify relevant symptoms not volunteered by the patient or informant during the HPI.
+RECOMMENDATION 5: During history taking for a patient being evaluated for cognitive or behavioral symptoms, the clinician should
+obtain reliable information about individualized risk factors for cognitive decline (Strength of Recommendation A).
+Rationale
+∙ Each person has his or her own individual profile of risk factors—some of which are potentially modifiable (Box 2)—for the underlying
+brain diseases associated with dementia.
+∙ Each person has a profile of resilience and risk factors that can modify the likelihood, types, and trajectory of cognitive, behavioral,
+and functional changes associated with neuropathological changes. These factors can also impact the reporting of symptoms and
+performance on cognitive tests and must be considered uniquely for each individual and informant.
+∙ In older people, cognitive and behavioral symptoms may arise from a combination of several factors, including one or multiple types
+of neuropathological changes (e.g., AD neuropathologic change with or without Vascular Ischemic Brain Injury or LBD) or contributing
+conditions (e.g., obstructive sleep apnea, use of medications that may impair cognition, mood disorder, high alcohol consumption).
+∙ Some conditions that contribute to cognitive impairment are, to varying amounts, modifiable during the life course.
+Considerations for Implementation
+∙ During the evaluation process, the clinician should systematically obtain knowledge regarding the patient’s risk factors for
+neurodegenerative, cerebrovascular, and other diseases or conditions that may cause brain dysfunction.
+∙ During the evaluation process, the clinician should obtain information about the patient’s reserve and vulnerability profile with regard
+to cognitive and behavioral function.
+∙ The clinician should integrate this information regarding risk factors into the diagnostic evaluation process to: (a) contextualize symp-
+toms and test performance against the patient’s risk profile; (b) estimate the likelihood that the patient’s symptoms may be due to
+potential effects of one or more diseases, conditions, or other factors, some of which may require specific diagnostic testing and may
+be more responsive to intervention than others; (c) incorporate the patient’s risk factor profile into the overall care plan by educating
+and counseling the patient and care partner regarding modifiable risk factors and likely non-modifiable processes, developing a plan
+that includes treatments of specific diseases and conditions, and identifying strategies to mitigate the effects of modifiable risk factors,
+while promoting brain healthy lifestyles (Box2).
+RECOMMENDATION 6: In a patient being evaluated for cognitive or behavioral symptoms, the clinician should perform an examination
+of cognition, mood, and behavior (mental status exam), and a dementia-focused neurologic examination, aiming to diagnose the cognitive–
+behavioral syndrome (Strength of Recommendation A).
+Rationale and Considerations for Implementation
+∙ If a clinician ascertains a history of symptoms of changes in memory, thinking, reasoning, language, attention, perception, or behavior, a
+structured examination should be performed that includes a dementia-focused mental status examination and an elemental neurologic
+examination.
+∙ In addition to the history discussed in Recommendation 5, the examination enables the clinician to characterize the cognitive–
+behavioral syndrome if one is present and generate hypotheses about the differential diagnosis of the possible etiology (-ies).
+∙ The examination may identify signs of neurologic or psychiatric impairment that suggest an atypical cognitive–behavioral syndrome,
+such as one with prominent sensorimotor, language, perceptual, or behavioral components, which may warrant referral to a specialist.
+RECOMMENDATION 7:In a patient being evaluated for cognitive or behavioral symptoms, clinicians should use validated tools to assess
+cognition (Strength of Recommendation A).
+Rationale and Considerations for Implementation
+∙ While there is no single cognitive assessment instrument that fits all circumstances, the use of a validated instrument to detect cog-
+nitive impairment is an invaluable step in the evaluation process for the identification of potentially clinically significant cognitive
+impairment.
+∙ The interpretation of an individual’s cognitive test score profile (not simply whether performance is below or above a cut-off score)
+facilitates accurate detection and diagnosis of the cognitive functional status and cognitive–behavioral syndrome.
+∙ The patient’s performance on a validated brief cognitive test should not be interpreted in isolation but should be carefully integrated
+with patient’s overall risk profile (Recommendation 6), history of presenting illness (Recommendation 5), and other physical or medical
+examination and diagnostic findings.
+∙ It is possible that when a concern exists, a validated brief cognitive test may not be sufficiently informative or may not capture mild
+but clinically significant impairments (e.g., in individuals with extremes of age, education, and intelligence, or in those with complex
+medical or demographic considerations including language and culture); in such situations a clinician should strongly consider referral
+to a neuropsychologist or specialist.
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 9 =====
+ATRI ET AL . 9o f3 2
+RECOMMENDATION 8: Laboratory tests in the evaluation of cognitive or behavioral symptoms should be multi-tiered and individu-
+alized to the patient’s medical risks and profile. Clinicians should obtain routine Tier 1 laboratory studies in all patients (Strength of
+Recommendation A).
+Rationale
+∙ A multi-tiered approach to the selection of laboratory diagnostic tests in a patient with cognitive or behavioral impairment should
+balance individualized risk factors and medical conditions the patient is known to have or is suspected of having.
+∙ A routine laboratory panel as first-line diagnostic testing (in conjunction with structural neuroimaging, see Recommendation 9) aids in
+the recognition and treatment of common comorbid conditions that rarely cause but may often contribute to cognitive or behavioral
+symptoms.
+∙ Routine first-line laboratory testing in patients suspected of having AD/ADRD is nearly universally recommended by specialty society
+practice parameters, and non-US health authority guidelines, but lack consistency regarding which tests should be included.
+Considerations for Implementation
+∙ In all, or almost all, patients with suspected cognitive or behavioral symptoms, the clinician should obtain a basic set of Tier 1 laboratory
+tests (“cognitive lab panel”; T able 5) that includes complete blood count (CBC) with differential; complete metabolic (e.g., Chem-20)
+panel with renal and hepatic panels, electrolytes, glucose, calcium, magnesium, and phosphate; thyroid-stimulating hormone (TSH);
+vitamin B12 level; homocysteine level; C-reactive protein (CRP), and erythrocyte sedimentation rate (ESR).
+RECOMMENDATION 9: In a patient being evaluated for a cognitive–behavioral syndrome, the clinician should obtain structural brain
+imaging to aid in establishing the cause(s). If magnetic resonance imaging (MRI) is not available or is contraindicated, computed
+tomography (CT) should be obtained (Strength of Recommendation A).
+Rationale
+∙ Structural brain imaging is useful to exclude non-AD/ADRD-related conditions and for diagnostic inclusion of changes related to
+AD/ADRD.
+∙ Structural brain imaging may show evidence of regional brain atrophy consistent with AD or another neurode-
+generative disease. Absence of such changes does not exclude presence of underlying AD/ADRD pathological
+changes.
+∙ The regional atrophy pattern on structural brain imaging is often probabilistically associated with a type of neurodegenerative
+pathologic change, although not specific for only that type of pathologic change.
+∙ Some patients who present with gradually progressive cognitive or behavioral symptoms have a brain tumor or other lesion (e.g., infarct,
+neuroinflammatory, infectious) that can be readily identified using structural brain imaging.
+∙ Structural brain imaging, particularly MRI, is often very helpful for determining the potential contribution of VCID, including cerebral
+amyloid angiopathy.
+Considerations for Implementation
+∙ As part of Tier 1 testing for etiological diagnosis, structural brain imaging should be obtained in almost all patients. When available,
+brain MRI without contrast provides standard of care for individuals that do not have an absolute or relative contraindication—a head
+CT should be considered in others.
+∙ An individualized risk–benefit calculus, based on goals, circumstances, and clinical status, should also guide the type and timing of
+brain imaging. For example, without highly compelling clinical reasons, obtaining neuroimaging in a bed-bound and non-communicative
+individual with longstanding and very severe dementia should be avoided.
+∙ The interpretation of structural brain imaging must also take into consideration the patient’s age, because aging itself can be asso-
+ciated with relatively minimal/mild and diffuse cerebral atrophy, leukoaraiosis (white matter changes, better detected on T2 and
+fluid-attenuated inversion recovery MRI sequences), or isolated microhemorrhage (better detected on gradient echo/susceptibility
+weighted imaging MRI sequences), and indication for the scan (e.g., when a cognitive symptom or disorder is being evaluated), because
+patterns and extent of atrophy, leukoaraiosis, and microhemorrhage are associated with AD/ADRD and VCID. Cerebral atrophy,
+leukoaraiosis, or microhemorrhage should not be routinely interpreted as “age related” in a patient with cognitive or behavioral symp-
+toms, particularly if not obviously minimal/very mild and diffuse; instead, in such cases, the extent and pattern should be clearly
+delineated and clinical correlation should be advised.
+∙ The interpretation of structural brain imaging is often facilitated through a dialogue between the clinicians involved in evaluating the
+patient and the radiologist who is interpreting the scan.
+RECOMMENDATION 10: Throughout the evaluation process, the clinician should establish a dialogue with the patient and care partner
+about the understanding (knowledge of facts) and appreciation (recognition that facts apply to the person) of the presence and severity
+of the cognitive–behavioral syndrome. The patient and care partner’s understanding and appreciation of the syndrome guide education,
+diagnostic disclosure, and methods for communicating and documenting diagnostic findings (Strength of Recommendation A).
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 10 =====
+10 of 32 ATRI ET AL .
+Rationale
+∙ Competent, ethical medicine relies on a doctor and patient freely and openly exchanging facts to allow a patient to exercise autonomy.
+∙ Clinicians caring for patients with cognitive–behavioral syndromes often face unique challenges arising from impairments in patient
+capacity (understanding and appreciation of the illness).
+∙ Impairments in capacity, along with the impact of the information, will determine the timing and content of information told to the
+patient, and the level of involvement of a care partner as the patient’s proxy. While a structured diagnostic disclosure process is recom-
+mended, it always has to be tailored to the individual patient and care partner(s). Competent, ethical medicine relies on a doctor and
+patient freely and openly exchanging facts to allow a patient to exercise autonomy.
+Considerations for Implementation
+∙ Clinicians caring for patients with cognitive–behavioral syndromes often face unique challenges arising from impairments in patient
+capacity (understanding and appreciation of the illness).
+∙ Impairments in capacity, along with the impact of the information, will determine the timing and content of information told to the
+patient, and the level of involvement of a care partner as the patient’s proxy. While a structured diagnostic disclosure process is
+recommended, it always has to be tailored to the individual patient and care partner(s).
+RECOMMENDATION 11: In communicating diagnostic findings the clinician should honestly and compassionately inform both the
+patient and their care partner of the following information using a structured process: the name, characteristics, and severity of the
+cognitive–behavioral syndrome; the disease(s) likely causing the cognitive–behavioral syndrome; the stage of the disease; what can
+be reasonably expected in the future; treatment options and expectations; potential safety concerns; and medical, psychosocial, and
+community resources for education, care planning and coordination, and support services (Strength of Recommendation A).
+Rationale
+∙ The purpose of diagnostic disclosure is to accurately and compassionately explain to the patient and care partner(s) the illness they are
+facing.
+∙ When a clinician communicates the diagnosis, stage, prognosis, and options for care of an illness, a patient (and care partner) can
+exercise his/her autonomy.
+∙ A standardized approach to the communication of the diagnosis, stage, and prognosis creates structure so that the clinician conveys
+a large amount of information in a cohesive and supportive manner and assesses the patient’s understanding and appreciation of the
+information, engaging in a dialogue to personalize the communication of diagnostic information to the individual(s).
+∙ Diagnostic disclosure for patients with cognitive impairment presents important challenges: a patient may not be able to understand
+or appreciate the information because of the nature of their impairments including, in some cases, lack of insight. In this case, the
+involvement of a care partner is critical.
+Considerations for Implementation
+∙ The patient and care partner’s informational needs, the patient’s capacity, and the clinician’s judgment about the likely impact of diag-
+nostic information on the patient and care partner will guide the process, content, and timing of the information shared with the patient
+and their care partner. The clinician should deliver the personalized education necessary for the patient and care partner to understand
+the diagnosis, its implications, and to develop the foundation for care planning.
+∙ The clinician may decide, based on impairments in the patient’s capacity, to use different methods to disclose the diagnosis to the
+patient and to the care partner(s).
+RECOMMENDATION 12: A patient with atypical findings or in whom there is uncertainty about how to interpret the evaluation, or that
+is suspected of having an early-onset or rapidly progressive cognitive–behavioral condition, should be further evaluated expeditiously,
+usually including referral to a specialist (Strength of Recommendation A).
+Rationale
+∙ Delirium and rapidly progressive dementia (usually defined as developing subacutely within weeks or months) are considered to be
+urgent medical problems requiring rapid, and in some cases inpatient, evaluation and management.
+∙ Atypical, rapidly progressive or early-onset (young age of onset, age< 65 years) dementias pose unique diagnostic and care challenges
+due to the potential for a broad differential diagnosis that may require comprehensive neuropsychiatric evaluation; Tier 3 and 4 studies
+(see Recommendation 15); and specialist assessment, interpretation, or management.
+∙ Atypical dementia presentations are not uncommon, but symptom recognition and accurate diagnosis are frequently delayed for
+several years.
+∙ Patients with atypical forms of neurodegenerative dementias may have substantially different care and management needs and
+considerations regarding safety than patients with typical presentations of dementia due to AD.
+∙ Delays in accurate diagnosis and appropriate management of patients with atypical and early-onset dementias may cause substantial
+distress, harm, and costs to patients, families, and society, especially when a patient is working and/or raising children at home.
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 11 =====
+ATRI ET AL . 11 of 32
+Considerations for Implementation
+∙ The diagnosis of delirium may be clinically straightforward or may be challenging depending on the presentation and medical context,
+but in all settings requires urgent or emergent care for diagnosis and management (Box3).
+∙ The diagnostic evaluation of a patient with rapidly progressive dementia requires urgency and is usually complex, often requiring
+specialist consultation.
+∙ The evaluation of a patient with atypical or early-onset cognitive impairment or dementia requires proactive and expedited
+management by the evaluating clinician and should usually involve prompt specialist referral.
+∙ Atypical examination findings in patients with suspected cognitive–behavioral syndromes may include: (1) attentional impairments dif-
+ficult to differentiate between dementia and delirium, (2) prominent language or social–behavioral abnormalities, (3) sensory or motor
+dysfunction of cerebral origin, (4) cognitive performance that may be confounded by high or low educational/occupational attainment.
+RECOMMENDATION 13: A specialist evaluating a patient with cognitive or behavioral symptoms should perform a comprehensive his-
+tory and office-based examination of cognitive, neuropsychiatric, and neurologic functions, aiming to diagnose the cognitive–behavioral
+syndrome and its cause(s) (Strength of Recommendation A).
+∙ See Dickerson BC et al.32 for specialists for rationale and considerations for implementation of Recommendations 13 and 15 through
+19.
+RECOMMENDATION 14: Neuropsychological evaluation is recommended when office-based cognitive assessment is not sufficiently
+informative. Specific examples are when a patient or caregiver report concerning symptoms in daily life, but the patient performs within
+normal limits on a cognitive examination, or when the examination of cognitive–behavioral function is not normal but there is uncertainty
+about interpretation of results due to a complex clinical profile or confounding demographic characteristics. The neuropsychological eval-
+uation, at a minimum, should include normed neuropsychological testing of the domains of learning and memory (in particular delayed free
+and cued recall/recognition); attention, executive function, visuospatial function, and language (Strength of Recommendation A).
+Rationale and Considerations for Implementation
+∙ The neuropsychological evaluation may detect very mild but clinically important cognitive impairment which a mental status exam-
+ination (see Recommendation 6) using brief validated cognitive tests (see Recommendation 7)—such as those done in most office
+examinations—may not capture.
+∙ The neuropsychological evaluation can provide recommendations for potential further studies and a care plan that considers a patient-
+centered profile of strengths and limitations and can inform the differential diagnosis of potential etiologies.
+∙ Neuropsychological evaluation can aid in distinguishing neuropsychiatric disorders from the effects of medical and emotional
+comorbidities or of confounding patient characteristics such as limited or advanced education or language limitations.
+∙ Neuropsychological evaluation should be considered when a clinician needs to better delineate the cognitive functional status or
+to define the cognitive–behavioral syndrome or when there are complex psychosocial, medical, or demographic characteristics or
+significant confounding conditions.
+∙ The referring clinician should provide a consultation question that the neuropsychological evaluation can be structured to answer.
+RECOMMENDATION 15: When diagnostic uncertainty remains, the clinician can obtain additional (Tier 2–4) laboratory tests guided by
+the patient’s individual medical, neuropsychiatric, and risk profile (Strength of Recommendation A).
+RECOMMENDATION 16: In a patient with an established cognitive–behavioral syndrome in whom there is continued diagnostic
+uncertainty regarding cause(s) after structural imaging has been interpreted, a dementia specialist can obtain molecular imaging with
+fluorodeoxyglucose (FDG) PET to improve diagnostic accuracy (Strength of Recommendation B).
+RECOMMENDATION 17: In a patient with an established cognitive–behavioral syndrome in whom there is continued diagnostic uncer-
+tainty regarding cause(s) after structural imaging with or without FDG PET, a dementia specialist can obtain CSF according to appropriate
+use criteria for analysis of amyloid beta (A β)42 and tau/phosphorylated tau (p-tau) profiles to evaluate for AD neuropathologic changes
+(Strength of Recommendation B).
+RECOMMENDATION 18: If diagnostic uncertainty still exists after obtaining structural imaging with or without FDG PET and/or CSF
+Aβ42 and tau/p-tau, the dementia specialist can obtain an amyloid PET scan according to the appropriate use criteria to evaluate for
+cerebral amyloid pathology (Strength of Recommendation B).
+RECOMMENDATION 19:In a patient with an established cognitive–behavioral syndrome and a likely autosomal dominant family history,
+the dementia specialist should consider whether genetic testing is warranted. A genetic counselor should be involved throughout the
+process (Strength of Recommendation A).
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 12 =====
+12 of 32 ATRI ET AL .
+TABLE 1 Diagnostic criteria for mild cognitive impairment and dementia.
+NIA-AA diagnostic criteria for mild cognitive impairment39
+Cognitive concern reflecting a change in cognition reported by patient or informant or clinician (i.e., historical or observed evidence of decline over
+time)
+Objective evidence of impairment in one or more cognitive domains (i.e., formal or “bedside” testing to establish level of cognitive function in
+multiple domains)
+Preservation of independence in functional abilities
+Not demented
+DSM-5 diagnostic criteria for mild neurocognitive disorder40
+Evidence of modest cognitive decline from a previous level of performance in one or more cognitive domains (complex attention, executive function,
+learning and memory, language, perceptual-motor, or social cognition) based on:
+1. Concern of the individual, a knowledgeable informant, or the clinician that there has been a mild decline in cognitive function; and
+2. A modest impairment in cognitive performance, preferably documented by standardized neuropsychological testing or, in its absence, another
+quantified clinical assessment.
+The cognitive deficits do not interfere with capacity for independence in everyday activities (i.e., complex instrumental activities of daily living such
+as paying bills or managing medications are preserved, but greater effort, compensatory strategies, or accommodation may be required).
+The cognitive deficits do not occur exclusively in the context of delirium.
+The cognitive deficits are not better explained by another mental disorder (e.g., major depressive disorder, schizophrenia).
+NIA-AA diagnostic criteria for dementia41
+Dementia is diagnosed when there are cognitive or behavioral (neuropsychiatric) symptoms that:
+1. Interfere with the ability to function at work or at usual activities; and
+2. Represent a decline from previous levels of functioning and performing; and
+3. Are not explained by delirium or major psychiatric disorder.
+Cognitive impairment is detected and diagnosed through a combination of:
+a. History taking from the patient and a knowledgeable informant and
+b. An objective cognitive assessment, either a “bedside” mental status examination or neuropsychological testing. Neuropsychological testing
+should be performed when the routine history and bedside mental status examination cannot provide a confident diagnosis.
+The cognitive or behavioral impairment involves a minimum of two of the following domains:
+a. Impaired ability to acquire and remember new information
+Symptoms include: repetitive questions or conversations, misplacing personal belongings, forgetting events or appointments, getting lost on a
+familiar route.
+b. Impaired reasoning and handling of complex tasks, poor judgment
+Symptoms include: poor understanding of safety risks, inability to manage finances, poor decision-making ability, inability to plan complex or
+sequential activities.
+c. Impaired visuospatial abilities
+Symptoms include: inability to recognize faces or common objects or to find objects in direct view despite good acuity, inability to operate simple
+implements, or orient clothing to the body.
+d. Impaired language functions (speaking, reading, writing)
+Symptoms include: difficulty thinking of common words while speaking, hesitations; speech, spelling, and writing errors.
+e. Changes in personality, behavior, or comportment
+Symptoms include: uncharacteristic mood fluctuations such as agitation, impaired motivation, initiative, apathy, loss of drive, social withdrawal,
+decreased interest in previous activities, loss of empathy, compulsive or obsessive behaviors, socially unacceptable behaviors.
+DSM-5 diagnostic criteria for major neurocognitive disorder40
+Evidence of significant cognitive decline from a previous level of performance in one or more cognitive domains (complex attention, executive
+function, learning and memory, language, perceptual-motor, or social cognition) based on:
+1. Concern of the individual, a knowledgeable informant, or the clinician that there has been a significant decline in cognitive function; and
+2. A substantial impairment in cognitive performance, preferably documented by standardized neuropsychological testing or, in its absence,
+another quantified clinical assessment.
+The cognitive deficits interfere with independence in everyday activities (i.e., at a minimum, requiring assistance with complex instrumental
+activities of daily living such as paying bills or managing medications).
+The cognitive deficits do not occur exclusively in the context of delirium.
+The cognitive deficits are not better explained by another mental disorder (e.g., major depressive disorder, schizophrenia).
+Abbreviations: DSM-5, Diagnostic and Statistical Manual of Mental Disorders Fifth Edition; NIA-AA, National Institute on Aging–Alzheimer’s Association.
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 13 =====
+ATRI ET AL . 13 of 32
+TABLE 2 Cognitive–behavioral syndromes (syndromic diagnosis) and the differential diagnosis for diseases that cause them (etiologic
+diagnosis).
+Cognitive–behavioral syndrome Major clinical features
+Differential diagnosis of neuropathologic
+etiology(ies)
+Progressive amnesic syndrome
+(single or multi-domain)
+Difficulty with learning and remembering new
+information, sometimes as the main feature, often
+accompanied by other features (e.g., executive
+dysfunction, depression, anxiety)
+Usually AD
+Often AD with co-pathologies (AD + VCID,
+AD + LBD > AD + VCID + LBD)
+Sometimes hippocampal sclerosis, argyrophilic
+g r a i nd i s e a s e ,p u r eV C I D ,p u r eL B D ,T D P - 4 3
+proteinopathy/LATE, PART
+Rarely FTLD
+Progressive aphasic syndrome (e.g.,
+PPA or progressive aphasic
+multi-domain syndrome)
+Speech and language impairments including
+word-finding difficulty (anomia), agrammatism,
+speech sound errors, impaired repetition (often due
+to auditory-verbal working memory impairment),
+impaired comprehension, impaired reading (alexia),
+impaired writing (agraphia)
+Usually logopenic variant PPA is due to AD, less
+commonly FTLD
+Usually semantic variant PPA is due to
+FTLD-TDP43, rarely FTLD-tau or AD
+Usually non-fluent variant PPA is due to FTLD-tau,
+sometimes FTLD-TDP43, rarely AD
+Progressive visuospatial dysfunction
+(e.g., posterior cortical atrophy
+syndrome)
+Difficulty with visual and/or spatial perception and
+cognition, often with limb apraxia (difficulty
+planning or performing learned motor tasks or
+movements), alexia, agraphia, acalculia, and related
+cognitive dysfunction localizable to posterior
+cortical regions
+Usually AD
+Sometimes FTLD-CBD or AD + LBD
+Rarely LBD
+Very rarely FTLD-TDP43
+Progressive dysexecutive and/or
+behavioral syndrome (e.g., bvFTD)
+Changes in executive function (judgment, problem
+solving, reasoning) with or without apathy or
+changes in personality or social or emotional
+behavior
+Frequently FTLD (FTLD-tau or FTLD-TDP43)
+Frequently AD or AD + VCID
+Sometimes FTLD-PSP , FTLD-CBD, or VCID
+Rarely LBD
+Progressive
+cognitive-behavioral-parkinsonism
+syndrome (e.g., dementia with Lewy
+bodies syndrome or PDD syndrome)
+Fluctuating levels of cognitive impairment,
+recurrent visual hallucinations, spontaneous
+extrapyramidal motor features and a history of
+rapid eye movement (REM) sleep behavior disorder
+(RBD)
+Often LBD
+Often LBD with AD
+Sometimes LBD with FTLD or VCID
+Rarely FTLD-CBD or FTLD-PSP
+Progressive cortical
+cognitive-somatosensorimotor
+syndrome (e.g., corticobasal
+syndrome)
+Cortical sensorimotor (e.g., limb apraxia) and
+cognitive difficulties especially including executive
+dysfunction, with asymmetric rigidity and other
+motor dysfunction
+Often CBD
+Sometimes AD, FTLD-PSP , FTLD-Pick’s or
+FTLD-TDP43
+Rarely LBD
+Progressive supranuclear palsy
+syndrome (e.g., PSP Richardson’s
+syndrome)
+Postural instability, supranuclear gaze palsy, with
+varying degrees of cognitive, behavioral, or other
+movement symptoms
+Usually FTLD-PSP
+Sometimes FTLD-CBD
+Rarely LBD
+Note: The syndromic diagnosis is defined by the nature of the cognitive and/or behavioral domain most prominently impacted. There is a probabilistic—not
+deterministic—relationship between syndromic diagnosis and etiologic diagnosis. AD neuropathologic changes can be associated with many clinica ls y n -
+dromes; multiple etiologies are likely in individuals older than 85 years. VCID may be the primary etiology or a contributor to a host of syndromes. 31,42
+Korsakoff’s syndrome, limbic encephalitis, anoxic brain injury, traumatic brain injury, temporal lobe epilepsy, sequelae of herpes encephalitis may cause
+amnesic syndromes but are usually distinguishable by history. In addition, cognitive–behavioral impairment may be a feature of other rare diseasesincluding
+Huntington’s disease, FTD with ALS, Creutzfeldt–Jakob disease, multiple-system atrophy, etc.
+Abbreviations: AD, Alzheimer’s disease (referring specifically to the neuropathologic changes); bvFTD, behavioral variant frontotemporal deme ntia; CBD,
+corticobasal degeneration; FTLD, frontotemporal lobar degeneration (referring specifically to the neuropathologic changes; many neuropatholo gists con-
+sider FTLD-tau to include the neuropathologic entities of Pick’s disease, PSP , and CBD); LATE, limbic-predominant age-related TDP-43 encephalopathy; LBD,
+Lewy body disease (referring specifically to the neuropathologic changes); PART, primary age-related tauopathy; PDD, Parkinson’s disease dement ia; PPA,
+Primary Progressive Aphasia; PSP , progressive supranuclear palsy; VCID, vascular contributions to cognitive impairment and dementia.
+T o accomplish the three steps of the diagnostic formulation, the
+evaluation follows a multi-tiered approach so the clinician can select
+assessments and tests that follow a structured process but that are
+tailored to the individual patient’s circumstances. Depending on the
+proficiency of the practitioner and the profile of the patient, this
+evaluation can be initiated and, in many situations, completed in any
+clinical practice setting. The three steps of the diagnostic formula-
+tion may be relatively straightforward to determine by following a
+process of seven core elements (Figure 1) and using the first tier of
+assessment and diagnostic tests in a primary care setting (Figure 2),
+or they may require additional consultation (e.g., neuropsychologi-
+cal evaluation) and tiers of assessments and tests in the primary
+care (Figure 2), specialty (Figure 3), or dementia subspecialty settings
+(Figure 4).
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 14 =====
+14 of 32 ATRI ET AL .
+BOX 2: Brain-healthy behaviors
+Accruing evidence indicates that there are a variety of potentially modifiable risk factors for dementia. 43–48 In their report, Liv-
+ingston et al. identified three mid-life risk factors for dementia, including hearing loss, hypertension, and obesity. 47 In later life, five
+potentially modifiable risk factors include smoking, depression, physical inactivity, social isolation, and diabetes. Although it is impos-
+sible to completely eliminate these risks, estimates suggest that risk could be reduced by ≈ 20% if these factors were adequately
+addressed. Additional evidence is cited in this report indicating that patients with MCI or dementia may benefit—even after symp-
+toms are clearly present—from brain-healthy behaviors to reduce modifiable risk factors for dementia. 47 Several ongoing studies are
+evaluating the efficacy of multifaceted lifestyle interventions as preventative approaches or to treat progressive decline in people with
+dementia.
+Although a small group of studies suggest that primary care clinicians are not aware of this evidence, they have a positive attitude
+toward the promotion of brain health and would like a risk prediction tool and more time to promote brain health. 49 An evidence-based
+consensus50 recommended that clinicians perform individualized risk assessment and counseling, focusing on the American Heart Asso-
+ciation Life’s Simple 7.44 These include the promotion of four health-related behaviors: non-smoking status, physical activity at goal levels,
+body mass index< 25 kg/m2, healthy diet consistent with current guidelines; and three health-related factors: untreated blood pressure<
+120/< 80 mm Hg, untreated total cholesterol < 200 mg/dL, and fasting blood glucose < 100 mg/dL. Citing substantial evidence, they also
+recommend the pursuit of cognitively stimulating and rewarding activities. 50 Screening and evaluating for obstructive sleep apnea and
+excessive alcohol use are also important.
+We recommend that primary care clinicians work toward bringing this evidence into their practice by performing a personalized assess-
+ment of dementia risk factors in any middle-aged or older adult and providing counseling on “brain-healthy behaviors.”51 In many settings,
+approaches similar to those taken for diabetes treatment and prevention are worth considering, including the development of a “cham-
+pion” member of the team who provides a summary of evidence and motivational information. 49 If a patient has sought evaluation for
+symptoms of cognitive decline and been determined to be cognitively normal or experiencing subjective cognitive decline, clinicians
+should take the opportunity to engage the patient in promoting brain-healthy behaviors while continuing to monitor cognitive function
+longitudinally.52
+2.2 DET eCD-ADRD core elements of diagnostic
+and disclosure process and recommendations
+2.2.1 Core element one: whom to evaluate and
+how to establish shared goals
+The first core element of the process, covered by Recommendations
+1 through 3, addresses foundational considerations when initiating
+and proceeding through a diagnostic evaluation and disclosure pro-
+cess. These include in whom and when to initiate an evaluation; the
+importance of a patient-centered and collaborative partnership in the
+goal-setting, diagnostic, and disclosure processes; and the three-step
+conceptual framework for diagnostic formulation. The DET eCD-ADRD
+CPG also emphasizes the critical importance—in most situations—of
+including both the patient and an informant or care partner in the
+diagnostic and disclosure process.
+Recommendation 1 applies the basic tenets of a high-quality medi-
+cal approach to the evaluation of symptoms of cognitive or behavioral
+decline.36,53–55 The timely evaluation of an individual with cognitive or
+behavioral symptoms concerning for MCI or dementia represents best
+medical practice.16,20,22,56–60
+Any middle-aged or older patient who self-reports—or whose
+spouse, family, or other informant (or clinician) reports concern
+regarding symptoms of cognitive, behavioral, or functional decline—
+should undergo an evaluation to determine whether they might
+have a cognitive–behavioral syndrome arising due to specific neu-
+ropathologic changes (Recommendation 1). A clinician should not
+assume “normality” or ascribe cognitive or behavioral symptoms
+to “normal aging” without an appropriate evaluation. 56 The opti-
+mal approach to the evaluation of a patient with suspected cog-
+nitive or behavioral impairments, whether at the level of subjec-
+tive cognitive decline, 61 MCI,56 mild behavioral impairment, 62,63 or
+dementia, is grounded in the biopsychosocial model of health and
+illness.64,65
+Clinicians evaluating a patient suspected of having a cognitive–
+behavioral syndrome arising from neurodegenerative disease may face
+unique challenges arising from impairments that may be present in a
+patient’s awareness of the illness (anosognosia) or understanding and
+appreciation of medical facts and the ability to use this information to
+make decisions about medical care or other important activities (capac-
+ity). Impairments in awareness and capacity that may be present at the
+outset or that will arise sooner or later in all patients with dementia
+due to AD or ADRD dictate the need to engage a care partner in the
+communication of the diagnosis, optimally from the beginning.
+The clinician should use patient-centered communication to
+develop a partnership with the patient or with the patient and a
+care partner to (1) establish shared goals for the evaluation process
+and (2) assess capacity (understanding and appreciation) to engage
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 15 =====
+ATRI ET AL . 15 of 32
+FIGURE 3 In a specialty care setting (usually general neurology, geriatric psychiatry, or geriatrics), this diagram briefly illustrates how each
+primary care clinical practice recommendation fits into the typical workflow (see Figure2 for details). Additional detail is provided on how higher
+tier assessments and diagnostic tests fit into the specialty care workflow. In some specialty care settings, the assessments and tests illustrated in
+Figure 4 are performed to arrive at the three-step diagnostic formulation. This diagnostic formulation should then be disclosed clearly and
+compassionately, and a treatment plan can then be initiated.
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 16 =====
+16 of 32 ATRI ET AL .
+FIGURE 4 In a dementia subspecialty care setting (usually behavioral or geriatric neurology, geriatric or neuropsychiatry, or geriatrics), this
+diagram briefly illustrates how each primary care or specialty clinical practice recommendation fits into the typical workflow (see Figures2 and 3
+for details). Additional detail is provided on how higher tier assessments and diagnostic tests fit into the subspecialty care workflow to arrive at the
+three-step diagnostic formulation. This diagnostic formulation should then be disclosed clearly and compassionately, and a treatment plan can
+then be initiated. CBC, complete blood count; CRP , C-reactive protein; CT, computed tomography; DDx, differential diagnosis; Dx, diagnosis; ESR,
+erythrocyte sedimentation rate; MRI, magnetic resonance imaging; TSH, thyroid-stimulating hormone.
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 17 =====
+ATRI ET AL . 17 of 32
+in the goal-setting process for the evaluation (Recommendation 2).
+Such a relationship provides a foundation aiming to ensure that all
+information necessary for an accurate diagnosis is obtained, that an
+explanation of the illness being faced is effectively communicated,
+and that a robust plan of care is formulated and implemented. The
+provider should convey medical information, assess the patient and
+care partner’s knowledge and appreciation of that knowledge, and
+offer education and support. Throughout the process, the clinician’s
+assessment of the patient’s awareness and capacity should guide the
+timing and content of the information shared with the patient and
+their care partner.
+Although the triadic clinician–patient–informant relationship is
+unusual in the practice of adult medicine, it is nonetheless essential
+to assure that an accurate diagnosis is made, an appropriate explana-
+tion of the illness being faced by the patient and family is provided,
+and a comprehensive and practical plan of care is formulated and
+implemented. Other consensus recommendations and guidelines also
+emphasize the critical importance of establishing a triadic relationship
+that involves a patient-centered communication approach66,67 includ-
+ing a care partner, optimally from the beginning of a structured and
+iterative process (see Figure 1).15,56,58,60,68,69
+The practical considerations for achieving the most effective triadic
+relationship are often complex and can, in some circumstances–
+and particularly in primary care settings—be challenging to
+accommodate.7,16,18,70 For example, the most honest history from
+an informant may be best obtained in private. In some primary care
+settings, privacy concerns may make it difficult to involve an informant
+in the evaluation process. Some clinician’s offices may not be physically
+or operationally designed to optimally accommodate a patient and
+care partner. Relationship dynamics between the patient and family
+members or informant/care partners can be complicated and may
+necessitate several streams of communication and a separate space.
+It can be very helpful to start the process with a meeting to establish
+shared goals for the diagnostic evaluation process.
+In most cases, the goal of the evaluation process is to determine
+whether the patient has a diagnosable brain disease affecting cognition
+or behavior.71 The first step—the determination that a person does or
+does not have dementia—is critical for the clinician to be able to dis-
+cuss whether the patient needs or will likely need specific supports,
+including surrogate decision makers. For any individual, differentia-
+tion of what is a cognitive–behaviorally impaired versus an unimpaired
+state requires clinical judgment.24,39–41,56,72,73 The determination that
+a person has MCI or dementia (or mild vs. major neurocognitive dis-
+order in Diagnostic and Statistical Manual of Mental Disorders Fifth
+Edition [DSM-5] terminology) is the first step of a diagnostic formula-
+tion that requires the clinician to integrate reliable history regarding
+the types, trajectory, and impact of changes in cognitive, behavioral,
+and daily activity functions with the patient’s performance on tests of
+cognitive function in multiple domains (attention, memory, language,
+executive function, visual function, socio-emotional behavior). 39–41
+The patient’s symptoms and performance on tests are both influenced
+by a variety of individual factors that have to be considered, including
+education, occupation, culture, living situation, family or other rela-
+tionship dynamics, developmental history, and medical and psychiatric
+comorbidities (see T able1).
+The second step—determination of the cognitive–behavioral
+syndrome—facilitates communication about the specific types of
+impairments the patient has, regardless of the severity and impact
+of those impairments (i.e., MCI or dementia). While some patients
+present classically with one of the recognizable cognitive–behavioral
+syndromes (T able 2), others may not fit so clearly into these syn-
+dromic diagnostic criteria. In these cases, additional information or
+consultation with a specialist may be useful. A neuropsychological
+evaluation by a neuropsychologist proficient in AD/ADRD assess-
+ment is often invaluable in delineating the cognitive–behavioral
+syndrome in a patient with a complex presentation and can also be
+very helpful to suggest next steps in the evaluation and management
+process.
+Third, it is important for the clinician to implicate a specific dis-
+ease and/or condition as the likely cause(s) of cognitive impairment
+or dementia. While a patient’s clinical syndromic profile (cognitive–
+behavioral syndrome) informs likelihood estimates of underlying dis-
+ease pathology, there is always a differential diagnosis with regard
+to the possible neuropathologic changes that may be primarily driv-
+ing and “responsible” for a given clinical syndrome 42,74–77 (T able2).
+A variety of risk and resilience factors can inform the clinician’s
+thinking about the likelihood of specific diseases (e.g., a strong fam-
+ily history of AD increases the likelihood of AD pathology in a
+symptomatic individual; multiple cerebrovascular risk factors increase
+the likelihood of VCID). Each of these major disease entities has clin-
+ical diagnostic criteria (T ables 3 and 4), although the field is evolving
+toward a forward-thinking framework of separation of clinical syn-
+drome from likely neuropathologic changes informed by core and
+ancillary biomarkers.78–80
+2.2.2 Core elements two through five: history,
+systems review, risk profile, and exam
+Recommendations 4 through 7 provide guidance regarding the next
+four core elements of the evaluation process, including the use of a
+structured approach to obtain history and systems review information
+in the key domains of cognition, daily function, mood and behavior,
+and sensorimotor function, representing not only the patient’s per-
+spective but in most cases also reliable collateral information from an
+informant. These recommendations also emphasize the importance of
+eliciting personalized information regarding risk factors for cognitive
+decline. The clinician should perform a mental status examination that
+assesses cognition, mood and behavior, and a dementia-focused neuro-
+logic examination, using validated tools whenever feasible. A separate
+article in this special issue provides detailed descriptions of instru-
+ments that can be used to facilitate these assessments (Atri A, et al). 94
+It is also fundamentally important to consider psychiatric history and
+psychiatric disorders in the differential diagnosis in patients with cog-
+nitive impairment, recognizing that it is not uncommon for neurologic
+diseases to present with primary psychiatric symptoms (Box 3).
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 18 =====
+18 of 32 ATRI ET AL .
+TABLE 3 NIA-AA core diagnostic criteria for probable AD dementia41 and for MCI due to AD,39 and AA diagnostic criteria for AD.80
+Diagnostic criteria for AD
+NIA-AA core diagnostic criteria for probable AD dementia
+A diagnosis of probable AD dementia can be made when the patient
+1. Meets criteria for dementia (see T able 1), and
+2. In addition has the following characteristics:
+A. Insidious onset: symptoms have a gradual onset over months to years, not sudden over hours or days;
+B. Clear-cut history of worsening of cognition by report or observation; and
+C. The initial and most prominent cognitive deficits are evident on history and examination in one of the following categories:
+a. Amnestic presentation: It is the most common syndromic presentation of AD dementia. The deficits should include impairment in learning and recall of recently
+learned information. There should also be evidence of cognitive dysfunction in at least one other cognitive domain, as defined earlier in the text.
+b. Non-amnestic presentations:
+(i) Language presentation: The most prominent deficits are in word finding, but deficits in other cognitive domains should be present.
+(ii) Visuospatial presentation: The most prominent deficits are in spatial cognition, including object agnosia, impaired face recognition, simul tanagnosia, and
+alexia. Deficits in other cognitive domains should be present.
+(iii) Executive dysfunction: The most prominent deficits are impaired reasoning, judgment, and problem solving. Deficits in other cognitive domai ns should be
+present.
+D. The diagnosis of probable AD dementia should not be applied when there is evidence of
+a. Substantial concomitant cerebrovascular disease, defined by a history of a stroke temporally related to the onset or worsening of cognitive impai rment; or the
+presence of multiple or extensive infarcts or severe white matter hyperintensity burden; or
+b. Core features of dementia with Lewy bodies other than dementia itself; or
+c. Prominent features of behavioral variant frontotemporal dementia; or
+d. Prominent features of semantic variant primary progressive aphasia or non-fluent/agrammatic variant primary progressive aphasia; or
+e. Evidence for another concurrent, active neurological disease, or a non-neurological medical comorbidity or use of medication that could have a su bstantial
+effect on cognition.
+Biomarker evidence may increase the certainty that the basis of the clinical dementia syndrome is the AD pathophysiological process. If biomarkers ofb o t hAβ (PET
+or CSF) and neuronal injury (structural brain MRI, FDG PET, CSF tau) are present, likelihood is high that dementia is due to AD. If both are absent, the dementia is
+highly likely not due to AD. If they are conflicting, likelihood is intermediate.
+NIA-AA core diagnostic criteria for MCI due to AD
+1. Cognitive concern reflecting a change in cognition reported by patient or informant or clinician (i.e., historical or observed evidence of declin eo v e rt i m e )
+2. Objective evidence of impairment in one or more cognitive domains, typically including memory (i.e., formal or bedside testing to establish level of cognitive
+function in multiple domains)
+3. Preservation of independence in functional abilities
+4. Not demented
+Supportive
+1. Evidence of longitudinal decline in cognition, when feasible
+2. Rule out vascular, traumatic, medical causes of cognitive decline, where possible
+3. Report history consistent with AD genetic factors, where relevant
+Likelihood of MCI being due to AD
+1. High: biomarkers of both amyloid-beta (PET or CSF) and neuronal injury (structural brain MRI, FDG PET, CSF tau) are present
+2. Intermediate: a biomarker of either amyloid-beta or neuronal injury is present and the other is untested; or one is positive and one is negative
+3. Low: biomarkers of both A β and neuronal injury are absent
+AA diagnostic criteria for AD*
+Biomarker categorization
+Core AD biomarkers
+∙ Core 1: Aβ (“A”: PET, CSF, plasma) and hyper-phosphorylated tau (“T1 ”: specific CSF or plasma tau species [p-tau 217, p-tau 181, p-tau 231])
+∙ Core 2: AD tau proteinopathy (“T2 ”: specific CSF or plasma tau species [p-tau 205, microtubule binding region 243, non-phosphorylated tau fragments], tau PET)
+Non-specific processes involved in AD pathophysiology
+∙ N (neurodegeneration or injury): CSF or plasma neurofilament-light, MRI anatomic measures, FDG PET hypometabolism
+∙ I (astrocytic activation): CSF or plasma GFAP
+Biomarkers of non-AD pathology
+∙ Vascular brain injury: MRI indicators of infarct(s) and/or white matter hyperintensities
+∙ Alpha-synuclein: CSF alpha-synuclein seed amplification assay
+Biological staging (e.g., by PET)
+∙ Stage A (amyloid-positive [A+])
+∙ Stage B (A+,t a up o s i t i v e ,m e d i a lt e m p o r a ll o b e )
+∙ Stage C (A+, tau positive, moderate neocortical)
+∙ Stage D (A+, tau positive, high neocortical)
+Clinical staging for individuals on the AD continuum
+∙ Stage 0 (asymptomatic, deterministic genetic abnormality, no biomarker abnormality)
+∙ Stage 1 (asymptomatic, biomarker evidence for AD)
+∙ Stage 2 (Transitional cognitive/behavioral decline (including subjective cognitive decline))
+∙ Stage 3 (MCI)
+∙ Stage 4 (mild dementia)
+∙ Stage 5 (moderate dementia)
+∙ Stage 6 (severe dementia)
+Abbreviations: Aβ, amyloid beta; AA, Alzheimer’s Association; AD, Alzheimer’s disease; CSF, cerebrospinal fluid; FDG, fluorodeoxyglucose; GFAP , glial fibrillary acidic
+protein; MCI, mild cognitive impairment; MRI, magnetic resonance imaging; NIA, National Institute on Aging; PET, positron emission tomography; p-tau, phosphorylated
+tau.
+*As this manuscript was in press, an international working group published an alternative proposal for contemporary clinical diagnostic criteria for Alzheimer’s disease,
+maintaining the tradition of viewing it as a clinical-biological construct.73
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 19 =====
+ATRI ET AL . 19 of 32
+TABLE 4 Diagnostic criteria for major forms of non-AD dementia
+(AD-related dementia).
+Diagnostic criteria for various types of ADRD
+Behavioral variant frontotemporal dementia 81
+Primary progressive aphasiaa 40,82
+Dementia with Lewy bodies/Parkinson’s disease
+dementia
+40,83
+Vascular dementia/vascular cognitive impairment 40,84–86
+LATE 87
+Progressive supranuclear palsy 88
+Corticobasal degeneration 89
+Amyotrophic lateral sclerosis with frontotemporal
+dementia
+90
+Huntington’s disease 91,92
+Creutzfeldt-Jacob disease 93
+Abbreviations: AD, Alzheimer’s disease; LATE, Limbic-predominant Age-
+related TDP-43 encephalopathy; PPA, primary progressive aphasia.
+aPPA can be an atypical presentation of AD, especially when characteristics
+are consistent with the logopenic variant of PPA.
+BOX 3: Psychiatric disorders and dementia
+The interplay between cognitive impairment and psychiatric
+symptoms is complex. Traditionally, new-onset depression
+in an older adult has been on the list of treatable forms
+of dementia, formerly referred to as pseudodementia. 95–97
+Yet, it has become clear that changes in mood are very
+common early symptoms of AD or ADRD. For example, in
+one study of data from nearly 2000 cognitively unimpaired
+participants in the National Alzheimer’s Coordinating Cen-
+ter database who subsequently developed MCI or demen-
+tia, more than half had depression or irritability symptoms
+prior to cognitive impairment. 98 According to the DSM-
+5, core symptoms of depression include difficulty thinking,
+concentrating, and decision making. Thus, a patient pre-
+senting with such symptoms should always be evaluated
+for other symptoms of depression and this diagnostic pos-
+sibility should be considered. 99 Further complicating the
+matter, specific types of primary neurologic etiologies of
+dementia can be very difficult to differentiate from pri-
+mary psychiatric disorders because psychiatric symptoms
+are common early clinical features, including FTLD, LBD,
+prion diseases, Huntington’s disease, and paraneoplastic
+and autoimmune encephalopathies. 100 Neuropsychological
+assessment or dementia subspecialist assessment may be
+helpful.101
+A past medical history of a variety of primary psychiatric
+disorders is associated with an increased risk of dementia
+in later life, including not only major depressive disorder
+but also post-traumatic stress disorder, bipolar disorder, and
+psychotic disorders. 102 The causal direction of the associ-
+ation between psychiatric disorders and dementia remains
+unclear. Psychiatric symptoms may be risk factors for future
+dementia or may represent early symptoms in patients with
+neuropathologic changes associated with dementia. Many
+studies investigating associations between psychiatric dis-
+orders and dementia have only included relatively short
+follow-up periods. Therefore, given the long duration of
+accumulation of some neuropathologic changes leading to
+dementia prior to overt cognitive and functional impairment,
+new-onset psychiatric symptoms in older adults may repre-
+sent early symptoms of a disease that will ultimately become
+obvious as dementia due to AD or ADRD. These observations
+have led to the development of the clinical construct of mild
+behavioral impairment.103 In some cases, it may not be clear
+whether a patient’s symptoms are most likely explained by a
+primary psychiatric disorder or a neurodegenerative or other
+neuropsychiatric disease; thus, this construct may be useful
+in indicating this ambiguity as further diagnostic evaluation
+is performed, and as treatment for primary psychiatric symp-
+toms is implemented. Although not yet clinically validated,
+risk algorithms are being developed to support individual-
+ized prognostication in patients with MCI demonstrate the
+importance of assessing mood.104 Because of this complexity,
+many experts are advocating for studies with longer follow-
+up periods and sufficient biomarker evaluations to determine
+whether psychiatric symptoms/disorders represent primary
+psychiatric conditions that are risk factors and drivers for
+later developing neurodegenerative pathologic changes that
+then lead to dementia or whether psychiatric symptoms
+in some older persons are early manifestations of neu-
+ropathologic changes that precede cognitive and functional
+impairment in the clinical course of AD/ADRD.
+Recognizing these challenges, the Lancet Commission
+report focused their 2024 meta-analysis on seven studies
+with a 10- to 14-year follow-up period after a diagnosis of
+depression, summarizing their findings as supporting mid-
+life depression as a modifiable risk factor for dementia: “The
+effect of medication and therapy for depression in reduc-
+ing the risk of dementia suggest the importance of treating
+depression both for quality of life and because it might
+reduce the risk of dementia in the future.” It is widely recog-
+nized that the diagnosis and treatment of depression in older
+adults is often more complex than in younger adults, 105,106
+hence a high index of suspicion and an interdisciplinary and
+coordinated approach is required.
+When considering risk profile, it is important to recognize that a
+majority of individuals older than age 80 with cognitive impairment
+harbor more than one type of brain pathological change.77,107,108 Older
+persons with AD neuropathological changes often have concomi-
+tant changes related to VCID—including macroinfarcts, microinfarcts,
+atherosclerosis, arteriosclerosis, cerebral amyloid angiopathy—as well
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 20 =====
+20 of 32 ATRI ET AL .
+as other concomitant neurodegenerative diseases (e.g., LBD, TDP-43
+proteinopathy, hippocampal sclerosis). 74–77 In addition, many older
+adults with cognitive impairment have other potentially contributing
+conditions (e.g., obstructive sleep apnea, use of cognitively impairing
+medications, excessive alcohol consumption) that can exacerbate cog-
+nitive or behavioral symptoms. Therefore, it is not uncommon in older
+individuals and those with multiple comorbidities that a cognitive–
+behavioral syndrome has multiple etiologies, which when causing
+dementia-level impairment is called mixed etiology dementia. 75,109
+Patients with mixed etiology dementia are more likely to present with
+atypical or non-amnestic symptoms, and the identification of these
+factors may also provide opportunities for risk mitigation and optimiza-
+tion of care and management, particularly when cardiac, cerebrovas-
+cular, sleep, medication/supplement, or alcohol/substance-related risk
+factors are present.
+2.3 Core element six: iterative diagnostic
+formulation and multi-tiered diagnostic testing
+By following recommendations to this sixth core element in the eval-
+uation process (see Figures 1, 2 ,a n d 3), the clinician should have
+integrated information about risk profile, history of symptoms, and
+examination findings to develop an opinion regarding the cognitive
+functional status and, at least preliminarily, a cognitive–behavioral syn-
+dromic diagnosis, if present. There should also be sufficient information
+for most primary care clinicians to arrive at a first decision point with
+regard to whether consultative input should be obtained (i.e., from
+a neuropsychologist, specialist, or dementia subspecialist). In the pri-
+mary care setting, two or more problem-focused visits would usually
+be required to arrive at this point in the diagnostic evaluation process,
+especially when involving an informant/care partner and allowing suffi-
+cient time to assess cognition via a validated standardized instrument.
+T o achieve the goals of this three-step diagnostic formulation,
+the DET eCD-ADRD CPG recommends a structured and multi-tiered
+approach to assessment and testing that begins with a fundamental set
+of Tier 1 assessments and tests, supplemented as needed by other tests
+tailored to the patient (see Figures2–3). The clinician should formulate
+the results of the Tier 1 assessments and tests and decide which, if any,
+additional tests may be required to gain sufficiently high confidence in
+the presence or absence of a specific diagnosis. A stepped approach
+to diagnostic evaluation of potential cognitive impairment or demen-
+tia is also a cornerstone of other national, European and international
+guidelines including the UK National Institute for Health and Care
+Excellence 2018 Guidelines on dementia diagnosis and care, 58 Cana-
+dian (5th Canadian Consensus Conference on Diagnosis and Treatment
+of Dementia) guidelines, 60 the World Health Organization mhGAP
+2016 Intervention Guide,110 and the 2024 European Intersocietal Rec-
+ommendations for the biomarker-based diagnosis of neurocognitive
+disorders.111 It is ultimately each clinician who, depending on her
+or his proficiency, the available data and resources, and the goals of
+evaluation, must—in partnership with each patient-care partner dyad—
+guide the evaluation process to achieve the desired confidence in the
+syndromic and etiological diagnosis.
+Recommendations 8 and 9 provide guidance regarding the basic
+(Tier 1) diagnostic tests, including a cognitive laboratory panel and
+structural neuroimaging, that should be routinely obtained in all
+patients with a cognitive–behavioral syndrome to inform a confident
+etiological diagnosis. Importantly, Recommendations 8 through 11
+apply to fewer patients than those who begin the process, as many
+patients in whom there is an initial concern that prompts the evalu-
+ation process will, once Recommendations 1 through 7 are followed,
+be assessed with high confidence to have a cognitive functional sta-
+tus of “cognitively unimpaired,” and will not require further testing
+or evaluation (see Figure 2). Conversely, whether in the primary or
+specialty setting, for most individuals with typical presentations of AD
+dementia, the relevant information often would be available at this
+point to arrive at a confident clinical diagnosis of the likely etiology
+and to proceed with a disclosure visit emphasizing that such a diagnosis
+remains probabilistic and clinical judgment based and is not biomarker
+confirmed. Molecular biomarker confirmation is necessary for con-
+sideration of new disease-modifying therapies that target amyloid
+plaques (see Box 6).112
+Several readily treatable common comorbid conditions, includ-
+ing infections, dehydration, hypothyroidism (TSH), and vitamin B 12
+deficiency, are often observed and may contribute to cognitive or
+behavioral symptoms, and may cause subacute or acute clinical decom-
+pensation (see Box 4 on delirium). Acute mental status changes may
+be solely due to such conditions, but acute-on-chronic decompensa-
+tions are usually an indication that a patient with a chronic brain
+disease causing progressive cognitive decline has developed a common
+comorbid condition.
+A shotgun approach to first-tier diagnostic testing is not recom-
+mended as it is costly and can be harmful. A judicious and stepwise
+approach that prioritizes common and treatable conditions, and less
+invasive and more cost-effective testing, is recommended as the first-
+tier approach to diagnostic testing in a patient suspected of having a
+cognitive–behavioral syndrome due to AD/ADRD. Such approaches to
+routine lab testing in AD/ADRD have been recommended in specialty
+society practice parameters; 57,59,68 health-care systems such as the
+Veterans Health Administration;122 and in guidelines by world, Euro-
+pean Intersociety Consensus Recommendations, and national health
+service authorities and commissions, 20,58,60,110,111,123 but lack consis-
+tency, detail, a multi-disciplinary perspective, and specificity to the
+United States.124
+A description of first-line routine laboratory testing as “labs for
+reversible causes of dementia” can be misleading; the term “cognitive
+lab panel” may be more suitable. The conditions being evaluated in
+such a panel are rarely the primary etiology of a gradually progres-
+sive cognitive–behavioral syndrome, but often exacerbate cognitive or
+behavioral impairment in individuals with underlying neurodegenera-
+tive diseases and related disorders (e.g., VCID). It is highly unlikely for a
+hormonal or vitamin deficiency, or metabolic, infectious, autoimmune,
+toxic, neoplastic, or paraneoplastic condition to mimic the clinical
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 21 =====
+ATRI ET AL . 21 of 32
+BOX 4: Delirium
+Delirium (also known as encephalopathy, confusional state, or altered mental status) is a sometimes life threatening but often preventable
+clinical syndrome that is especially common in older vulnerable adults.40 Delirium, which is defined as an acute disorder of cognition and
+attention, often occurs during the course of a medical illness or after surgery (commonly while a person is in the hospital). Delirium often
+occurs in a person who is already cognitively impaired due to AD or ADRD, but may arise in a person who has not yet been diagnosed
+with cognitive impairment or dementia due to AD/ADRD or other cause. When delirium is superimposed on a preexisting neurodegener-
+ative dementia, there are important risk stratification and prognostic implications, including accelerated cognitive and functional decline;
+increased length of hospital stay; higher rates of rehospitalization, institutionalization, and death; and greater costs compared to demen-
+tia alone.113 It is critical to diagnose delirium because it represents a medical emergency, which if left untreated may be fatal or lead to
+devastating and irreversible cognitive and functional losses.113
+Delirium is a clinical diagnosis involving acute onset and fluctuating course of cognitive, behavioral, and/or sensorimotor symptoms;
+inattention; impaired level of consciousness; and disturbance of cognition indicating disorganization of thought (e.g., disorientation,
+memory impairment, or alteration in language).113 Delirium usually occurs in the context of medical conditions including infection, toxic-
+metabolic disorders, electrolyte and hydration disturbances, drugs, hypoxia, or organ failure. Supportive features of the syndrome include
+alterations in sleep–wake cycle; perceptual disturbances, such as hallucinations or misperceptions; delusions; inappropriate or unsafe
+behavior; and emotional lability. In typical delirium, acute changes in cognition, behavior, attention, and level of consciousness develop
+on timescales of hours to days, and may fluctuate within minutes to hours depending on the delirium subtype (hyperactive, hypoactive,
+mixed).
+The foundation of the delirium diagnosis rests on an estimate of the patient’s previous baseline level of cognition, function, and behavior.
+The clinician must interview a knowledgeable informant to determine the time course, nature, and trajectory of changes, and exam-
+ine the patient to establish current levels of cognitive function. The assessment of the patient with suspected delirium benefits greatly
+from the use of a validated brief cognitive assessment instrument to delineate spot performance (e.g., one of the forms of the Confusion
+Assessment Method (CAM) 114,115 or a similar instrument. 113 Repeated assessments are helpful because cognitive status often varies
+substantially within a day due to fluctuations in arousal, attention, and psychomotor state. In parallel, the clinician should obtain appro-
+priate labs and studies to establish and treat the cause(s) of and factors contributing to delirium. Simultaneously, measures should be
+initiated to prevent delirium complications; and delirium symptoms should be managed using non-pharmacological and, in severe cases,
+pharmacological strategies.116 Delirium severity should be measured over time to ensure appropriate response and resolution.
+The time course and nature of cognitive and behavioral abnormalities can help differentiate delirium from dementia, psychosis, mania,
+or severe depression. From a diagnostic perspective, the most useful characteristics of typical delirium are an acute change in mental sta-
+tus or behavior, fluctuations in arousal or level of consciousness, and inattention. Some patients experience a hypoactive delirium,117–119
+with cognitive and motor slowing and even a sedated appearance, which is more common among older individuals and is associated with
+greater risk of morbidity and mortality.120 Atypical, subsyndromal, and mild chronic forms of delirium must also be recognized and treated
+accordingly. Some causes of these forms of delirium include sleep disturbances, heavy alcohol intake, or the use of cognitively deleterious
+medications in vulnerable older individuals.121
+phenotype of typical AD/ADRD; it is more likely for a subsyndromal
+delirium caused by these conditions to secondarily becloud and decom-
+pensate cognitive–behavioral function in an individual with underlying
+AD/ADRD pathological changes. It is also possible, though very uncom-
+mon, for some of these conditions to primarily cause atypical dementia
+syndromes: reports of very rare instances (with insufficient long-term
+follow-up) notwithstanding, meta-analyses suggest that 0.3% to 0.6%
+of dementia syndromes may be at least partially “reversible”; while in
+≈ 9% of dementia syndromes a common comorbid condition may be
+observed.125
+The DET eCD-ADRD Workgroup aimed to provide practical guid-
+ance for Tier-1 lab testing via a cognitive lab panel that should
+be obtained in all or almost all patients evaluated for suspected
+cognitive–behavioral syndromes due to their relatively low cost, wide
+availability, and acceptable yield as a broad evaluation for common
+comorbid conditions. The workgroup adopted a multidisciplinary and
+US health-care–centric perspective to estimate risk–reward calculus
+by integrating usual practice, recommendations from other guide-
+lines and practice parameters, 20,57–60,68,110,111,122,124 and the limited
+evidence to otherwise support or refute the utility of cognitive lab
+panel tests for common comorbid conditions.59
+The cognitive lab panel (T able 5) recommended by the work-
+group includes screening tests for TSH and vitamin B12 deficiency,
+which are common in older adults, can cause neuropsychiatric symp-
+toms and decompensation of cognitive–behavioral syndromes, and
+their treatment can improve symptoms. Homocysteine is included
+because hyperhomocysteinemia is associated with functional B12 defi-
+ciency (and may not always readily detected by B12 levels in blood),
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 22 =====
+22 of 32 ATRI ET AL .
+TABLE 5 Multiple tiers of tests considered in the evaluation of patients with or suspected of having cognitive impairment.
+Tier Type What Who/how Why
+1 Blood “cognitive
+lab panel” (Rec. 8)
+TSH, vitamin B12, homocysteine, CBC with differential, complete
+metabolic panel (including calcium, magnesium, liver function tests), ESR,
+CRP
+Who: Obtain in almost all individuals
+assessed
+How: Usually obtain all tests in this
+tier
+Broad and relatively inexpensive tests for common conditions
+in older individuals that can contribute to cognitive and
+behavioral impairments
+Imaging (Rec. 9) Brain MRI without gadolinium—if unavailable or contraindicated then
+obtain non-contrast head CT
+Brain MRI (or CT if MRI is unavailable or contraindicated) (Rec.
+9), assessing: atrophy patterns (hippocampal and cortical
+atrophy in medial temporal and lateral temporal and parietal
+lobes are consistent with AD; frontal or anterior temporal
+atrophy are consistent with FTD; infarcts, leukoaraiosis, and
+microhemorrhages; non-degenerative conditions (e.g.,
+hydrocephalus, mass lesions)
+2 Blood ANA, HgbA1c, lipid profile, folate, ammonia,a Lead, Lyme antibody, RPR,
+HIV , SPEP , methylmalonic acid (MMA), PT, PTT
+Who: Obtain in some individuals
+based on clinical features (clinical
+risk profile from history, exam or
+lab/studies; other medical
+comorbidities) (**including people
+for whom the clinician aims to obtain
+a high confidence diagnosis of AD)
+How: Obtain one or a few tests in
+this tier depending on targeted
+clinical question
+Some Tier 2-4 tests can be obtained in some individuals based
+on clinical characteristics (Rec. 15)
+Imaging Chest plain film/x-raya
+Urine Urinalysis,a urine culturea
+Other Sleep study: for obstructive sleep apnea or REM sleep disorder (LBD)
+3 Blood TPO, anti-TGA, FTA-ABS, ACE, ANCA, viral antibody studies (hepatitis
+B/C, EBV , CMV)
+Who: Obtain in few individuals
+including those with atypical clinical
+profiles* or rapid progression
+How: Obtain one or more tests in
+this tier to evaluate a patient for a
+specific condition
+Most Tier 3 and 4 tests should be done by or in consultation
+with a specialist/subspecialist (see126 for review)
+Urine UPEP , Bence-Jones Proteins TPO & TGA to assess for Hashimoto’s encephalopathy/SREAT
+CSF AD CSF biomarker panel (Aβ42, tau, phospho-tau and ratios) (Rec. 17)**;
+consider obtaining cell count, glucose, total protein, and other CSF tests
+depending on condition being considered
+Lyme PCR; viral PCRs and cultures, VDRL, T. pallidum PCR
+*Assessment of possible early age-of-onset or atypical AD or
+ADRD may include brain FDG-PET (or SPECT) scan (Rec. 16).
+**When AD is a possibility and high confidence is desired
+consider analysis of specific in vivo AD biomarkers such as CSF
+AD panel (Rec. 17) or amyloid PET (Rec. 18). Diagnostic
+confirmation with molecular biomarkers is required for
+anti-amyloid therapies (see Box 6).
+Imaging MR or CT angiogram of head and neck, carotid ultrasound, brain MRI with
+gadolinium or head CT with contrast, chest films
+Brain FDG PET (or SPECT) scan* (Rec. 16)
+Brain amyloid PET scan** (Rec. 18)
+Other EEG, dopamine transport SPECT or PET imaging (altered in LBD, PDD >
+PSP and CBD), cardiac scintigraphy (altered in LBD)
+(Continues)
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 23 =====
+ATRI ET AL . 23 of 32
+TABLE 5 (Continued)
+Tier Type What Who/how Why
+4 Blood Paraneoplastic antibody panel, anti-voltage-gated potassium channel
+(VGKC) antibody, non-Lyme tick borne disease panel (ehrlichiosis,
+babesiosis, anaplasmosis, rickestsiosis, Powassan), copper &
+ceruloplasmin, tumor markers, rheumatological studies
+Who: Obtain in rare cases, atypical
+cases or in rapid progression, when
+etiology remains uncertain or index
+of suspicion is raised by evolving
+clinical trajectory or results of
+earlier testing
+How: One or more tests in this tier
+would be obtained if a specific
+etiology is being considered
+Tier 4 tests investigate rare, highly atypical or rapidly
+progressive dementia syndromes (see126 for review)
+Urine 24 hour urine collection for heavy metals, porphyria and/or copper
+CSF Protein 14-3-3, neuron specific enolase (NSE), T. whipplei PCR,
+paraneoplastic antibody panel, anti-voltage-gated potassium channel
+(VGKC) antibody, cytology, flow cytometry, other stains and cultures for
+infectious agents (bacterial, fungal, AFB)
+Imaging CT of chest, abdomen, pelvis; cerebral angiogram; whole body PET scan
+Other [biopsy] Biopsies: Brain and/or meningeal vessels; temporal artery; skin; small
+intestine; or muscle biopsy
+Genetic Autosomal dominant AD or ADRD genetic mutations*** (PSEN2, PSEN1,
+APP) (Rec 19), FTLD genetic mutations (MAPT, GRN, C9orf72), Huntington
+genetic mutation
+***When there is a 2 or more generational history of AD or
+dementia syndrome suggestive of autosomal dominant pattern
+or in early age-of-onset. All genetic tests should be performed
+and disclosed with involvement of genetic counseling when
+possible (Rec. 19).
+X Blood A β, hyperphosphorylated tau, neurofilament light chain (NfL), glial
+fibrillary acidic protein (GFAP), etc.
+Who: Patients suspected of having
+cognitive impairment or dementia
+due to a particular etiology typically
+in a specialist setting
+Subspecialty molecular biomarkers are emerging as
+commercial tests but at the time of this writing have not been
+validated in most clinical practice settings and diverse
+populations;127 reimbursement is not yet available. T au PET is
+FDA approved but not yet widely available or reimbursed.128
+This is a rapidly evolving field. See Box6 and 2024 AA Revised
+Criteria for diagnosis and staging of AD80 for more information
+and caveats. See also 2024 biological diagnosis of Lewy body
+diseases.79
+CSF, skin Alpha synuclein 129,130 How: One or more tests in this tier
+would be obtained if a specific
+etiology is being considered
+Imaging Brain tau PET scan 131
+Note: Tier 1 tests involve a blood cognitive lab panel and structural brain imaging that should be obtained in all or almost all individuals to establish likely etiology(-ies). T ests listed in Tier 2–4 are representative of
+tests that could be ordered with increasing selectively based on an individual’s clinical characteristics. Tier X are clinically emerging in specialist/subspecialist settings but may not be validated in diverse real-world
+populations and clinical settings, widely accessible, reimbursed or readily interpreted without high proficiency.126
+Abbreviations: AA, Alzheimer’s Association; Aβ, amyloid beta; ACE, angiotensin converting enzyme; AD, Alzheimer’s disease; ADRD, Alzheimer’s disease and related dementias; AFB, acid fast bacilli; ANCA, antineu-
+trophil cytoplasmic antibodies; CBC, complete blood count; CBD, corticobasal degeneration; CMV , cytomegalovirus; CRP , C-reactive protein; CSF,cerebrospinal fluid; CT, computed tomography; EBV , Epstein–Barr
+virus; ESR, erythrocyte sedimentation rate; FDA, US Food and Drug Administration; FDG, fluorodeoxyglucose; FTA-ABS, fluorescent treponemal anti body absorption; FTLD, frontotemporal lobar degeneration;
+HIV , human immunodeficiency virus; LBD, Lewy body disease; PCR, polymerase chain reaction; PDD, Parkinson’s disease dementia; PET, positron emiss ion tomography; PSP , progressive supranuclear palsy; PT,
+prothrombin time; PTT, partial thromboplastin time; RPR, rapid plasma reagin; SPECT, single photon emission computed tomography; SREAT, steroid responsive encephalopathy associated with thyroiditis; TGA,
+thyroglobulin antibodies; TPO, thyroid peroxidase antibodies; TSH, thyroid-stimulating hormone.
+aDelirium work-up first tier (see Box 3 on delirium)—in addition to Tier 1 labs, these tests should also be considered in all or nearly all individuals being assessed for delirium or an acute change in mental status.
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 24 =====
+24 of 32 ATRI ET AL .
+cardio- and cerebrovascular risk, and VCID. Other panel tests are
+informative about the potential existence of common comorbid con-
+ditions such as dehydration (e.g., suggestive with a blood urea nitro-
+gen:creatinine ratio > 20:1), hypo/hypernatremia, hypomagnesemia,
+hypercalcemia (and hypocalcemia), hypo/hyperglycemia, anemia, ure-
+mia, and hepatic dysfunction. Finally, ESR and CRP are included as
+broad, non-specific, and inexpensive screens for insidious systemic
+processes including inflammatory/autoimmune, infectious, or neoplas-
+tic processes (e.g., undetected lung, liver, or colon cancer) which may
+change management and prognosis.
+Brain MRI without contrast, when available and not contraindi-
+cated, is appropriate for evaluation of AD/ADRD.111,132 In the past, the
+major role of structural neuroimaging in dementia assessment was to
+assist in the exclusion of non-neurodegenerative etiologies of cogni-
+tive impairment or dementia (such as tumors, inflammatory conditions,
+infectious processes, etc.) or the identification of features of unusual
+forms of dementia (such as prion diseases). 59,132–134 In contempo-
+rary practice, structural brain images may reveal atrophy patterns
+supportive of a particular neurodegenerative disease diagnosis.133–135
+Strong evidence supports the utility of brain MRI against gold-standard
+neuropathologic examinations.136 For example, in some patients pre-
+senting with a history and examination typical for an early clinical
+stage of suspected AD, the brain MRI may show clear evidence of atro-
+phy in the medial temporal lobes and lateral temporal and parietal
+cortices with ventricular enlargement. 135,137 When a proficient clin-
+ician’s hypothesis is that the patient’s cognitive impairment is likely
+due to AD with relatively little else in the differential diagnosis, and
+a brain MRI is supportive of this hypothesis, the clinician may be
+reasonably confident in the clinical diagnosis, although specific molec-
+ular biomarkers are required to confirm the diagnosis for treatment
+with disease-modifying therapy. In other cases, there may not be evi-
+dence of abnormality, or the abnormalities may not be consistent with
+those hypothesized from the clinical presentation. In these cases, addi-
+tional higher-tier testing may be warranted. Finally, MRI plays a critical
+role in the detection of evidence of microhemorrhage associated with
+cerebral amyloid angiopathy, 138 which influences risk–benefit con-
+siderations for the use of anticoagulants and is a critical element
+of appropriate patient selection and monitoring for amyloid-related
+imaging abnormalities in patients who receive disease-modifying
+therapies.112,139
+While multiple barriers to timely diagnosis and appropriate dis-
+closure of AD/ADRD exist in primary care, individuals with typical
+AD dementia can and should be readily diagnosed with confidence in
+the primary care setting. By gaining proficiency with the testing and
+processes recommended in this guideline, most PCPs should find it rel-
+atively straightforward to suspect and then diagnose dementia likely
+due to AD in a patient with a typical presentation of gradually progres-
+sive memory loss and difficulty with judgment and problem solving, and
+often spatial and/or temporal orientation, which have impacted ADLs,
+and in whom cognitive lab panel and brain MRI are also supportive
+(i.e., unrevealing in the former and consistent with AD in the latter).
+However, some patients—especially those who are relatively young—
+may not only present with an unusual history of subtle, atypical, or
+rapidly progressive symptoms but may also exhibit unusual signs on
+office-based examination. Delirium and rapidly progressive dementia
+(usually defined as developing subacutely within weeks or months) are
+considered urgent medical problems requiring rapid, and in some cases
+inpatient, evaluation and management.
+Atypical features may include prominent focal cognitive abnormal-
+ities (e.g., aphasia, cortical visual dysfunction), sensorimotor impair-
+ment (e.g., visual field cut, limb apraxia or rigidity, myoclonus, eye
+movement abnormalities, incoordination, gait abnormalities), or pro-
+found mood and behavioral symptoms (e.g., disinhibition, manic-like
+behavior, flat or indifferent affect, or severe depressive or anxious
+mood or psychotic thought content).140–144 Patients with such signs on
+examination require an approach with a broader differential diagnosis,
+which often warrants specialist examination and distinct testing and
+studies to arrive at a diagnosis and appropriate interdisciplinary care
+plan.
+Other patients may have a history and examination that are incon-
+gruent: for example, a patient may not have a history suggestive of
+delirium but on examination may be highly inattentive or exhibit signs
+suggestive of a toxic-metabolic encephalopathy or a related syndrome.
+Still other patients may present with a history of substantial cognitive–
+behavioral change in daily life yet have what appears to be a normal
+examination in an initial office encounter. In patients whose exami-
+nation may be difficult to interpret in the primary care setting, it is
+critical to consider and facilitate referral to a specialist with expertise
+in dementia; and to strongly consider neuropsychological evaluation.
+Evaluation for suspected rare or rapidly progressive dementia is com-
+plex, includes a very broad differential diagnosis, and is best performed
+by a dementia subspecialist.126,145,146
+Recommendations 12 through 14 provide guidance regarding refer-
+ral to a specialist or a neuropsychologist and the elements of these
+assessments. Recommendations 15 through 19 provide guidance
+regarding hierarchical use of Tier 2 to 4 diagnostic tests (special-
+ized labs, imaging, genetic testing) and consultations, if needed, to
+determine cause(s) of (and potential contributors to) the cognitive–
+behavioral syndrome with a high level of confidence. Importantly,
+Recommendations 12 through 19 apply to fewer and fewer patients
+and circumstances still and the strength of these recommendations
+varies. For additional detail on the specialist or dementia subspecialist
+guideline, see Dickerson BC, et al.32 aimed toward specialists.
+2.4 Core element seven: diagnostic disclosure
+Recommendations 10 and 11 provide guidance regarding the sev-
+enth core element of the process—the communication of diagnostic
+findings and recommended management and follow-up care. 147 The
+patient and care partner’s understanding and appreciation of the
+illness—together with the clinician’s judgment—should guide educa-
+tion, communication, and documentation of diagnostic findings and
+disclosure. In this context, the clinician should honestly and com-
+passionately communicate the name/stage of the syndrome and the
+disease causing it; treatment options and expectations; prognosis;
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 25 =====
+ATRI ET AL . 25 of 32
+BOX 5: Health equity and disparities in AD/ ADRD
+There is a great need to better understand the incidence and prevalence of ADRD and to appropriately tailor services for underrep-
+resented communities and people of color. 2,159–161 Incidence of dementia appears to be highest in Black, Hispanic/Latino Caribbean,
+and Native American populations; intermediate in Latinx, Mexican American, and non-Latino White populations; and lowest in Japanese
+American and Asian American populations. Prevalence of dementia appears to be highest in Black and Caribbean Hispanic/Latinx
+populations.159,162 The prevalence rates are likely underestimated, and better data are needed, particularly in Native American, most
+Asian American, and Pacific Islander populations.159,163,164
+Studies of genetic risk factors and molecular biomarkers of AD in underrepresented minoritized backgrounds have consistently
+reported differences from non-Latinx White populations. 165–168 These studies suggest that the apolipoprotein E ( APOE) ε4 allele and
+traditional AD pathological biomarkers are likely not the major factors that account for the observed differences in risk, incidence, and
+prevalence of AD in underrepresented populations. At least some of the differences in incidence and prevalence likely relate to varia-
+tions in medical comorbidities, health-related behaviors, and sociocultural and environmental factors 2,164,169 that confer increased AD
+and ADRD vulnerability (or other as yet unknown genetic or biological factors).170 Such factors may include differences in chronic stress,
+smoking, exposure to pollution, and inequitable access to education, a healthy diet, and health care. 160,171 The complex interplay among
+these factors may influence the pathobiological disease processes leading to AD or ADRD in the brain, neuroimmune responses to these
+pathologic changes, or other risk and resilience factors that are ultimately expressed as alterations in brain circuit function underlying
+dementia symptoms.172,173
+Pervasive health-care system inequities for people of color and underrepresented and underserved populations hinder the diagnosis of
+cognitive–behavioral impairment and dementia due to ADRD.2,174 People of color and underrepresented populations have less access to
+health care, and family members may be less able to access help they need when faced with challenges of caring of adults with cognitive–
+behavioral impairments. Lack of access to medical services, care, and appropriate resources can result in more rapid cognitive decline,
+increased hospitalization rates from comorbid medical conditions, and excessive financial and caregiver burdens.3,174 The combination of
+disparities in access to health care and differences in disease biomarker characteristics in individuals with symptoms of cognitive impair-
+ment who are from underrepresented backgrounds compounds the challenges in early diagnosis and will likely lead to delays in access
+to appropriate treatments. In parallel with emerging evidence that collaborative dementia care management in primary care is associ-
+ated with better health outcomes and is cost effective, 175 numerous studies are being launched to try to improve the efficiency of the
+diagnostic process in primary care in underserved communities.176
+Ongoing progress to raise awareness, diversify the practitioner workforce, and to evolve clinical and research practices are needed to
+mitigate health inequities. It is essential to develop and implement tailored practices to improve diversity, inclusion, and equity in access
+to health-care resources and research opportunities for people of color and underrepresented populations. 2,163 Although differences
+in modifiable risk factors for dementia such as control of blood pressure, cholesterol, and glucose among racial and ethnic groups may
+contribute to ongoing health disparities, some health-care systems in certain regions of the country have demonstrated the elimination
+of racial disparities in at least some of these modifiable risk factors in their beneficiaries except for Blacks. 177 Finally, better access and
+inclusion of Blacks, Hispanic/Latinos, Asian Americans, Pacific Islanders, and Native Americans in clinical trials and observational studies
+are crucial to advance the biopsychosocio-environmental understanding of ADRD, to develop more effective treatments, and to provide
+greater care and hope for all facing the increasing scourge of dementing disorders.2,170
+and potential safety concerns—and the certainties, likelihoods, and
+unknowns related to these—and medical, psychosocial, and community
+resources for education, care planning and coordination, and support
+services. A separate article in this special issue provides guidance
+about principles of the diagnostic disclosure process as well as when
+immediate or full diagnostic disclosure may not be recommended or
+feasible.148
+3 DISCUSSION
+Improved diagnostic approaches for AD and ADRD that have tan-
+gible clinical benefits will be effective and of value in primary care
+if the diagnostic procedures can be efficient (with respect to time,
+effort, and costs), widely available, and sufficiently accurate and inter-
+pretable without high expertise. In parallel, therapeutic research must
+move forward toward new evidence-based pharmacotherapies, other
+biological interventions, behavioral interventions, and care and sup-
+port interventions that improve outcomes. In addition to the federal
+agencies devoting growing resources to these diseases, guided strate-
+gically in part by the National Alzheimer’s Project Act Advisory Council,
+grass-roots and advocacy organizations are catalyzing public–private–
+industry partnerships that should help the field work toward our
+common goal of timely and accurate diagnosis, appropriate disclo-
+sure, and better management for people living with these serious
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 26 =====
+26 of 32 ATRI ET AL .
+BOX 6: Diagnostic assessment in the era of amyloid plaque-lowering monoclonal antibody disease-modifying therapies
+In June 2021, the US Food and Drug Administration (FDA) granted accelerated approval for aducanumab (Aduhelm), an A β-directed
+plaque-lowering monoclonal antibody (mAb) indicated for the treatment of AD in patients with MCI or mild dementia (“early-stage AD”),
+but the Centers for Medicare Services (CMS) did not support payment for aducanumab, limiting its use. 178,179 Its development has been
+discontinued. In January 2022, the FDA granted accelerated approval for lecanemab (Leqembi), another amyloid plaque-lowering mAb
+indicated for the treatment of early-stage AD.112 This was followed in July 2023 by the traditional (full) FDA approval of lecanemab with
+the CMS agreeing to reimburse for its use when appropriate patients are registered in a CMS-approved patient registry. Protocols and
+care pathways for lecanemab administration have made it available to patients, particularly in specialty clinical practices. On July 2, 2024,
+the FDA gave traditional approval for donanemab (Kisunla), a third plaque-lowering mAb. In October 2023, CMS eliminated the national
+coverage determination for amyloid PET, thus making it reimbursable in clinical practice for Medicare beneficiaries. Several new CSF
+assays for amyloid and tau have also received FDA clearance.
+The availability of these disease-modifying therapies creates a demand for timely detection, accurate diagnosis, and appropriate
+treatment options for early AD that could overwhelm an unprepared health-care system. 180 Providing treatment with amyloid plaque–
+lowering mAbs requires high proficiency and sufficient resources including close collaborations with comprehensive multi-disciplinary
+teams.112 With too few specialists currently available to respond to the possible number of patients who are candidates for treatment,
+there are opportunities to forge new models of hub-and-spoke dementia specialist–primary care collaborations and peer-to-peer con-
+sultation to partially fill these needs and respond to workforce gaps. Health-care systems around the country are working to respond to
+this need, which will likely require new partnerships among community organizations, primary care clinicians, memory-care experienced
+nurses and nurse practitioners, and specialists.181–183
+The DET eCD-ADRD CPG Workgroup reviewed the 19 recommendations in the context of these FDA and CMS decisions. As guidance
+on the practical use of this new class of medications is developed and revised diagnostic criteria for AD evolve, the role, availability, and
+reimbursement of companion diagnostic biomarkers in the evaluation of patients with MCI or mild dementia will change. In addition,
+adjustments may be needed to accommodate the segment of the patient population who might warrant referral primarily for specialized
+elements of the diagnostic evaluation to determine whether a patient is a candidate for amyloid-lowering therapy. And finally, the use
+of structural brain imaging and genetics will change because brain MRI scans are required for monitoring for amyloid-related imaging
+abnormalities (ARIA) and APOE genotype influences ARIA risk. 112,139 Thus, an MRI may need to be repeated and APOE testing (and the
+genetic counseling that should accompany genetic testing) may need to be obtained for treatment planning (not for diagnostic evaluation
+purposes). With those points of potential adjustment in mind, the workgroup believes these guidelines and the evidence and principles
+that support them will likely change minimally in the short term in the context of amyloid-lowering therapy, yet we plan to re-evaluate
+them soon as this class of medications gains greater traction in clinical practice; as more accurate and broadly validated (in diverse clinical
+populations and settings) AD plasma biomarkers become available and reimbursed; as tau PET’s clinical utility and accessibility increase;
+and as sufficiently clinically accurate biomarkers for AD and other ADRD are developed, validated, and become accessible.127,128,153–158
+illnesses. Many in the field are enthusiastic for new approaches that
+may provide primary care clinicians with more actionable informa-
+tion within their own practices or that will help with decision making
+regarding referrals, including digital biomarkers (e.g., wearables to
+monitor aspects of physiology, behavior, or sensorimotor functions149
+and self-administered remote computerized cognitive and behavioral
+testing150) and plasma biomarkers, 151,152 which are demonstrating
+remarkable potential for detecting forms of A β, p-tau, and other
+disease-related proteins in blood samples but require further assess-
+ment and validation in real-world and diverse populations and clinical
+settings.153–158 Appropriate use criteria and EU/US Clinical Trials in
+Alzheimer’s Disease T ask Force recommendations for blood-based
+biomarkers do not recommend their use as stand-alone biomarkers
+in clinical practice, although cautious use in subspecialty clinics with
+confirmation using CSF or PET has been encouraged. 127,152 Further-
+more, it is critical to recognize that a variety of factors appear to
+alter the clinicopathologic relationships and biomarker characteris-
+tics of these disorders in minoritized populations who are under-
+represented in AD and ADRD research and clinical practice studies
+(Box 5).
+The field is evolving rapidly, and although we expect that the fun-
+damental principles outlined in the DET eCD-ADRD CPG recommenda-
+tions will stand the test of time, advances in specific technologies and
+their validation in more diverse non-research cohorts and real-world
+clinical settings will likely lead to the need to update this CPG within
+the next few years; especially now that disease-modifying therapies for
+AD are approved (Box 6) and plasma biomarkers are becoming more
+accurate and being validated in real-world populations and settings.155
+Ongoing studies of other specific etiologies of cognitive impairment
+and dementia, such as chronic traumatic encephalopathy (Box 7), are
+continuing to expand our understanding of the variety of disease
+processes that can lead to dementia.
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 27 =====
+ATRI ET AL . 27 of 32
+BOX 7: Chronic traumatic encephalopathy
+Chronic traumatic encephalopathy (CTE) is a neurodegenerative disease leading to dementia that is associated with exposure to repeti-
+tive head impacts, including those sustained in contact sports and military service.184 The diagnosis of CTE can only be made at present by
+neuropathologic examination demonstrating a unique pattern of p-tau deposition.185 A diagnosis of dementia due to CTE in life is not yet
+possible to make. Given that the 2014 research diagnostic criteria for the traumatic encephalopathy syndrome (TES) showed high sensi-
+tivity (97.3%) but low specificity (20.2%), an expert consensus panel published a report in 2021 on provisional research National Institute
+of Neurological Disorders and Stroke Consensus Diagnostic Criteria for TES, which requires (1) substantial exposure to repetitive head
+impacts from contact sports, military service, or other causes; (2) core clinical features of cognitive impairment and/or neurobehavioral
+dysregulation; (3) a progressive course; and (4) that the clinical features are not fully accounted for by any other neurologic, psychiatric,
+or medical conditions.186 Cognitive symptoms include core impairments in episodic memory and/or executive function (potentially with
+symptoms in other domains as well). Behavioral symptoms include poor regulation or control of emotions and/or behavior, including
+(but not limited to) explosiveness, impulsivity, rage, violent outbursts, having a short fuse (exceeding what might be described as peri-
+odic episodes of minor irritability), or emotional lability (often reported as mood swings)—not transiently occurring in the context of life
+events, for example, divorce, death of loved one, and financial problems. The panel stated that these diagnostic criteria for TES are meant
+primarily for research purposes and should be used cautiously in clinical and medicolegal settings, avoiding equivalence with a diagnosis
+of CTE, and using appropriate care when communicating a diagnosis of TES.
+A sufficient level of expertise must be developed by PCPs
+(i.e., physicians, nurse practitioners, physicians’ assistants) to
+proficiently evaluate, diagnose, and manage most persons with
+typical and non-complicated AD or ADRD. Dementia subspecialists,
+geriatricians, general neurologists and general psychiatrists are far
+too few in number to care for the majority of persons with later life
+disorders of cognition or behavior. Given that frontline providers
+are also held accountable for expertise in dozens of other common
+conditions, we recognize the importance of unbiased professional
+educational curricula to assist PCPs in maintaining currency and
+proficiency with this rapidly evolving field. Such curricula must address
+access barriers to timely and appropriate evaluation of patients with
+cognitive and behavioral disorders. Development of efficient linkages
+to specialty care sponsored by health systems will be critical to make
+expert consultation available where it is needed, and to facilitate
+access to specialized treatment protocols for appropriate patients.
+We hope that this guideline supports efforts to assist primary care
+and specialty providers in harnessing the resources necessary for
+high quality diagnostic evaluation and management of the millions of
+Americans with cognitive–behavioral impairment or dementia due to
+AD or ADRD.
+4 CONCLUSIONS
+This guideline aims to empower all clinicians, regardless of specialty
+or practice setting, to collaborate in close alignment with patients and
+care partners to take a systematic patient-centered approach to the
+timely evaluation of cognitive or behavioral symptoms suggestive of
+AD or ADRD. The evaluation process may lead to an AD or ADRD
+diagnosis, or it may lead to opportunities to optimize and promote
+brain-healthy strategies and to treat comorbid medical conditions to
+mitigate risk of cognitive and functional decline, or to both.20,47,48 In all
+cases, the evaluation process should lead to a diagnostic formulation
+that is communicated clearly and compassionately to the patient and
+care partner, along with a discussion of management and prognosis.
+It should also lead to a multipronged plan to address—through direct
+treatment, risk factor identification and reduction, educational and
+psychosocial support, and monitoring—the symptoms of concern that
+can affect quality of life, health status, and major life choices including
+current and future care needs and priorities, finances, and personal and
+public safety.
+AUTHOR CONTRIBUTIONS
+Alireza Atri and Bradford C. Dickerson had full access to all of the
+data in the study and take responsibility for the integrity of the data
+and the accuracy of the data analysis. Concept and design: all authors.
+Acquisition, analysis, or interpretation of data: all authors. Drafting of
+the manuscript: Alireza Atri and Bradford C. Dickerson. Critical revi-
+sion of the manuscript for important intellectual content: all authors.
+Administrative, technical, or material support: Alireza Atri, Bradford
+C. Dickerson, and Maria Carrillo. Supervision: Alireza Atri, Bradford C.
+Dickerson, and Maria Carrillo.
+ACKNOWLEDGMENTS
+We are grateful to our colleagues who served as external peer
+reviewers; to Roger Chou, MD, Jesse Wagner, MA, Tracy Dana, MLS,
+Miranda Pappas, MA, Ian Blazina, MPH, Lucy Stillman, BS, of the
+Pacific Northwest Evidence-based Practice Center, Oregon Health
+& Science University who conducted the evidence review and syn-
+thesis; to Alzheimer’s Association staff Jim Hendrix, PhD (former),
+April Ross, PhD (former), Christopher Weber, PhD; and to Avalere
+staff Sheila Fifer, Judit Illes (former), Courtney Ramus, Michelle
+Bruno. No compensation outside of regular salary was received by
+any named contributor. The DET eCD-ADRD Guideline report was
+funded by the Alzheimer’s Association. Role of the funder/sponsor: The
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 28 =====
+28 of 32 ATRI ET AL .
+Alzheimer’s Association staff agreed with the co-chairs about the need
+for this guideline, contracted with Avalere and the Pacific Northwest
+Evidence-based Practice Center, worked with the co-chairs to select
+the expert panel members, and provided administrative support and
+oversight. The expert panel designed the approach to the review of
+the evidence; review and interpretation of the data; and preparation,
+review, and approval of the guideline and the comprehensive report.
+CONFLICT OF INTEREST STATEMENT
+Bradford C. Dickerson: consulting for Acadia, Alector, Arkuda, Biogen,
+Eisai, Med Learning Group, Quanterix; on DSMB for Lilly, Merck; roy-
+alties from Cambridge University Press, Elsevier, Oxford University
+Press, Up T o Date. Alireza Atri: consulting for Acadia, AriBio, AZ Thera-
+pies, Biogen, Eisai, JOMDD, Lundbeck, Life Molecular Imaging, Merck,
+ONO, Prothena, Roche/Genentech, Novo Nordisk, Qynapse, Vaxxin-
+ity; royalties from Oxford University Press. Carolyn Clevenger: none.
+Jason Karlawish: on a DSMB for Linus Health. David Knopman: on a
+DSMB for DIAN TU. Pei-Jung Lin: consulting for Lilly. Mary Norman:
+none. Chiadi Onyike: consulting for Acadia Pharmaceuticals, Reata
+Pharmaceuticals, Otsuka Pharmaceutical, Eisai Pharmaceutical, Lykos
+Therapeutics, Zevra Therapeutics. Mary Sano: consulting for Eisai,
+NovoNordisk, Otsuka Lundbeck. Susan Scanland: employee of Demen-
+tia Connection, LLC; consulting for Axsome, BioXcel, Eisai, Genentech,
+Lundbeck, Otsuka. Maria Carrillo: employee of Alzheimer’s Associa-
+tion. Author disclosures are available in the supporting information.
+REFERENCES
+1. 2023 Alzheimer’s disease facts and figures. Alzheimers Dement .
+2023;19:1598-1695.
+2. 2020 Alzheimer’s disease facts and figures. Alzheimers Dementia .
+2020;16:391-460.
+3. El-Hayek YH, Wiley RE, Khoury CP, et al. Tip of the Iceberg: assessing
+the Global Socioeconomic Costs of Alzheimer’s disease and related
+dementias and strategic implications for stakeholders. J Alzheimers
+Dis. 2019;70:323-341.
+4. 2018 Alzheimer’s disease facts and figures. Alzheimers Dementia .
+2018;14:367-429.
+5. Prince MJ, Wimo A, Guerchet MM, Ali GC, Wu Y-T, Prina M. World
+Alzheimer Report 2015 - The Global Impact of Dementia: An Anal-
+ysis of Prevalence, Incidence, Cost and Trends. Alzheimer’s Disease
+International; 2015:82.
+6. Lang L, Clifford A, Wei L, et al. Prevalence and determinants of unde-
+tected dementia in the community: a systematic literature review and
+a meta-analysis. BMJ Open. 2017;7:e011146.
+7. Bradford A, Kunik ME, Schulz P, Williams SP, Singh H. Missed
+and delayed diagnosis of dementia in primary care: prevalence and
+contributing factors. Alzheimer Dis Assoc Disord. 2009;23:306-314.
+8. Perry-Young L, Owen G, Kelly S, Owens C. How people come to recog-
+nise a problem and seek medical help for a person showing early signs
+of dementia: a systematic review and meta-ethnography. Dementia.
+2018;17:34-60.
+9. Mitchell AJ, Meader N, Pentzek M. Clinical recognition of demen-
+tia and cognitive impairment in primary care: a meta-analysis of
+physician accuracy.Acta Psychiatr Scand. 2011;124:165-183.
+10. Prince MC-HA, Knapp M, Guerchet M, Karagiannidou M. World
+Alzheimer Report 2016: Improving Healthcare for People Living
+With Dementia–Coverage, Quality and Costs Now and in the Future.
+Alzheimer’s Disease International; 2016:131.
+11. McCarten JR, Anderson P, Kuskowski MA, McPherson SE, Borson
+S, Dysken MW. Finding dementia in primary care: the results of a
+clinical demonstration project. JA mG e r i a t rS o c. 2012;60:210-217.
+12. Bernstein A, Rogers KM, Possin KL, et al. Dementia assessment
+and management in primary care settings: a survey of current
+provider practices in the United States.BMC Health Serv Res. 2019;19:
+919.
+13. Phillips J, Pond CD, Paterson NE, et al. Difficulties in disclosing the
+diagnosis of dementia: a qualitative study in general practice.Br J Gen
+Pract. 2012;62:e546.
+14. Pinner G, Bouman WP. Attitudes of patients with mild dementia and
+their carers towards disclosure of the diagnosis. Int Psychogeriatr .
+2003;15:279-288.
+15. Grossberg GT, DD C, Griffith PA, Kerwin DR, Hunt G, Hall EJ. The art
+of sharing the diagnosis and management of Alzheimer’s disease with
+patients and caregivers: recommendations of an expert consensus
+panel. Prim Care Companion J Clin Psychiatry. 2010:12.
+16. Dubois B, Padovani A, Scheltens P, Rossi A, Dell’Agnello G. Timely
+diagnosis for Alzheimer’s disease: a literature review on benefits and
+challenges. J Alzheimers Dis. 2016;49:617-631.
+17. Weimer DL, Sager MA. Early identification and treatment of
+Alzheimer’s disease: social and fiscal outcomes. Alzheimers Dementia.
+2009;5:215-226.
+18. Aminzadeh F, Molnar F, Dalziel W, Ayotte D. A review of barriers and
+enablers to diagnosis and management of persons with dementia in
+primary care. Can Geriatr J. 2012;15:85-94.
+19. Brodaty H, Donkin M. Family caregivers of people with dementia.
+Dialogues Clin Neurosci. 2009;11:217-228.
+20. Livingston G, Huntley J, Sommerlad A, et al. Dementia preven-
+tion, intervention, and care: 2020 report of the Lancet Commission.
+Lancet. 2020;396:413-446.
+21. Barnett JH, Lewis L, Blackwell AD, T aylor M. Early intervention
+in Alzheimer’s disease: a health economic study of the effects of
+diagnostic timing. BMC Neurology. 2014;14:101.
+22. Alzheimer’s Disease International. World Alzheimer Report. McGill
+University; 2021.
+23. Cordell CB, Borson S, Boustani M, et al. Alzheimer’s Association
+recommendations for operationalizing the detection of cognitive
+impairment during the Medicare Annual Wellness Visit in a primary
+care setting. Alzheimers Dement. 2013;9:141-150.
+24. Jack CR Jr, Bennett DA, Blennow K, et al. NIA-AA Research
+Framework: toward a biological definition of Alzheimer’s disease.
+Alzheimers Dement. 2018;14:535-562.
+25. Patnode CD, Perdue LA, Rossom RC, et al. Screening for cog-
+nitive impairment in older adults: updated evidence report and
+systematic review for the US preventive services task force. JAMA.
+2020;323(8):764-785. doi:10.1001/jama.2019.22258
+26. Patnode CD, Perdue LA, Rossom RC, et al. Screening for cognitive
+impairment in older adults. JAMA. 2020;323:764.
+27. Petersen RC, Yaffe K. Issues and questions surrounding screening for
+cognitive impairment in older patients. JAMA. 2020;323:722.
+28. Foster NL, Bondi MW, Das R, et al. Quality improvement in neurology.
+Neurology. 2019;93:705-713.
+29. Liss JL, Seleri Assuncao S, Cummings J, et al. Practical recommen-
+dations for timely, accurate diagnosis of symptomatic Alzheimer’s
+disease (MCI and dementia) in primary care: a review and synthesis.J
+Intern Med. 2021;290:310-334.
+30. Perlett L, Smith EE. Treatment of vascular and neurodegenerative
+forms of cognitive impairment and dementias. Clin Geriatr Med .
+2023;39:135-149.
+31. Atri A. The Alzheimer’s disease clinical spectrum: diagnosis and
+management. Med Clin North Am. 2019;103:263-293.
+32. Dickerson BC, Atri A, Clevenger C, et al. The Alzheimer’s Asso-
+ciation clinical practice guideline for the Diagnostic Evaluation,
+T esting, Counseling and Disclosure of Suspected Alzheimer’s Dis-
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 29 =====
+ATRI ET AL . 29 of 32
+ease and Related Disorders (DET eCD-ADRD): Executive summary of
+recommendations for specialty care. Alzheimer’s Dement . 2024. in
+press.
+33. Gronseth G, Cox J, Gloss D, et al. 2017 AAN Clinical Practice
+Guideline Process Manual. The American Academy of Neurology;
+2017.
+34. American College of Cardiology Foundation, Inc. Methodology Man-
+ual and Policies From the ACCF/AHA T ask Force on Practice Guide-
+lines. Dallas, TX; 2010.
+35. Institute of Medicine (US) Committee on Standards for Developing
+Trustworthy Clinical Practice Guidelines. Clinical Practice Guidelines
+We Can Trust. National Academies Press; 2011.
+36. The Editors. The practice of medicine. In: Jameson JL, Fauci AS,
+Kasper DL, Hauser SL, Longo DL, Loscalzo J, eds. Harrison’s Principles
+of Internal Medicine. 20 ed. McGraw-Hill Education; 2018.
+37. Halperin JL, Levine GN, Al-Khatib SM, et al. Further evolution of the
+ACC/AHA clinical practice guideline recommendation classification
+system: a report of the american college of cardiology/american heart
+association task force on clinical practice guidelines.J Am Coll Cardiol.
+2016;67:1572-1574.
+38. Qaseem A, Kansagara D, Lin JS, et al. The development of clinical
+guidelines and guidance statements by the clinical guidelines com-
+mittee of the American college of physicians: update of methods.Ann
+Intern Med. 2019;170:863-870.
+39. Albert MS, DeKosky ST, Dickson D, et al. The diagnosis of mild cogni-
+tive impairment due to Alzheimer’s disease: recommendations from
+the National Institute on Aging-Alzheimer’s Association workgroups
+on diagnostic guidelines for Alzheimer’s disease. Alzheimers Dement.
+2011;7:270-279.
+40. American Psychiatric Association. Neurocognitive Disorders. Ameri-
+can Psychiatric Association; 2013.
+41. McKhann GM, Knopman DS, Chertkow H, et al. The diagnosis of
+dementia due to Alzheimer’s disease: recommendations from the
+National Institute on Aging-Alzheimer’s Association workgroups on
+diagnostic guidelines for Alzheimer’s disease. Alzheimers Dement .
+2011;7(3):263-269.
+42. Elahi FM, Miller BL. A clinicopathological approach to the diagnosis
+of dementia. Nat Rev Neurol. 2017;13:457-476.
+43. Daviglus ML, Bell CC, Berrettini W, et al. National Institutes of Health
+State-of-the-Science Conference statement: preventing Alzheimer
+disease and cognitive decline. Ann Intern Med. 2010;153:176-181.
+44. Lloyd-Jones DM, Hong Y, Labarthe D, et al. Defining and set-
+ting national goals for cardiovascular health promotion and disease
+reduction: the American Heart Association’s strategic Impact Goal
+through 2020 and beyond. Circulation. 2010;121:586-613.
+45. Baumgart M, Snyder HM, Carrillo MC, Fazio S, Kim H, Johns H. Sum-
+mary of the evidence on modifiable risk factors for cognitive decline
+and dementia: a population-based perspective. Alzheimers Dement .
+2015;11:718-726.
+46. Committee on the Public Health Dimensions of Cognitive Aging;
+Board on Health Sciences Policy; Institute of Medicine. Blazer DG,
+Yaffe K, Liverman CT, editors. Cognitive Aging: Progress in Under-
+standing and Opportunities for Action. National Academies Press (US);
+2015.
+47. Livingston G, Huntley J, Liu KY, et al. Dementia prevention, interven-
+tion, and care. Lancet. 2024;404:572-628.
+48. World Health Organization. Risk reduction of cognitive decline and
+dementia: WHO guidelines. World Health Organization; 2019.
+49. Godbee K, Gunn J, Lautenschlager NT, Curran E, Palmer VJ. Imple-
+menting dementia risk reduction in primary care: a preliminary
+conceptual model based on a scoping review of practitioners’ views.
+Prim Health Care Res Dev. 2019;20:e140.
+50. Gorelick PB, Furie KL, Iadecola C, et al. Defining optimal brain
+health in adults: a presidential advisory from the American Heart
+Association/American Stroke Association. Stroke. 2017;48:e284-
+e303.
+51. Sorond FA, Gorelick PB. Brain reserve, resilience, and cognitive
+stimulation across the lifespan: how do these factors influence
+risk of cognitive impairment and the dementias?. Clin Geriatr Med .
+2023;39:151-160.
+52. Frisoni GB, Altomare D, Ribaldi F, et al. Dementia prevention in mem-
+ory clinics: recommendations from the European task force for brain
+health services. Lancet Reg Health Eur. 2023;26:100576.
+53. Josephson SA, Miller BL. Confusion and delirium. In: Jameson JL,
+Fauci AS, Kasper DL, Hauser SL, Longo DL, Loscalzo J, eds. Har-
+rison’s Principles of Internal Medicine. 20ed . McGraw-Hill Education;
+2018.
+54. Mesulam MM. Aphasia, memory loss, hemispatial neglect, frontal
+syndromes, and other cerebral disorders. In: Jameson JL, Fauci AS,
+Kasper DL, Hauser SL, Longo DL, Loscalzo J, eds. Harrison’s Principles
+of Internal Medicine. 20ed. McGraw-Hill Education; 2018.
+55. Seeley WW, Miller BL. Dementia. In: Jameson JL, Fauci AS, Kasper
+DL, Hauser SL, Longo DL, Loscalzo J, eds. Harrison’s Principles of
+Internal Medicine. 20ed. McGraw-Hill Education; 2018.
+56. Petersen RC, Lopez O, Armstrong MJ, et al. Practice guideline
+update summary: mild cognitive impairment: report of the Guideline
+Development, Dissemination, and Implementation Subcommittee
+of the American Academy of Neurology. Neurology. 2018;90:126-
+135.
+57. Hort J, O’Brien JT, Gainotti G, et al. EFNS guidelines for the diagnosis
+and management of Alzheimer’s disease.Eur J Neurol. 2010;17:1236-
+1248.
+58. NICE. Dementia: Assessment, Management and Support for People
+Living With Dementia and Their Carers. National Institute for Health
+and Care Excellence; 2018:43.
+59. Knopman DS, DeKosky ST, Cummings JL, et al. Practice parame-
+ter: diagnosis of dementia (an evidence-based review). Report of
+the Quality Standards Subcommittee of the American Academy of
+Neurology. Neurology. 2001;56:1143-1153.
+60. Ismail Z, Black SE, Camicioli R, et al. Recommendations of the 5th
+Canadian Consensus Conference on the diagnosis and treatment of
+dementia. Alzheimers Dementia. 2020;16:1182-1195.
+61. Jessen F, Amariglio RE, Buckley RF, et al. The characterisation of
+subjective cognitive decline. Lancet Neurol. 2020;19:271-278.
+62. Ismail Z, Agüera-Ortiz L, Brodaty H, et al. The mild behavioral impair-
+ment checklist (MBI-C): a rating scale for neuropsychiatric symp-
+toms in pre-dementia populations. J Alzheimers Dis . 2017;56:929-
+938.
+63. Ismail Z, Smith EE, Geda Y, et al. Neuropsychiatric symptoms as early
+manifestations of emergent dementia: provisional diagnostic criteria
+for mild behavioral impairment. Alzheimers Dement . 2016;12:195-
+202.
+64. Engel GL. The need for a new medical model: a challenge for
+biomedicine. Science. 1977;196:129-136.
+65. Borrell-Carrio F, Suchman AL, Epstein RM. The biopsychosocial
+model 25 years later: principles, practice, and scientific inquiry. Ann
+Fam Med. 2004;2:576-582.
+66. Epstein RM SR, Jr. Patient-Centered Communication in Cancer
+Care: Promoting Healing and Reducing Suffering. National Cancer
+Institute; 2007:203.
+67. Zaleta AK, Carpenter BD. Patient-centered communication during
+the disclosure of a dementia diagnosis. Am J Alzheimers Dis Other
+Demen. 2010;25:513-520.
+68. Rabins PV, Blacker D, Rovner BW, et al. American Psychiatric
+Association practice guideline for the treatment of patients with
+Alzheimer’s disease and other dementias. Second edition. Am J
+Psychiatry. 2007;164(S12):5-56.
+69. Rabins PV, Rovner BW, Rummans T, Schneider LS, T ariot PN. Guide-
+line Watch (October 2014) Practice guideline for the treatment of
+patients with Alzheimer’s disease and other dementias. Guideline
+Watch. American Psychiatric Association’s Executive Committee on
+Practice Guidelines; 2014.
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 30 =====
+30 of 32 ATRI ET AL .
+70. Hinton L, Franz CE, Reddy G, Flores Y, Kravitz RL, Barker JC.
+Practice constraints, behavioral problems, and dementia care: pri-
+mary care physicians’ perspectives. J Gen Intern Med. 2007;22:1487-
+1492.
+71. Baratono S, Press D. What are the key diagnostic cognitive impair-
+ment and dementia subtypes and how to integrate all of the
+diagnostic data to establish a diagnosis? Clin Geriatr Med . 2023;39:
+77-90.
+72. Dubois B, Feldman HH, Jacova C, et al. Advancing research diagnos-
+tic criteria for Alzheimer’s disease: the IWG-2 criteria. Lancet Neurol.
+2014;13:614-629.
+73. Dubois B, Villain N, Schneider L, et al. Alzheimer disease as a
+clinical-biological construct—an international working group rec-
+ommendation. JAMA Neurol. Published online November 01, 2024.
+doi:10.1001/jamaneurol.2024.3770
+74. Beach TG, Monsell SE, Phillips LE, Kukull W. Accuracy of the clin-
+ical diagnosis of Alzheimer disease at National Institute on Aging
+Alzheimer Disease Centers, 2005-2010. J Neuropathol Exp Neurol .
+2012;71:266-273.
+75. Schneider JA, Arvanitakis Z, Leurgans SE, Bennett DA. The neu-
+ropathology of probable Alzheimer disease and mild cognitive
+impairment. Ann Neurol. 2009;66:200-208.
+76. Kapasi A, DeCarli C, Schneider JA. Impact of multiple pathologies
+on the threshold for clinically overt dementia. Acta neuropathologica.
+2017;134:171-186.
+77. Kawas CH, Kim RC, Sonnen JA, Bullain SS, Trieu T, Corrada MM.
+Multiple pathologies are common and related to dementia in the
+oldest-old: the 90+ Study. Neurology. 2015;85:535-542.
+78. Jack CR Jr, Bennett DA, Blennow K, et al. NIA-AA Research
+Framework: toward a biological definition of Alzheimer’s disease.
+Alzheimers Dement. 2018;14:535-562.
+79. Simuni T, Chahine LM, Poston K, et al. A biological definition of neu-
+ronal alpha-synuclein disease: towards an integrated staging system
+for research. Lancet Neurol. 2024;23:178-190.
+80. Jack CR Jr, Andrews JS, Beach TG, et al. Revised criteria for diag-
+nosis and staging of Alzheimer’s disease: Alzheimer’s Association
+Workgroup. Alzheimers Dement. 2024;20(8):5143-5169.
+81. Rascovsky K, Hodges JR, Knopman D, et al. Sensitivity of revised
+diagnostic criteria for the behavioural variant of frontotemporal
+dementia. Brain. 2011;134:2456-2477.
+82. Gorno-T empini ML, Hillis AE, Weintraub S, et al. Classification of pri-
+mary progressive aphasia and its variants. Neurology. 2011;76:1006-
+1014.
+83. McKeith IG, Boeve BF, Dickson DW, et al. Diagnosis and management
+of dementia with Lewy bodies: Fourth consensus report of the DLB
+Consortium. Neurology. 2017;89:88-100.
+84. Gorelick PB, Scuteri A, Black SE, et al. Vascular contributions to
+cognitive impairment and dementia: a statement for healthcare
+professionals from the american heart association/american stroke
+association. Stroke. 2011;42:2672-2713.
+85. Skrobot OA, O’Brien J, Black S, et al. The Vascular Impairment
+of Cognition Classification Consensus Study. Alzheimers Dement .
+2017;13:624-633.
+86. Sachdev P, Kalaria R, O’Brien J, et al. Diagnostic criteria for vascular
+cognitive disorders: a VASCOG statement.Alzheimer Dis Assoc Disord.
+2014;28:206-218.
+87. Wolk DA, Nelson PT, Apostolova L, et al. Clinical criteria for Limbic-
+Predominant age-related TDP-43 encephalopathy. Alzheimer’s
+Dement. 2024; in press.
+88. Höglinger GU, Respondek G, Stamelou M, et al. Clinical diagnosis
+of progressive supranuclear palsy: The movement disorder society
+criteria. Mov Disord. 2017;32:853-864.
+89. Armstrong MJ, Litvan I, Lang AE, et al. Criteria for the diagnosis of
+corticobasal degeneration. Neurology. 2013;80:496-503.
+90. Strong MJ, Grace GM, Freedman M, et al. Consensus criteria for the
+diagnosis of frontotemporal cognitive and behavioural syndromes in
+amyotrophic lateral sclerosis. Amyotroph Lateral Scler. 2009;10:131-
+146.
+91. Reilmann R, Leavitt BR, Ross CA. Diagnostic criteria for Hunting-
+ton’s disease based on natural history. Mov Disord . 2014;29:1335-
+1341.
+92. Ross CA, Reilmann R, Cardoso F, et al. Movement Disorder Society
+T ask Force Viewpoint: Huntington’s Disease Diagnostic Categories.
+Mov Disord Clin Pract. 2019;6:541-546.
+93. Hermann P, Laux M, Glatzel M, et al. Validation and utilization of
+amended diagnostic criteria in Creutzfeldt-Jakob disease surveil-
+lance. Neurology. 2018;91:e331-e338.
+94. Atri A, Dickerson BC, et al. The Alzheimer’s Association clinical prac-
+tice guideline for the Diagnostic Evaluation, T esting, Counseling and
+Disclosure of Suspected Alzheimer’s Disease and Related Disor-
+ders (DET eCD-ADRD): Validated Clinical Assessment Instruments.
+Alzheimer’s Dement. 2024; in press. doi:10.1002/alz.14333
+95. Elefante C, Brancati GE, Acierno D, et al. Pseudodementia in patients
+with unipolar and bipolar disorders: a case series and literature
+review. J Clin Med. 2024;13.
+96. Mouta S, Fonseca Vaz I, Pires M, Ramos S, Figueiredo D.
+What do we know about pseudodementia?. Gen Psychiatr .
+2023;36:e100939.
+97. Sekhon S, Marwaha R. Depressive Cognitive Disorders. StatPearls
+Publishing; 2024.
+98. Wise EA, Rosenberg PB, Lyketsos CG, Leoutsakos JM. Time course
+of neuropsychiatric symptoms and cognitive diagnosis in National
+Alzheimer’s Coordinating Centers volunteers. Alzheimers Dement .
+2019;11:333-339.
+99. Leyhe T, Reynolds CF 3rd, Melcher T, et al. A common challenge in
+older adults: classification, overlap, and therapy of depression and
+dementia. Alzheimers Dement. 2017;13:59-71.
+100. Barker MS, Cosentino SA, Fremont R, Devanand DP, Huey ED.
+T owards defining the neuroanatomical basis of late-onset psychiatric
+symptoms. J Geriatr Psychiatry Neurol. 2022;35:751-762.
+101. McClintock SM, Minto L, Denney DA, Bailey KC, Cullum CM, Dotson
+VM. Clinical neuropsychological evaluation in older adults with major
+depressive disorder. Curr Psychiatry Rep. 2021;23:55.
+102. Stafford J, Chung WT, Sommerlad A, Kirkbride JB, Howard R. Psychi-
+atric disorders and risk of subsequent dementia: systematic review
+and meta-analysis of longitudinal studies. Int J Geriatr Psychiatry .
+2022:37.
+103. Soto M, Rosenberg P, Ballard C, et al. CTAD task force paper: neu-
+ropsychiatric symptoms in AD: clinical trials targeting mild behavioral
+impairment: a report from the International CTAD T ask Force.JP r e v
+Alzheimers Dis. 2024;11:56-64.
+104. Wang M, Sajobi TT, Ismail Z, et al. A pragmatic dementia risk score
+for patients with mild cognitive impairment in a memory clinic pop-
+ulation: development and validation of a dementia risk score using
+routinely collected data. Alzheimers Dement. 2022;8:e12301.
+105. Gunderson E, Bensadon B. Geriatric depression. Prim Care .
+2023;50:143-158.
+106. T aylor WD. Clinical practice. Depression in the elderly. N Engl J Med .
+2014;371:1228-1236.
+107. James BD, Bennett DA, Boyle PA, Leurgans S, Schneider JA. Demen-
+tia from Alzheimer disease and mixed pathologies in the oldest old.
+JAMA. 2012;307:1798-1800.
+108. Mehta RI, Schneider JA. Neuropathology of the common forms of
+dementia. Clin Geriatr Med. 2023;39:91-107.
+109. Arvanitakis Z, Shah RC, Bennett DA. Diagnosis and management of
+dementia: review. JAMA. 2019;322:1589-1599.
+110. World Health Organization. mhGAP intervention guide for mental,
+neurological and substance use disorders in non-specialized health
+settings: mental health Gap Action Programme (mhGAP) – version
+2.0. 2ed. World Health Organization; 2016:93-104.
+111. Frisoni GB, Festari C, Massa F, et al. European intersoci-
+etal recommendations for the biomarker-based diagnosis
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 31 =====
+ATRI ET AL . 31 of 32
+of neurocognitive disorders. Lancet Neurol . 2024;23:302-
+312.
+112. Cummings J, Apostolova L, Rabinovici GD, et al. Lecanemab: appro-
+priate use recommendations.J Prev Alzheimers Dis. 2023;10:362-377.
+113. Oh ES, Fong TG, Hshieh TT, Inouye SK. Delirium in older per-
+sons: advances in diagnosis and treatment. JAMA. 2017;318:1161-
+1174.
+114. Inouye SK, van Dyck CH, Alessi CA, Balkin S, Siegal AP, Horwitz
+RI. Clarifying confusion: the confusion assessment method. A new
+method for detection of delirium.Ann Intern Med. 1990;113:941-948.
+115. Wei LA, Fearing MA, Sternberg EJ, Inouye SK. The confusion assess-
+ment method: a systematic review of current usage. JA mG e r i a t rS o c.
+2008;56:823-830.
+116. Guthrie PF, Rayborn S, Butcher HK. Evidence-Based Practice Guide-
+line: delirium. JG e r o n t o lN u r s. 2018;44:14-24.
+117. Boettger S, Nunez DG, Meyer R, et al. Brief assessment of delirium
+subtypes: psychometric evaluation of the Delirium Motor Subtype
+Scale (DMSS)-4 in the intensive care setting. Palliat Support Care .
+2017;15:535-543.
+118. Meagher D. Motor subtypes of delirium: past, present and future. Int
+Rev Psychiatry. 2009;21:59-73.
+119. Robinson TN, Raeburn CD, Tran ZV, Brenner LA, Moss M. Motor
+subtypes of postoperative delirium in older adults. Arch Surg .
+2011;146:295-300.
+120. Avelino-Silva T J, Campora F, Curiati JAE, Jacob-Filho W. Prognos-
+tic effects of delirium motor subtypes in hospitalized older adults: a
+prospective cohort study. PLoS One. 2018;13:e0191092.
+121. By the American Geriatrics Society Beers Criteria Update Expert
+Panel. American Geriatrics Society 2019 updated AGS beers crite-
+ria(R) for potentially inappropriate medication use in older adults. J
+Am Geriatr Soc. 2019;67:674-694.
+122. US Department of Veterans Affairs. VHA Dementia Steering Com-
+mittee Recommendations for Dementia Care in the VHA Health Care
+System. 2016.
+123. World Health Organization. mhGAP Intervention Guide for Men-
+tal, Neurological and Substance Use Disorders in Non-Specialized
+Health Settings. 1ed. World Health Organization; 2010:51-6.
+124. Ngo J, Holroyd-Leduc JM. Systematic review of recent dementia
+practice guidelines. Age and Ageing. 2015;44:25-33.
+125. Clarfield AM. The decreasing prevalence of reversible dementias: an
+updated meta-analysis. Arch Intern Med. 2003;163:2219-2229.
+126. Rosenbloom MH, Atri A. The evaluation of rapidly progressive
+dementia. The neurologist. 2011;17:67-74.
+127. Hansson O, Edelmayer RM, Boxer AL, et al. The Alzheimer’s Asso-
+ciation appropriate use recommendations for blood biomarkers in
+Alzheimer’s disease. Alzheimers Dement. 2022;18:2669-2686.
+128. Rabinovici G, Knopman D, Arbizu J, et al. Updated Appropri-
+ate Use Criteria for Amyloid and T au PET in Alzheimer’s Dis-
+ease. 2024. https://www.alz.org/media/Documents/AUC-Amyloid-
+T au-PET-Alzheimers_Manuscript.pdf
+129. Coughlin DG, MacLeod KR, Middleton JS, et al. Association of CSF α-
+Synuclein Seeding Amplification Assay Results With Clinical Features
+of Possible and Probable Dementia With Lewy Bodies. Neurology.
+2024;103(3):e209656. doi:10.1212/WNL.0000000000209656
+130. Gibbons CH, Levine T, Adler C, et al. Skin Biopsy Detection of Phos-
+phorylated α-Synuclein in Patients With Synucleinopathies. JAMA.
+2024;331(15):1298-1306. doi:10.1001/jama.2024.0792
+131. U.S. Food and Drug Administration FDA Approves First Drug
+to Image T au Pathology in Patients Being Evaluated for
+Alzheimer’s Disease. Accessed May 28, 2020. Available online:
+https://www.fda.gov/news-events/press-announcements/fda-
+approves-first-drug-image-tau-pathology-patients-being-
+evaluated-alzheimers-disease
+132. Wippold F J 2nd, Brown DC, Broderick DF, et al. ACR appropriate-
+ness criteria dementia and movement disorders. J Am Coll Radiol .
+2015;12:19-28.
+133. Atri A. Imaging of neurodegenerative cognitive and behavioral dis-
+orders: practical considerations for dementia clinical practice. Handb
+Clin Neurol. 2016;136:971-984.
+134. Scheltens P, Fox N, Barkhof F, De Carli C. Structural magnetic res-
+onance imaging in the practical assessment of dementia: beyond
+exclusion. Lancet Neurol. 2002;1:13-21.
+135. Filippi M, Agosta F, Barkhof F, et al. EFNS task force: the use of neu-
+roimaging in the diagnosis of dementia. Eur J Neurol. 2012;19:e131-
+140. 1487-501.
+136. Fink HA, Linskens EJ, Silverman PC, et al. Accuracy of biomarker test-
+ing for neuropathologically defined Alzheimer disease in older adults
+with dementia. Ann Intern Med. 2020;172:669-677.
+137. Dickerson BC, Bakkour A, Salat DH, et al. The cortical signature
+of Alzheimer’s disease: regionally specific cortical thinning relates
+to symptom severity in very mild to mild ad dementia and is
+detectable in asymptomatic amyloid-positive individuals. Cerebral
+Cortex. 2009;19:497-510.
+138. Greenberg SM, Bacskai BJ, Hernandez-Guillamon M, Pruzin J,
+Sperling R, van Veluw SJ. Cerebral amyloid angiopathy and Alzheimer
+disease—one peptide, two pathways. Nat Rev Neurol . 2020;16:
+30-42.
+139. Hampel H, Elhage A, Cho M, Apostolova LG, Nicoll JAR, Atri A.
+Amyloid-related imaging abnormalities (ARIA): radiological, biologi-
+cal and clinical characteristics. Brain. 2023.
+140. Gomperts SN. Lewy Body Dementias: dementia with Lewy Bodies
+and Parkinson disease dementia. Continuum. 2016;22:435-463.
+141. Onyike CU. Psychiatric aspects of dementia. Continuum.
+2016;22:600-614.
+142. Seeley WW. Behavioral variant frontotemporal dementia. Contin-
+uum. 2019;25:76-100.
+143. Grossman M, Irwin DJ. Primary progressive aphasia and stroke
+aphasia. Continuum. 2018;24:745-767.
+144. Schott JM, Crutch SJ. Posterior cortical atrophy. Continuum.
+2019;25:52-75.
+145. Schmahmann JD. The differential diagnosis of rapidly progressive
+and rare dementias – a clinical approach. In: Dickerson BC, Atri A, eds.
+Dementia: Comprehensive Principles and Practices . Oxford University
+Press; 2014:291-359.
+146. Geschwind MD. Rapidly progressive dementia. Continuum.
+2016;22:510-537.
+147. Goldfarb D, Sheard S, Shaughnessy L, Atri A. Disclosure of
+Alzheimer’s disease and dementia: patient- and care partner-
+centric decision-making and communication. J Clin Psychiatry. 2019:
+80.
+148. O’Brien K, Largent E, Karlawish J. Applying recommendations for
+diagnostic disclosure of mild cognitive impairment and dementia:
+Practical guidance for clinicians. Alzheimer’s Dement. 2024; in press.
+doi:10.1002/alz.14200
+149. Kourtis LC, Regele OB, Wright JM, Jones GB. Digital biomarkers for
+Alzheimer’s disease: the mobile/wearable devices opportunity. NPJ
+Digital Med. 2019;2:9.
+150. Brooker H, Williams G, Hampshire A, et al. FLAME: a computerized
+neuropsychological composite for trials in early dementia.Alzheimers
+Dement. 2020;12:e12098.
+151. T eunissen CE, Verberk IMW, Thijssen EH, et al. Blood-based biomark-
+ers for Alzheimer’s disease: towards clinical implementation. Lancet
+Neurol. 2022;21:66-77.
+152. Angioni D, Delrieu J, Hansson O, et al. Blood biomarkers from
+research use to clinical practice: what must be done? A report
+from the EU/US CTAD task force. J Prev Alzheimers Dis . 2022;9:569-
+579.
+153. Jack CR Jr. The transformative potential of plasma phosphorylated
+tau. Lancet Neurol. 2020;19:373-374.
+154. Barthelemy NR, Salvado G, Schindler SE, et al. Highly accurate
+blood test for Alzheimer’s disease is similar or superior to clinical
+cerebrospinal fluid tests. Nat Med. 2024;30:1085-1095.
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+===== PAGE 32 =====
+32 of 32 ATRI ET AL .
+155. Schindler SE, Atri A. The role of cerebrospinal fluid and other
+biomarker modalities in the Alzheimer’s disease diagnostic revolu-
+tion. Nat Aging. 2023;3:460-462.
+156. Mielke MM, Dage JL, Frank RD, et al. Performance of plasma
+phosphorylated tau 181 and 217 in the community. Nat Med .
+2022;28:1398-1405.
+157. Schindler SE, Karikari TK, Ashton NJ, et al. Effect of race on
+prediction of brain amyloidosis by plasma Abeta42/Abeta40, phos-
+phorylated tau, and neurofilament light. Neurology. 2022;99:e245-
+e257.
+158. Bouteloup V, Pellegrin I, Dubois B, et al. Explaining the variability of
+Alzheimer disease fluid biomarker concentrations in memory clinic
+patients without dementia. Neurology. 2024;102:e209219.
+159. Mehta KM, Yeo GW. Systematic review of dementia prevalence
+and incidence in United States race/ethnic populations. Alzheimers
+Dement. 2017;13:72-83.
+160. Babulal GM, Quiroz YT, Albensi BC, et al. Perspectives on ethnic
+and racial disparities in Alzheimer’s disease and related demen-
+tias: update and areas of immediate need. Alzheimers Dement .
+2019;15:292-312.
+161. Misiura MB, Butts B, Hammerschlag B, et al. Intersectionality in
+Alzheimer’s disease: the role of female sex and black american
+race in the development and prevalence of Alzheimer’s Disease.
+Neurotherapeutics. 2023;20:1019-1036.
+162. Mayeda ER, Glymour MM, Quesenberry CP, Whitmer RA. Inequali-
+ties in dementia incidence between six racial and ethnic groups over
+14 years. Alzheimers Dementia. 2016;12:216-224.
+163. Clark PC, Kutner NG, Goldstein FC, et al. Impediments to timely diag-
+nosis of Alzheimer’s disease in African Americans. JA mG e r i a t rS o c.
+2005;53:2012-2017.
+164. Fitten LJ, Ortiz F, Pontón M. Frequency of Alzheimer’s disease and
+other dementias in a community outreach sample of Hispanics. JA m
+Geriatr Soc. 2001;49:1301-1308.
+165. Gleason CE, Zuelsdorff M, Gooding DC, et al. Alzheimer’s disease
+biomarkers in Black and non-Hispanic White cohorts: a contextu-
+alized review of the evidence. Alzheimers Dement . 2022;18:1545-
+1564.
+166. Lim U, Wang S, Park SY, Bogumil D, et al. Risk of Alzheimer’s dis-
+ease and related dementia by sex and race/ethnicity: the Multiethnic
+Cohort Study. Alzheimers Dement. 2022;18:1625-1634.
+167. Wilkins CH, Windon CC, Dilworth-Anderson P, et al. Racial and eth-
+nic differences in amyloid PET positivity in individuals with mild
+cognitive impairment or dementia: a secondary analysis of the Imag-
+ing Dementia-Evidence for Amyloid Scanning (IDEAS) Cohort Study.
+JAMA Neurol. 2022;79:1139-1147.
+168. Morris JC, Schindler SE, McCue LM, et al. Assessment of racial dispar-
+ities in biomarkers for Alzheimer disease.JAMA Neurol. 2019;76:264-
+273.
+169. Perkins P, Annegers JF, Doody RS, Cooke N, Aday L, Vernon SW.
+Incidence and prevalence of dementia in a multiethnic cohort of
+municipal retirees. Neurology. 1997;49:44-50.
+170. Mindt MR, Okonkwo O, Weiner MW, et al. Improving general-
+izability and study design of Alzheimer’s disease cohort studies
+in the United States by including under-represented populations.
+Alzheimers Dement. 2023;19:1549-1557.
+171. Balls-Berry JJE, Babulal GM. Health disparities in dementia. Contin-
+uum. 2022;28:872-884.
+172. Beydoun MA, Beydoun HA, Fanelli-Kuczmarski MT, et al. Path-
+ways explaining racial/ethnic and socio-economic disparities in
+dementia incidence: the UK Biobank study. Aging. 2023;15:9310-
+9340.
+173. Jagust WJ, T eunissen CE, DeCarli C. The complex pathway between
+amyloid beta and cognition: implications for therapy. Lancet Neurol.
+2023;22:847-857.
+174. Hinton L, Tran D, Peak K, Meyer OL, Quinones AR. Mapping racial
+and ethnic healthcare disparities for persons living with dementia: a
+scoping review. Alzheimers Dement. 2024;20:3000-3020.
+175. Michalowsky B, Blotenberg I, Platen M, T eipel S, Kilimann I,
+Portacolone E, et al. Clinical outcomes and cost-effectiveness of
+collaborative dementia care: a secondary analysis of a cluster ran-
+domized clinical trial. JAMA Netw Open. 2024;7:e2419282.
+176. Lovett R, Bonham M, Yoshino Benavente J, et al. Primary care
+detection of cognitive impairment leveraging health and con-
+sumer technologies in underserved US communities: protocol for a
+pragmatic randomised controlled trial of the MyCog paradigm. BMJ
+Open. 2023;13:e080101.
+177. Ayanian JZ, Landon BE, Newhouse JP, Zaslavsky AM. Racial and eth-
+nic disparities among enrollees in Medicare advantage plans. NE n g lJ
+Med. 2014;371:2288-2297.
+178. Cummings J, Aisen P, Apostolova LG, Atri A, Salloway S, Weiner M.
+Aducanumab: appropriate use recommendations. J Prev Alzheimers
+Dis. 2021;8:398-410.
+179. Cummings J, Rabinovici GD, Atri A, et al. Aducanumab: appropri-
+ate use recommendations update. J Prev Alzheimers Dis. 2022;9:221-
+230.
+180. Liu J, Hlayka J, Hillestad R, Mattke S. Assessing the preparedness of
+the US health care infrastructure for an Alzeimer’s treatment. RAND
+Corporation; 2017. https://www.rand.org/t/RR2272
+181. Reuben DB, T an ZS, Romero T, Wenger NS, Keeler E, Jennings LA.
+Patient and caregiver benefit from a comprehensive dementia care
+program: 1-year results from the UCLA Alzheimer’s and Dementia
+Care Program. JA mG e r i a t rS o c. 2019;67:2267-2273.
+182. Reuben DB, Gill TM, Stevens A, et al. D-CARE: the Dementia Care
+Study: design of a pragmatic trial of the effectiveness and cost effec-
+tiveness of health system-based versus community-based dementia
+care versus usual dementia care. JA mG e r i a t rS o c. 2020;68:2492-
+2499.
+183. Callahan CM, Boustani MA, Weiner M, et al. Implementing dementia
+care models in primary care settings: the Aging Brain Care Medical
+Home. Aging Ment Health. 2011;15:5-12.
+184. Stern RA, Daneshvar DH, Baugh CM, et al. Clinical presentation of
+chronic traumatic encephalopathy. Neurology. 2013;81:1122-1129.
+185. McKee AC, Cairns NJ, Dickson DW, et al. The first NINDS/NIBIB
+consensus meeting to define neuropathological criteria for the
+diagnosis of chronic traumatic encephalopathy. Acta Neuropathol .
+2016;131:75-86.
+186. Katz DI, Bernick C, Dodick DW, et al. National Institute of Neurologi-
+cal Disorders and Stroke Consensus Diagnostic Criteria for traumatic
+encephalopathy syndrome. Neurology. 2021;96:848-863.
+SUPPORTING INFORMATION
+Additional supporting information can be found online in the Support-
+ing Information section at the end of this article.
+How to cite this article: Atri A, Dickerson BC, Clevenger C,
+et al. Alzheimer’s Association clinical practice guideline for the
+Diagnostic Evaluation, T esting, Counseling, and Disclosure of
+Suspected Alzheimer’s Disease and Related Disorders
+(DET eCD-ADRD): Executive summary of recommendations for
+primary care. Alzheimer’s Dement. 2025;21:1–32.
+https://doi.org/10.1002/alz.14333
+ 15525279, 2025, 6, Downloaded from https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.14333, Wiley Online Library on [09/09/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

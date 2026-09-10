@@ -121,9 +121,13 @@ class Scheduler:
 
     def _context_for_task(self, context: TaskContext, run_id: str, task: TaskSpec) -> TaskContext:
         task_results = {
-            record.spec.task_id: record.result
+            record.spec.task_id: record.result or {
+                "agent_name": record.spec.agent_name,
+                "status": "skipped" if record.state == "skipped" else "failed",
+                "limitations": [f"任务 {record.spec.task_id} 未产生结果（{record.state}）。"],
+            }
             for record in self.task_store.get_tasks(run_id)
-            if record.result is not None
+            if record.result is not None or record.state in TERMINAL_STATES
         }
         return context.model_copy(update={"task_results": task_results, "task_parameters": task.parameters})
 

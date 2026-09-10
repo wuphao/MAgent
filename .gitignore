@@ -51,6 +51,7 @@ Desktop.ini
 # Logs and generated output
 *.log
 output/
+tmp/test-deps/
 evaluation/stage-*/test-packages/
 evaluation/stage-*/v2-store*/
 evaluation/stage-*/tasks*.sqlite3

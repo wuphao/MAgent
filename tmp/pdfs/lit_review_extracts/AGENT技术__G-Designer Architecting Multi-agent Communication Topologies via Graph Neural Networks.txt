@@ -1,0 +1,1420 @@
+
+
+===== PAGE 1 =====
+G-Designer: Architecting Multi-agent Communication
+Topologies via Graph Neural Networks
+Guibin Zhang * 1 2 Yanwei Yue* 2 Xiangguo Sun 1 Guancheng Wan 3 Miao Yu4
+Junfeng Fang 5 Kun Wang4 Tianlong Chen 6 Dawei Cheng 2
+Abstract
+Recent advancements in large language model
+(LLM)-based agents have demonstrated that col-
+lective intelligence can significantly surpass the
+capabilities of individual agents, primarily due
+to well-crafted inter-agent communication topolo-
+gies. Despite the diverse and high-performing
+designs available, practitioners often face confu-
+sion when selecting the most effective pipeline
+for their specific task: Which topology is the best
+choice for my task, avoiding unnecessary com-
+munication token overhead while ensuring high-
+quality solution? In response to this dilemma,
+we introduce G-Designer, an adaptive, effi-
+cient, and robust solution for multi-agent de-
+ployment, which dynamically designs task-aware,
+customized communication topologies. Specif-
+ically, G-Designer models the multi-agent sys-
+tem as a multi-agent network, leveraging a vari-
+ational graph auto-encoder to encode both the
+nodes (agents) and a task-specific virtual node,
+and decodes a task-adaptive and high-performing
+communication topology. Extensive experiments
+on six benchmarks showcase that G-Designer
+is: (1) high-performing, achieving superior re-
+sults on MMLU with accuracy at 84.50% and on
+HumanEval with pass@1 at 89.90%; (2) task-
+adaptive, architecting communication protocols
+tailored to task difficulty, reducing token con-
+sumption by up to95.33% on HumanEval; and(3)
+adversarially robust, defending against agent ad-
+versarial attacks with merely 0.3% accuracy drop.
+The code is available at https://github.
+com/yanweiyue/GDesigner.
+*Equal contribution 1CUHK 2Tongji University 3Emory Uni-
+versity 4USTC 5NUS 6UNC-Chapel Hill. Primary Contact: Guibin
+Zhang <guibinz@outlook.com>.
+Chain Star Tree
+Complete Graph Layered Graph Random Graph
+GRAPH
+CHAIN TREE DYNAMIC
+DyLAN
+iteration
+GPTSwarm
+Figure 1. Existing practices for LLM-based multi-agent communi-
+cation topology design.
+1. Introduction
+An LLM-based agent, which integrates the language gen-
+eration capabilities of LLMs with decision-making and
+action-execution functionalities (Richards & et al., 2023;
+Nakajima, 2023; Reworkd, 2023), has exhibited impressive
+performance across a wide range of tasks, from reason-
+ing (Yao et al., 2023b) and code generation (Shinn et al.,
+2023) to even more complex applications like video gam-
+ing (Wang et al., 2023) and autonomous driving (Jin et al.,
+2023). Even more exciting, researchers have discovered that
+combining multiple LLM-based agents–whether implicitly
+or explicitly–into a team can outperform individual agents
+when tackling complex tasks (Du et al., 2023; Liang et al.,
+2023; Wang et al., 2023b; Jiang et al., 2023; Shinn et al.,
+2023; Zheng et al., 2023; Wu et al., 2023), demonstrating
+a form of collaborative intelligence reminiscent of human
+teamwork in multi-agent systems (Zhang et al., 2023b).
+This emergence of human-esque collective intelligence is
+fundamentally driven by the design of their topology, i.e.,
+how multi-agents are connected, and how they transmit,
+exchange, and assimilate information reciprocally.
+In practice, prior research has extensively explored how
+multiple instances of LLMs, referred to as agents (Wang
+et al., 2024; Xi et al., 2023; Gao et al., 2023; Cheng et al.,
+2024), should be structured and organized to converse,
+collaborate, debate, or even compete. Various topologi-
+cal designs have been investigated, such as chain (Wei
+et al., 2022; Hong et al., 2023), tree (Yao et al., 2023a; Wu
+1
+arXiv:2410.11782v3  [cs.MA]  6 Feb 2025
+
+===== PAGE 2 =====
+G-Designer
+Token Consumption 
+Token Consumption 
+Accuracy (%); on MMLU (Highschool Biology)
+Chain
+GPTSwarm
+Chain
+GPTSwarm
+Easy case
+(Highschool Biology) Hard case
+(College Math)
+Accuracy (%); on MMLU (College Math)
+Figure 2. The token consumption and accuracy of different multi-
+agent protocols on two subsets of MMLU dataset, “Highschool Bi-
+ology” and “College Math”, tested with four gpt-4-based agents.
+et al., 2023), star (Wu et al., 2023), complete graphs (Qian
+et al., 2024), random graphs (Qian et al., 2024), optimiz-
+able graphs (Zhuge et al., 2024; Zhang et al., 2024), and
+LLM-based networks (Hao et al., 2023; Liu et al., 2023).
+These elaborately designed communication topologies have
+demonstrated remarkable performance with minimal human
+supervision, bridging the gap between individual and collec-
+tive intelligence. Faced with numerous structures available,
+an inquisitive practitioner might ask: how should I select or
+design a topology that best suits my task at hand?
+The question posed above is non-trivial and, at times, per-
+plexing. A piece of experimental evidence is presented in
+Figure 2, where we evaluated the performance of different
+multi-agent structures on the MMLU dataset (Hendrycks
+et al., 2021), a collection of multiple-choice questions across
+various subjects. The results reveal that even within the same
+dataset, the suitability of different communication topolo-
+gies varies. ❶ Simpler Case: in the simpler ”High School
+Biology” subset, the chain structure performs comparably
+to the complex GPTSwarm, while consuming significantly
+fewer tokens (0.5k versus 7.8k). In this case, the chain
+structure is clearly a more economical choice. ❷ Harder
+Case: However, for the more challenging ”College Mathe-
+matics” subset, GPTSwarm outperforms the chain structure
+by 8.75%, primarily attributed to its intricate topology and
+prompt optimization. In summary, practitioners often find
+it challenging to effortlessly identify the most efficient and
+complexity-adaptive multi-agent topology for a given task.
+In light of this dilemma, we propose theLLM-based ::Multi-
+:agent :Communication ::Protocol (MACP), establishing
+standardized guidance for LLM-MA topology design:
+Multi-agent Communication Protocol (MACP): Given
+a task/query q, an optimal LLM-MA communication topol-
+ogy for q should satisfy the following protocol logics: (1)
+Effectiveness: The communication structure must effec-
+tively produce the qualified solution forq; (2) Complexity-
+adaptiveness: The topology should dynamically adjust
+to the complexity of the task, minimizing communica-
+tion overhead; (3) Adversarial robustness: The topology
+should maintain reliable under adversarial attacks.
+The formal definition of MACP is provided in Section 3.3.
+To design a communication topology that ideally adheres
+to the MACP principles, we propose an effective, adaptive,
+and robust LLM-powered multi-agent communication graph
+designer, termed G-Designer. Technically, G-Designer
+first architects a multi-agent graph, where each agent, along
+with its specific properties (e.g., profile (Li et al., 2023a),
+external API tools (Zhuang et al., 2023), or knowledge
+base (Chen et al., 2024a)), is represented as a node, and com-
+munication between agents forms the edges. G-Designer
+employs a variational graph auto-encoder to encode the
+nodes (agents) along with task-specific information, and
+to decode the resulting collaboration network between
+agents. This input-dependent paradigm allows G-Designer
+to design task-adaptive, high-performing communication
+topology, which is, at the same time, assured of efficiency
+and robustness with sparsity regularization. Unlike previous
+LLM-based multi-agent topology designs, which rely on
+a static structure for all queries/tasks, G-Designer adap-
+tively crafts customized topologies for different domains
+and tasks, serving as a fully autonomous and flexible assis-
+tant for multi-agent system establishment and deployments.
+Our contribution can be summarized as follows:
+❶ Protocol Proposal. We propose the first communica-
+tion protocol tailored for LLM-powered multi-agent sys-
+tems, MACP, which comprehensively regulates multi-
+agent topology design across three dimensions: perfor-
+mance, adaptability, and robustness, and incisively high-
+lights the shortcomings of existing designs.
+❷ Practical Solution. We presentG-Designer, an effective,
+adaptive, and robust designer of LLM-powered multi-
+agent communication graphs. By leveraging a varia-
+tional graph auto-encoder to construct and process the
+multi-agent network, G-Designer decodes task-adaptive
+and high-performing agent communication, which is also
+equipped with strong robustness against agent-rooted ad-
+versarial attacks via dynamic topology adjustment.
+❸ Experimental V alidation.Extensive experiments across
+six benchmarks show that G-Designer is: (1) high-
+performing, surpassing state-of-the-art topologies by
+0.20% ∼ 4.10% on MMLU and HumanEval; (2) task-
+adaptive, dynamically adjusting topology complexity
+with task awareness, outperforming state-of-the-art meth-
+ods on MMLU with a cost of merely 1.5e + 5 compared
+to their 2.6e + 6, reducing token consumption by up to
+92.24%; and (3) adversarially robust, defending against
+agent adversarial attacks with merely 0.3% accuracy drop.
+2. Related Works
+LLM-agent Collaboration Recent research has explored
+various multi-agent communication topologies, including:
+(1) Non-interactive, where agents operate independently
+without inter-agent communication, as employed in systems
+like LATM (Zhang et al., 2023a) and LLM-Debate (Du
+2
+
+===== PAGE 3 =====
+G-Designer
+et al., 2023); (2) Chain, where agents are arranged in a
+sequential structure, each receiving the output from its pre-
+decessor and passing information to its successor, utilized
+by ChatDev (Qian et al., 2023), MetaGPT (Hong et al.,
+2023), and L2MAC (Holt et al., 2024); (3) Star, where
+a central administrative agent (often referred to as a com-
+mander, teacher, etc.) directs subordinate agents, seen in
+AutoGen (Wu et al., 2023), SecurityBot (Yan et al., 2024),
+and MiniGrid (Zhou et al., 2023); (4) Tree, where a root
+agent hierarchically manages multiple child agents, as in
+SoA (Ishibashi & Nishimura, 2024); and (5) Graph, encom-
+passing complete graphs (Qian et al., 2024; Zhuge et al.,
+2024) and random graphs (Qian et al., 2024), among others.
+Multi-agents as Graphs Graphs, as a fundamental data
+structure for organizing and representing relationships be-
+tween entities (Zhang & Chartrand, 2006), are widely
+adopted in the pre-LLM era as a powerful tool to facilitate
+effective communication in multi-agent reinforcement learn-
+ing (MARL) (Pesce & Montana, 2023; Hu et al., 2024; Liu
+et al., 2022). With the rise of LLMs and the proliferation of
+LLM-based agents (Chen et al., 2023a; Cohen et al., 2023;
+Hua et al., 2023), researchers have similarly recognized that
+interactions among multiple agents can naturally be mod-
+eled from a graph-based perspective (Chen et al., 2023b;
+Zhuge et al., 2024; Qian et al., 2024; Liu et al., 2023). Early
+attempts are implicit, like ChatEval (Chan et al., 2023), Au-
+toGen (Wu et al., 2023), and DSPy (Khattab et al., 2023).
+More recent practices including ChatLLM (Hao et al., 2023),
+DyLAN (Liu et al., 2023), GPTSwarm (Zhuge et al., 2024),
+and MacNet (Qian et al., 2024), have explicitly represented
+the organization of multiple agents as a graph. However, all
+these attempts, whether predefined or iteratively optimized,
+remain input-independent. Consequently, they fail to be
+task-aware and adaptively design topologies that suit the
+complexity of the specific task.
+3. Formalization
+This section establishes the notation, formalizes key con-
+cepts from a topology perspective, and formally defines our
+proposed multi-agent communication protocol.
+3.1. Topology Structure
+We model the multi-agent system as a directed graph G =
+(V, E), where V = {v1, . . . , vN } represents the set of nodes
+(with N = |V|) and E denotes the set of edges. Each node
+vi ∈ V corresponds to an agent, formalized as:
+vi = {Basei, Rolei, Statei, Plugini}, (1)
+where each agent vi is composed of four key elements:
+(1) Basei, the language model instance powering vi;
+(2) Rolei, the agent’s pre-assigned role or function; (3)
+Statei, representing the agent’s accumulated knowledge
+and interaction history; and (4) Plugini, a set of external
+tools or plugins available to vi, such as web searchers (Ma
+et al., 2023), code compilers (Richards & et al., 2023;
+Wu et al., 2023; Hong et al., 2023; Bouzenia et al., 2024;
+Ishibashi & Nishimura, 2024), or file readers (Zhuge et al.,
+2024; Richards & et al., 2023). Each LLM-based agent vi
+receives prompt P and generates response Ri:
+Ri = vi(P) = vi(Psys, Pusr), (2)
+where Psys = {Rolei, Statei} represents the system
+prompt encompassing its role and state, and Pusr denotes
+the user prompt, which possibly includes the given tasks,
+responses/instructions from other agents and externally re-
+trieved knowledge.
+The connectivity of G can also be characterized by a (non-
+symmetric) adjacency matrix A ∈ { 0, 1}N ×N , where
+A[i, j] = 1 if eij = (vi, vj) ∈ E , otherwise 0. Each edge
+eij ∈ E represents the flow of information from vi to vj.
+3.2. Communication Pipeline
+Given a query/problem Q, the multi-agent system engages
+in K rounds of interactive utterances, which collaboratively
+drive the agents toward producing the final solution a(K)
+based on their cumulative dialogue exchanges. At the be-
+ginning of the t-th dialogue round, a mapping function ϕ is
+applied to determine the execution index for each agent:
+ϕ : G 7− →σ, σ = [vσ1 , vσ2 , · · · , vσN ],
+s. t. ∀i > j, v σi /∈ Nin(vσj), (3)
+where σ is the execution sequence of agents, Nin(vσ(j))
+denotes the in-neighborhood of vσ(j), and the constraint
+ensures that an agent vσ(i) can only execute after any agent
+vσ(j) from which it receives information. Once the execu-
+tion order is determined, each agent proceeds to perform
+input-output operations sequentially:
+R(t)
+i = vi(P(t)
+sys , P(t)
+usr ), P(t)
+usr = {Q, ∪vj ∈Nin(vi)R(t)
+j } (4)
+where R(t)
+i represents the output of vi, which could be a
+rationale, an answer, or a partial solution, depending on
+the specific context. The output R(t)
+i is generated based on
+the system prompt P(t)
+sys and the context prompt, consisting
+of the query Q and messages from other agents. At the
+end of each dialogue, an aggregation function is adopted to
+generate the answer/solution a(t):
+a(t) ← Aggregate(R(t)
+1 , R(t)
+2 , · · · , R(t)
+N ). (5)
+The implementation of the Aggregate function is flexible,
+with possible options including majority voting (Chen et al.,
+2024b; Zhuge et al., 2024; Li et al., 2024), aggregating all
+agents’ responses and delegating one agent to provide the
+final answer (Wu et al., 2023; Jiang et al., 2023; Liu et al.,
+2023; Zhang et al., 2024), or simply using the output of
+3
+
+===== PAGE 4 =====
+G-Designer
+Materials Construct Design Optimize
+🤔  Query/Problem  
+An electric motor has a label on
+it that reads: Input: 120V AC, 1.0
+Amps, 60 Hz - Efficiency - 75%.
+At what constant speed can the
+motor lift up a 6 kg mass?
+🤖  Agent (node) set 
+🧰  Tool/Plugin set 
+  🖥  Python complier  📁  File reader
+  🦜  Text-to-speech translator
+  🖼  Image question answerer
+... ... (other external tools)
+ChiefProgrammer
+Mathematician Physicist
+Instantiated by gpt-4/Llama 3.1/...
+🎭  Role/Profile pool
+Task-specific
+ 
+Agent representation
+Math AnalystProgrammerPhycist Chief Scientist
+Node Encoder
+Profile Assignment
+Sentence Bert;
+MiniLM; ...
+task 
+Multi-agent Network
+Virtual node
+Multi-agent Network: 
+Anchor structure  is either user-defined
+or generated by LLMs as an anchor
+0.69
+0.28
+0.62
+0.81
+0.93
+0.160.92
+0.810.46
+Encode:
+Decode: 
+0.70
+0.35
+0.53
+Graph Auto-encoder
+Encoder  
+Decoder 
+Communication Graph 
+ 
+Anchor RegularizeSparse Regularzie
+  🧮  Mathematical calculator 
+generated by gpt-4
+Teacher
+Math Analyst
+Physicist
+...
+Economist 🧮 🖥  📁  
+Optimization Config
+Number of dialogues: 
+Execution order: 
+All the calculations
+are correct.The key
+relationships used,
+such as the power
+equation ,
+are mathematically
+solid.
+Let's break down the
+problem step by step:
+The input power 𝑃𝑖𝑛  is
+calculated as:
+...
+Iteration
+ `python
+iv = 120
+ic = 1.0 
+eff = 0.75 
+eff mass = 6 
+...
+`
+``
+``
+For Physicist, provide a problem-
+solving analysis;
+For Mathematician, please check
+its correctness;
+For Programmer, write Python
+codes for verification
+Iteration round
+Workflow
+Ouput solution
+Solution  to task 
+Based on the discussions, the answer is a speed
+of approximately 1.53 m/s at which the motor
+can lift 6 kg mass.
+Input query  ▶  Construct graph ▶ 
+Encode & Decode ▶  Iterative dialogue
+Figure 3. The designing workflow of our proposed G-Designer.
+the last agent R(t)
+σN (Qian et al., 2024). Through K rounds
+of utterances, either predefined (Qian et al., 2024) or deter-
+mined by an early-stopping mechanism (Liu et al., 2023),
+the overall system G produces the final answer a(K) for Q.
+3.3. MACP Protocol
+We give the formal definition of MACP Protocol as follows:
+Definition 3.1 (Multi-agent Communication Protocol).
+Given an LLM-based multi-agent system G = (V, E), we
+establish the following objective as optimization principle:
+min
+G∈G
+h
+−u
+ 
+G(Q)
+
++β1 · ||G|| + β2 ·
+ ˆG( ˆQ) − G(Q)
+
+i
+, (6)
+where G represents the feasible parameter space of G, u(·)
+is the utility evaluator, ||G|| measures the computational and
+communication overhead of the entire graph, and ˆQ and
+ˆG denote the query description and the multi-agent system
+after adversarial perturbation, respectively. The first term in
+Equation (6) corresponds to high performance, aiming to
+maximize the utility of the system’s output; the second term
+addresses task-adaptiveness, seeking to minimize system
+complexity to reduce power consumption and economic
+cost; and the third term focuses on robustness, constraining
+the deviation of system output under adversarial attacks.
+4. G-Designer
+Figure 3 illustrates how G-Designer adaptively designs
+communication topologies for any given query. Specifi-
+cally, the process begins with a few “raw materials”: the
+input query Q, the agent set V, the profile pool, and the
+toolset. In the Construct stage, G-Designer leverages a
+node encoder to construct a multi-agent network along with
+a task-specific virtual node. In the Design stage, a graph
+auto-encoder is employed to decode the communication
+graph topology Gcom, which is leveraged for multi-round
+inter-agent collaboration in the Optimize stage.
+4.1. Multi-agent Network Construction
+Given an input query Q and a set of LLM-agents V,
+G-Designer aims to design a task-adaptive and effective
+communication topology Gcom. We begin by assigning each
+agent a unique role and profile, as previous research (Wang
+et al., 2023b) has shown that assigning distinct personas or
+roles to LLM-based agents can enhance cognitive synergy.
+Based on these roles, different external tools are allocated
+to the agents (e.g., Mathematica for a math analyst, Python
+compiler for a programmer). Thus, we successfully initial-
+ize each agent vi as {Basei, Rolei, Statei, Plugini},
+as defined in Equation (1).
+We proceed to construct a structured multi-agent network
+as input to G-Designer, represented as G = (Xagent, A),
+where Xagent ∈ RN ×D is the node (agent) feature matrix
+and A ∈ RN ×N represents the connectivity matrix. For
+the feature matrix Xagent, we employ a node encoder to
+transform each agent’s unique profile into a fixed-length
+4
+
+===== PAGE 5 =====
+G-Designer
+embedding representation:
+xi ← NodeEncoder (T (Basei), Rolei, T (Plugini)) , (7)
+where T (·) extracts the textual description of the agent’s
+LLM backbone and its assigned plugins, andNodeEncoder
+can be realized using small and lightweight text embed-
+ding models (Reimers, 2019). After encoding the indi-
+vidual agents, we aim to ensure that the multi-agent net-
+work incorporates information related to the query Q, as
+this query-dependent approach enables G-Designer to be
+task-aware and adaptive. To this end, we introduce an ad-
+ditional task-specific virtual global node vtask, which is
+bidirectionally connected to all agent nodes, enabling a
+global ”storage sink” and facilitating smoother information
+flow among agents (Shirzad et al., 2023; Tan et al., 2023;
+Rosenbluth et al., 2024). This task node is encoded by the
+NodeEncoder as follows: xtask ← NodeEncoder(Q).
+After obtaining the agent node features Xagent =
+[x1, x2, . . . ,xN]⊤ and the task-specific embedding xtask,
+we provide a simple anchor topology Aanchor ∈
+{0, 1}N ×N , which serves as a starting point for
+G-Designer’s topology design process. For instance,
+given a code generation task with three agents: man-
+ager/programmer/code reviewer, the anchor topology could
+be configured as a chain structure, i.e., “manager → pro-
+grammer → reviewer”, reflecting the typical workflow
+of code completion. The anchor topology, being either
+user-defined or automatically generated by LLMs, is often
+simple and sub-optimal 1. However, it provides a founda-
+tional reference and prior knowledge for G-Designer’s
+subsequent optimization process. We incorporate the task-
+specific vertex vtask and its corresponding edges and obtain
+˜Aanchor ∈ { 0, 1}(N+1)×(N+1). Consequently, we estab-
+lish a task-specific multi-agent network ˜G:
+˜G =
+ Xagent
+x⊤
+task
+
+, ˜Aanchor
+
+= (˜V, ˜E)
+=
+ 
+V ∪ { vtask}, E ∪ {
+← →
+(vi, vtask)|vi ∈ V )}
+
+,
+(8)
+where
+h
+Xagent
+x⊤
+task
+i
+can also be jointly denoted as ˜X.
+4.2. Designing Communication Topology
+Building upon the task-specific multi-agent network ˜G,
+G-Designer seeks to establish a more fine-grained and
+precise communication topology Gcom. Drawing inspi-
+ration from the variational graph auto-encoder (VGAE)
+framework (Kipf & Welling, 2016; Zhao & Zhang, 2024),
+G-Designer employs a VGAE-based encoder-decoder fv
+to generate the multi-agent interaction topology:
+Gcom = fv( ˜G; Θv) = p(Gcom | H)q(H | ˜X, ˜Aanchor), (9)
+1We discuss the substantial performance improvement of
+G-Designer over the anchor topology in Section 5.4.
+where fv is the encoder-decoder architecture with parame-
+ters Θv, q(·) is the encoder module, p(·) is the decoder mod-
+ule. The encoder utilizes posterior probabilities to encode
+the node embeddings into low-dimensional latent vector
+representations Hagent, which can be formulated as:
+q(Hagent | ˜X, ˜Aanchor) =
+NY
+i=1
+q(hi | ˜X, ˜Aanchor),
+q(hi | ˜X, ˜Aanchor) = N (hi | µi, diag(σ2
+i )),
+(10)
+where µ = GNNµ( ˜X, ˜Aanchor; Θµ) is the matrix of mean
+vectors µi; similarly log(σ) = GNN σ( ˜X, ˜Aanchor; Θσ).
+The choice of GNN backbone can be customized as needed;
+here, we utilize a simple two-layer GCN (Kipf & Welling,
+2017). hi, µi, and σi denote the i-th column of H, µ,
+and σ, respectively. The encoder q(·) is parameterized
+by Θe = {Θµ, Θσ}. Following the encoding phase, the
+decoder employs the latent representations to generate a
+comprehensive blueprint for multi-agent communication.
+More specifically, the decoder q(·) = qc ◦ qs first constructs
+a parameterized, sketched graph S, which is then refined
+into the final multi-agent communication topology:
+p(Gcom | Hagent) =
+Z
+S
+pc(Gcom | S)ps(S | Hagent) dS.
+(11)
+At the first step, ps(·) constructs the sketched adjacency
+matrix S from the latent representation Hagent:
+ps(S | Hagent) =
+NY
+i=1
+NY
+j=1
+ps(Sij | hi, hj, htask; Θd), (12)
+whose detailed derivation is as follows:
+ps(Sij = 1 | hi, hj, htask) = g(hi, hj, htask),
+= Sigmoid((log(ϵ) − log(1 − ϵ) + ϖij)/τ), (13)
+where ϖ = FFN d([hi, hj, htask]) with FFNd parame-
+terized by Θd, ϵ ∼ Uniform(0, 1), and τ denotes the
+temperature coefficient. When τ approaches zero, Equa-
+tion (13) essentially return the Bernouli sampling result
+for Sij. The resulting matrix S ∈ [0, 1]N ×N represents a
+densely-connected, non-negative graph distribution, indi-
+cating an overly complex and resource-intensive pair-wise
+communication structure, which is not yet suitable for guid-
+ing multi-agent collaboration. To align with G-Designer’s
+objectives of task adaptiveness and minimizing costs, we ap-
+ply a refinement decoder pc(·) to refine the sketched S into
+a compact, sparse, and highly informative communication
+graph, instantiated by a regularization objective:
+pc : arg max
+˜S∈S
+1/2||S − ZWZ⊤||2
+F + ζ||W||∗+
+1/2||Aanchor − ZWZ⊤||2
+F , s. t. ˜S = ZWZ⊤,
+(14)
+5
+
+===== PAGE 6 =====
+G-Designer
+where Z ∈ RN ×r is the top-r columns of left singular ma-
+trix S, ζ is a coefficient hyperparameter,W ∈ Rr×r is an
+optimizable weight matrix, || · || F denotes the Frobenius
+norm and ||W||∗ = P
+i λi where λi is the i-th singular
+value of W. ˜S ∈ RN ×N is the desired sparse topology,
+which is decomposed as ZWZ⊤. In Equation (14), the first
+and second terms are jointly denoted as anchor regulariza-
+tion, which encourage the learned ˜S to maintain similarity
+with both the original S and the anchor topology. The third
+term, denoted as sparsity regularization, though appearing
+to minimize the nuclear norm of W, essentially sparsifies
+˜S, since ||˜S||∗ = ||W||∗ holds due to Z⊤Z = I r×r. There-
+fore, Equation (14) achieves two key goals: (1) producing a
+sparse, refined communication topology, and (2) constrain-
+ing the design to remain grounded in practical intuition. The
+resulting communication can be represented as follows:
+Gcom = (V, Ecom), Ecom = {(i, j) | ˜Sij ̸= 0 ∧ (i, j) ∈ E} ).
+(15)
+At this stage, we have successfully distilled a lightweight
+and informative collaboration network Gcom from the
+sketched task-specific network ˜G, which is now ready to
+guide inter-agent message passing in the following process.
+4.3. Optimizing G-Designer
+Upon obtaining Gcom, the multi-agent utterances and di-
+alogues can proceed as usual using Gcom, as detailed in
+Section 3.2. After K rounds of interaction, the agents con-
+verge to a final solution a(K) = Gcom(Q). We then give the
+following optimization objective:
+arg min
+Θe,Θd
+EΘe,Θd∼Ω
+h
+u
+ 
+Gcom(Q)
+i
+, (16)
+where Θe and Θd are the parameters of the encoder q(·) and
+decoder p(·), respectively,Ω is the parameter space and E(·)
+denotes the mathematical expectation. Equation (16) aims
+to maximize the utility of the generated solution, but it is
+inherently intractable and non-differentiable, as u(·) often
+depends on external API calls (Li et al., 2023b; Hendrycks
+et al., 2021). To address this, following standard approaches
+in multi-agent structure design (Zhuge et al., 2024; Zhang
+et al., 2024), we apply policy gradient (Williams, 1992) to
+approximate and optimize Equation (16):
+∇ΘEΘ∼Ω
+h
+u
+ 
+Gcom(Q)
+i
+≈ 1
+M
+MX
+k=1
+u(a(K)
+m )∇Θ(P (Gk)), (17)
+where Θ = {Θe, Θd}, {Gk}M
+m=1 are indepently samples
+from Gcom, and {a(K)
+m }M
+m=1 are the corresponding out-
+put. P (Gk) calculates the probability of Gk being sam-
+pled, which can be expressed as P (Gk) =QN
+i=1
+QN
+j=1 ˜Sij.
+Through iterative optimization guided by Equations (14)
+and (16) over a limited set of queries as the “training set”,
+G-Designer efficiently develops task-awareness and the ca-
+pability to strategically design the agent network, achieving
+truly task-customized multi-agent topology design.
+Optimization configuration The overall training objec-
+tive of our method is formulated as LG-Designer = Lutility +
+Lanchor + Lsparse, where Lutility represents the optimiza-
+tion target from Equation (16), Lanchor corresponds to the
+first and third terms in Equation (14), and Lsparse is the
+second term. Given a benchmark {Qi}D
+i=1 consisting of
+B queries, G-Designer begins by optimizing with a small
+subset of B′ queries and fixes the learned parameters for
+testing on the remaining (B − B′) queries. The whole algo-
+rithm workflow of G-Designer is depicted in Algorithm 1.
+5. Experiments
+5.1. Experimental Setup
+Datasets and Metrics We evaluate G-Designer on
+three categories of datasets: ■ General Reasoning :
+MMLU (Hendrycks et al., 2021); ■ Mathematical Rea-
+soning: GSM8K (Cobbe et al., 2021), MultiArith (Roy &
+Roth, 2016), SV AMP (Patel et al., 2021), and AQuA (Ling
+et al., 2017); ■ Code: HumanEval (Chen et al., 2021). We
+include the dataset statistics in Table 4.
+Baselines For single-agent approaches, we select
+COT (Wei et al., 2022),ComplexCoT (Fu et al., 2022),Self-
+Consistency (Wang et al., 2023a), and PHP (Zheng et al.,
+2023). For multi-agent topologies, we select Chain, Star,
+and Tree(formally defined in (Qian et al., 2024)),Complete
+Graph and Random Graph , AutoGen (Wu et al., 2023),
+MetaGPT (Hong et al., 2023), LLM-Debate (Du et al.,
+2023), LLM-Blender (Jiang et al., 2023), DyLAN (Liu
+et al., 2023), and GPTSwarm (Zhuge et al., 2024).
+Implementation Details We access the GPT via the Ope-
+nAI API, and mainly test on gpt-4-1106-preview
+(gpt-4) and gpt-3.5-turbo-0125 (gpt-3.5). We
+set temperature to 0 for the single execution and sin-
+gle agent baselines and 1 for multi-agent methods. We set
+a summarizer agent to aggregate the dialogue history and
+produce the final solution a(K), with K = 3 across all
+experiments. The NodeEncoder(·) is implemented using
+all-MiniLM-L6-v2 (Wang et al., 2020), with the em-
+bedding dimension set to D = 384. The anchor topology
+Aanchor is predefined as a simple chain structure. The sam-
+pling times M are set as 10, and τ = 1e − 2 and ζ = 1e − 1
+are set for all experiments. We provide explicit agent pro-
+filing for multi-agent methods, following the classical con-
+figurations in LLM-MA systems (Liu et al., 2023; Zhuge
+et al., 2024; Yin et al., 2023), and use gpt-4 to generate
+agent profile pools. For all benchmarks, we merely use
+B′ ∈ {40, 80} queries for optimization.
+5.2. Main Results
+In this section, we conduct extensive experiments across six
+benchmarks to verify that G-Designer is:
+6
+
+===== PAGE 7 =====
+G-Designer
+Table 1. Performance comparison with three types of baselines, including single-agent execution, spatial communication, and temporal
+communication. The best results are in bold, and the runner-ups are underlined. All methods, except for the single-agent category,
+utilize five gpt-4-based agents. “Mul.”, “Ada.”, and “Rob.” indicate whether the method supports a multi-agent setting, whether it is
+task-adaptive, and whether it is adversarially robust, respectively. %, ✓✗ and ! signifies no/partial/full support in these aspects.
+Method Mul. Ada. Rob. MMLU GSM8K MultiArith SV AMP AQuA HumanEval Avg.
+Vanilla % % % 82.14 85.40 93.15 87.18 70.34 71.68 81.65
+CoT % % % 82.65↑0.51 87.17↑1.77 94.79↑1.64 88.32↑1.14 73.91↑3.57 75.52↑3.84 83.73
+ComplexCoT % % % 83.78↑1.64 87.62↑2.22 95.86↑2.71 90.17↑2.99 77.58↑7.24 74.94↑3.26 84.99
+SC (CoT) % % % 82.66↑0.52 87.93↑2.53 96.88↑3.73 88.69↑1.51 75.08↑4.74 77.30↑5.62 84.75
+SC (ComplexCoT) % % % 83.65↑1.51 86.14↓0.74 96.94↑3.79 89.72↑2.54 77.69↑7.35 77.94↑6.26 85.35
+PHP ! % % 83.45↑1.31 95.50↑10.1 98.10↑2.84 90.02↑3.44 79.00↑8.66 82.96↑11.36 88.17
+Chain ! % % 82.35↑0.21 85.57↑0.17 94.38↑1.23 83.41↓3.77 70.94↑0.60 80.88↑9.20 82.92
+Star ! % % 80.79↓1.35 85.55↑0.15 93.79↓0.64 88.09↑0.91 68.57↓1.77 75.65↑3.97 82.07
+Tree ! % % 81.89↓0.25 84.56↓0.84 94.60↑1.45 89.25↑2.07 72.84↑2.50 77.38↑5.70 83.42
+Complete Graph ! % % 83.15↑1.01 86.49↑1.09 97.20↑4.05 89.48↑2.30 79.21↑8.87 83.75↑12.07 86.55
+Random Graph ! % % 83.76↑1.62 86.14↑0.74 95.46↑2.31 85.41↓1.77 74.07↑3.73 82.66↑10.98 84.58
+AutoGen ! % % 82.13↓0.01 90.06↑7.92 93.80↑0.65 88.44↓1.26 73.65↑3.31 85.41↑13.73 85.58
+MetaGPT ! % % - - - - - 85.90 ↑14.22 84.90
+LLM-Blender ! % % 81.22↓0.92 89.17↑3.77 94.27↑1.12 88.77↑1.59 77.05↑6.71 - 86.09
+LLM-Debate ! % ! 83.69↑1.55 90.23↑4.83 96.27↑3.12 90.56↑3.38 77.52↑7.18 83.79↑12.11 87.01
+DyLAN ! ✓✗ ! 80.16↓1.98 88.16↑2.76 94.27↑1.12 87.40↑0.22 74.16↑3.82 89.70↑18.02 85.64
+GPTSwarm ! ✓✗ ! 83.98↑1.84 89.74↑4.34 97.84↑4.69 86.42↓0.76 78.16↑7.82 88.49↑16.81 87.32
+G-Designer ! ! ! 84.50↑2.36 95.07↑9.67 98.30↑5.15 91.85↑4.67 79.47↑9.13 89.90↑18.22 89.84
+High-performing The experimental results from Table 1
+demonstrate that G-Designer is effective in designing
+powerful LLM-MA topologies. Concretely, G-Designer
+achieves the best performance in five out of six benchmarks,
+and on GSM8K, it trails only PHP with a 9.67% ↑ accuracy
+improvement. On the HumanEval benchmark, G-Designer
+surpasses MetaGPT, a specialized multi-agent code gen-
+eration framework, by 4.0% at pass@1, and outperforms
+state-of-the-art multi-agent collaboration frameworks like
+GPTSwarm and DyLAN by margins of 0.20% ∼ 1.41%.
+Task-adaptive Figure 6 visualizes the different topolo-
+gies designed by G-Designer for varying query difficul-
+ties on HumanEval and GSM8K. As shown in Figure 6,
+the multi-agent topologies generated by G-Designer are
+highly dependent on the specific task context and its diffi-
+culty. In Case a, despite having fivegpt-4 agents available
+as design resources, G-Designer identified the task of de-
+signing a strlen(string) function as relatively simple.
+It streamlined the topology by removing unnecessary agents
+and retained only a minimal “Algorithm Designer → Pro-
+grammer” structure to solve the problem. In contrast, for the
+more complex Case c and Case e, G-Designer crafted a
+more intricate communication graph. These cases highlight
+the strong task-adaptiveness of G-Designer.
+Scalable To evaluate the scalability of G-Designer to
+a larger number of agents, we report its performance
+across 5 ∼ 20 agents, as presented in Table 6. No-
+tably, G-Designer exhibits a steeper performance gain than
+GPTSwarm as the agent count increases. More importantly,
+Token consumption (10^x)
+Accuracy (%)
+Token consumption (10^x)
+Pass@1 (%)
+Token consumption (10^x)
+Accuracy (%)
+Token consumption (10^x)
+Accuracy (%)
+MMLU HumanEval
+GSM8K SVAMP
+Figure 4. Visualization of the performance metrics and prompt
+token consumption of different multi-agent communication topolo-
+gies across MMLU, HumanEval, GSM8K, and SV AMP. The di-
+ameter of each point is proportional to its y-axis value.
+while the complete graph and GPTSwarm incur an over-
+whelming token cost at 20 agents (5.6 ∼ 30.3M tokens),
+G-Designer achieves superior performance with merely
+6.11% of GPTSwarm’s prompt token consumption, surpass-
+ing it by 2.44% ↑. These results decisively demonstrate
+the scalability and potential of G-Designer in advancing
+large-scale autonomous multi-agent systems.
+Token-economical ( inference) A key benefit of
+G-Designer’s adaptivity is that it prevents the use of
+overly complex structures for simple tasks, thus minimizing
+7
+
+===== PAGE 8 =====
+G-Designer
+/uni00000026/uni0000004b/uni00000044/uni0000004c/uni00000051/uni00000036/uni00000057/uni00000044/uni00000055/uni00000037/uni00000055/uni00000048/uni00000048/uni00000026/uni00000052/uni00000050/uni00000053/uni0000004f/uni00000048/uni00000057/uni00000048
+/uni0000002a/uni00000055/uni00000044/uni00000053/uni0000004b
+/uni00000035/uni00000044/uni00000051/uni00000047/uni00000052/uni00000050
+/uni0000002a/uni00000055/uni00000044/uni00000053/uni0000004b
+/uni00000027/uni0000005c/uni0000002f/uni00000024/uni00000031/uni0000002a/uni00000033/uni00000037/uni00000036/uni0000005a/uni00000044/uni00000055/uni00000050/uni00000024/uni00000058/uni00000057/uni00000052/uni0000002a/uni00000048/uni00000051/uni0000002a/uni00000010/uni00000027/uni00000048/uni00000056/uni0000004c/uni0000004a/uni00000051/uni00000048/uni00000055
+/uni00000019/uni00000013
+/uni00000019/uni00000018
+/uni0000001a/uni00000013
+/uni0000001a/uni00000018
+/uni0000001b/uni00000013
+/uni0000001b/uni00000018
+/uni0000001c/uni00000013
+/uni0000001b/uni00000015/uni00000011/uni00000016
+/uni0000001a/uni00000014/uni00000011/uni00000016
+/uni0000001b/uni00000013/uni00000011/uni0000001a
+/uni0000001a/uni0000001b/uni00000011/uni00000018
+/uni0000001b/uni00000014/uni00000011/uni0000001b
+/uni0000001a/uni00000017/uni00000011/uni00000015
+/uni0000001b/uni00000016/uni00000011/uni00000014
+/uni0000001a/uni00000016/uni00000011/uni00000016
+/uni0000001b/uni00000016/uni00000011/uni0000001a
+/uni0000001b/uni00000013/uni00000011/uni00000014
+/uni0000001b/uni00000016/uni00000011/uni00000017
+/uni0000001a/uni0000001a/uni00000011/uni00000015
+/uni0000001b/uni00000017/uni00000011/uni00000013/uni0000001b/uni00000016/uni00000011/uni0000001a
+/uni0000001b/uni00000015/uni00000011/uni00000014
+/uni0000001a/uni00000015/uni00000011/uni00000015
+/uni0000001b/uni00000017/uni00000011/uni00000018/uni0000001b/uni00000017/uni00000011/uni00000015/uni00000045/uni00000048/uni00000049/uni00000052/uni00000055/uni00000048/uni00000003/uni00000044/uni00000057/uni00000057/uni00000044/uni00000046/uni0000004e/uni00000044/uni00000049/uni00000057/uni00000048/uni00000055/uni00000003/uni00000044/uni00000057/uni00000057/uni00000044/uni00000046/uni0000004e
+Figure 5. We compare the accuracy (%) of various multi-agent
+frameworks before and after prompt attacks on MMLU.
+unnecessary communication costs—in the case of LLM-
+MA, reducing token consumption. Figure 4 It illustrates
+the differences in prompt token consumption between
+G-Designer and several representative multi-agent designs.
+We observe that simpler topologies, such as complete
+graphs and random graphs, consume fewer tokens but
+show significantly weaker performance. More complex
+communication structures, like GPTSwarm and DyLAN,
+achieve superior performance, albeit at the cost of excessive
+token consumption. For instance, DyLAN’s cost on
+GSM8K is 2.82× that of the random graph, reaching a
+substantial 2.2e + 7. In contrast, G-Designer elegantly
+balances both efficiency and task performance, achieving
+the highest performance across all four benchmarks while
+maintaining the lowest token cost. For example, on SV AMP,
+G-Designer surpasses DyLAN by 4% while using only
+23.7% of DyLAN’s token cost.
+Resource-efficient (training) We validate G-Designer’s
+training process is resource-friendly from three dimen-
+sions: GPU cost, token cost, and wall-clock time. Table 5
+showcases that training G-Designer with up to 1000 agents
+requires less than 4GB of memory. Table 2 unveils that
+G-Designer not only attains the highest accuracy but also
+exhibits superior token efficiency and reduced wall-clock
+time compared to existing baselines, underscoring its effec-
+tiveness in multi-agent collaboration.
+Table 2. Efficiency analysis. We compare the training/inference
+wall-clock time and token consumption between G-Designer and
+other high-performing baselines on the GSM8K dataset.
+Method Perf. #TrainingToken #InferenceToken #OverallToken TrainingTime InferenceTime
+Complete 86.4 - 9.8×106 9.8×106 - 2.4hDyLAN 88.1 9.6×106 1.3×107 2.2×107 2.8h 4.6hGPTSwarm89.7 5.5×106 8.4×106 1.4×107 2.1h 2.8h
+G-Designer95.0 2.7×105 8.2×106 8.5×106 0.3h 2.3h
+5.3. Robustness Analysis
+Following (Zhuge et al., 2024), we simulate a system prompt
+attack on one of the five agents. As seen in Figure 5, many
+trivial structures, such as chain or complete graph, expe-
+rience significant performance degradation under partial
+system attacks, with drops as high as 11.0%. Among more
+sophisticated structures, GPTSwarm, benefiting from its spe-
+cialized node optimization mechanism, only suffers a minor
+0.3% accuracy decline. However, other methods fare less
+Table 3. Ablation study tested on MMLU benchmark.
+Variant MMLU GSM8K
+Clean Attack Clean Attack
+vanillaG-Designer 84.5 84.2 95.0 92.5
+w/o SR 84.1 83.2 94.4 90.7
+w/o Anchor 84.0 83.8 94.7 92.0
+w/oNodeEncoder(·) 83.2 82.4 92.8 87.4
+w/o vtask 81.3 82.0 90.3 87.7
+well, with DyLAN and AutoGen showing accuracy drops
+of 6.2% and 9.9%, respectively. Remarkably, G-Designer
+demonstrates exceptional robustness against adversarial at-
+tacks, maintaining nearly identical performance pre- and
+post-attack. This resilience can be attributed to its agent
+encoding capability, which, during optimization, can detect
+malicious inputs and prune the corresponding edges.
+5.4. Framework Analysis
+Ablation Study. We report results for two variants of
+ourmethod: (1) w/o SR, which removes the sparsity regular-
+ization in Equation (14), (2) w/o Anchor, which excludes
+the anchor structure Aanchor, (3) w/o NodeEncoder, re-
+moving node encoder in Equation (7), and (4) w/o vtask
+in Equation (8). As shown in Table 3, removing the task
+virtual node disrupts G-Designer’s task-adaptiveness, lead-
+ing to the most significant performance drop. The removal
+of Aanchor consistently leads to performance degradation,
+while the absence of sparsity regularization makes the sys-
+tem more vulnerable to adversarial attacks.
+Discussion on anchor topology. Given that G-Designer
+is initialized with the anchor topology Aanchor introduced
+in Section 4.1, one may question whether the perfor-
+mance gains of G-Designer primarily stem from Aanchor
+itself. In response, we emphasize that the anchor topol-
+ogy corresponds to the simple Chain structure in Table 1,
+where G-Designer achieves substantial improvements over
+it, specifically 9.50% ↑ on GSM8K and 8.44% ↑ on
+SV AMP. Thus, we assert that the superior performance
+of G-Designer is predominantly attributed to its adaptive
+topology design rather than the anchor topology itself.
+6. Conclusion
+In this paper, we present the LLM-based Multi-agent Com-
+munication Protocol (MACP), which aims to provide in-
+sightful guidance for designing complex multi-agent sys-
+tems. Furthermore, we propose an effective, adaptive, and
+robust LLM-powered multi-agent communication graph de-
+signer, termed G-Designer, to facilitate the automated de-
+sign of collaborative AI systems. G-Designer is highly
+task-aware, dynamically crafting compact and robust com-
+munication topologies based on task complexity. We
+hope that G-Designer will inspire future research on self-
+organizing and self-evolving collective intelligence.
+8
+
+===== PAGE 9 =====
+G-Designer
+Impact Statement
+Ethical impacts. We confidently affirm that our paper
+is free of ethical concerns across its motivation, design,
+experiments, and data usage. The proposed G-Designer
+method aims to advance the fields of multi-agent systems
+and communication topologies design automation, contribut-
+ing positively and responsibly to the scientific community.
+Expected societal implications. Our paper presents a sig-
+nificant advancement in multi-agent systems. G-Designer
+addresses the challenge of choosing the right communi-
+cation topology for specific tasks. G-Designer not only
+provides a practical solution for multi-agent deployment but
+also paves the way for future studies on collective intelli-
+gence systems. Furthermore, as long as the base LLM used
+is aligned with human values, our system will not generate
+harmful content.
+References
+Bouzenia, I., Devanbu, P., and Pradel, M. Repairagent: An
+autonomous, llm-based agent for program repair. arXiv
+preprint arXiv:2403.17134, 2024.
+Chan, C.-M., Chen, W., Su, Y ., Yu, J., Xue, W., Zhang, S.,
+Fu, J., and Liu, Z. ChatEval: Towards Better LLM-based
+Evaluators through Multi-Agent Debate. arXiv e-prints,
+August 2023.
+Chen, D., Wang, H., Huo, Y ., Li, Y ., and Zhang, H. Gamegpt:
+Multi-agent collaborative framework for game develop-
+ment. arXiv preprint arXiv:2310.08067, 2023a.
+Chen, J., Lin, H., Han, X., and Sun, L. Benchmarking large
+language models in retrieval-augmented generation. In
+Proceedings of the AAAI Conference on Artificial Intelli-
+gence, volume 38, pp. 17754–17762, 2024a.
+Chen, L., Davis, J. Q., Hanin, B., Bailis, P., Stoica, I., Za-
+haria, M., and Zou, J. Are more llm calls all you need?
+towards scaling laws of compound inference systems.
+arXiv preprint arXiv:2403.02419, 2024b.
+Chen, M., Tworek, J., Jun, H., Yuan, Q., Ponde de
+Oliveira Pinto, H., Kaplan, J., Edwards, H., Burda, Y .,
+Joseph, N., Brockman, G., Ray, A., Puri, R., Krueger,
+G., Petrov, M., Khlaaf, H., Sastry, G., Mishkin, P., Chan,
+B., Gray, S., Ryder, N., Pavlov, M., Power, A., Kaiser,
+L., Bavarian, M., Winter, C., Tillet, P., Petroski Such, F.,
+Cummings, D., Plappert, M., Chantzis, F., Barnes, E.,
+Herbert-V oss, A., Hebgen Guss, W., Nichol, A., Paino,
+A., Tezak, N., Tang, J., Babuschkin, I., Balaji, S., Jain, S.,
+Saunders, W., Hesse, C., Carr, A. N., Leike, J., Achiam,
+J., Misra, V ., Morikawa, E., Radford, A., Knight, M.,
+Brundage, M., Murati, M., Mayer, K., Welinder, P., Mc-
+Grew, B., Amodei, D., McCandlish, S., Sutskever, I., and
+Zaremba, W. Evaluating large language models trained
+on code, July 01, 2021 2021.
+Chen, W., Su, Y ., Zuo, J., Yang, C., Yuan, C., Qian, C., Chan,
+C.-M., Qin, Y ., Lu, Y ., Xie, R., Liu, Z., Sun, M., and Zhou,
+J. Agentverse: Facilitating multi-agent collaboration and
+exploring emergent behaviors in agents, 2023b.
+Cheng, Y ., Zhang, C., Zhang, Z., Meng, X., Hong, S., Li, W.,
+Wang, Z., Wang, Z., Yin, F., Zhao, J., and He, X. Explor-
+ing large language model based intelligent agents: Defi-
+nitions, methods, and prospects. CoRR, abs/2401.03428,
+2024.
+Cobbe, K., Kosaraju, V ., Bavarian, M., Chen, M., Jun, H.,
+Kaiser, L., Plappert, M., Tworek, J., Hilton, J., Nakano,
+R., Hesse, C., and Schulman, J. Training verifiers to solve
+math word problems. arXiv prepring, abs/2110.14168,
+2021.
+Cohen, R., Hamri, M., Geva, M., and Globerson, A. Lm vs
+lm: Detecting factual errors via cross examination. arXiv
+preprint arXiv:2305.13281, 2023.
+Du, Y ., Li, S., Torralba, A., Tenenbaum, J. B., and Mordatch,
+I. Improving factuality and reasoning in language models
+through multiagent debate. CoRR, abs/2305.14325, 2023.
+Fu, Y ., Peng, H., Sabharwal, A., Clark, P., and Khot, T.
+Complexity-based prompting for multi-step reasoning.
+In The Eleventh International Conference on Learning
+Representations, 2022.
+Gao, C., Lan, X., Li, N., Yuan, Y ., Ding, J., Zhou, Z.,
+Xu, F., and Li, Y . Large language models empowered
+agent-based modeling and simulation: A survey and per-
+spectives. CoRR, abs/2312.11970, 2023.
+Hao, R., Hu, L., Qi, W., Wu, Q., Zhang, Y ., and Nie, L.
+Chatllm network: More brains, more intelligence, April
+01, 2023 2023.
+Hendrycks, D., Burns, C., Basart, S., Zou, A., Mazeika, M.,
+Song, D., and Steinhardt, J. Measuring massive multitask
+language understanding. Proceedings of the International
+Conference on Learning Representations (ICLR), 2021.
+Holt, S., Luyten, M. R., and van der Schaar, M. L2mac:
+Large language model automatic computer for extensive
+code generation. In The Twelfth International Conference
+on Learning Representations, 2024.
+Hong, S., Zheng, X., Chen, J., Cheng, Y ., Wang, J., Zhang,
+C., Wang, Z., Yau, S. K. S., Lin, Z., Zhou, L., Ran, C.,
+Xiao, L., and Wu, C. Metagpt: Meta programming for
+multi-agent collaborative framework, August 01, 2023
+2023.
+9
+
+===== PAGE 10 =====
+G-Designer
+Hu, S., Shen, L., Zhang, Y ., and Tao, D. Learning multi-
+agent communication from graph modeling perspective.
+arXiv preprint arXiv:2405.08550, 2024.
+Hua, W., Fan, L., Li, L., Mei, K., Ji, J., Ge, Y ., Hemphill, L.,
+and Zhang, Y . War and peace (waragent): Large language
+model-based multi-agent simulation of world wars. arXiv
+preprint arXiv:2311.17227, 2023.
+Ishibashi, Y . and Nishimura, Y . Self-organized agents:
+A llm multi-agent framework toward ultra large-scale
+code generation and optimization. arXiv preprint
+arXiv:2404.02183, 2024.
+Jiang, D., Ren, X., and Lin, B. Y . LLM-blender: Ensembling
+large language models with pairwise ranking and genera-
+tive fusion. In Proceedings of the 61st Annual Meeting of
+the Association for Computational Linguistics (Volume 1:
+Long Papers), pp. 14165–14178, Toronto, Canada, July
+2023. Association for Computational Linguistics.
+Jin, Y ., Shen, X., Peng, H., Liu, X., Qin, J., Li, J., Xie, J.,
+Gao, P., Zhou, G., and Gong, J. Surrealdriver: Designing
+generative driver agent simulation framework in urban
+contexts based on large language model, 2023.
+Khattab, O., Singhvi, A., Maheshwari, P., Zhang, Z., San-
+thanam, K., Vardhamanan, S., Haq, S., Sharma, A., Joshi,
+T. T., Moazam, H., et al. Dspy: Compiling declarative
+language model calls into self-improving pipelines. arXiv
+preprint arXiv:2310.03714, 2023.
+Kipf, T. N. and Welling, M. Variational graph auto-encoders.
+arXiv preprint arXiv:1611.07308, 2016.
+Kipf, T. N. and Welling, M. Semi-supervised classifica-
+tion with graph convolutional networks. In 5th Interna-
+tional Conference on Learning Representations. OpenRe-
+view.net, 2017.
+Li, G., Hammoud, H., Itani, H., Khizbullin, D., and Ghanem,
+B. CAMEL: communicative agents for ”mind” explo-
+ration of large language model society. In NeurIPS,
+2023a.
+Li, J., Zhang, Q., Yu, Y ., Fu, Q., and Ye, D. More agents is
+all you need. CoRR, abs/2402.05120, 2024.
+Li, M., Zhao, Y ., Yu, B., Song, F., Li, H., Yu, H., Li,
+Z., Huang, F., and Li, Y . Api-bank: A comprehen-
+sive benchmark for tool-augmented llms. arXiv preprint
+arXiv:2304.08244, 2023b.
+Liang, T., He, Z., Jiao, W., Wang, X., Wang, Y ., Wang,
+R., Yang, Y ., Tu, Z., and Shi, S. Encouraging divergent
+thinking in large language models through multi-agent
+debate. CoRR, abs/2305.19118, 2023.
+Ling, W., Yogatama, D., Dyer, C., and Blunsom, P. Pro-
+gram induction by rationale generation: Learning to solve
+and explain algebraic word problems. arXiv preprint
+arXiv:1705.04146, 2017.
+Liu, Y ., Dou, Y ., Li, Y ., Xu, X., and Liu, D. Temporal
+dynamic weighted graph convolution for multi-agent re-
+inforcement learning. In Proceedings of the Annual Meet-
+ing of the Cognitive Science Society, volume 44, 2022.
+Liu, Z., Zhang, Y ., Li, P., Liu, Y ., and Yang, D. Dynamic llm-
+agent network: An llm-agent collaboration framework
+with agent team optimization. CoRR, abs/2310.02170,
+2023.
+Ma, K., Zhang, H., Wang, H., Pan, X., Yu, W., and Yu, D.
+Laser: Llm agent with state-space exploration for web
+navigation. arXiv preprint arXiv:2309.08172, 2023.
+Nakajima, Y . Babyagi. https://github.com/
+yoheinakajima/babyagi, 2023.
+Patel, A., Bhattamishra, S., and Goyal, N. Are nlp models
+really able to solve simple math word problems? arXiv
+preprint arXiv:2103.07191, 2021.
+Pesce, E. and Montana, G. Learning multi-agent coordi-
+nation through connectivity-driven communication. Ma-
+chine Learning, 112(2):483–514, 2023.
+Qian, C., Cong, X., Yang, C., Chen, W., Su, Y ., Xu, J.,
+Liu, Z., and Sun, M. Communicative agents for software
+development, July 01, 2023 2023. 25 pages, 9 figures, 2
+tables.
+Qian, C., Xie, Z., Wang, Y ., Liu, W., Dang, Y ., Du, Z.,
+Chen, W., Yang, C., Liu, Z., and Sun, M. Scaling large-
+language-model-based multi-agent collaboration. arXiv
+preprint arXiv:2406.07155, 2024.
+Reimers, N. Sentence-bert: Sentence embeddings using
+siamese bert-networks. arXiv preprint arXiv:1908.10084,
+2019.
+Reworkd. Agentgpt. https://github.com/
+reworkd/AgentGPT, 2023.
+Richards, T. B. and et al. Auto-gpt: An au-
+tonomous gpt-4 experiment. https://github.com/
+Significant-Gravitas/Auto-GPT, 2023.
+Rosenbluth, E., T ¨onshoff, J., Ritzert, M., Kisin, B., and
+Grohe, M. Distinguished in uniform: Self attention vs.
+virtual nodes. arXiv preprint arXiv:2405.11951, 2024.
+Roy, S. and Roth, D. Solving general arithmetic word
+problems. arXiv preprint arXiv:1608.01413, 2016.
+10
+
+===== PAGE 11 =====
+G-Designer
+Shinn, N., Labash, B., and Gopinath, A. Reflexion:
+an autonomous agent with dynamic memory and self-
+reflection. arXiv preprint, abs/2303.11366, 2023. doi: 10.
+48550/arXiv.2303.11366. URL https://doi.org/
+10.48550/arXiv.2303.11366.
+Shirzad, H., Velingker, A., Venkatachalam, B., Sutherland,
+D. J., and Sinop, A. K. Exphormer: Sparse transform-
+ers for graphs. In International Conference on Machine
+Learning, pp. 31613–31632. PMLR, 2023.
+Tan, Z., Guo, R., Ding, K., and Liu, H. Virtual node tuning
+for few-shot node classification. In Proceedings of the
+29th ACM SIGKDD Conference on Knowledge Discovery
+and Data Mining, pp. 2177–2188, 2023.
+Wang, G., Xie, Y ., Jiang, Y ., Mandlekar, A., Xiao, C., Zhu,
+Y ., Fan, L., and Anandkumar, A. V oyager: An Open-
+Ended Embodied Agent with Large Language Models.
+arXiv e-prints, art. arXiv:2305.16291, May 2023.
+Wang, L., Ma, C., Feng, X., Zhang, Z., Yang, H., Zhang, J.,
+Chen, Z., Tang, J., Chen, X., Lin, Y ., Zhao, W. X., Wei,
+Z., and Wen, J. A survey on large language model based
+autonomous agents. Front. Comput. Sci., 18, 2024.
+Wang, W., Wei, F., Dong, L., Bao, H., Yang, N., and
+Zhou, M. Minilm: Deep self-attention distillation for
+task-agnostic compression of pre-trained transformers.
+Advances in Neural Information Processing Systems, 33:
+5776–5788, 2020.
+Wang, X., Wei, J., Schuurmans, D., Le, Q. V ., Chi,
+E. H., Narang, S., Chowdhery, A., and Zhou, D. Self-
+consistency improves chain of thought reasoning in lan-
+guage models. In The Eleventh International Conference
+on Learning Representations, 2023a.
+Wang, Z., Mao, S., Wu, W., Ge, T., Wei, F., and Ji, H.
+Unleashing cognitive synergy in large language mod-
+els: A task-solving agent through multi-persona self-
+collaboration, July 01, 2023 2023b. work in progress.
+Wei, J., Wang, X., Schuurmans, D., Bosma, M., Ichter, B.,
+Xia, F., Chi, E., Le, Q., and Zhou, D. Chain-of-thought
+prompting elicits reasoning in large language models,
+January 01, 2022 2022.
+Williams, R. J. Simple statistical gradient-following algo-
+rithms for connectionist reinforcement learning. Machine
+learning, 8:229–256, 1992.
+Wu, Q., Bansal, G., Zhang, J., Wu, Y ., Zhang, S., Zhu, E., Li,
+B., Jiang, L., Zhang, X., and Wang, C. Autogen: Enabling
+next-gen llm applications via multi-agent conversation
+framework, August 01, 2023 2023.
+Xi, Z., Chen, W., Guo, X., He, W., Ding, Y ., Hong, B.,
+Zhang, M., Wang, J., Jin, S., Zhou, E., Zheng, R., Fan,
+X., Wang, X., Xiong, L., Zhou, Y ., Wang, W., Jiang, C.,
+Zou, Y ., Liu, X., Yin, Z., Dou, S., Weng, R., Cheng, W.,
+Zhang, Q., Qin, W., Zheng, Y ., Qiu, X., Huan, X., and
+Gui, T. The rise and potential of large language model
+based agents: A survey. arxiv preprint, abs/2309.07864,
+2023.
+Yan, Y ., Zhang, Y ., and Huang, K. Depending on yourself
+when you should: Mentoring llm with rl agents to be-
+come the master in cybersecurity games. arXiv preprint
+arXiv:2403.17674, 2024.
+Yao, S., Yu, D., Zhao, J., Shafran, I., Griffiths, T. L., Cao,
+Y ., and Narasimhan, K. Tree of thoughts: Deliberate
+problem solving with large language models, May 01,
+2023 2023a.
+Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan,
+K. R., and Cao, Y . React: Synergizing reasoning and
+acting in language models. In The Eleventh International
+Conference on Learning Representations, 2023b.
+Yin, Z., Sun, Q., Chang, C., Guo, Q., Dai, J., Huang, X.-
+J., and Qiu, X. Exchange-of-thought: Enhancing large
+language model capabilities through cross-model com-
+munication. In Proceedings of the 2023 Conference on
+Empirical Methods in Natural Language Processing, pp.
+15135–15153, 2023.
+Zhang, G., Yue, Y ., Li, Z., Yun, S., Wan, G., Wang, K.,
+Cheng, D., Yu, J. X., and Chen, T. Cut the crap: An
+economical communication pipeline for llm-based multi-
+agent systems. arXiv preprint arXiv:2410.02506, 2024.
+Zhang, J., Xu, X., and Deng, S. Exploring collaboration
+mechanisms for llm agents: A social psychology view.
+arXiv preprint arXiv:2310.02124, 2023a.
+Zhang, J., Xu, X., and Deng, S. Exploring collaboration
+mechanisms for llm agents: A social psychology view.
+arXiv preprint arXiv:2310.02124, 2023b.
+Zhang, P. and Chartrand, G. Introduction to graph theory.
+Tata McGraw-Hill, 2:2–1, 2006.
+Zhao, K. and Zhang, L. Causality-inspired spatial-temporal
+explanations for dynamic graph neural networks. In The
+Twelfth International Conference on Learning Represen-
+tations, 2024.
+Zheng, C., Liu, Z., Xie, E., Li, Z., and Li, Y . Progressive-
+hint prompting improves reasoning in large language
+models, April 01, 2023 2023. Tech Report.
+11
+
+===== PAGE 12 =====
+G-Designer
+Zhou, Z., Hu, B., Zhao, C., Zhang, P., and Liu, B. Large
+language model as a policy teacher for training reinforce-
+ment learning agents. arXiv preprint arXiv:2311.13373,
+2023.
+Zhuang, Y ., Chen, X., Yu, T., Mitra, S., Bursztyn, V ., Rossi,
+R. A., Sarkhel, S., and Zhang, C. Toolchain*: Efficient
+action space navigation in large language models with a*
+search. arXiv preprint arXiv:2310.13227, 2023.
+Zhuge, M., Wang, W., Kirsch, L., Faccio, F., Khizbullin, D.,
+and Schmidhuber, J. Gptswarm: Language agents as op-
+timizable graphs. In Forty-first International Conference
+on Machine Learning, 2024.
+12
+
+===== PAGE 13 =====
+G-Designer
+A. Algorithm Workflow
+Algorithm 1 Designing workflow of G-Designer
+Input : Input query Q, Graph auto-encoder fv composed of encoder q(·) and decoder p(·) (parameterized by Θe and Θ),
+learning rate α
+for query d in {1, 2, · · · , D′} do
+/* Establish multi-agent network */
+for node i in {1, 2, · · · , N} do
+xi ← NodeEncoder (T (Basei), Rolei, T (Plugini))
+end
+Obtain agent embeddings Xagent ← [x1, x2, · · · , xN]⊤
+Obtain task-specific node xtask ← NodeEncoder(Qd)
+Set an anchor topology Aanchor // In our experiments, the anchor topology is simply set
+as the chain structure
+Obtain a task-specific multi-agent network ˜G =
+ Xagent
+x⊤
+task
+
+, Aanchor
+
+// Note that Aanchor here
+contains bidirectional edges added by the task node vtask
+/* Design communication topology */
+Encode ˜G into latent agent representations Hagent: q(Hagent | ˜X, Aanchor) =QN
+i=1 q(hi | ˜X, Aanchor)
+Decode (phase 1) and obtain the sketched graph S: ps(S | Hagent) =QN
+i=1
+QN
+j=1 ps(Sij | hi, hj, htask; Θd),
+Decode (phase 2) and obtain the communication graph Gcom = (V, Ecom), Ecom = {(i, j) | ˜Sij ̸= 0 ∧ (i, j) ∈ E} )
+/* Guide multi-agent system collaboration */
+for iteration t in {1, 2, · · · , K} do
+for node i in ϕ(Gcom) do
+Agent vi generates R(t)
+i ← vi(P(t)
+sys , P(t)
+usr ), P(t)
+usr = {Q, ∪vj ∈Nin(vi)R(t)
+j }
+end
+/* Aggregate solution */
+a(t) ← Aggregate(R(t)
+1 , R(t)
+2 , · · · , R(t)
+N )
+end
+/* Update G-Designer parameters */
+Θd+1 ← Θd − α∇Θd LG-Designer
+end
+B. Dataset Statistics
+We conclude the dataset statistics in Table 4.
+C. Case Study
+Figure 6 visualizes the different topologies designed by G-Designer for varying query difficulties on the HumanEval and
+GSM8K benchmarks.
+D. Supplementary Results
+13
+
+===== PAGE 14 =====
+G-Designer
+Table 4. Dataset descriptions and statistics.
+Category Dataset Answer Type Metric #Test License
+General reasoning MMLU Multi-choice Acc. 153 MIT License
+Math reasoning
+GSM8K Number Acc. 1,319 MIT License
+MultiArith Number Acc. 600 Unspecified
+SV AMP Number Acc. 1,000 MIT License
+AQuA Multi-choice Acc. 254 Apache-2.0
+Code generation HumanEval Code Pass@1 164 MIT License
+HumanEval (case a)
+def strlen(string: str) -> int:
+   """ Return length of given string
+    >>> strlen('')
+    0
+    >>> strlen('abc')
+    3
+   """
+Programming
+Expert
+Algorithm
+Designer
+HumanEval (case b)
+def double_the_difference(lst: List[float]) -> int:
+    """
+    Given a list of numbers, return the sum of squares of
+the numbers in the list that are odd. Ignore numbers that
+are negative or not integers.
+    If the input list is empty, return 0.
+    """
+HumanEval (case c)
+def do_algebra(operator: List[str], operand: List[int]) -> int:
+    """
+    Given two lists operator, and operand. The first list has basic algebra operations, and  the second list is a
+list of integers. Use the two given lists to build the algebraic expression and return the evaluation of this
+expression.  The basic operations: Addition(+); Subtraction(-); Multiplication(*); Floor division(//);
+Exponentiation(**) . Example: operator['+', '*', '-']; array = [2, 3, 4, 5];result = 2 + 3 * 4 - 5;=> result = 9
+    Note: 1. The length of operator list is equal to the length of operand list minus one. 2. Operand is a list of
+of non-negative integers. 3. Operator list has at least one operator, and operand list has at least two operands.
+    """
+ Algorithm
+Designer
+Programming
+Expert
+Bug
+Fixer
+Test
+Analyst
+Project
+Manager
+Harder Example:
+G-Designer is complexity-
+aware and capable of designing
+task-adaptive topologies
+GSM8K (case d)
+Background:
+A robe takes 2 bolts of blue fiber and half that much
+white fiber.  
+Question:
+How many bolts in total does it take?
+Math
+Analyst
+Programming
+Expert
+Math
+Solver
+Inspector
+GSM8K (case e)
+Question: 
+John drives for 3 hours at a speed of 60 mph and then turns
+around because he realizes he forgot something very
+important at home.  He tries to get home in 4 hours but
+spends the first 2 hours in standstill traffic.  He spends the
+next half-hour driving at a speed of 30mph, before being
+able to drive the remaining time of the 4 hours going at 80
+mph.  How far is he from home at the end of those 4 hours?
+Math
+Analyst
+Programming
+Expert
+Math
+Solver
+Inspector
+Algorithm
+Designer
+Programming
+Expert
+Bug
+Fixer
+Test
+Analyst
+Figure 6. Case study of the communication topologies designed by G-Designer on HumanEval and GSM8K benchmarks.
+Table 5. The GPU cost of G-Designer with increasing number of agents.
+#Agents 5 50 100 1000
+Memory (GB) 2.7 2.9 3.0 3.8
+14
+
+===== PAGE 15 =====
+G-Designer
+Table 6. Comparison of accuracy, time, token consumption, and cost across different agent configurations. We use the MMLU benchmark
+and gpt-3.5-turbo as the base LLM.
+#Agents 5 10 20
+Chain
+Accuracy (%) 70.59 71.24 71.98
+Time (min) 15.73 30.20 56.18
+#Prompt Tokens 351,802 702,164 1,378,328
+Cost (USD) 0.5228 1.0434 2.0482
+Complete Graph
+Accuracy (%) 71.90 72.16 72.51
+Time (min) 16.85 34.21 66.47
+#Prompt Tokens 545,984 1,669,451 5,648,834
+Cost (USD) 0.7161 2.1770 7.3662
+GPTSwarm
+Accuracy (%) 72.55 73.86 75.38
+Time (min) 62.14 186.86 412.18
+#Prompt Tokens 3,055,236 9,048,465 30,317,341
+Cost (USD) 4.2190 12.4961 41.4235
+G-Designer
+Accuracy (%) 73.20 74.51 77.82
+Time (min) 19.26 36.04 68.89
+#Prompt Tokens 452,329 885,332 1,852,538
+Cost (USD) 0.6036 1.2768 2.6713
+15

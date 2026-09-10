@@ -1,0 +1,443 @@
+
+
+===== PAGE 1 =====
+nature medicine Volume 30 | August 2024 | 2121–2124 | 2121
+https://doi.org/10.1038/s41591-024-02988-7
+Comment
+Revised criteria for the diagnosis and 
+staging of Alzheimer’s disease
+Clifford R. Jack Jr, Scott J. Andrews, Thomas G. Beach, Teresa Buracchio, Billy Dunn, 
+Ana Graf, Oskar Hansson, Carole Ho, William Jagust, Eric McDade, Jose Luis Molinuevo, 
+Ozioma C. Okonkwo, Luca Pani, Michael S. Rafii, Philip Scheltens, Eric Siemers, 
+Heather M. Snyder, Reisa Sperling, Charlotte E. Teunissen & Maria C. Carrillo
+Alzheimer’s disease can be treated by targeting 
+amyloid-β plaques and diagnosed in vivo by 
+biomarkers, prompting the revision of criteria 
+for the diagnosis and staging of this disease.
+A workgroup convened by the Alzheimer’s Association recently pub-
+lished ‘Revised Criteria for Diagnosis and Staging of Alzheimer’s Dis-
+ease’1. Members of this committee (who also co-authored this comment) 
+were selected to provide balanced representation of academia, clinical 
+medicine, industry, the US National Institute on Aging (NIA) and the 
+US Food and Drug Administration (FDA), and included participants 
+from the USA and Europe. The revised criteria1 are an update to previ-
+ous criteria published in 2011 and 20182,3. Formulation of these revised 
+criteria1 was prompted by two major developments in this field that 
+occurred after the 2018 research framework3 was published: regulatory 
+approval of the first disease-targeted therapeutic agents for Alzheimer’s 
+disease4,5; and development of accurate blood-based biomarkers of 
+the disease6.
+The 2024 revised criteria1 are founded on several core principles. 
+Alzheimer’s disease is defined as a biological process that is first detect-
+able by abnormal biomarkers of its defining neuropathologic features 
+(amyloid-β plaques and tau neurofibrillary tangles) when an individual 
+is asymptomatic. The disease progresses biologically during the pre-
+clinical period and when a sufficient pathological burden is reached, 
+symptoms appear and then progress. The entire disease course may 
+span up to 30 years.
+Categorization of biomarkers
+In the revised criteria1, biomarkers are categorized into those that are 
+core biomarkers of neuropathological changes7 (specific to Alzheimer’s 
+disease), non-core biomarkers of processes (not specific to Alzhei-
+mer’s but still important in disease pathogenesis, such as biomark-
+ers of inflammation or immune activation, and neurodegeneration), 
+and biomarkers of common non- Alzheimer’s disease co-pathologies 
+(such as cerebrovascular disease and neuronal α-synuclein disease). 
+This commentary focuses on core biomarkers for Alzheimer’s disease 
+that fall into the following categories: biomarkers of the amyloid-β 
+proteinopathy pathway (labeled ‘ A’); biofluid biomarkers of phospho-
+rylated and secreted tau, which become abnormal early in the disease 
+process (labeled ‘T1’); and biomarkers of tau neurofibrillary pathology 
+that become abnormal later in the disease process (labeled ‘T2’). We 
+group biomarkers into core 1 (A and T1) and core 2 (T2) (Table 1).
+Core 1 biomarkers define the initial stage of Alzheimer’s disease 
+that is detectable in vivo. An abnormal core 1 biomarker is sufficient 
+to establish a diagnosis of Alzheimer’s disease, and to inform clinical 
+decision making (Table 2). Core 2 biomarkers are not typically used as 
+standalone tests for the diagnosis of Alzheimer’s disease, but when 
+combined with core 1 they may be used to stage biological disease 
+severity and provide prognostic information (Table 2).
+Diagnosis
+An abnormal core 1 biomarker test is diagnostic of Alzheimer’s disease. 
+The following are currently considered fit for this purpose: amyloid 
+positron emission tomography (PET); the cerebrospinal fluid (CSF) 
+ratio of Aβ 42 to Aβ 40 (Aβ 42/40); the CSF ratio of tau phosphorylated at 
+threonine 181 (p-tau181) to Aβ 42 (p-tau181/Aβ 42); the CSF ratio of total tau 
+to Aβ 42 (t-tau/Aβ 42) ratio; and accurate plasma assays (defined below). 
+However, the revised criteria outline important caveats around diag-
+nostics, especially using plasma biomarkers. Chief among these is 
+a minimum diagnostic accuracy requirement (90% or greater) with 
+respect to an accepted reference standard in the intended context 
+of use (which includes a description of the intended use population). 
+Amyloid PET ligands and CSF assays listed in Table 1  have received 
+regulatory approval in the USA and the EU; the former were validated 
+against autopsy8 and the latter were validated against amyloid PET9. 
+Although no plasma assays have yet received regulatory approval, this 
+is expected to change soon as some plasma assays (such as p-tau217) 
+have demonstrated diagnostic accuracy equivalent to approved CSF 
+assays10. The diagnostic accuracies of other plasma assays, however, 
+do not meet the 90% standard10 and would not be considered fit for 
+the purpose of diagnosis.
+A second important caveat centers on the role of the clinician. 
+The biologically based diagnosis of Alzheimer’s disease is meant to 
+ Check for updates
+CREDIT : YUICHIR o CHINo/ MoMENT / GETTY
+
+===== PAGE 2 =====
+nature medicine Volume 30 | August 2024 | 2121–2124 | 2122
+Comment
+to enable effective treatments. Although Alzheimer’s disease is the 
+most common pathological condition underlying progressive cogni-
+tive impairment in older people, non-Alzheimer’s disease pathologies 
+are also common13. The typical syndrome association with Alzheimer’s 
+disease (a progressive memory impairment that progresses to other cog-
+nitive domains) can also be caused by common non-Alzheimer’s disease 
+pathologies, most often in combination. For example, in early amyloid-β 
+immunotherapy trials in which eligibility was based on a traditional clini-
+cal diagnosis of Alzheimer’s disease without biological confirmation, 
+30% of individuals had normal amyloid PET scans14, meaning that nearly 
+one-third of participants in these trials did not have the disease they were 
+being treated for. The position of the committee is that therapy directed 
+toward a biological target requires confirmation of that biology both 
+in clinical trials and in clinical practice. Thus, Alzheimer’s disease must 
+be defined by its biology for medical progress to be made; the public is 
+readily able to grasp this concept with the proper educational effort.
+Requiring symptoms for diagnosis
+A second critique argues that a diagnosis of Alzheimer’s disease should 
+require the presence of both abnormal biomarkers and the presence of 
+clinical symptoms. The argument is that preclinical Alzheimer’s disease 
+is not a valid concept and asymptomatic individuals with abnormal bio-
+markers should be labeled ‘at risk’ for the disease. The reasoning is that 
+many asymptomatic individuals with abnormal biomarkers (preclinical 
+Alzheimer’s disease) will not develop symptoms in their lifetime. The 
+argument continues, labeling such individuals with a disease may cause 
+psychological, financial or social harm without potential for benefit, 
+since at present, disease targeted treatments are not approved for 
+preclinical Alzheimer’s disease.
+The committee takes a different view1. First, diseases are routinely 
+diagnosed in other areas of medicine while patients are asymptomatic. 
+It is axiomatic throughout medicine that treatments are more effec -
+tive when administered as early in the disease process as possible 2. 
+Therefore, conducting clinical trials in people with preclinical Alzhei-
+mer’s disease is considered by the committee to be a forward-looking 
+approach to identify the most effective means of slowing or preventing 
+the onset of symptoms.
+Second, although it is true that many asymptotic individuals with 
+abnormal Alzheimer’s biomarkers will not experience symptoms in 
+their lifetime, this is because of increasing all-cause mortality rates with 
+advancing age, not because Alzheimer’s disease pathology is benign 
+in the preclinical period. Alzheimer’s disease is characterized by a pre-
+clinical period of 15–20 years or more, which most often begins from age 
+601. over half of individuals newly diagnosed in their mid-70s may not 
+experience symptoms in their lifetime, but nearly half will. The position 
+assist, rather than supplant, the clinical evaluation of individuals with 
+cognitive impairment. Biomarker testing should only be performed 
+under the supervision of a clinician.
+Staging
+The revised criteria1 describe separate schemes for staging biological 
+Alzheimer’s disease severity and for staging the severity of clinical symp-
+toms. Biological staging is based on ordering of biomarker events in the 
+natural history of the disease from observational research. A four-point 
+staging scale (A–D) is outlined that can be accomplished by amyloid and 
+tau PET, by core 1 biofluids and tau PET, or a forward-looking conceptual 
+staging approach based only on biofluids11,12. Staging the severity of 
+clinical symptoms is based on a six-point numeric scale ranging from 
+asymptomatic (stage 1) to severe dementia (stage 6). Integration of 
+biological and clinical staging is described using an alphanumeric 
+labeling scheme (for example, stage 1A, 4D, and so on).
+Although clinical stages generally worsen with increasing biologi-
+cal stages, the revised criteria recognize that mismatches between clini-
+cal and biological stage commonly occur. This is because Alzheimer’s 
+disease is only one of several common pathologies that underlie cog-
+nitive decline and dementia in older individuals; the other three most 
+common disorders are cerebrovascular disease, neuronal α-synuclein 
+disease, and limbic-predominant age-related TDP-43 encephalopathy 
+(LATE)13. Individuals with one or more of these pathologies are likely to 
+have worse clinical stage than expected for their biological Alzheimer’s 
+disease stage. Conversely, individuals with exceptional resilience or 
+cognitive reserve may have better clinical stage than expected for their 
+biological Alzheimer’s disease stage.
+Use of the name Alzheimer’s disease
+Two successive drafts of these criteria were presented at scientific meet-
+ings in 2023 and were also posted for public comment. It is our view 
+that some of the comments or critiques offered contradict fundamental 
+positions of the committee and so below we describe these critiques 
+and the rational underlying the committee’s decision to formulate 
+the criteria as done.
+The term Alzheimer’s disease is understood by many in the pub-
+lic and in general medicine to be synonymous with dementia. Many 
+people think of Alzheimer’s disease as a progressive impairment that 
+leads to loss of functional independence in older people, irrespective 
+of etiology. A common critique of the revised criteria
+1 is that to avoid 
+confusion on the part of the public, the term Alzheimer’s disease should 
+be used to describe all-cause dementia and the distinction between 
+etiology (pathobiology) and symptoms (the result of pathobiology) 
+should be ignored.
+The position of the committee is that not only is this scientifically 
+inaccurate, but it is also harmful. The etiology or etiologies underly-
+ing clinical symptoms must be understood and accurately diagnosed 
+Table 1 | Categorization of core Alzheimer’s disease 
+biomarkers
+Category Modalities
+Core 1
+Amyloid PET and biofluid measures of amyloid-β 
+proteinopathy (A)
+Biofluid measures of phosphorylated and secreted 
+Alzheimer’s disease tau (T1)
+Core 2 Tau PET and biofluid measures of Alzheimer’s disease tau 
+proteinopathy (T
+2)
+Table 2 | Intended uses of core Alzheimer’s disease 
+biomarkers
+Category Intended use Details
+Core 1 Diagnosis
+Early detection of Alzheimer’s disease in 
+asymptomatic individuals
+Confirmation that Alzheimer’s disease is 
+an underlying pathology in symptomatic 
+individuals
+Core 2 Staging and 
+prognosis
+Provide information on the likelihood that 
+symptoms are associated with Alzheimer’s 
+disease
+Inform on the risk of and rate of progression
+
+===== PAGE 3 =====
+nature medicine Volume 30 | August 2024 | 2121–2124 | 2123
+Comment
+of the committee is that asymptomatic individuals who may experience 
+symptoms deserve treatment once these are approved for the preclinical 
+population. Mortality from unrelated diseases should not be interpreted 
+to indicate that Alzheimer’s disease in asymptomatic persons is a benign 
+condition. Individuals with Down syndrome have genetically determined 
+Alzheimer’s disease (trisomy 21) and 95% of these individuals develop 
+dementia in their lifetime15, because the average age of onset of clinical 
+symptoms is mid-50s, at which age all-cause mortality rates are far lower 
+than in older age. Remaining life expectancy is an important considera-
+tion in clinical management, but mortality from unrelated causes should 
+not be a criterion used to define what is and what is not a disease1.
+Third, the revised criteria have been criticized for advocating 
+screening of the general population with Alzheimer’s disease bio -
+markers, which could place asymptomatic persons who test positive 
+in a position of potential harm without benefit. However, the criteria 
+are very clear that because no treatment has yet been approved for 
+asymptomatic people, biomarker testing should not be performed in 
+this population outside the context of observational or therapeutic 
+research studies1. This may change in the future, however, pending 
+results of ongoing trials.
+Validation of plasma biomarkers
+Criticism was raised that plasma biomarkers are too new to be used 
+clinically and have not been adequately tested in all representative 
+populations. While the committee recognizes that plasma biomark-
+ers are a recent development, we also outline rigorous criteria that 
+plasma biomarkers need to meet to be considered fit for the purpose 
+of diagnosis1. The committee strongly endorses the need for testing 
+and prospective evaluation of plasma biomarkers in more representa-
+tive populations.
+Neuropathological underpinnings of diagnosis by 
+biomarkers
+Some critics claim that defining Alzheimer’s disease by an abnormal 
+core 1 biomarker is a departure from the accepted neuropathological 
+definition that requires the presence of both amyloid-β plaques and 
+tau tangles7. Regulatory approval of amyloid PET ligands was based on 
+their ability to detect moderate to frequent neuritic amyloid-β plaques 
+at autopsy and not both plaques and tangles8, whereas approval of CSF 
+assays was based on their ability to differentiate normal from abnormal 
+amyloid PET scans9. Thus, the argument of these critics is that defining 
+Alzheimer’s disease by the presence of abnormal core 1 biomarkers 
+does not fully capture the neuropathological standard that requires tau 
+tangles in addition to β-amyloid plaques. However, amyloid PET scans 
+(and thus biofluid surrogates) are not able to reliably detect mild levels 
+of Alzheimer’s disease pathology; it can detect moderate to frequent 
+neuritic plaques but not sparse plaques8. Given that nearly all (over 90%) 
+of individuals with moderate to frequent neuritic plaques at autopsy 
+(and therefore abnormal core 1 biomarkers) will also have sufficient 
+neurofibrillary tangle pathology to meet criteria for a pathological 
+diagnosis of intermediate to high Alzheimer’s disease neuropathologic 
+change7, diagnosing Alzheimer’s disease based on abnormal core 1 
+biomarkers will nearly always be consistent with the accepted neuro-
+pathologic reference standard for Alzheimer’s disease.
+Future
+Many in the Alzheimer’s disease field are optimistic about the pros-
+pects for improving care of patients. Recent advances in the ability 
+to diagnose and treat Alzheimer’s disease herald a virtuous cycle in 
+which improvements in diagnostic methods enable more sophisti -
+cated treatment approaches, which in turn steer advances in diagnostic 
+methods. An unchanging principle, however, is that effective treatment 
+will always rely on the ability to diagnose and stage the biology driving 
+the disease process. The committee recognizes that the feasibility of 
+implementing criteria for biologically based diagnosis and staging 
+of Alzheimer’s disease in clinical practice varies across regions, even 
+within high-income countries. We anticipate that the increasing avail-
+ability and accuracy of blood-based biomarkers will make these criteria 
+more widely deployable.
+Clifford R. Jack Jr 1 , Scott J. Andrews2, Thomas G. Beach3, 
+Teresa Buracchio4, Billy Dunn5, Ana Graf6, Oskar Hansson    7,8, 
+Carole Ho9, William Jagust    10, Eric McDade    11, 
+Jose Luis Molinuevo12, Ozioma C. Okonkwo13, Luca Pani14, 
+Michael S. Rafii    15, Philip Scheltens16, Eric Siemers17, 
+Heather M. Snyder18, Reisa Sperling    19, Charlotte E. Teunissen    20 
+& Maria C. Carrillo18
+1Department of Radiology, Mayo Clinic, Rochester, MN, USA. 2Global 
+Evidence & Outcomes, Takeda Pharmaceuticals Company Limited, 
+Cambridge, MA, USA. 3Civin Laboratory for Neuropathology, 
+Banner Sun Health Research Institute, Sun City, AZ, USA. 4Office of 
+Neuroscience, US Food and Drug Administration, Silver Spring, MD, 
+USA. 
+5The Michael J Fox Foundation for Parkinson’s Research, New 
+York, NY, USA. 6Neuroscience Global Drug Development, Novartis, 
+Basel, Switzerland. 7Clinical Memory Research Unit, Department 
+of Clinical Sciences Malmö, Faculty of Medicine, Lund University, 
+Lund, Sweden. 
+8Memory Clinic, Clinical Research Centre, Skåne 
+University Hospital, Malmö, Sweden. 9Denali Therapeutics, South 
+San Francisco, CA, USA. 10School of Public Health and Helen Wills 
+Neuroscience Institute, University of California Berkeley, Berkeley, 
+CA, USA. 
+11Department of Neurology, Washington University St 
+Louis School of Medicine, St Louis, MO, USA. 12Experimental 
+Medicine, Department Global Clinical Development H. Lundbeck 
+A/S, Copenhagen, Denmark. 
+13Department of Medicine, Division 
+of Geriatrics and Gerontology, University of Wisconsin School of 
+Medicine, Madison, WI, USA. 
+14University of Miami, Miami, FL, USA. 
+15Alzheimer’s Therapeutic Research Institute (ATRI), Keck School of 
+Medicine at the University of Southern California, San Diego, CA, USA. 
+16Department of Neurology, Amsterdam University Medical Center 
+(Emeritus), Amsterdam, The Netherlands. 17Clinical Research, Acumen 
+Pharmaceuticals, Zionsville, IN, USA. 18Medical & Scientific Relations 
+Division, Alzheimer’s Association, Chicago, IL, USA. 19Department of 
+Neurology, Brigham and Women’s Hospital, Massachusetts General 
+Hospital, Harvard Medical School, Boston, MA, USA. 
+20Neurochemistry 
+Laboratory, Department of Laboratory Medicine, Amsterdam UMC, 
+Amsterdam, The Netherlands.  
+ e-mail: jack.clifford@mayo.edu
+Published online: 28 June 2024
+References
+1. Jack, C. R. Jr. et al. Alzheimers Dement. https://doi.org/10.1002/alz.13859 (2024).
+2. Sperling, R. A. et al. Alzheimers Dement. 7, 280–292 (2011).
+3. Jack, C. R. Jr. et al. Alzheimers Dement. 14, 535–562 (2018).
+4. van Dyck, C. H. et al. N. Engl. J. Med. 388, 9–21 (2023).
+5. Sims, J. R. et al. JAMA 330, 512–527 (2023).
+6. Hansson, O., Blennow, K., Zetterberg, H. & Dage, J. Nat. Aging 3, 506–519 (2023).
+7. Hyman, B. T. et al. Alzheimers Dement. 8, 1–13 (2012).
+8. Clark, C. M. et al. Lancet Neurol. 11, 669–678 (2012).
+9. PRNewswire https://go.nature.com/3WcfHYH (4 May 2022).
+
+===== PAGE 4 =====
+nature medicine Volume 30 | August 2024 | 2121–2124 | 2124
+Comment
+10. Janelidze, S. et al. Brain 146, 1592–1601 (2023).
+11. Barthelemy, N. R. et al. Nat. Med. 26, 398–407 (2020).
+12. Salvadó, G. et al. Alzheimers Dement. 19, e075367 (2023).
+13. Beach, T. G. & Malek-Ahmadi, M. J. Alzheimers Dis. 79, 389–400 (2021).
+14. Doody, R. S. et al. N. Engl. J. Med. 370, 311–321 (2014).
+15. McCarron, M. et al. J. Intellect. Disabil. Res. 61, 843–852 (2017).
+Acknowledgements
+E. Masliah and L. Ryan are contributing members of the committee and are acknowledged 
+here. E. Masliah is also a member of the steering committee, as are C.R.J. B.D. H.M.S.  
+and M.C.C.
+Competing interests
+C.R.J. is employed by Mayo Clinic; receives grant funding from the National Institutes of 
+Health (NIH), the Alexander family professorship and the GHR Foundation; served on a data 
+and safety monitoring board for Roche pro bono within the past 36 months with no payments 
+to the individual or institution involved; and received funding from the Alzheimer’s Association 
+for travel and holds index funds. J.S.A. is employed by Takeda Pharmaceuticals and is a minor 
+shareholder for the company; has a leadership or fiduciary role in the Clinical Trials on 
+Alzheimer’s Disease (CTAD) Task Force—Clinical Meaningfulness and Optimizing Therapies, 
+Alzheimer’s Disease PACE Executive Steering Committee and UsAgainstAlzheimer’s—Clinical 
+Meaningfulness Forum; is a former employee of Eli Lilly and Company and is a minor 
+shareholder for the company. T.G.B. is employed by Banner Health; received grant funding 
+from the NIH, Veterans Administration, State of Arizona, Life Molecular Imaging, Michael J. Fox 
+Foundation for Parkinson’s Research, Avid Radiopharmaceuticals/Eli Lilly and Gates 
+Foundation; received consulting fees from Aprinoia Therapeutics and Acadia 
+Pharmaceuticals, and consulted unpaid for Biogen; received payment or honoraria from the 
+World PD Coalition, Mayo Clinic Florida, Stanford University and the IOS Press-Journal of 
+Parkinson’s Disease; received support for attending meetings from the Alzheimer’s 
+Association, AD/PD/Kenes Group, Mayo Clinic Florida and the Universitätsklinikum 
+Hamburg-Eppendorf; and has a leadership or fiduciary role and stock options with Vivid 
+Genomics. T.B. is employed by the US FDA and has no financial conflicts to disclose. B.D. is a 
+consultant and received consulting fees for his role as an advisor for Arch Venture Partners, 
+Cerveau Technologies, Epilepsy Foundation, F-PRIME Capital, Loulou Foundation and Michael 
+J. Fox Foundation; held a past position of leadership or fiduciary role in the Virginia 
+Neurological Society (past president) and Prothena (director); and holds stock options with 
+Prothena. A.G. is employed by Novartis Pharma AG and has stock options in the company.  
+O.H. is employed by Lund University; received grants or contracts from ADx, AVID 
+Radiopharmaceuticals, Biogen, Eli Lilly, Eisai, Fujirebio, GE Healthcare, Pfizer and Roche; and 
+received consulting fees from AC Immune, Amylyx, Alzpath, BioArctic, Biogen, Cerveau, Eisai, 
+Eli Lilly, Fujirebio, Genentech, Merck, Novartis, Novo Nordisk, Roche, Sanofi and Siemens.  
+O.H. is employed by Lund University; received research support to his institution from AVID 
+Radiopharmaceuticals, Biogen, C2N Diagnostics, Eli Lilly, Eisai, Fujirebio, GE Healthcare and 
+Roche; received consultancy or speaker fees within the past 2 years from AC Immune, 
+Alzpath, BioArctic, Biogen, Bristol Meyer Squibb, Cerveau, Eisai, Eli Lilly, Fujirebio, Merck, 
+Novartis, Novo Nordisk, Roche, Sanofi and Siemens. C.H. is employed by Denali Therapeutics 
+and has stock options with the company; is a board director for Beam Therapeutics and NGM 
+Therapeutics and has stock options with both companies. W.J. is employed by the University 
+of California, Berkley; received grants or contracts paid to his institution from the US NIA, 
+Roche/Genentech, Alzheimer’s Association and BrightFocus Foundation; received consulting 
+fees from Biogen, Clario, Eisai, Lilly and Prothena; and has stock with Optoceutics and 
+Molecular Medicine. E. McDade is employed by Washington University, St Louis, and received 
+grant funding directly to his institution from NIA, Eli Lilly, Hoffmann-La Roche, Alzheimer’s 
+Association and GHR Foundation; received royalties for work on ‘Methods of diagnosing  
+AD with phosphorylation changes’, which is licensed to C2N with royalties to himself and 
+Washington University; received consulting fees from Alzamend (scientific advisory board 
+member), Sanofi, AstraZeneca, Roche, Grifols, Merck and Sage; received payments from 
+Neurology Live, Kaplan-Projects in Knowledge, and support for travel from Foundation 
+Alzheimer, Alzheimer’s Association and Eisai; has a patent planned, issued or pending on 
+‘Methods of diagnosing Alzheimer’s disease with phosphorylation changes’; participated on a 
+data safety monitoring board or advisory board for Alector and Eli Lilly, both roles for which he 
+was paid; and has a leadership or fiduciary role in Alzamend (paid). J.L.M. is a full-time 
+employee of H. Lundbeck A/S. O.O. is employed by University of Wisconsin School of 
+Medicine & Public Health and received support paid to his institution from the following 
+grants: R01AG062167, R01AG077507, U19AG024904, U19AG078109, U19AG073153, 
+R01AG066203, R01AG070028, R01AG027161 and RF1AG052324; received consulting fees 
+from Mayo Clinic Rochester and IUPUI; holds a leadership or fiduciary role in the International 
+Neuropsychological Society (board member); and previously held an advisory role for Society 
+for Black Neuropsychology. L.P. is employed by the University of Miami and the University of 
+Modena and Reggio Emilia and has no financial conflicts to disclose; in unrelated areas,  
+he holds options/stocks from Relmada Therapeutics (US) and NetraMark (Canada). M.R. is 
+employed by University of Southern California and the Alzheimer’s Therapeutics Research 
+Institute (ATRI); received grants or contracts paid to his institution from Eisai (AHEAD study) 
+and Eli Lilly (A4 study); received consulting fees from AC Immune and Ionis; and has 
+participated on a data safety monitoring board or advisory board for Alzheon, Aptah Bio, 
+Biohaven, Embic, Keystone Bio, Prescient Imaging and Positrigo. P.S. is employed by Life 
+Science Partners and is professor emeritus Amsterdam University Medical Center; received 
+grants or contracts paid to his institution from Novo Nordisk, Toyama, UCB, AC Immune and 
+Alzheon; has an unpaid leadership position as chair of World Dementia Council and holds 
+stock options in EQT AB. E.S. is employed by Acumen Pharmaceuticals; received consulting 
+fees from Biogen, Cogstate, Cortexyme, Partner Therapeutics, Pinteon Therapeutics, 
+Prothena, Vaccinex, Acumen, Pharmaceuticals, Gates Ventures LLC and Hoffman La Roche 
+and payments were made to Siemers Integration LLC; participated on a data safety monitoring 
+board for Hoffman La Roche; and has had a leadership or fiduciary role with the Alzheimer’s 
+Association and BrightFocus Foundation, both unpaid; holds stock options and is a 
+shareholder for Acumen Pharmaceuticals, and is a shareholder for Eli Lilly and Company. H.S. 
+is a full-time employee of the Alzheimer’s Association, Chicago, has a spouse who is employed 
+by Abbott Laboratories in an unrelated area, and has no financial conflicts to disclose. R.S. is 
+employed by Brigham and Women’s Hospital; received grants or contracts from the US NIA,  
+Eli Lilly (public–private partnership trial funding), Eisai (public–private partnership trial funding), 
+Alzheimer’s Association and GHR Foundation; and received consulting fees from Abbvie, AC 
+Immune, Acumen, Alector, Alnylam, Bristol-Myers Squibb, Cytox, Genentech, Ionis, Janssen, 
+NervGen, Neuraly, Neurocentria, Oligomerix, Prothena, Roche, Shionogi and Vaxxinity. C.E.T.  
+is employed by Amsterdam UMC; received grants or contracts for research from the European 
+Commission (Marie Curie International Training Network, grant 86019, MIRIADE), Innovative 
+Medicines Initiatives 3TR (Horizon 2020, grant 831434) EPND (IMI 2 Joint Undertaking, grant 
+101034344) and JPND (bPRIDE), National MS Society (Progressive MS Alliance), Alzheimer 
+Drug Discovery Foundation, Alzheimer Association, Health Holland, the Dutch Research 
+Council (ZonMW), including TAP-dementia, a ZonMw funded project (10510032120003) in the 
+context of the Dutch National Dementia Strategy, Alzheimer Drug Discovery Foundation, The 
+Selfridges Group Foundation, Alzheimer Netherlands; is recipient of ABOARD, public–private 
+partnership receiving funding from ZonMW (73305095007) and Health–Holland, Topsector 
+Life Sciences & Health (PPP-allowance; LSHM20106); is a contract researcher for ADx 
+Neurosciences, AC-Immune, Aribio, Axon Neurosciences, Beckman-Coulter, BioConnect, 
+Bioorchestra, Brainstorm Therapeutics, Celgene, Cognition Therapeutics, EIP Pharma, Eisai,  
+Eli Lilly, Fujirebio, Grifols, Instant Nano Biosensors, Merck, Novo Nordisk, Olink, PeopleBio, 
+Quanterix, Roche, Siemens, Toyama, Vivoryon and the European Commission; received 
+payment or honoraria to her institution from Eli Lilly, Grifols, Novo Nordisk, Olink and Roche; 
+serves on editorial boards of Medidact Neurologie/Springer and Neurology: Neuroimmunology 
+& Neuroinflammation, and is editor of Alzheimer Research and Therapy. M.C. is a full-time 
+employee of the Alzheimer’s Association, has a daughter in the neuroscience program at the 
+University of South Carolina, and has no financial conflicts to disclose.

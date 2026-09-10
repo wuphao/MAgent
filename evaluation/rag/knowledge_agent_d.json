@@ -1,0 +1,658 @@
+{
+  "schema_version": "rag_d_agent_eval/1",
+  "cases": [
+    {
+      "case_id": "scoring_definition",
+      "result": {
+        "schema_version": "1.0",
+        "agent_name": "KnowledgeAgent",
+        "status": "success",
+        "findings": [
+          {
+            "finding_id": "finding_knowledge_candidate_chunk_20735f547427e2ac2d2d",
+            "proposition": "Knowledge candidate instrument_scoring_definition: XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+            "status": "unresolved",
+            "support_refs": [],
+            "artifact_refs": [],
+            "assumptions": [],
+            "limitations": [
+              "candidate must be activated through instrument registry before scoring rules change",
+              "candidate extraction is conservative and source-bound"
+            ]
+          }
+        ],
+        "artifact_refs": [],
+        "requested_checks": [],
+        "limitations": [],
+        "output": {
+          "question": "XX-v1 total 是怎么计算的？",
+          "query": {
+            "question": "XX-v1 total 是怎么计算的？",
+            "document_ids": [],
+            "instrument_versions": [
+              "xx-v1"
+            ],
+            "include_parent_chunks": false
+          },
+          "hits": [
+            {
+              "chunk": {
+                "chunk_id": "chunk_20735f547427e2ac2d2d",
+                "document_id": "xx_v1_dictionary",
+                "document_version": "2026-09-07",
+                "title": "XX-v1 测试量表说明",
+                "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+                "locator": "section:XX-v1 测试量表说明:child:0",
+                "keywords": [
+                  "xx-v1",
+                  "total",
+                  "条目"
+                ],
+                "chunk_kind": "child",
+                "parent_chunk_id": "parent_0ab8d58f7f6dbd9ff94c",
+                "section_path": [
+                  "XX-v1 测试量表说明"
+                ],
+                "page": null,
+                "char_start": null,
+                "char_end": null,
+                "content_hash": "0fdca2bf374f289eda8ea116c9ad2f7100dde91343b390c3304b2c24019c699d",
+                "metadata": {
+                  "applies_to": [
+                    "XX-v1"
+                  ],
+                  "instrument_versions": [
+                    "xx-v1"
+                  ],
+                  "effective_from": null,
+                  "effective_to": null,
+                  "review_status": "draft"
+                }
+              },
+              "score": 164,
+              "matched_terms": [
+                "total",
+                "xx-v1",
+                "的"
+              ],
+              "scores": {
+                "lexical_score": 2.6243916149793063,
+                "vector_score": null,
+                "rrf_score": 0.01639344262295082,
+                "lexical_rank": 1,
+                "vector_rank": null,
+                "mode": "lexical"
+              }
+            }
+          ],
+          "evidence_package": {
+            "question": "XX-v1 total 是怎么计算的？",
+            "status": "success",
+            "index_id": null,
+            "retrieval_mode": "lexical",
+            "evidence": [
+              {
+                "evidence_id": "knowledge_evidence_parent_0ab8d58f7f6dbd9ff94c",
+                "source_chunk": {
+                  "chunk_id": "chunk_20735f547427e2ac2d2d",
+                  "document_id": "xx_v1_dictionary",
+                  "document_version": "2026-09-07",
+                  "title": "XX-v1 测试量表说明",
+                  "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+                  "locator": "section:XX-v1 测试量表说明:child:0",
+                  "keywords": [
+                    "xx-v1",
+                    "total",
+                    "条目"
+                  ],
+                  "chunk_kind": "child",
+                  "parent_chunk_id": "parent_0ab8d58f7f6dbd9ff94c",
+                  "section_path": [
+                    "XX-v1 测试量表说明"
+                  ],
+                  "page": null,
+                  "char_start": null,
+                  "char_end": null,
+                  "content_hash": "0fdca2bf374f289eda8ea116c9ad2f7100dde91343b390c3304b2c24019c699d",
+                  "metadata": {
+                    "applies_to": [
+                      "XX-v1"
+                    ],
+                    "instrument_versions": [
+                      "xx-v1"
+                    ],
+                    "effective_from": null,
+                    "effective_to": null,
+                    "review_status": "draft"
+                  }
+                },
+                "context_chunk": {
+                  "chunk_id": "parent_0ab8d58f7f6dbd9ff94c",
+                  "document_id": "xx_v1_dictionary",
+                  "document_version": "2026-09-07",
+                  "title": "XX-v1 测试量表说明",
+                  "text": "# XX-v1 测试量表说明\n\nXX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。\n\n缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+                  "locator": "section:XX-v1 测试量表说明",
+                  "keywords": [
+                    "xx-v1",
+                    "total",
+                    "条目",
+                    "缺失"
+                  ],
+                  "chunk_kind": "parent",
+                  "parent_chunk_id": null,
+                  "section_path": [
+                    "XX-v1 测试量表说明"
+                  ],
+                  "page": null,
+                  "char_start": 0,
+                  "char_end": 170,
+                  "content_hash": "cd0e3eb9e0f8ac934b3ed41582abdc12f79227568cecfa640bcd85e15c85325e",
+                  "metadata": {
+                    "applies_to": [
+                      "XX-v1"
+                    ],
+                    "instrument_versions": [
+                      "xx-v1"
+                    ],
+                    "effective_from": null,
+                    "effective_to": null,
+                    "review_status": "draft"
+                  }
+                },
+                "hit": {
+                  "chunk": {
+                    "chunk_id": "chunk_20735f547427e2ac2d2d",
+                    "document_id": "xx_v1_dictionary",
+                    "document_version": "2026-09-07",
+                    "title": "XX-v1 测试量表说明",
+                    "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+                    "locator": "section:XX-v1 测试量表说明:child:0",
+                    "keywords": [
+                      "xx-v1",
+                      "total",
+                      "条目"
+                    ],
+                    "chunk_kind": "child",
+                    "parent_chunk_id": "parent_0ab8d58f7f6dbd9ff94c",
+                    "section_path": [
+                      "XX-v1 测试量表说明"
+                    ],
+                    "page": null,
+                    "char_start": null,
+                    "char_end": null,
+                    "content_hash": "0fdca2bf374f289eda8ea116c9ad2f7100dde91343b390c3304b2c24019c699d",
+                    "metadata": {
+                      "applies_to": [
+                        "XX-v1"
+                      ],
+                      "instrument_versions": [
+                        "xx-v1"
+                      ],
+                      "effective_from": null,
+                      "effective_to": null,
+                      "review_status": "draft"
+                    }
+                  },
+                  "score": 164,
+                  "matched_terms": [
+                    "total",
+                    "xx-v1",
+                    "的"
+                  ],
+                  "scores": {
+                    "lexical_score": 2.6243916149793063,
+                    "vector_score": null,
+                    "rrf_score": 0.01639344262295082,
+                    "lexical_rank": 1,
+                    "vector_rank": null,
+                    "mode": "lexical"
+                  }
+                },
+                "truncated": false
+              }
+            ],
+            "limitations": [],
+            "answerability": {
+              "answerable": true,
+              "reason": "retrieved_evidence",
+              "rejected_phrases": [],
+              "limitations": []
+            }
+          },
+          "rule_candidates": [
+            {
+              "candidate_id": "candidate_chunk_20735f547427e2ac2d2d",
+              "rule_type": "instrument_scoring_definition",
+              "statement": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+              "chunk_refs": [
+                "chunk_20735f547427e2ac2d2d"
+              ],
+              "evidence_refs": [
+                "knowledge_evidence_parent_0ab8d58f7f6dbd9ff94c"
+              ],
+              "conditions": [
+                "conditional rule; verify source condition before activation"
+              ],
+              "exceptions": [
+                "source contains a prohibition; do not infer an automatic replacement rule"
+              ],
+              "applicable_versions": [
+                "xx-v1"
+              ],
+              "status": "candidate",
+              "limitations": [
+                "candidate must be activated through instrument registry before scoring rules change",
+                "candidate extraction is conservative and source-bound"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "missing_rule",
+      "result": {
+        "schema_version": "1.0",
+        "agent_name": "KnowledgeAgent",
+        "status": "success",
+        "findings": [
+          {
+            "finding_id": "finding_knowledge_candidate_chunk_6c222e7a99d1183a5e3b",
+            "proposition": "Knowledge candidate missing_item_handling: 缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+            "status": "unresolved",
+            "support_refs": [],
+            "artifact_refs": [],
+            "assumptions": [],
+            "limitations": [
+              "candidate must be activated through instrument registry before scoring rules change",
+              "candidate extraction is conservative and source-bound"
+            ]
+          }
+        ],
+        "artifact_refs": [],
+        "requested_checks": [],
+        "limitations": [],
+        "output": {
+          "question": "缺失条目能不能按 0 自动填补？",
+          "query": {
+            "question": "缺失条目能不能按 0 自动填补？",
+            "document_ids": [],
+            "instrument_versions": [
+              "xx-v1"
+            ],
+            "include_parent_chunks": false
+          },
+          "hits": [
+            {
+              "chunk": {
+                "chunk_id": "chunk_6c222e7a99d1183a5e3b",
+                "document_id": "xx_v1_dictionary",
+                "document_version": "2026-09-07",
+                "title": "XX-v1 测试量表说明",
+                "text": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+                "locator": "section:XX-v1 测试量表说明:child:1",
+                "keywords": [
+                  "条目",
+                  "缺失"
+                ],
+                "chunk_kind": "child",
+                "parent_chunk_id": "parent_0ab8d58f7f6dbd9ff94c",
+                "section_path": [
+                  "XX-v1 测试量表说明"
+                ],
+                "page": null,
+                "char_start": null,
+                "char_end": null,
+                "content_hash": "9aa77d2a28bb280825e85706e8125bc4eeef5383de75c9c7b8ecda5278baef33",
+                "metadata": {
+                  "applies_to": [
+                    "XX-v1"
+                  ],
+                  "instrument_versions": [
+                    "xx-v1"
+                  ],
+                  "effective_from": null,
+                  "effective_to": null,
+                  "review_status": "draft"
+                }
+              },
+              "score": 164,
+              "matched_terms": [
+                "0",
+                "不",
+                "不能",
+                "不能按",
+                "动",
+                "动填",
+                "动填补",
+                "填",
+                "填补",
+                "失",
+                "失条",
+                "失条目",
+                "按",
+                "条",
+                "条目",
+                "目",
+                "缺",
+                "缺失",
+                "缺失条",
+                "能",
+                "能按",
+                "自",
+                "自动",
+                "自动填",
+                "补"
+              ],
+              "scores": {
+                "lexical_score": 17.762248826738674,
+                "vector_score": null,
+                "rrf_score": 0.01639344262295082,
+                "lexical_rank": 1,
+                "vector_rank": null,
+                "mode": "lexical"
+              }
+            },
+            {
+              "chunk": {
+                "chunk_id": "chunk_20735f547427e2ac2d2d",
+                "document_id": "xx_v1_dictionary",
+                "document_version": "2026-09-07",
+                "title": "XX-v1 测试量表说明",
+                "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+                "locator": "section:XX-v1 测试量表说明:child:0",
+                "keywords": [
+                  "xx-v1",
+                  "total",
+                  "条目"
+                ],
+                "chunk_kind": "child",
+                "parent_chunk_id": "parent_0ab8d58f7f6dbd9ff94c",
+                "section_path": [
+                  "XX-v1 测试量表说明"
+                ],
+                "page": null,
+                "char_start": null,
+                "char_end": null,
+                "content_hash": "0fdca2bf374f289eda8ea116c9ad2f7100dde91343b390c3304b2c24019c699d",
+                "metadata": {
+                  "applies_to": [
+                    "XX-v1"
+                  ],
+                  "instrument_versions": [
+                    "xx-v1"
+                  ],
+                  "effective_from": null,
+                  "effective_to": null,
+                  "review_status": "draft"
+                }
+              },
+              "score": 161,
+              "matched_terms": [
+                "不",
+                "不能",
+                "条",
+                "条目",
+                "目",
+                "能"
+              ],
+              "scores": {
+                "lexical_score": 1.4255330408700595,
+                "vector_score": null,
+                "rrf_score": 0.016129032258064516,
+                "lexical_rank": 2,
+                "vector_rank": null,
+                "mode": "lexical"
+              }
+            }
+          ],
+          "evidence_package": {
+            "question": "缺失条目能不能按 0 自动填补？",
+            "status": "success",
+            "index_id": null,
+            "retrieval_mode": "lexical",
+            "evidence": [
+              {
+                "evidence_id": "knowledge_evidence_parent_0ab8d58f7f6dbd9ff94c",
+                "source_chunk": {
+                  "chunk_id": "chunk_6c222e7a99d1183a5e3b",
+                  "document_id": "xx_v1_dictionary",
+                  "document_version": "2026-09-07",
+                  "title": "XX-v1 测试量表说明",
+                  "text": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+                  "locator": "section:XX-v1 测试量表说明:child:1",
+                  "keywords": [
+                    "条目",
+                    "缺失"
+                  ],
+                  "chunk_kind": "child",
+                  "parent_chunk_id": "parent_0ab8d58f7f6dbd9ff94c",
+                  "section_path": [
+                    "XX-v1 测试量表说明"
+                  ],
+                  "page": null,
+                  "char_start": null,
+                  "char_end": null,
+                  "content_hash": "9aa77d2a28bb280825e85706e8125bc4eeef5383de75c9c7b8ecda5278baef33",
+                  "metadata": {
+                    "applies_to": [
+                      "XX-v1"
+                    ],
+                    "instrument_versions": [
+                      "xx-v1"
+                    ],
+                    "effective_from": null,
+                    "effective_to": null,
+                    "review_status": "draft"
+                  }
+                },
+                "context_chunk": {
+                  "chunk_id": "parent_0ab8d58f7f6dbd9ff94c",
+                  "document_id": "xx_v1_dictionary",
+                  "document_version": "2026-09-07",
+                  "title": "XX-v1 测试量表说明",
+                  "text": "# XX-v1 测试量表说明\n\nXX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。\n\n缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+                  "locator": "section:XX-v1 测试量表说明",
+                  "keywords": [
+                    "xx-v1",
+                    "total",
+                    "条目",
+                    "缺失"
+                  ],
+                  "chunk_kind": "parent",
+                  "parent_chunk_id": null,
+                  "section_path": [
+                    "XX-v1 测试量表说明"
+                  ],
+                  "page": null,
+                  "char_start": 0,
+                  "char_end": 170,
+                  "content_hash": "cd0e3eb9e0f8ac934b3ed41582abdc12f79227568cecfa640bcd85e15c85325e",
+                  "metadata": {
+                    "applies_to": [
+                      "XX-v1"
+                    ],
+                    "instrument_versions": [
+                      "xx-v1"
+                    ],
+                    "effective_from": null,
+                    "effective_to": null,
+                    "review_status": "draft"
+                  }
+                },
+                "hit": {
+                  "chunk": {
+                    "chunk_id": "chunk_6c222e7a99d1183a5e3b",
+                    "document_id": "xx_v1_dictionary",
+                    "document_version": "2026-09-07",
+                    "title": "XX-v1 测试量表说明",
+                    "text": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+                    "locator": "section:XX-v1 测试量表说明:child:1",
+                    "keywords": [
+                      "条目",
+                      "缺失"
+                    ],
+                    "chunk_kind": "child",
+                    "parent_chunk_id": "parent_0ab8d58f7f6dbd9ff94c",
+                    "section_path": [
+                      "XX-v1 测试量表说明"
+                    ],
+                    "page": null,
+                    "char_start": null,
+                    "char_end": null,
+                    "content_hash": "9aa77d2a28bb280825e85706e8125bc4eeef5383de75c9c7b8ecda5278baef33",
+                    "metadata": {
+                      "applies_to": [
+                        "XX-v1"
+                      ],
+                      "instrument_versions": [
+                        "xx-v1"
+                      ],
+                      "effective_from": null,
+                      "effective_to": null,
+                      "review_status": "draft"
+                    }
+                  },
+                  "score": 164,
+                  "matched_terms": [
+                    "0",
+                    "不",
+                    "不能",
+                    "不能按",
+                    "动",
+                    "动填",
+                    "动填补",
+                    "填",
+                    "填补",
+                    "失",
+                    "失条",
+                    "失条目",
+                    "按",
+                    "条",
+                    "条目",
+                    "目",
+                    "缺",
+                    "缺失",
+                    "缺失条",
+                    "能",
+                    "能按",
+                    "自",
+                    "自动",
+                    "自动填",
+                    "补"
+                  ],
+                  "scores": {
+                    "lexical_score": 17.762248826738674,
+                    "vector_score": null,
+                    "rrf_score": 0.01639344262295082,
+                    "lexical_rank": 1,
+                    "vector_rank": null,
+                    "mode": "lexical"
+                  }
+                },
+                "truncated": false
+              }
+            ],
+            "limitations": [],
+            "answerability": {
+              "answerable": true,
+              "reason": "retrieved_evidence",
+              "rejected_phrases": [],
+              "limitations": []
+            }
+          },
+          "rule_candidates": [
+            {
+              "candidate_id": "candidate_chunk_6c222e7a99d1183a5e3b",
+              "rule_type": "missing_item_handling",
+              "statement": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+              "chunk_refs": [
+                "chunk_6c222e7a99d1183a5e3b"
+              ],
+              "evidence_refs": [
+                "knowledge_evidence_parent_0ab8d58f7f6dbd9ff94c"
+              ],
+              "conditions": [
+                "applies when item data are missing"
+              ],
+              "exceptions": [
+                "source contains a prohibition; do not infer an automatic replacement rule"
+              ],
+              "applicable_versions": [
+                "xx-v1"
+              ],
+              "status": "candidate",
+              "limitations": [
+                "candidate must be activated through instrument registry before scoring rules change",
+                "candidate extraction is conservative and source-bound"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "wrong_version",
+      "result": {
+        "schema_version": "1.0",
+        "agent_name": "KnowledgeAgent",
+        "status": "no_data",
+        "findings": [],
+        "artifact_refs": [],
+        "requested_checks": [],
+        "limitations": [
+          "knowledge retrieval returned no matching chunks"
+        ],
+        "output": {
+          "question": "XX-v2 total 怎么算？",
+          "query": {
+            "question": "XX-v2 total 怎么算？",
+            "document_ids": [],
+            "instrument_versions": [
+              "xx-v2"
+            ],
+            "include_parent_chunks": false
+          },
+          "hits": [],
+          "evidence_package": {
+            "question": "XX-v2 total 怎么算？",
+            "status": "no_match",
+            "index_id": null,
+            "retrieval_mode": "none",
+            "evidence": [],
+            "limitations": [
+              "knowledge retrieval returned no matching chunks"
+            ],
+            "answerability": {
+              "answerable": false,
+              "reason": "no_match",
+              "rejected_phrases": [],
+              "limitations": [
+                "knowledge retrieval returned no matching chunks"
+              ]
+            }
+          },
+          "rule_candidates": []
+        }
+      }
+    },
+    {
+      "case_id": "missing_question",
+      "result": {
+        "schema_version": "1.0",
+        "agent_name": "KnowledgeAgent",
+        "status": "no_data",
+        "findings": [],
+        "artifact_refs": [],
+        "requested_checks": [],
+        "limitations": [
+          "knowledge question is required"
+        ],
+        "output": {
+          "status": "input_required"
+        }
+      }
+    }
+  ]
+}

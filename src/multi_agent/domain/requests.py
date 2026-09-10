@@ -19,7 +19,7 @@ class BudgetLimit(RequestModel):
 class AnalysisRequest(RequestModel):
     project_id: str = Field(min_length=1)
     subject_scope: list[str] = Field(default_factory=list)
-    goal: Literal["source_inventory", "xx_v1_assessment", "longitudinal_xx_v1", "multi_source_summary", "multimodal_summary"]
+    goal: Literal["source_inventory", "xx_v1_assessment", "longitudinal_xx_v1", "multi_source_summary", "multimodal_summary", "rwe_patient_summary"]
     snapshot_id: str | None = None
     as_of: datetime
     allowed_capabilities: list[str] = Field(default_factory=list)

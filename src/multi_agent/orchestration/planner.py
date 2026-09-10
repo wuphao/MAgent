@@ -10,7 +10,9 @@ from multi_agent.orchestration import goal_templates
 class TemplatePlanner:
     def plan(self, request: AnalysisRequest, available_capabilities: set[str], present_concepts: set[str] | None = None) -> Plan:
         present_concepts = present_concepts or set()
-        if request.goal == "source_inventory":
+        if request.goal == "rwe_patient_summary":
+            tasks = goal_templates.rwe_patient_tasks()
+        elif request.goal == "source_inventory":
             tasks = goal_templates.source_inventory_tasks()
         elif request.goal == "xx_v1_assessment":
             tasks = goal_templates.xx_v1_assessment_tasks()

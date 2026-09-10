@@ -1,0 +1,18 @@
+{
+  "schema_version": "knowledge_documents/1",
+  "documents": [
+    {
+      "document_id": "xx_v1_dictionary",
+      "version": "2026-09-07",
+      "path": "configs/knowledge/xx-v1-data-dictionary.md",
+      "title": "XX-v1 测试量表说明",
+      "source_type": "markdown",
+      "applies_to": ["XX-v1"],
+      "instrument_versions": ["xx-v1"],
+      "effective_from": null,
+      "effective_to": null,
+      "review_status": "draft",
+      "notes": "A0 baseline source. Version is inherited from existing stage-07 test expectations and should be replaced by a true source version when available."
+    }
+  ]
+}

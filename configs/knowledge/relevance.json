@@ -1,0 +1,21 @@
+{
+  "schema_version": "knowledge_relevance_config/1",
+  "unsupported_phrases": [
+    "cutoff",
+    "阈值",
+    "异常",
+    "几级评分",
+    "取值范围",
+    "插补公式",
+    "年龄校正",
+    "英文全称",
+    "规则候选激活",
+    "patient observation value",
+    "报告模板",
+    "影像模型",
+    "自动生成 total"
+  ],
+  "limitations": [
+    "A configured unsupported concept was present in the query; retrieved neighbors are not sufficient evidence for an answer."
+  ]
+}

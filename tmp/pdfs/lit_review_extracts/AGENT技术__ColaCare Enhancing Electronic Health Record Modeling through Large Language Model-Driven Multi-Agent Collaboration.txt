@@ -1,0 +1,1518 @@
+
+
+===== PAGE 1 =====
+ColaCare: Enhancing Electronic Health Record Modeling through
+Large Language Model-Driven Multi-Agent Collaboration
+Zixiang Wang∗
+Peking University
+Beijing, China
+wangzx@stu.pku.edu.cn
+Yinghao Zhu∗
+Peking University
+Beijing, China
+yhzhu99@gmail.com
+Huiya Zhao∗
+Peking University
+Beijing, China
+zhaohuiya@stu.pku.edu.cn
+Xiaochen Zheng
+ETH Zurich
+Zurich, Switzerland
+xzheng@ethz.ch
+Dehao Sui
+Peking University
+Beijing, China
+dehaosui1@gmail.com
+Tianlong Wang
+Peking University
+Beijing, China
+tianlong.wang@stu.pku.edu.cn
+Wen Tang
+Peking University Third Hospital
+Beijing, China
+tanggwen@126.com
+Yasha Wang†
+Peking University
+Beijing, China
+wangyasha@pku.edu.cn
+Ewen Harrison
+University of Edinburgh
+Edinburgh, Scotland, UK
+ewen.harrison@ed.ac.uk
+Chengwei Pan
+Beihang University
+Beijing, China
+pancw@buaa.edu.cn
+Junyi Gao†
+University of Edinburgh
+Edinburgh, Scotland, UK
+Health Data Research UK
+London, UK
+junyi.gao@ed.ac.uk
+Liantao Ma†
+Peking University
+Beijing, China
+malt@pku.edu.cn
+Abstract
+We introduce ColaCare, a framework that enhances Electronic
+Health Record (EHR) modeling through multi-agent collaboration
+driven by Large Language Models (LLMs). Our approach seamlessly
+integrates domain-specific expert models with LLMs to bridge the
+gap between structured EHR data and text-based reasoning. In-
+spired by the Multidisciplinary Team (MDT) approach used in clini-
+cal settings, ColaCare employs two types of agents: DoctorAgents
+and a MetaAgent, which collaboratively analyze patient data. Ex-
+pert models process and generate predictions from numerical EHR
+data, while LLM agents produce reasoning references and decision-
+making reports within the MDT-driven collaborative consultation
+framework. The MetaAgent orchestrates the discussion, facilitating
+consultations and evidence-based debates among DoctorAgents,
+simulating diverse expertise in clinical decision-making. We addi-
+tionally incorporate the Merck Manual of Diagnosis and Therapy
+(MSD) medical guideline within a retrieval-augmented generation
+∗Equal contribution.
+†Corresponding author.
+Permission to make digital or hard copies of all or part of this work for personal or
+classroom use is granted without fee provided that copies are not made or distributed
+for profit or commercial advantage and that copies bear this notice and the full citation
+on the first page. Copyrights for components of this work owned by others than the
+author(s) must be honored. Abstracting with credit is permitted. To copy otherwise, or
+republish, to post on servers or to redistribute to lists, requires prior specific permission
+and/or a fee. Request permissions from permissions@acm.org.
+WWW ’25, Sydney, NSW, Australia.
+© 2025 Copyright held by the owner/author(s). Publication rights licensed to ACM.
+ACM ISBN 979-8-4007-1274-6/25/04
+https://doi.org/10.1145/3696410.3714877
+(RAG) module for medical evidence support, addressing the chal-
+lenge of knowledge currency. Extensive experiments conducted on
+three EHR datasets demonstrate ColaCare’s superior performance
+in clinical mortality outcome and readmission prediction tasks, un-
+derscoring its potential to revolutionize clinical decision support
+systems and advance personalized precision medicine. All code,
+case studies and a questionnaire are available at the project website:
+https://colacare.netlify.app.
+CCS Concepts
+•Applied computing → Health informatics; •Information
+systems → Language models; Data mining;•Computing method-
+ologies → Multi-agent systems.
+Keywords
+electronic health record; large language model; multi-agent
+ACM Reference Format:
+Zixiang Wang, Yinghao Zhu, Huiya Zhao, Xiaochen Zheng, Dehao Sui,
+Tianlong Wang, Wen Tang, Yasha Wang, Ewen Harrison, Chengwei Pan,
+Junyi Gao, and Liantao Ma. 2025. ColaCare: Enhancing Electronic Health
+Record Modeling through Large Language Model-Driven Multi-Agent Col-
+laboration. In Proceedings of the ACM Web Conference 2025 (WWW ’25),
+April 28–May 2, 2025, Sydney, NSW, Australia. ACM, New York, NY, USA,
+12 pages. https://doi.org/10.1145/3696410.3714877
+1 Introduction
+The Web has become an indispensable platform for facilitating the
+integration and analysis of Electronic Health Records (EHR) data,
+arXiv:2410.02551v2  [cs.LG]  26 Feb 2025
+
+===== PAGE 2 =====
+WWW ’25, April 28–May 2, 2025, Sydney, NSW, Australia. Zixiang Wang et al.
+③
+Action: 
+Continue 
+discussion
+Report: ...
+Multiple 
+Rounds
+......
+Collaborative Consultation Process
+②
+MetaAgent
+Synthesized Preliminary Report
+Patient Info
+ Synthesized
+Report
+MetaAgent
+Final 
+Report
+Action: 
+Stop
+discussion
+Report: ...
+①
+ Generation of Initial Reviews
+DoctorAgent
+EHR Outputs
+Reviews
+Report
+Report
+MetaAgent MetaAgent
+Figure 1: A three-stage workflow of ColaCare’s multi-agent
+collaborative consultation. (1) multiple DoctorAgents gener-
+ate initial reviews based on EHR outputs; (2) a MetaAgent
+synthesizes these reviews into a preliminary report; and (3)
+an iterative consultation process where DoctorAgents and the
+MetaAgent collaborate through multiple rounds until reach-
+ing consensus, resulting in a final report.
+playing a pivotal role in prognosis prediction and clinical decision-
+making. By leveraging web-based technologies, EHR modeling not
+only enhances data accessibility but also fosters the development
+of data-driven healthcare advancements [13]. In recent years, deep
+learning has achieved remarkable success in EHR modeling, par-
+ticularly through structured data repositories and interoperable
+platforms that are part of the broader web ecosystem [32, 34, 54].
+However, these efforts have primarily relied on purely data-driven,
+end-to-end methods that operate independently of external, web-
+based semantic knowledge. Consequently, these models often fail
+to fully capture the clinical significance of the recorded features,
+treating them as mere variables without a comprehensive semantic
+context [56]. This limitation hinders the real-world applicability
+of such “black box” methods, as they lack interpretability and do
+not leverage the rich, interlinked knowledge available on the Web,
+making it difficult for human physicians to trust them in real-world
+clinical practice.
+Most interpretability models primarily rely on traditional fea-
+ture importance analysis techniques, such as attention mecha-
+nisms [33, 59], SHAP (SHapley Additive exPlanations) [ 42], and
+activation-level visualizations [47]. While these techniques provide
+a basic level of interpretability, they still fall short of aligning mod-
+els with real-world knowledge. Several existing methods attempt
+to incorporate external knowledge to improve interpretability. For
+instance, some approaches embed knowledge from external knowl-
+edge graphs [4, 31], or construct knowledge graphs from patient
+sequential visit data [ 22]. However, deploying these methods in
+practical settings remains challenging due to their dependence on
+manually crafted knowledge representations and the slow pace of
+knowledge updates, which often fail to keep pace with the latest
+medical research or updated guidelines. Moreover, physicians in-
+creasingly require deeper insights into the reasoning behind deep
+learning models for interpretability purposes.
+Given the impressive capabilities of Large Language Models
+(LLMs) in handling general tasks [ 1], including medical applica-
+tions [41] such as medical question-answering (Q&A) tasks that
+reason over unstructured clinical notes [2, 19, 44], we are motivated
+to explore their potential for enhancing structured EHR modeling,
+which remains less explored. Specifically, we aim to meet the re-
+quirements of knowledge fusion and interpretable reasoning that
+address the limitations of conventional methods. We have further
+identified and summarized the key limitations of existing LLM-
+driven works in structured EHR modeling as follows:
+(1) Structured EHR comprehension : Although some works have
+demonstrated LLMs’ reasoning ability in structured EHR analy-
+sis under few-shot settings [17], there remains a notable per-
+formance gap compared to conventional methods [55]. While
+LLMs excel at mining natural language contexts, their ability
+to analyze or make predictions based on structured EHR data is
+still limited [55].
+(2) Lack of medical reference : While recent research has expanded
+beyond single-model approaches by introducing multiple LLMs
+to address complex problems [2, 19, 44], most previous works
+lack trustworthy medical guidelines for clinical decision-making.
+These continuously updated guidelines are crucial when the
+inherent knowledge within LLMs is insufficient for diagnosis.
+To address these challenges, we propose ColaCare, a Retrieval-
+Augmented Generation (RAG)-enhanced framework inspired by the
+Multidisciplinary Team (MDT) approach employed by physicians
+in clinical settings [39]. ColaCare integrates domain-specific EHR
+modeling methods (expert models) into LLM-driven agents that
+fulfill two roles: doctor agents (referred to as DoctorAgent) and a
+meta doctor agent (referred to as MetaAgent). The MetaAgent or-
+chestrates MDT discussions, facilitating consultations and evidence-
+based debates among DoctorAgents. Overall, ColaCare simulates
+the collaborative decision-making process among physicians with
+diverse expertise by leveraging LLMs’ reasoning and role-playing
+capabilities, alongside the strengths of expert models in processing
+and predicting from structured EHR data.
+ColaCare has the potential to revolutionize clinical decision-
+making and advance the field of personalized precision medicine.
+Our primary contributions are summarized as follows:
+• Insightfully, we introduce the MDT approach to EHR mod-
+eling and incorporate external knowledge via RAG, enabling
+a prediction process that is both driven by EHR data and en-
+riched with up-to-date external knowledge, complemented by
+self-examination.
+• Technically, we develop a collaborative mechanism where clini-
+cal decision evidence from multipleDoctorAgents and theMetaAgent
+is synthesized. These agents discuss patient status and reach a
+consensus in a report, thereby enhancing transparency and pro-
+viding human-understandable evidence to support physicians in
+their diagnostic reasoning.
+• Experimentally, we conduct extensive experiments on three
+EHR datasets, demonstrating the superior performance ofColaCare
+in predicting clinical outcomes such as mortality and readmission,
+with relative improvements in AUPRC of 0.86%, 2.50%, 2.00%, and
+4.49% across four tasks. Case studies highlight the reasonable-
+ness and interpretability of the reports generated by ColaCare,
+offering healthcare professionals detailed and understandable
+insights into each prediction.
+
+===== PAGE 3 =====
+ColaCare: Enhancing EHR Modeling through LLM-Driven Multi-Agent Collaboration WWW ’25, April 28–May 2, 2025, Sydney, NSW, Australia.
+2 Related Work
+2.1 LLMs in Medical Tasks
+Large Language Models (LLMs) have demonstrated significant
+success in the medical domain, particularly in medical question-
+answering (Q&A) [3, 10, 50] and medical evidence summarization
+tasks [43, 45]. Notably, the advanced LLM GPT-4 [1] has outper-
+formed medical students on standard medical board exams [ 25].
+While these achievements primarily involve textual clinical notes,
+recent research has begun exploring LLMs’ capabilities in handling
+structured Electronic Health Records (EHR) data [48]. Approaches
+include prompting LLMs directly [17, 55] or ensembling machine
+learning models’ outputs [14, 21]. These studies reveal that GPT-4
+shows potential for zero-shot prediction on structured EHR data,
+although a significant performance gap remains compared to con-
+ventional deep learning methods trained on full datasets [55]. Ad-
+ditionally, LLM’s direct outputs face challenges with hallucination,
+where generated content may not strictly adhere to instructions,
+resulting in unexpected outputs beyond numerical values [51].
+2.2 LLM-Driven Multi-Agent Collaboration in
+Medical Field
+The development of LLM-driven agent systems, where multiple
+agents with distinct roles collaborate and utilize external tools [11,
+49], has garnered increasing attention in medical domains. AI-
+SCE [37] introduces a novel evaluation framework that enables
+the creation of simulated clinical environments for assessing clini-
+cal LLM agents. Notable implementations of this approach include
+AI Hospital [9] and Agent Hospital [28], which construct virtual
+hospital environments where multiple agents collaborate to em-
+ulate real clinical settings. These platforms facilitate comprehen-
+sive evaluation of clinical LLMs’ capabilities in realistic healthcare
+scenarios. Recent studies have also explored adversarial collabora-
+tion, incorporating debates and negotiations among multiple agents.
+MedAgents [44] proposes a medical collaboration framework where
+doctor agents vote on diagnoses, while ArgMed-Agents [19] con-
+structs conflict relationship graphs and employs formal deduction
+to generate coherent Q&A conclusions. Further advancements in-
+clude ReConcile [2], which employs a confidence-weighted voting
+mechanism for better consensus.
+In summary, most prior work focuses on medical Q&A tasks,
+with LLMs generating text-based diagnoses. However, real-world
+scenarios often require specific numerical outputs, like disease mor-
+tality risk predictions. While approaches like Multi-Agent Debate
+(MAD) [7, 16, 29] have been proposed at a general theoretical level,
+they are not specifically designed for clinical applications. More-
+over, current implementations often use multiple instances of the
+same LLM, leading to homogeneous reasoning. This falls short of
+clinical requirements for diverse diagnostic reasoning. Therefore,
+there is a need for frameworks that better integrate structured EHR
+and address complex, quantitative medical tasks.
+3 Problem Definition
+3.1 EHR Datasets Formulation
+The EHR datasets are structured as multivariate time-series data
+with multiple features, denoted as 𝑿 = [𝒙1, 𝒙2, · · ·, 𝒙𝑻 ]⊤ ∈ R𝑇 ×𝐹 ,
+encapsulating information across 𝑇 visits and 𝐹 features, which
+includes static features (e.g., sex and age) and dynamic features
+(e.g., laboratory tests and vital signs).
+3.2 Predictive Objective Formulation
+The prediction task is defined as a binary classification problem
+aimed at predicting patients’ mortality outcomes or 30-day readmis-
+sion. Our goal is to extract knowledge from EHR data, supplemented
+by auxiliary external medical knowledge (e.g., medical guidelines),
+to enhance predictive modeling of EHRs. Thus, the predictive ob-
+jective is formulated as:
+ˆ𝑦 = Framework(𝒙𝐸𝐻 𝑅, MedicalKnowledge) (1)
+where ˆ𝑦 represents the predicted outcome.
+For the mortality prediction task, the outcome ˆ𝑦 is a binary
+variable where 0 indicates the patient is alive, and 1 indicates the
+patient is deceased. In the case of the readmission prediction task,
+the model predicts whether the patient will be readmitted within
+30 days of discharge, with 0 representing no readmission and 1
+indicating readmission within the specified time frame.
+4 Methodology
+Fig. 1 and Fig. 2 demonstrates our proposed LLM-based multi-agent
+collaboration ColaCare framework, where the key module: Multi-
+Agent Collaborative Consultation Module is detailedly illustrated
+in Fig. 1. It gathers a group of doctor agents and a meta doctor agent
+for medical discussion about a certain patient’s condition. Doctor
+agents reach an agreement after multiple rounds of debate and the
+meta doctor agent proposes a report finally.
+4.1 Structured EHR Information Extraction
+Given the EHR data of a patient, 𝒙𝐸𝐻 𝑅, we utilize the EHR model,
+denoted as Model, to encode this temporally linked information:
+𝒉𝐸𝐻 𝑅 = Model(𝒙𝐸𝐻 𝑅) (2)
+Then we use a MLP layer to predict the output logit 𝒛 and the
+SHAP strategy to obtain feature importance weights 𝜶 :
+𝒛 = MLP(𝒉𝐸𝐻 𝑅)
+𝜶 = SHAP(Model, 𝒙𝐸𝐻 𝑅) (3)
+The prediction logit 𝒛 and weights 𝜶 by deep learning models
+are used to support the LLM-based collaborative consultation.
+4.2 Multi-Agent Collaborative Consultation
+As shown in Fig. 1, in the multi-agent collaborative consultation,
+we define two distinct roles: the doctor agent (DoctorAgent) and
+the meta doctor agent (MetaAgent). Each DoctorAgent is linked to
+a domain-specific expert model.
+The collaboration begins with each DoctorAgent providing an
+initial review of a patient’s condition. Subsequently, theMetaAgent
+synthesizes these reviews to generate a comprehensive report and
+orchestrates the collaborative consultation process. During this
+iterative process, all DoctorAgents express their opinions on the
+current report. The MetaAgent then considers the feedback, ac-
+cordingly revises the report, and determines whether more rounds
+of consultation are necessary. Fig. 1 demonstrates the overview
+pipeline of the collaborative consultation.
+
+===== PAGE 4 =====
+WWW ’25, April 28–May 2, 2025, Sydney, NSW, Australia. Zixiang Wang et al.
+LM
+Multimodal 
+Fusion
+Prediction
+Logits
+Final 
+Report
+Interpretable
+Evidence
+Information
+Retriever
+Relevant
+Knowledge
+Initial
+Patient Record
+Report 
+Embedding
+EHR 
+Embedding
+Medical 
+Guideline
+Query
+Multi-Agent
+Collaborative Consultation
+DoctorAgent 3
+Logits
+RAG Module
+EHR 
+Models
+EHR Data
+EHR
+Embedding
+DoctorAgent 1
+DoctorAgent 2
+MetaAgent
+Structured EHR Information Extraction
+Figure 2: Overall architecture of our proposed ColaCare framework. It consists of three main components: (1) a structured EHR
+information extraction module that processes patient EHR data and generates embeddings through EHR models, (2) a RAG
+module that processes medical guidelines and retrieves relevant knowledge, and (3) a multi-agent collaborative consultation
+module where multiple DoctorAgents interact with a MetaAgent to produce a final report. The framework concludes with
+multimodal fusion of report and EHR embeddings to generate prediction logits.
+4.2.1 Generation of Initial Reviews. We first utilize output logits 𝒛
+and feature importance weights 𝜶 of EHR models, as well as basic
+information of a certain patient (e.g. Sex and Age), to build an initial
+patient record 𝒙𝑟𝑒𝑐𝑜𝑟𝑑 :
+𝒙𝑟𝑒𝑐𝑜𝑟𝑑 = Prompt(𝒛, 𝜶 , Infopatient) (4)
+Next, the retriever measures the cosine similarity between em-
+beddings of documents in the corpus and the patient record, and
+select the top-K relevant documents:Ø
+Docs = Retriever(𝒙𝑟𝑒𝑐𝑜𝑟𝑑 ) (5)
+Lastly, we instruct the DoctorAgent to generate a review:
+𝒓𝑑𝑜𝑐𝑡𝑜𝑟 = DoctorAgent(Prompt(𝒙𝑟𝑒𝑐𝑜𝑟𝑑 ,
+Ø
+Docs)) (6)
+4.2.2 Synthesized Preliminary Report. The MetaAgent is instructed
+to leverage the patient’s basic information and initial reviews from
+all DoctorAgents to generate a synthesized report:
+𝒓𝑚𝑒𝑡𝑎 = MetaAgent(𝑃𝑟𝑜𝑚𝑝𝑡 (
+∑︁
+𝒓𝑑𝑜𝑐𝑡𝑜𝑟 , 𝐼𝑛𝑓 𝑜 𝑝𝑎𝑡𝑖𝑒𝑛𝑡 )) (7)
+For the report, the MetaAgent is instructed to first assess and
+articulate the patient’s mortality risk, categorizing it as either high
+or low and then select and incorporate pertinent comments and
+supporting evidence from the DoctorAgents’ reviews.
+4.2.3 Collaborative Consultation Process. The DoctorAgents are
+instructed to evaluate their initial assessments and state their agree-
+ment or disagreement with the current report. In cases of disagree-
+ment, they are required to provide detailed rationales and support
+their arguments with relevant documents retrieved from the corpus:
+𝒓 𝑗
+𝑑𝑜𝑐𝑡𝑜𝑟 = DoctorAgent(Prompt(𝒓 𝑗 −1
+𝑑𝑜𝑐𝑡𝑜𝑟 , 𝒓 𝑗 −1
+𝑚𝑒𝑡𝑎 ,
+Ø
+𝐷𝑜𝑐𝑠 )) (8)
+where 𝑗 stands for the j-th round in the process.
+Subsequently, the MetaAgent aggregates and analyzes the feed-
+back from all DoctorAgents to determine whether further discus-
+sion is necessary:
+Action𝑗 = MetaAgent(Prompt(
+∑︁
+𝒓 𝑗 −1
+𝑑𝑜𝑐𝑡𝑜𝑟 )) (9)
+The MetaAgent evaluates the statements of the DoctorAgents,
+focusing on their agreement or disagreement with the current re-
+port. If unanimous agreement is reached, the MetaAgent concludes
+that further discussion is unnecessary. However, in cases of disagree-
+ment, the MetaAgent conducts a more detailed analysis by carefully
+examining the evidence presented by the dissenting DoctorAgents
+and assessing the validity and relevance of this evidence within the
+context of the current report. If any opposing statements and their
+supporting evidence are considered meritorious, the MetaAgent
+continues the discussion.
+If the action infers a new round, the MetaAgent considers the
+opinions and relevant documents by all DoctorAgents and refine
+the report:
+𝒓 𝑗
+𝑚𝑒𝑡𝑎 = MetaAgent(Prompt(𝒓 𝑗 −1
+𝑚𝑒𝑡𝑎 ,
+∑︁
+𝒓 𝑗 −1
+𝑑𝑜𝑐𝑡𝑜𝑟 )) (10)
+Once again, DoctorAgents express their statements towards the
+new report and try to convince the MetaAgent. The MetaAgent
+considers their statements and further revises the report, until all
+DoctorAgents reach an agreement or the MetaAgent calls it a day.
+4.3 Multimodal Fusion Network
+We begin by leveraging hidden representations of EHR data from
+previous 𝑁 EHR-specific expert models, denoted as 𝒉𝑖
+𝐸𝐻 𝑅. Subse-
+quently, we utilize a medical-domain pretrained language model,
+LM, to encode the final consensus report embedding:
+𝒉𝑅𝑒𝑝𝑜𝑟𝑡 = LM(𝒙𝑅𝑒𝑝𝑜𝑟𝑡 ) (11)
+We then concatenate the representations from both modalities
+and apply an MLP layer to obtain the final prediction, ˆ𝒚:
+ˆ𝒚 = MLP
+
+Concat
+h
+𝒉1
+𝐸𝐻 𝑅, 𝒉2
+𝐸𝐻 𝑅, . . . , 𝒉𝑁
+𝐸𝐻 𝑅, 𝒉𝑅𝑒𝑝𝑜𝑟𝑡
+i
+(12)
+The loss function employed is the Binary Cross-Entropy (BCE)
+Loss for binary classification:
+L (ˆ𝒚, 𝒚) = − 1
+𝑁
+𝑁∑︁
+𝑖=1
+(𝒚𝑖 log( ˆ𝒚𝑖 ) + ( 1 − 𝒚𝑖 ) log(1 − ˆ𝒚𝑖 )) (13)
+
+===== PAGE 5 =====
+ColaCare: Enhancing EHR Modeling through LLM-Driven Multi-Agent Collaboration WWW ’25, April 28–May 2, 2025, Sydney, NSW, Australia.
+where 𝑁 represents the number of patients in a batch, ˆ𝒚 ∈ [ 0, 1] is
+the predicted probability, and 𝒚 is the ground truth.
+5 Experimental Setups
+5.1 Experimented Datasets and Utilized Medical
+Guideline
+We adopt three real-world datasets: (1)MIMIC-IV [24] is a compre-
+hensive intensive care unit database containing EHR data including
+demographics and laboratory test features; (2) CDSL [20] contains
+detailed medical information of COVID-19 patients from HM Hos-
+pitales; and (3) ESRD [33] includes longitudinal EHR data from
+end-stage renal disease (ESRD) patients, with baseline information,
+visit records and clinical outcomes.
+We additionally introduce the Merck Manual of Diagnosis and
+Therapy (MSD) medical guideline [40]1 to enhance our framework.
+We adhere to the established EHR benchmark pipeline [13, 18,
+33, 57] for preprocessing time-series data, ensuring consistency
+and comparability in our data preparation across all datasets. The
+test set size is limited to approximately 1,000 samples due to the
+time cost associated with each sample. We suggest a sample of
+1,000 patients provides sufficient representation for benchmark-
+ing and evaluation, offering diverse, information-rich records that
+effectively test model generalization in realistic healthcare scenar-
+ios [55, 58]. The statistics of dataset splits and label distributions
+for the three datasets are presented in Tab. 1.
+Table 1: Statistics of the experimented datasets after prepro-
+cessing. The # Samples column shows the number of samples
+and their percentage of the entire dataset, indicating data
+splits (train, val, test). The # Label𝑂𝑢𝑡 . = 1 and # Label𝑅𝑒. = 1
+columns provides the count and percentage of patients with
+adverse outcomes within each data split. “Out. ” denotes “mor-
+tality outcome”, “Re. ” denotes “Readmission”.
+Dataset Split # Samples # Label 𝑂𝑢𝑡 . = 1 # Label𝑅𝑒. = 1
+MIMIC-IV
+Train 17,397 (90.00%) 2,067 (11.88%) 2,685 (15.43%)
+Val 966 (5.00%) 118 (12.22%) 157 (16.25%)
+Test 968 (5.01%) 115 (11.88%) 153 (15.81%)
+CDSL
+Train 2,127 (49.98%) 270 (12.69%) -
+Val 1,064 (25.01%) 135 (12.69%) -
+Test 1,064 (25.01%) 135 (12.69%) -
+ESRD
+Train 379 (57.77%) 157 (41.42%) -
+Val 131 (19.97%) 47 (35.88%) -
+Test 146 (22.26%) 57 (39.04%) -
+5.2 Evaluation Metrics
+We employ three widely-used evaluation metrics for binary classi-
+fication tasks, all of which are interpreted as “higher is better”:
+• AUROC, AUPRC: These complementary metrics assess model
+performance across various classification thresholds. AUROC
+is valued in clinical settings [36], while AUPRC is particularly
+useful for imbalanced datasets [ 26]. Together, they provide a
+comprehensive view of the model’s discriminative ability.
+• min(+P, Se): This metric takes the minimum value between
+precision (+P) and sensitivity (Se), offering a balanced assessment
+of model performance by correctly identifying positive cases and
+minimizing false positives [35].
+1Access link: https://www.msdmanuals.com/professional
+For readability purposes, in the performance tables below, bold
+indicates the best results. Values are presented as mean±std, with
+metrics multiplied by 100.
+5.3 Baseline Models
+5.3.1 EHR-specific Baselines. We include the following established
+EHR-specific deep learning-based models as baselines: AdaCare [32],
+ConCare [34], and RETAIN [5]. These models employ various ar-
+chitecture, such as attention mechanisms, feature extraction, and
+recalibration, to address different aspects of EHR data analysis and
+patient health representation.
+Additionally, we implement five ensemble-based approaches: (1)
+simple averaging of logits from three models; (2) weighted aver-
+aging with weights based on model performance; (3) temperature
+scaling ensemble [15] with trainable parameters; (4) deep ensem-
+ble [27] which trains each model multiple times with different
+random initializations and averages their predictions; and (5) MC-
+dropout [12] which enables dropout during inference to generate
+multiple stochastic predictions for ensemble averaging.
+5.3.2 LLM-based Baselines. We incorporate baselines utilizing sin-
+gle or multiple LLMs. For those using a single LLM, we employ
+three different prompt strategies: zero-shot, few-shot, and self-
+consistency [46]. Additionally, we include three multi-agent collab-
+oration approaches: multi-agent debate [29], MedAgents [44], and
+ReConcile [2]. All of these LLM-based baselines directly process
+EHR data as input, relying on large language models to interpret
+the data and generate final prediction results.
+5.4 Implementation Details
+5.4.1 Hardware and Software Configuration. All experiments are
+conducted on a single Nvidia RTX 3090 GPU with CUDA 12.5. The
+server’s RAM size is 128GB. We implement the model in Python
+3.9.19, PyTorch 2.3.1 [38], PyTorch Lightning 2.3.3 [8].
+5.4.2 Model Training and Hyperparameters. AdamW [30] opti-
+mizer is employed with a batch size of 128 patients. All models
+are trained for 50 epochs with an early stopping strategy based on
+AUPRC after 10 epochs without improvement.
+For EHR-specific baseline models, the learning rate {0.01, 0.001,
+0.0001} and hidden dimensions {64, 128} are tuned using a grid
+search strategy on the validation set. For LLM-based baselines, the
+few-shot approach simulates two sample examples, one positive
+and one negative, following the approach in previous work [ 55].
+The self-consistency method selects three possible reasoning paths,
+followed by a consistency evaluation.
+For ColaCare, the maximum number of rounds for the collabo-
+rative consultation process is set to 3. The fusion network’s hidden
+dimension is 128 with a learning rate of 0.001. The 𝐾 for the re-
+trieval process is set to 3. Performance is reported as mean ±std,
+calculated by bootstrapping all test set samples 100 times for all
+three datasets. Experiments are conducted from June 30th, 2024, to
+October 15th, 2024.
+5.4.3 Utilized (Large) Language Models. ColaCare incorporates
+both Language Models (LMs) and Large Language Models (LLMs)
+within its framework. For language models, we employ MedCPT [23]
+in the RAG system’s biomedical information retrieval process and
+
+===== PAGE 6 =====
+WWW ’25, April 28–May 2, 2025, Sydney, NSW, Australia. Zixiang Wang et al.
+Table 2: Overall performance of in-hospital mortality and 30-day readmission prediction results on MIMIC-IV, CDSL, and ESRD.
+Methods MIMIC-IV Outcome MIMIC-IV Readmission CDSL Outcome ESRD Outcome
+AUPRC (↑) AUROC ( ↑) min(+P, Se) (↑) AUPRC (↑) AUROC ( ↑) min(+P, Se) (↑) AUPRC (↑) AUROC ( ↑) min(+P, Se) (↑) AUPRC (↑) AUROC ( ↑) min(+P, Se) (↑)
+AdaCare 52.67±4.50 87.56 ±1.37 53.62 ±3.91 50.51±4.24 78.82 ±1.94 50.01 ±3.37 82.76±3.74 95.54 ±1.02 77.20 ±3.23 60.44±6.94 69.11 ±5.53 59.23 ±6.46
+ConCare 49.71±4.83 87.21 ±1.41 52.96 ±3.74 46.66±4.05 79.06 ±1.82 47.00 ±3.20 80.77±3.59 94.47 ±1.24 74.17 ±2.80 56.65±6.91 68.84 ±4.85 58.47 ±5.78
+RETAIN 51.89±4.22 87.87 ±1.27 49.71 ±3.83 50.89±3.90 80.73 ±1.82 50.42 ±3.33 74.46±4.13 93.32 ±1.30 70.09 ±3.30 60.02±6.32 70.82 ±4.32 59.26 ±5.41
+EnsembleMean 53.59±4.52 88.60 ±1.26 54.08 ±3.66 50.48±4.68 86.97 ±1.45 50.36 ±3.58 83.54±3.36 95.63 ±1.04 76.24 ±3.48 60.90±7.08 73.41 ±4.80 59.98 ±6.02
+EnsembleWeightedMean 53.44±4.51 88.58 ±1.26 53.98 ±3.72 50.64±4.69 87.05 ±1.45 50.68 ±3.63 84.08±3.34 95.88 ±0.98 76.48 ±3.42 61.07±7.11 73.49 ±4.81 60.09 ±5.99
+EnsembleTemperature 53.56±4.52 88.57 ±1.26 54.07 ±3.69 51.11±4.00 80.38 ±1.80 52.70±3.30 83.86±3.32 95.72 ±1.02 76.39 ±3.43 61.47±6.41 73.36 ±3.70 59.00 ±5.19
+EnsembleDeep 53.12±4.69 88.21 ±1.31 53.95 ±3.57 51.54±4.05 80.83 ±1.80 52.47 ±3.27 84.58±3.27 95.90 ±0.97 77.01 ±3.38 62.61±6.05 73.76±3.76 60.47±5.29
+MC-Dropout 52.75±4.93 87.96 ±2.22 53.58 ±3.89 50.54±4.66 81.57 ±2.60 49.42 ±3.93 83.86±3.63 95.04 ±1.66 76.02 ±3.89 61.53±6.90 71.61 ±4.76 60.34 ±5.43
+LLMZeroShot 31.01±3.68 75.20 ±2.67 34.39 ±3.71 21.63±1.89 63.98 ±2.08 26.47 ±2.71 29.71±2.82 78.80 ±2.12 33.39 ±2.63 6.71±2.88 49.93 ±12.30 7.72 ±3.28
+LLMFewShot 26.28±2.91 70.94 ±2.30 40.39 ±3.74 29.09±3.25 65.72 ±1.83 34.43 ±3.62 41.58±4.13 78.61 ±1.83 42.88 ±4.53 2.78±2.54 54.54 ±38.33 2.78 ±2.54
+LLMSelfConsistency 27.39±3.38 72.36 ±2.56 30.77 ±3.55 24.73±2.33 62.84 ±2.46 27.95 ±2.79 36.24±4.09 75.37 ±2.07 32.44 ±3.96 9.09±4.44 58.57 ±10.70 11.60 ±6.06
+MAD 30.95±5.59 78.43 ±3.09 29.62 ±4.48 24.33±2.66 65.09 ±2.47 24.14 ±2.38 42.53±5.38 78.55 ±2.94 40.02 ±5.05 5.14±2.63 52.47 ±18.77 6.59 ±3.47
+MedAgents 27.73±3.38 74.38 ±2.19 27.80 ±3.31 20.15±2.46 58.25 ±2.66 19.39 ±2.29 33.02±3.34 81.21 ±1.75 33.48 ±3.12 4.47±2.21 53.64 ±18.31 5.26 ±2.80
+ReConcile 27.91±3.50 74.51 ±2.43 29.91 ±3.99 24.00±2.86 65.39 ±2.35 25.45 ±3.11 35.04±3.17 80.39 ±1.87 34.31 ±2.86 17.37±13.54 62.20 ±20.94 24.62 ±16.54
+ColaCare 54.05±4.88 88.80 ±1.31 54.44 ±3.80 51.91±4.99 87.72 ±1.37 50.16±4.17 85.76±2.99 96.23 ±0.91 78.93 ±3.21 63.81±6.43 71.61±4.77 63.33±5.54
+GatorTron [52] model for final clinical note embedding computa-
+tion. For large language models, we employ the DeepSeek-V2.5 [6]
+to act as the reasoning engine.
+6 Experimental Results and Analysis
+This section evaluates the ColaCare framework by addressing the
+following research questions (RQs):
+(1) [RQ1: Overall Performance] How does ColaCare compare
+to other EHR-specific deep learning models and LLM-based
+frameworks in clinical downstream tasks?
+(2) [RQ2: Ablation Study] What is the contribution of each pro-
+posed module to the performance?
+(3) [RQ3: Sensitivity to Number of Agents] How does the num-
+ber of agents affect ColaCare’s performance?
+(4) [RQ4: Sensitivity to Different LLMs] How does ColaCare’s
+performance vary with different LLMs?
+(5) [RQ5: Case Study] Does ColaCare generate reliable clinical
+reports and summaries for interpretability?
+(6) [RQ6: Cost Analysis] What are the implementation costs
+of ColaCare in clinical practice, considering token usage, etc.,
+across datasets and tasks?
+(7) [RQ7: Human Evaluation] How consistent are ColaCare’s
+decisions and interpretations with experienced clinicians’ judg-
+ments in real clinical cases?
+6.1 RQ1: Overall Performance
+To address RQ1, we conduct mortality and readmission prediction
+tasks on the MIMIC-IV dataset and mortality prediction tasks on
+the CDSL and ESRD datasets. The overall performance ofColaCare
+is shown in Tab. 2. The results demonstrate that ColaCare consis-
+tently outperforms all baseline models in most cases, with notable
+improvements in the AUPRC metric. Specifically, ColaCare sur-
+passes each expert model, the ensemble results of expert models (as
+ColaCare can be viewed as an LLM-based ensemble method), and
+LLM-driven approaches that are instructed to directly output pre-
+diction results. This superior performance highlights ColaCare’s
+potential for practical application in clinical decision-making.
+6.2 RQ2: Ablation Study
+For RQ2, we assess each module’s impact on performance (see
+Tab. 3) by testing three variants: (1) without the RAG module, where
+relevant documents are not provided to agents; (2) without the fu-
+sion network, which relies on the LLM by prompting it to produce
+prediction results based on the final report; (3) without integrat-
+ing expert models, where information from EHR-specific domain
+models is omitted and the LLM is prompted to generate predic-
+tion results based on raw EHR data, replicating the MedAgents
+approach; and (4) without the MDT process, where relevant docu-
+ments are integrated into EHR-specific models directly. The results
+indicate that excluding expert models significantly reduces perfor-
+mance. Additionally, the direct output approach of LLMs proves
+ineffective, as evidenced by the performance drop when the fusion
+network is removed and in comparison to other LLM-based baseline
+methods. Furthermore, ColaCare performs better compared to the
+without-MDT baseline and without-RAG baseline, demonstrating
+that the MDT process in ColaCare’s framework plays a crucial role
+and that retrieving relevant documents improves performance.
+Table 3: Ablation study results for each module.
+Methods MIMIC-IV Outcome MIMIC-IV Readmission
+AUPRC (↑) AUROC (↑) min(+P, Se) (↑) AUPRC (↑) AUROC (↑) min(+P, Se) (↑)
+w/o RAG 51.57±4.76 88.09±1.30 49.25 ±3.91 48.00±4.58 86.74±1.63 51.43±3.85
+w/o Fusion Network42.61±4.02 87.53±1.27 49.72 ±3.69 49.03±4.38 79.85±1.90 51.26 ±3.30
+w/o Expert Models27.73±3.38 74.38±2.19 27.80 ±3.31 20.15±2.46 58.25±2.66 19.39 ±2.29
+w/o MDT 50.63±5.02 86.80±1.36 51.92 ±4.25 47.68±4.36 79.12±1.82 51.39 ±3.34
+ColaCare 54.05±4.88 88.80±1.31 54.44±3.80 51.91±4.99 87.72±1.37 50.16±4.17
+6.3 RQ3: Sensitivity to Number of Agents
+For RQ3, we explore the impact of the number of agents partici-
+pating in the collaborative consultation, as shown in Tab. 4. Our
+findings indicate that having one or two DoctorAgents has little to
+no impact or slightly decreases performance. This is because a small
+Table 4: Performance of different numbers of agents in the
+in-hospital mortality prediction task on MIMIC-IV datasets.
+#Agents Models Metrics
+AdaCare ConCare RETAIN AUPRC (↑) AUROC ( ↑) min(+P, Se)
+0
+✓ - - 52.67±4.50 87.56 ±1.37 53.62 ±3.91
+- ✓ - 49.71±4.83 87.21 ±1.41 52.96 ±3.74
+- - ✓ 51.89±4.22 87.87 ±1.27 49.71 ±3.83
+1
+✓ - - 52.96±4.54 87.59 ±1.34 53.79 ±3.86
+- ✓ - 50.55±4.67 87.24 ±1.42 52.78 ±3.56
+- - ✓ 50.44±4.61 87.31 ±1.34 49.39 ±4.02
+2
+✓ ✓ - 52.61±4.85 87.96 ±1.33 53.96 ±3.8
+✓ - ✓ 51.24±4.60 86.58 ±1.53 50.99 ±3.50
+- ✓ ✓ 52.14±4.74 87.91 ±1.34 51.98 ±3.94
+3 ✓ ✓ ✓ 54.05±4.88 88.80 ±1.31 54.44 ±3.80
+
+===== PAGE 7 =====
+ColaCare: Enhancing EHR Modeling through LLM-Driven Multi-Agent Collaboration WWW ’25, April 28–May 2, 2025, Sydney, NSW, Australia.
+number of DoctorAgents can easily reach a consensus, even if their
+final opinion lacks robustness. As the number of DoctorAgents in-
+creases, performance improves due to the incorporation of a wider
+range of perspectives and medical evidence, resulting in more com-
+prehensive and reliable reports.
+6.4 RQ4: Sensitivity to Different LLMs
+To address RQ4, we evaluate the performance of ColaCare when
+utilizing different LLMs as the reasoning engine. Specifically, we
+compare ColaCare instantiated with DeepSeek-V2.5, GPT-4o-Mini,
+GPT-4o, Qwen-Turbo, Doubao-Pro, Llama-3.1-400B and Claude-3.5-
+Sonnet-1022. The performance presented in Tab. 5 shows that all
+these LLMs can reason with EHR data, with DeepSeek-V2.5 and
+GPT-4o-Mini performing slightly better.
+Table 5: Performance of different LLMs of in-hospital mortal-
+ity and 30-day readmission prediction results on MIMIC-IV.
+Methods MIMIC-IV Outcome MIMIC-IV ReadmissionAUPRC (↑) AUROC (↑) min(+P, Se) (↑) AUPRC (↑) AUROC (↑) min(+P, Se) (↑)
+GPT-4o-Mini 55.27±4.92 88.66±1.38 55.74±3.75 51.01±5.05 85.00±1.88 51.09 ±4.09GPT-4o 54.13±4.84 88.59±1.36 54.38 ±3.96 50.93±4.81 86.89±1.48 49.44 ±3.63Qwen-Turbo 52.88±4.76 88.57±1.28 54.68 ±3.70 49.95±4.13 80.10±1.81 50.38 ±3.29Doubao-Pro 52.14±4.65 88.04±1.34 53.37 ±3.69 49.70±4.04 79.92±1.80 50.00 ±3.33Llama-3 54.23±4.81 88.20±1.32 52.10 ±3.74 51.16±4.08 85.35±1.77 51.96±3.05Claude-3.5-sonnet52.58±4.90 88.07±1.37 53.92 ±3.63 50.77±4.45 81.53±1.74 50.50 ±3.45
+ColaCare(DeepSeek-V2.5)54.05±4.88 88.80±1.31 54.44±3.80 51.91±4.99 87.72±1.37 50.16±4.17
+6.5 RQ5: Case Study
+To evaluate whether ColaCare provides reliable clinical reports
+and summaries for interpretable analysis, we present a case study
+based on a patient from the ESRD dataset’s mortality prediction
+task. Fig. 3 illustrates each step in the ColaCare pipeline during
+the collaborative consultation process.
+In Step 1, eachDoctorAgent is provided with the patient’s records,
+including basic information and multivariate time-series EHR data,
+results from expert models such as mortality risk prediction logits,
+feature importance, and population-level statistics, as well as rele-
+vant retrieved documents. The DoctorAgents are then prompted to
+generate an initial review for the patient. DoctorAgent 1 assesses
+a moderate risk by focusing on the patient’s carbon dioxide bind-
+ing power and albumin levels. DoctorAgent 2 determines a low
+risk by concentrating on diastolic blood pressure and blood chlo-
+rine levels, both within normal ranges for patients with end-stage
+renal disease (ESRD). In contrast, DoctorAgent 3 identifies signifi-
+cantly low blood potassium levels, indicating a precarious condition.
+All DoctorAgents cite evidence from authoritative documents. In
+Step 2, the MetaAgent synthesizes a report based on the reviews
+from the three DoctorAgents, primarily integrating the analyses
+of DoctorAgent 1 and DoctorAgent 3 to conclude a high mortality
+risk and provide a comprehensive analysis. The MetaAgent high-
+lights key factors such as carbon dioxide binding power, blood
+potassium, and albumin levels, all of which are abnormal and pose
+serious risks. Subsequently, in Step 3, each DoctorAgent reviews,
+votes on, and comments on the MetaAgent’s synthesized report.
+DoctorAgent 1 and DoctorAgent 2 concur with the MetaAgent’s
+perspective, revising their initial assessments and addressing previ-
+ously overlooked critical factors. Upon reaching consensus among
+all DoctorAgents, the MetaAgent performs a final summary and
+delivers the ultimate report.
+6.6 RQ6: Cost Analysis
+To evaluate the practical viability of the ColaCare framework in
+real-world clinical settings, we conduct an analysis of its computa-
+tional costs, as illustrated in Tab. 6. With DeepSeek-V2.5,ColaCare
+costs approximately $0.013 USD per patient, demonstrating its cost-
+effectiveness and practical viability for integration into clinical
+workflows.
+Table 6: A verage time and token cost ofColaCare in in-hospital
+mortality and 30-day readmission prediction tasks on MIMIC-
+IV, CDSL, and ESRD datasets.
+Cost MIMIC-IV OutcomeMIMIC-IV ReadmissionCDSL OutcomeESRD Outcome
+Prompt Tokens 59,113.06 62,759.91 124,074.52 72,151.11
+Output Tokens 4,435.91 4,570.47 5,456.79 6,156.30
+# API Requests 8.56 8.37 10.39 11.86
+6.7 RQ7: Human Evaluation
+We conduct a systematic questionnaire-based human evaluation
+study using peritoneal dialysis patient data. We engage 12 experi-
+enced medical practitioners (5-15 years of experience) from nephrol-
+ogy departments across 5 hospitals. Practitioners rate agreement
+levels (1-5) for each patient case.ColaCare achieves a mean score of
+4.4 vs. ConCare’s 3.2, demonstrating strong alignment with expert
+clinical judgment. Blinded evaluations confirm that ColaCare’s
+interpretability closely matches human expert practice patterns.
+7 Conclusion
+This paper presents ColaCare, a framework that enhances EHR
+modeling through LLM-driven multi-agent collaboration.ColaCare
+combines a knowledge-infused Multidisciplinary Team ensemble
+within an LLM-driven multi-agent system, supported by RAG for
+accessing up-to-date medical knowledge. This design mirrors the
+collaborative and iterative nature of real-world clinical decision-
+making processes, delivering human-interpretable, personalized
+predictions with patient-specific evidence while identifying and
+rectifying potential errors. Experiments on three real-world EHR
+datasets demonstrate ColaCare’s better performance in mortality
+and readmission predictions. By simulating real clinical team dy-
+namics, ColaCare advances personalized precision medicine and
+has the potential to transform clinical decision support systems
+and healthcare delivery.
+Ethical Use of Data
+All EHR data used in this study are de-identified EHR datasets. We
+adhere to the data usage policy. The MIMIC-IV dataset is processed
+using secure Azure OpenAI API and human review of the data has
+been waived.
+Acknowledgments
+This work was supported by the National Natural Science Foun-
+dation of China (62402017, U23A20468), Beijing Natural Science
+Foundation (L244063), Xuzhou Scientific Technological Projects
+(KC23143), Peking University Medicine plus X Pilot Program-Key
+Technologies R&D Project (2024YXXLHGG007). Junyi Gao acknowl-
+edges the receipt of studentship awards from the Health Data Re-
+search UK-The Alan Turing Institute Wellcome PhD Programme in
+Health Data Science (Grant Ref: 218529/Z/19/Z).
+
+===== PAGE 8 =====
+WWW ’25, April 28–May 2, 2025, Sydney, NSW, Australia. Zixiang Wang et al.
+DoctorAgent 3DoctorAgent 1 DoctorAgent 2
+MetaAgent
+DoctorAgent 3DoctorAgent 1 DoctorAgent 2
+Mortality risk from the expert model (AdaCare)
+The mortality prediction risk for the patient from AdaCare model is 0.55 out of 1.0. The 
+risk is at the middle 30% levels among all ESRD patients. The expert model especially 
+pays great attention to the following features:
+Feature importance and population-level stats
+Carbon dioxide binding power: with importance weight of 0.788 out of 1.0. The feature 
+value is 18.7 mmol/L, which is 32.0% lower than the median value of survival patients 
+(27.4 mmol/L), 32.0% lower than the median value of deceased patients (27.5 mmol/L). 
+The reference range for healthy people is 20 mmol/L to 29 mmol/L. The reference range 
+for ESRD patients is higher than 25 mmol/L.
+… …
+Retrieved relevant documents
+Document [1] (Title: Hemodialysis - Genitourinary Disorders - MSD Manual 
+Professional Edition) A patient’s blood is pumped into a dialyzer containing 2 fluid 
+compartments configured as bundles of hollow fiber capillary tubes or as parallel, 
+sandwiched sheets of semipermeable membranes. In either configuration, blood in the first 
+compartment is pumped along one side of a semipermeable membrane while a crystalloid 
+solution (dialysate) is pumped along the other side, in a separate compartment, in the 
+opposite direction. …
+Document [2] …
+… …
+Mortality risk from the expert model (ConCare)
+The mortality prediction risk for the patient from ConCare model is 0.17 out of 1.0. The 
+risk is at the bottom 40% levels among all ESRD patients. The expert model especially 
+pays great attention to the following features:
+Feature importance and population-level stats
+Diastolic blood pressure: with importance weight of 1.0 out of 1.0. The feature value is 
+85.0 mmHg, which is 6.0% higher than the median value of survival patients (80.0 mmHg), 
+21.0% higher than the median value of deceased patients (70.0 mmHg). The reference 
+range for healthy people is 60 mmHg to 80 mmHg. The reference range for ESRD 
+patients is higher than 70 mmHg.
+… …
+Retrieved relevant documents
+Document [1] (Title: Renal Insufficiency in Pregnancy - Gynecology and Obstetrics -
+MSD Manual Professional Edition) Renal disorders often do not worsen during 
+pregnancy; noninfectious renal disorders are usually exacerbated only when uncontrolled 
+hypertension coexists. However, significant renal insufficiency (serum creatinine > 3 mg/dL 
+[>> 30 mg/dL [>Maternal renal insufficiency may cause Fetal growth restriction. …
+Document [2] …
+… …
+Mortality risk from the expert model (RETAIN)
+The mortality prediction risk for the patient from RETAIN model is 0.69 out of 1.0. The risk 
+is at the top 30% levels among all ESRD patients. The expert model especially pays great 
+attention to the following features:
+Feature importance and population-level stats
+Blood potassium: with importance weight of 0.749 out of 1.0. The feature value is 3.11 
+mmol/L, which is 27.0% lower than the median value of survival patients (4.25 mmol/L), 
+24.0% lower than the median value of deceased patients (4.07 mmol/L). The reference 
+range for healthy people is 3.5 mmol/L to 5.5 mmol/L. The reference range for ESRD 
+patients is higher than 4 mmol/L.
+… …
+Retrieved relevant documents
+Document [1] (Title: Chronic Kidney Disease - Genitourinary Disorders - MSD 
+Manual Professional Edition) Chronic kidney disease (CKD) is long-standing, 
+progressive deterioration of renal function. Symptoms develop slowly and in advanced 
+stages include anorexia, nausea, vomiting, stomatitis, dysgeusia, nocturia, lassitude, 
+fatigue, pruritus, decreased mental acuity, muscle twitches and cramps, water retention, 
+undernutrition, peripheral neuropathies, and seizures. ...
+Document [2] …
+…
+Review
+The patient, a 46-year-old female with End-Stage Renal Disease (ESRD) due to chronic 
+glomerulonephritis, exhibits a moderate mortality risk of 0.55. At the final time-point, 
+key indicators reveal concerning trends: 
+Carbon dioxide binding power is 18.7 mmol/L, significantly below the ESRD reference 
+range of >25 mmol/L, indicating metabolic acidosis, a condition associated with muscle 
+wasting and accelerated kidney disease progression. 
+Albumin levels are 30.2 g/L, also below the ESRD reference range of >32 g/L, 
+suggesting malnutrition and increased susceptibility to infections. 
+Despite these low values, food intake is 3495.67 g, higher than both survival and 
+deceased patient medians, which may indicate an attempt to compensate for poor 
+nutrient absorption or increased metabolic demands. 
+These findings align with the AI model's high importance weights for these features, 
+underscoring their critical role in the patient's prognosis.
+Review
+The patient, a 46-year-old female with End-Stage Renal Disease (ESRD) due to chronic 
+glomerulonephritis, exhibits a mortality risk of 0.17, which is relatively low among 
+ESRD patients. 
+At the final time-point, her diastolic blood pressure of 85.0 mmHg is within the ESRD 
+reference range (>70 mmHg) and is notably higher than the median value of 
+deceased patients (70.0 mmHg), suggesting a potential protective effect against 
+mortality. 
+The patient's blood chlorine level of 98.0 mmol/L is within the normal range for ESRD 
+patients and is slightly higher than the median value of deceased patients, further 
+supporting a lower mortality risk.
+Her creatinine level is 768.0 μmol/L, which, although elevated, is lower than the typical 
+ESRD reference range (>900 μmol/L), indicating some degree of renal function risk. 
+Overall, the patient's condition appears relatively stable, with key biomarkers indicating a 
+lower likelihood of adverse outcomes.
+Review
+The patient, a 46-year-old female with End-Stage Renal Disease (ESRD) due to chronic 
+glomerulonephritis, exhibits several concerning trends at the final time-point. 
+Notably, her blood potassium level is 3.11 mmol/L, significantly below the reference 
+range for ESRD patients (>4 mmol/L), indicating a potential risk for cardiac 
+arrhythmias and muscle weakness.
+Additionally, her albumin level is 30.2 g/L, which is lower than the reference range for 
+ESRD patients (>32 g/L), suggesting malnutrition or inadequate protein intake. 
+Despite these concerning biochemical markers, her food intake (3495.67 g) is higher 
+than the median values for both survival and deceased patients, which may indicate an 
+attempt to compensate for nutritional deficits but could also contribute to fluid 
+overload. 
+Overall, the patient's condition is precarious, with significant risks related to 
+electrolyte imbalances, nutritional status, and cardiovascular health, all of which are 
+critical in ESRD management.
+Reference
+Document [1]: Renal Insufficiency in Pregnancy - Gynecology and Obstetrics - MSD 
+Manual Professional Edition - 'Maternal renal insufficiency may cause Fetal growth 
+restriction Stillbirth After kidney transplantation, full-term, uncomplicated pregnancy is often 
+possible if women have all of the following: A transplanted kidney that has been in place 
+for > 2 years Normal renal function No episodes of rejection Normal blood pressure (BP) 
+Delivery is usually required before term because preeclampsia, fetal growth restriction, or 
+uteroplacental insufficiency develop.’,
+Document [2]: Hemodialysis - Genitourinary Disorders - MSD Manual Professional Edition -
+'Overall adjusted annual mortality in hemodialysis-dependent patients is about 16%. The 5-
+year survival rate is lower for patients with diabetes than for patients with 
+glomerulonephritis.',
+Document [3]: Chronic Kidney Disease - Genitourinary Disorders - MSD Manual 
+Professional Edition - 'Chronic kidney disease (CKD) is long-standing, progressive 
+deterioration of renal function. Symptoms develop slowly and in advanced stages include 
+anorexia, nausea, vomiting, stomatitis, dysgeusia, nocturia, lassitude, fatigue, pruritus, 
+decreased mental acuity, muscle twitches and cramps, water retention, undernutrition, 
+peripheral neuropathies, and seizures.'
+Round 1 - Review
+I agree with the meta doctor, and I change my original perspective.
+The meta doctor's opinion aligns with the critical findings of metabolic acidosis, 
+hypoalbuminemia, and hypokalemia, which are significant indicators of poor prognosis in 
+ESRD.  My previous analysis did not fully emphasize the severity of these electrolyte 
+imbalances and their combined impact on cardiovascular health.  The high food intake, 
+while noted, does not mitigate the severe nutritional deficits indicated by hypoalbuminemia.  
+The inclusion of hypokalemia in the meta doctor's assessment is crucial, as it directly 
+relates to cardiovascular risks and overall metabolic stability, which are paramount in 
+ESRD management.
+Round 1 - Review
+I agree with the meta doctor, and I change my original perspective.
+The meta doctor's opinion highlights critical factors that were overlooked in my 
+initial analysis.
+Specifically, the presence of metabolic acidosis, hypoalbuminemia, and hypokalemia are 
+significant indicators of a high mortality risk. 
+Metabolic acidosis (carbon dioxide binding power of 18.7 mmol/L) can lead to muscle 
+wasting, bone loss, and accelerated kidney disease progression (Document [1]). 
+Hypoalbuminemia (albumin level of 30.2 g/L) suggests poor nutritional status and 
+increased susceptibility to infections and fluid retention, which are common complications in 
+ESRD patients (Document [1]). 
+Hypokalemia (blood potassium level of 3.11 mmol/L) can cause cardiac arrhythmias and 
+muscle weakness, further complicating the patient's condition (Document [1]). 
+Therefore, these key features collectively suggest a high mortality risk, aligning with 
+the meta doctor's opinion.
+Round 1 - Review
+I agree with the meta doctor.
+The synthesized report accurately captures the critical issues affecting the patient's 
+prognosis. The patient's hypokalemia, hypoalbuminemia, and metabolic acidosis are 
+significant indicators of poor prognosis in ESRD patients, as highlighted in Document [1]. 
+Hypokalemia can lead to severe cardiac arrhythmias and muscle weakness, while 
+hypoalbuminemia suggests inadequate protein intake or malnutrition, both of which are 
+associated with increased mortality risk. The patient's higher food intake, while attempting 
+to compensate for nutritional deficits, may also contribute to fluid overload, a common 
+complication in ESRD. The ongoing cardiovascular stress indicated by the patient's blood 
+pressure further exacerbates her condition. These factors collectively contribute to a 
+high mortality risk, aligning with the meta doctor's opinion.
+Round 1 - Reference
+Document [1]: 'Moderate metabolic acidosis (plasma bicarbonate content 15 to 20 mmol/L) 
+is characteristic. Acidosis causes muscle wasting due to protein catabolism, bone loss due 
+to bone buffering of acid, and accelerated progression of kidney disease.',
+Document [1]: 'Anemia is characteristic of moderate to advanced CKD (\u2265 stage 3). 
+The anemia of CKD is normochromic-normocytic, with a hematocrit of 20 to 30% (35 to 
+40% in patients with polycystic kidney disease).',
+Document [1]: 'Potassium-sparing diuretics, angiotensin-converting enzyme inhibitors, beta-
+blockers, nonsteroidal anti-inflammatory drugs may raise plasma potassium levels in 
+patients with less advanced renal failure.'
+Round 1 - Reference
+Document [1]: Decreased renal function interferes with the kidneys\u2019 ability to maintain 
+fluid and electrolyte homeostasis. Moderate metabolic acidosis (plasma bicarbonate 
+content 15 to 20 mmol/L) is characteristic. Acidosis causes muscle wasting due to protein 
+catabolism, bone loss due to bone buffering of acid, and accelerated progression of kidney 
+disease.,
+Document [1]: Anemia is characteristic of moderate to advanced CKD (\u2265 stage 3). 
+The anemia of CKD is normochromic-normocytic, with a hematocrit of 20 to 30% (35 to 
+40% in patients with polycystic kidney disease).,
+Document [1]: Potassium-sparing diuretics, angiotensin-converting enzyme inhibitors, beta-
+blockers, nonsteroidal anti-inflammatory drugs may raise plasma potassium levels in 
+patients with less advanced renal failure.
+Round 1 - Reference
+Document [1]: 'Decreased renal function interferes with the kidneys\u2019 ability to 
+maintain fluid and electrolyte homeostasis. The ability to concentrate urine declines early 
+and is followed by decreases in ability to excrete excess phosphate, acid, and potassium.',
+Document [1]: 'Hypertension is present in > 80% of patients with advanced CKD and is 
+usually related to hypervolemia.',
+Document [3]: 'Volume overload generally refers to expansion of the extracellular fluid (ECF) 
+volume. ECF volume expansion typically occurs in heart failure, acute or chronic kidney 
+failure, nephrotic syndrome, and cirrhosis.'
+MetaAgent - Final Report
+The patient, a 46-year-old female with End-Stage Renal Disease (ESRD) due to chronic 
+glomerulonephritis, exhibits significant biochemical abnormalities including metabolic 
+acidosis, hypoalbuminemia, and hypokalemia. These conditions indicate severe 
+nutritional deficits, electrolyte imbalances, and potential cardiovascular risks. 
+Despite increased food intake, the patient's nutritional status remains compromised, 
+suggesting poor nutrient absorption or increased metabolic demands. 
+These factors collectively contribute to a precarious condition with significant risks 
+related to electrolyte imbalances, nutritional status, and cardiovascular health, all of 
+which are critical in ESRD management.
+Step 1. Generation of Initial Reviews
+Step 2. Synthesized Preliminary Report
+Step 3. Collaborative Consultation Process
+Concatenate
+Generate initial review
+Report
+The patient, a 46-year-old female with End-Stage Renal Disease (ESRD) due to chronic 
+glomerulonephritis, exhibits several concerning trends that collectively indicate a high 
+mortality risk. 
+Key features include metabolic acidosis (carbon dioxide binding power of 18.7 mmol/L), 
+hypoalbuminemia (albumin level of 30.2 g/L), and hypokalemia (blood potassium level 
+of 3.11 mmol/L). These biochemical abnormalities suggest significant nutritional deficits, 
+electrolyte imbalances, and potential cardiovascular risks. 
+Despite a higher food intake, the patient's nutritional status remains compromised, 
+indicating poor nutrient absorption or increased metabolic demands. 
+These factors collectively contribute to a precarious condition with significant risks 
+related to electrolyte imbalances, nutritional status, and cardiovascular health, all of which 
+are critical in ESRD management.
+Reference
+Chronic Kidney Disease - Genitourinary Disorders - MSD Manual Professional Edition: 
+'Moderate metabolic acidosis (plasma bicarbonate content 15 to 20 mmol/L) is 
+characteristic. Acidosis causes muscle wasting due to protein catabolism, bone loss due 
+to bone buffering of acid, and accelerated progression of kidney disease.’,
+Chronic Kidney Disease - Genitourinary Disorders - MSD Manual Professional Edition: 
+'Undernutrition leading to generalized tissue wasting is a prominent feature of chronic 
+uremia.’,
+Hemodialysis - Genitourinary Disorders - MSD Manual Professional Edition -
+'Hypotension has multiple causes, including too-rapid water removal, osmotic fluid shifts 
+across cell membranes, acetate in the dialysate, heat-related vasodilation, allergic 
+reactions, sepsis, and underlying conditions (eg, autonomic neuropathy, cardiomyopathy 
+with poor ejection fraction, myocardial ischemia, arrhythmias).’,
+Chronic Kidney Disease - Genitourinary Disorders - MSD Manual Professional Edition -
+'Anemia is a common complication of moderate to advanced CKD (\u2265 stage 3) and, 
+when severe, can cause symptoms such as fatigue, pallor, and dyspnea. The anemia of 
+CKD is normochromic-normocytic, with a hematocrit of 20 to 30% (35 to 40% in patients 
+with polycystic kidney disease). It is usually caused by deficient erythropoietin production 
+due to a reduction of functional renal mass.'
+Generate synthesized report
+MetaAgent
+Express opinions
+Generate final report
+Agreement reached
+Patient Record
+Here is the patient's basic information:
+This female patient, aged 46.33, is an End-Stage Renal Disease(ESRD) patient with original disease Chronic glomerulonephritis.
+Here is multivariate time-series electronic health record (EHR) data of the patient, a structured collection of patient information comprising multiple clinical variables measured at various time points across multiple patient visits, represented as sequences of numerical values for each feature:
+- Blood chlorine: "99.0, 99.0, 100.0, 102.0, 102.0, 102.0, 98.0, 101.0, 99.9, 100.0, 102.0, 102.0, 100.0, 98.0, 92.0, 96.0, 101 .0, 101.0, 93.0, 96.0, 101.0, 97.0, 101.0, 97.0, 102.0, 100.0, 99.0, 100.0, 99.0, 96.0, 98.0". Unit: mmol/L. Reference range f or healthy people: 96 mmol/L to 106 mmol/L. Reference range for ESRD 
+patients: higher than 96 mmol/L.
+- Carbon dioxide binding power: "22.9, 22.9, 25.6, 24.5, 24.5, 26.3, 22.5, 22.2, 24.0, 22.6, 24.3, 24.3, 21.7, 26.4, 26.6, 29.0 , 26.7, 26.7, 27.7, 26.2, 25.9, 26.8, 22.6, 23.2, 24.3, 23.1, 25.1, 26.3, 25.0, 20.4, 18.7". Unit: mmol/L. Reference range for healthy people: 20 mmol/L to 29 mmol/L. Reference range for ESRD patients: 
+higher than 25 mmol/L.
+- … …
+The patient's EHR data is recorded at the following time points:
+2007-07-17, 2007-10-16, 2007-12-18, 2008-04-22, 2008-07-01, 2008-10-01, 2009-04-14, 2009-07-01, 2009-11-25, 2010-01-01, 2010-04-01, 2010-07-01, 2010-10-01, 2011-01-05, 2011-08-04, 2011-12-06, 2012-03-06, 2012-04-24, 2012-06-05, 2012-08-06, 2012-10-09, 2012-12-04, 2013-02-05, 2013-03-05, 2013-08-06, 2013-
+10-22, 2014-03-04, 2014-06-26, 2014-10-17, 2015-01-26, 2015-03-19.
+Supported by
+Concatenate Concatenate
+Supported by
+Supported by
+Express opinions Express opinions
+Generate initial review Generate initial review
+Supported by
+Supported by
+Supported by
+Reference
+Document [1]: Chronic Kidney Disease - Genitourinary Disorders - MSD Manual 
+Professional Edition - 'Anemia is a common complication of moderate to advanced CKD 
+(\u2265 stage 3) and, when severe, can cause symptoms such as fatigue, pallor, and 
+dyspnea. The anemia of CKD is normochromic-normocytic, with a hematocrit of 20 to 30% 
+(35 to 40% in patients with polycystic kidney disease). It is usually caused by deficient 
+erythropoietin production due to a reduction of functional renal mass.’,
+Document [1]: Chronic Kidney Disease - Genitourinary Disorders - MSD Manual 
+Professional Edition - 'Patients with CKD have small shrunken kidneys (usually \u2264 10 
+cm in length) with thinned, hyperechoic cortex. Obtaining a precise diagnosis becomes 
+increasingly difficult as renal function reaches values close to those of end-stage kidney 
+disease.’,
+Document [3]: Hemodialysis - Genitourinary Disorders - MSD Manual Professional Edition -
+'Hypotension has multiple causes, including too-rapid water removal, osmotic fluid shifts 
+across cell membranes, acetate in the dialysate, heat-related vasodilation, allergic 
+reactions, sepsis, and underlying conditions (eg, autonomic neuropathy, cardiomyopathy 
+with poor ejection fraction, myocardial ischemia, arrhythmias).'
+Reference
+Chronic Kidney Disease - Genitourinary Disorders - MSD Manual Professional Edition: 
+'Moderate metabolic acidosis (plasma bicarbonate content 15 to 20 mmol/L) is 
+characteristic. Acidosis causes muscle wasting due to protein catabolism, bone loss due to 
+bone buffering of acid, and accelerated progression of kidney disease.',
+Chronic Kidney Disease - Genitourinary Disorders - MSD Manual Professional Edition: 
+'Anemia is characteristic of moderate to advanced CKD (\u2265 stage 3). The anemia of 
+CKD is normochromic-normocytic, with a hematocrit of 20 to 30% (35 to 40% in patients 
+with polycystic kidney disease). It is usually caused by deficient erythropoietin production 
+due to a reduction of functional renal mass.',
+Chronic Kidney Disease - Genitourinary Disorders - MSD Manual Professional Edition: 
+'Undernutrition leading to generalized tissue wasting is a prominent feature of chronic 
+uremia.'
+Figure 3: The case of a patient from ESRD dataset, who deceased within one year after the last follow-up visit. Important indicators
+are shown in dark red color. Diseases are shown in red color. Healthy indicators are shown in green color.
+
+===== PAGE 9 =====
+ColaCare: Enhancing EHR Modeling through LLM-Driven Multi-Agent Collaboration WWW ’25, April 28–May 2, 2025, Sydney, NSW, Australia.
+References
+[1] Josh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Floren-
+cia Leoni Aleman, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal
+Anadkat, et al. 2023. GPT-4 Technical Report. arXiv preprint arXiv:2303.08774
+(2023).
+[2] Justin Chen, Swarnadeep Saha, and Mohit Bansal. 2024. ReConcile: Round-
+Table Conference Improves Reasoning via Consensus among Diverse LLMs. In
+Proceedings of the 62nd Annual Meeting of the Association for Computational
+Linguistics (Volume 1: Long Papers) , Lun-Wei Ku, Andre Martins, and Vivek
+Srikumar (Eds.). Association for Computational Linguistics, Bangkok, Thailand,
+7066–7085. https://doi.org/10.18653/v1/2024.acl-long.381
+[3] Zeming Chen, Alejandro Hernández Cano, Angelika Romanou, Antoine Bonnet,
+Kyle Matoba, Francesco Salvi, Matteo Pagliardini, Simin Fan, Andreas Köpf,
+Amirkeivan Mohtashami, et al. 2023. Meditron-70b: Scaling medical pretraining
+for large language models. arXiv preprint arXiv:2311.16079 (2023).
+[4] Edward Choi, Mohammad Taha Bahadori, Le Song, Walter F Stewart, and Jimeng
+Sun. 2017. GRAM: graph-based attention model for healthcare representation
+learning. In Proceedings of the 23rd ACM SIGKDD international conference on
+knowledge discovery and data mining . 787–795.
+[5] Edward Choi, Mohammad Taha Bahadori, Jimeng Sun, Joshua Kulas, Andy
+Schuetz, and Walter Stewart. 2016. Retain: An interpretable predictive model
+for healthcare using reverse time attention mechanism. Advances in neural
+information processing systems 29 (2016).
+[6] DeepSeek-AI. 2024. DeepSeek-V2: A Strong, Economical, and Efficient Mixture-
+of-Experts Language Model. arXiv:2405.04434 [cs.CL]
+[7] Yilun Du, Shuang Li, Antonio Torralba, Joshua B Tenenbaum, and Igor Mordatch.
+2023. Improving factuality and reasoning in language models through multiagent
+debate. arXiv preprint arXiv:2305.14325 (2023).
+[8] William A Falcon. 2019. Pytorch lightning. GitHub 3 (2019).
+[9] Zhihao Fan, Jialong Tang, Wei Chen, Siyuan Wang, Zhongyu Wei, Jun Xi, Fei
+Huang, and Jingren Zhou. 2024. AI Hospital: Benchmarking Large Language
+Models in a Multi-agent Medical Interaction Simulator. arXiv:2402.09742 [cs.CL]
+https://arxiv.org/abs/2402.09742
+[10] Hui Feng, Francesco Ronzano, Jude LaFleur, Matthew Garber, Rodrigo de Oliveira,
+Kathryn Rough, Katharine Roth, Jay Nanavati, Khaldoun Zine El Abidine, and
+Christina Mack. 2024. Evaluation of large language model performance on the
+Biomedical Language Understanding and Reasoning Benchmark. medRxiv (2024),
+2024–05.
+[11] Mehmet Fırat and Saniye Kuleli. 2023. What if GPT4 became autonomous: The
+Auto-GPT project and use cases. Journal of Emerging Computer Technologies 3, 1
+(2023), 1–6.
+[12] Yarin Gal and Zoubin Ghahramani. 2016. Dropout as a bayesian approximation:
+Representing model uncertainty in deep learning. In international conference on
+machine learning. PMLR, 1050–1059.
+[13] Junyi Gao, Yinghao Zhu, Wenqing Wang, Guiying Dong, Wen Tang, Hao Wang,
+Yasha Wang, Ewen M Harrison, and Liantao Ma. 2024. A Comprehensive Bench-
+mark for COVID-19 Predictive Modeling Using Electronic Health Records in
+Intensive Care. Patterns (2024). https://doi.org/10.1016/j.patter.2024.100951
+[14] Benjamin S Glicksberg, Prem Timsina, Dhaval Patel, Ashwin Sawant, Akhil
+Vaid, Ganesh Raut, Alexander W Charney, Donald Apakama, Brendan G
+Carr, Robert Freeman, Girish N Nadkarni, and Eyal Klang. 2024. Eval-
+uating the accuracy of a state-of-the-art large language model for pre-
+diction of admissions from the emergency room. Journal of the Amer-
+ican Medical Informatics Association (05 2024), ocae103. https://doi.org/
+10.1093/jamia/ocae103 arXiv:https://academic.oup.com/jamia/advance-article-
+pdf/doi/10.1093/jamia/ocae103/57728551/ocae103.pdf
+[15] Chuan Guo, Geoff Pleiss, Yu Sun, and Kilian Q Weinberger. 2017. On calibration of
+modern neural networks. In International conference on machine learning . PMLR,
+1321–1330.
+[16] Taicheng Guo, Xiuying Chen, Yaqi Wang, Ruidi Chang, Shichao Pei, Nitesh V
+Chawla, Olaf Wiest, and Xiangliang Zhang. 2024. Large language model based
+multi-agents: A survey of progress and challenges.arXiv preprint arXiv:2402.01680
+(2024).
+[17] Changho Han, Dong Won Kim, Songsoo Kim, Seng Chan You, Jin Young Park,
+SungA Bae, and Dukyong Yoon. 2024. Evaluation of GPT-4 for 10-year cardio-
+vascular risk prediction: Insights from the UK Biobank and KoGES data. Iscience
+27, 2 (2024).
+[18] Hrayr Harutyunyan, Hrant Khachatrian, David C Kale, Greg Ver Steeg, and Aram
+Galstyan. 2019. Multitask learning and benchmarking with clinical time series
+data. Scientific data 6, 1 (2019), 96.
+[19] Shengxin Hong, Liang Xiao, Xin Zhang, and Jianxia Chen. 2024. ArgMed-Agents:
+Explainable Clinical Decision Reasoning with Large Language Models via Argu-
+mentation Schemes. arXiv preprint arXiv:2403.06294 (2024).
+[20] HM Hospitales. 2020. Covid Data Save Lives. https://www.hmhospitales.com/
+prensa/notas-de-prensa/comunicado-covid-data-save-lives. Accessed: 2024-06-
+05.
+[21] Danqing Hu, Bing Liu, Xiaofeng Zhu, and Nan Wu. 2024. The Power of Combining
+Data and Knowledge: GPT-4o is an Effective Interpreter of Machine Learning
+Models in Predicting Lymph Node Metastasis of Lung Cancer. arXiv preprint
+arXiv:2407.17900 (2024).
+[22] Pengcheng Jiang, Cao Xiao, Adam Richard Cross, and Jimeng Sun. 2024. Graph-
+Care: Enhancing Healthcare Predictions with Personalized Knowledge Graphs.
+In The Twelfth International Conference on Learning Representations .
+[23] Qiao Jin, Won Kim, Qingyu Chen, Donald C Comeau, Lana Yeganova, W John
+Wilbur, and Zhiyong Lu. 2023. MedCPT: Contrastive Pre-trained Transform-
+ers with large-scale PubMed search logs for zero-shot biomedical information
+retrieval. Bioinformatics 39, 11 (2023), btad651.
+[24] Alistair EW Johnson, Lucas Bulgarelli, Lu Shen, Alvin Gayles, Ayad Shammout,
+Steven Horng, Tom J Pollard, Sicheng Hao, Benjamin Moody, Brian Gow, et al.
+2023. MIMIC-IV, a freely accessible electronic health record dataset. Scientific
+data 10, 1 (2023), 1.
+[25] Uriel Katz, Eran Cohen, Eliya Shachar, Jonathan Somer, Adam Fink, Eli Morse,
+Beki Shreiber, and Ido Wolf. 2024. GPT versus Resident Physicians—A Benchmark
+Based on Official Board Scores. NEJM AI 1, 5 (2024), AIdbp2300192.
+[26] Misuk Kim and Kyu-Baek Hwang. 2022. An empirical evaluation of sampling
+methods for the classification of imbalanced data.PLoS One 17, 7 (2022), e0271260.
+[27] Balaji Lakshminarayanan, Alexander Pritzel, and Charles Blundell. 2017. Simple
+and scalable predictive uncertainty estimation using deep ensembles. Advances
+in neural information processing systems 30 (2017).
+[28] Junkai Li, Siyu Wang, Meng Zhang, Weitao Li, Yunghwei Lai, Xinhui Kang,
+Weizhi Ma, and Yang Liu. 2024. Agent hospital: A simulacrum of hospital with
+evolvable medical agents. arXiv preprint arXiv:2405.02957 (2024).
+[29] Tian Liang, Zhiwei He, Wenxiang Jiao, Xing Wang, Yan Wang, Rui Wang,
+Yujiu Yang, Zhaopeng Tu, and Shuming Shi. 2023. Encouraging divergent
+thinking in large language models through multi-agent debate. arXiv preprint
+arXiv:2305.19118 (2023).
+[30] Ilya Loshchilov and Frank Hutter. 2017. Decoupled weight decay regularization.
+arXiv preprint arXiv:1711.05101 (2017).
+[31] Fenglong Ma, Quanzeng You, Houping Xiao, Radha Chitta, Jing Zhou, and Jing
+Gao. 2018. Kame: Knowledge-based attention model for diagnosis prediction in
+healthcare. In Proceedings of the 27th ACM International Conference on Information
+and Knowledge Management. 743–752.
+[32] Liantao Ma, Junyi Gao, Yasha Wang, Chaohe Zhang, Jiangtao Wang, Wenjie
+Ruan, Wen Tang, Xin Gao, and Xinyu Ma. 2020. AdaCare: Explainable Clinical
+Health Status Representation Learning via Scale-Adaptive Feature Extraction
+and Recalibration. Proceedings of the AAAI Conference on Artificial Intelligence
+34, 01 (Apr. 2020), 825–832. https://doi.org/10.1609/aaai.v34i01.5427
+[33] Liantao Ma, Chaohe Zhang, Junyi Gao, Xianfeng Jiao, Zhihao Yu, Yinghao Zhu,
+Tianlong Wang, Xinyu Ma, Yasha Wang, Wen Tang, Xinju Zhao, Wenjie Ruan,
+and Tao Wang. 2023. Mortality prediction with adaptive feature importance
+recalibration for peritoneal dialysis patients. Patterns 4, 12 (2023). https://doi.
+org/10.1016/j.patter.2023.100892
+[34] Liantao Ma, Chaohe Zhang, Yasha Wang, Wenjie Ruan, Jiangtao Wang, Wen
+Tang, Xinyu Ma, Xin Gao, and Junyi Gao. 2020. Concare: Personalized clinical
+feature embedding via capturing the healthcare context. In Proceedings of the
+AAAI Conference on Artificial Intelligence, Vol. 34. 833–840.
+[35] Xinyu Ma, Yasha Wang, Xu Chu, Liantao Ma, Wen Tang, Junfeng Zhao, Ye
+Yuan, and Guoren Wang. 2022. Patient Health Representation Learning via
+Correlational Sparse Prior of Medical Features. IEEE Transactions on Knowledge
+and Data Engineering (2022).
+[36] Matthew B. A. McDermott, Lasse Hyldig Hansen, Haoran Zhang, Giovanni
+Angelotti, and Jack Gallifant. 2024. A Closer Look at AUROC and AUPRC under
+Class Imbalance. arXiv preprint arXiv:2401.06091 (2024).
+[37] Nikita Mehandru, Brenda Y Miao, Eduardo Rodriguez Almaraz, Madhumita Sushil,
+Atul J Butte, and Ahmed Alaa. 2024. Evaluating large language models as agents
+in the clinic. NPJ digital medicine 7, 1 (2024), 84.
+[38] Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory
+Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, et al. 2019.
+Pytorch: An imperative style, high-performance deep learning library. Advances
+in neural information processing systems 32 (2019).
+[39] Brindha Pillay, Addie C Wootten, Helen Crowe, Niall Corcoran, Ben Tran, Patrick
+Bowden, Jane Crowe, and Anthony J Costello. 2016. The impact of multidisci-
+plinary team meetings on patient assessment, management and outcomes in
+oncology settings: a systematic review of the literature. Cancer treatment reviews
+42 (2016), 56–72.
+[40] Robert S Porter and Justin L Kaplan. 2011. The Merck manual of diagnosis and
+therapy. Merck Sharp & Dohme Corp.
+[41] Karan Singhal, Shekoofeh Azizi, Tao Tu, S Sara Mahdavi, Jason Wei, Hyung Won
+Chung, Nathan Scales, Ajay Tanwani, Heather Cole-Lewis, Stephen Pfohl, et al.
+2023. Large language models encode clinical knowledge. Nature 620, 7972 (2023),
+172–180.
+[42] Mukund Sundararajan and Amir Najmi. 2020. The many Shapley values for model
+explanation. In International conference on machine learning . PMLR, 9269–9278.
+
+===== PAGE 10 =====
+WWW ’25, April 28–May 2, 2025, Sydney, NSW, Australia. Zixiang Wang et al.
+[43] Liyan Tang, Zhaoyi Sun, Betina Idnay, Jordan G Nestor, Ali Soroush, Pierre A Elias,
+Ziyang Xu, Ying Ding, Greg Durrett, Justin F Rousseau, et al. 2023. Evaluating
+large language models on medical evidence summarization. NPJ digital medicine
+6, 1 (2023), 158.
+[44] Xiangru Tang, Anni Zou, Zhuosheng Zhang, Ziming Li, Yilun Zhao, Xingyao
+Zhang, Arman Cohan, and Mark Gerstein. 2024. MedAgents: Large Language
+Models as Collaborators for Zero-shot Medical Reasoning. In Findings of the
+Association for Computational Linguistics ACL 2024 , Lun-Wei Ku, Andre Martins,
+and Vivek Srikumar (Eds.). Association for Computational Linguistics, Bangkok,
+Thailand and virtual meeting, 599–621. https://doi.org/10.18653/v1/2024.findings-
+acl.33
+[45] Dave Van Veen, Cara Van Uden, Louis Blankemeier, Jean-Benoit Delbrouck, Asad
+Aali, Christian Bluethgen, Anuj Pareek, Malgorzata Polacin, Eduardo Pontes Reis,
+Anna Seehofnerová, et al. 2024. Adapted large language models can outperform
+medical experts in clinical text summarization. Nature medicine 30, 4 (2024),
+1134–1142.
+[46] Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed Chi, Sharan Narang,
+Aakanksha Chowdhery, and Denny Zhou. 2022. Self-consistency improves chain
+of thought reasoning in language models. arXiv preprint arXiv:2203.11171 (2022).
+[47] Sanghyun Woo, Jongchan Park, Joon-Young Lee, and In So Kweon. 2018. Cbam:
+Convolutional block attention module. In Proceedings of the European conference
+on computer vision (ECCV) . 3–19.
+[48] Hao Wu, Yinghao Zhu, Zixiang Wang, Xiaochen Zheng, Ling Wang, Wen Tang,
+Yasha Wang, Chengwei Pan, Ewen M Harrison, Junyi Gao, et al. 2024. EHRFlow:
+A Large Language Model-Driven Iterative Multi-Agent Electronic Health Record
+Data Analysis Workflow. In KDD’24 Workshop: Artificial Intelligence and Data
+Science for Healthcare: Bridging Data-Centric AI and People-Centric Healthcare .
+[49] Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu, Shaokun Zhang, Erkang
+Zhu, Beibin Li, Li Jiang, Xiaoyun Zhang, and Chi Wang. 2023. Autogen: Enabling
+next-gen llm applications via multi-agent conversation framework.arXiv preprint
+arXiv:2308.08155 (2023).
+[50] Qianqian Xie, Qingyu Chen, Aokun Chen, Cheng Peng, Yan Hu, Fongci Lin,
+Xueqing Peng, Jimin Huang, Jeffrey Zhang, Vipina Keloth, et al . 2024. Me-
+llama: Foundation large language models for medical applications. arXiv preprint
+arXiv:2402.12749 (2024).
+[51] Hao Xue and Flora D Salim. 2023. Promptcast: A new prompt-based learning
+paradigm for time series forecasting. IEEE Transactions on Knowledge and Data
+Engineering (2023).
+[52] Xi Yang, Aokun Chen, Nima PourNejatian, Hoo Chang Shin, Kaleb E Smith,
+Christopher Parisien, Colin Compas, Cheryl Martin, Mona G Flores, Ying Zhang,
+et al. 2022. GatorTron: a large clinical language model to unlock patient informa-
+tion from unstructured electronic health records. arXiv preprint arXiv:2203.03540
+(2022).
+[53] Chaohe Zhang, Xu Chu, Liantao Ma, Yinghao Zhu, Yasha Wang, Jiangtao Wang,
+and Junfeng Zhao. 2022. M3Care: Learning with Missing Modalities in Multimodal
+Healthcare Data. InProceedings of the 28th ACM SIGKDD Conference on Knowledge
+Discovery and Data Mining (Washington DC, USA) (KDD ’22). Association for
+Computing Machinery, New York, NY, USA, 2418–2428. https://doi.org/10.1145/
+3534678.3539388
+[54] Chaohe Zhang, Xin Gao, Liantao Ma, Yasha Wang, Jiangtao Wang, and Wen Tang.
+2021. GRASP: Generic Framework for Health Status Representation Learning
+Based on Incorporating Knowledge from Similar Patients. Proceedings of the
+AAAI Conference on Artificial Intelligence 35, 1 (May 2021), 715–723. https:
+//doi.org/10.1609/aaai.v35i1.16152
+[55] Yinghao Zhu, Junyi Gao, Zixiang Wang, Weibin Liao, Xiaochen Zheng, Lifang
+Liang, Yasha Wang, Chengwei Pan, Ewen M Harrison, and Liantao Ma. 2024.
+Is larger always better? Evaluating and prompting large language models for
+non-generative medical tasks. arXiv preprint arXiv:2407.18525 (2024).
+[56] Yinghao Zhu, Changyu Ren, Zixiang Wang, Xiaochen Zheng, Shiyun Xie, Junlan
+Feng, Xi Zhu, Zhoujun Li, Liantao Ma, and Chengwei Pan. 2024. EMERGE:
+Enhancing Multimodal Electronic Health Records Predictive Modeling with
+Retrieval-Augmented Generation. In Proceedings of the 33rd ACM International
+Conference on Information and Knowledge Management . 3549–3559.
+[57] Yinghao Zhu, Wenqing Wang, Junyi Gao, and Liantao Ma. 2024. PyEHR: A
+Predictive Modeling Toolkit for Electronic Health Records. https://github.com/
+yhzhu99/pyehr.
+[58] Yinghao Zhu, Zixiang Wang, Junyi Gao, Yuning Tong, Jingkun An, Weibin Liao,
+Ewen M Harrison, Liantao Ma, and Chengwei Pan. 2024. Prompting large lan-
+guage models for zero-shot clinical prediction with structured longitudinal elec-
+tronic health record data. arXiv preprint arXiv:2402.01713 (2024).
+[59] Yinghao Zhu, Zixiang Wang, Long He, Shiyun Xie, Xiaochen Zheng, Liantao Ma,
+and Chengwei Pan. 2024. PRISM: Mitigating EHR Data Sparsity via Learning from
+Missing Feature Calibrated Prototype Patient Representations. In Proceedings of
+the 33rd ACM International Conference on Information and Knowledge Management.
+3560–3569.
+A Limitations and Future Work
+While ColaCare demonstrates promising results in enhancing EHR
+modeling, several limitations and areas for future work remain:
+• Generalizability: Our current study focuses on mortality and
+readmission prediction tasks across three datasets and employs
+large language models, including DeepSeek-V2.5 and GPT-4o.
+Further research is needed to evaluate ColaCare’s performance
+on a broader range of clinical prediction tasks and diverse EHR
+datasets. Additionally, incorporating more LLMs, both closed-
+source and open-source, such as Claude, Gemini, LLaMA, and
+Qwen, could further validate the framework’s generalizability to
+meet users’ flexible needs.
+• Human Evaluation: Although ColaCare generates interpretable
+reports that are examined by expert doctors in our case studies,
+more extensive human evaluation involving a larger cohort of
+clinicians is necessary.
+• Continuous Learning: The current parameterization of EHR-
+specific models stays fixed after training on full datasets. Develop-
+ing mechanisms that enable ColaCare to continuously learn and
+update its parameters based on feedback from LLM agents and
+real-world clinical data remains an area to explore to enhance its
+adaptability and performance over time in dynamic healthcare
+environments.
+Our future work aims to address these limitations to further
+improve the effectiveness and applicability of ColaCare in real-
+world clinical settings. By leveraging a broader set of LLMs and
+introducing mechanisms for confidence estimation and continuous
+learning, we aim to create a more robust, interpretable, and adaptive
+tool for EHR modeling and clinical decision-making.
+B Supplemental Experiments
+We employed M3Care, AICare, and PRISM as ColaCare’s expert
+models (and compared them individually). Results validate Co-
+laCare’s effectiveness in enhancing performance through DoctorA-
+gents, MetaAgent collaboration, debate, and LLM reasoning. Fur-
+thermore, we compared the latest EMERGE model that incorporates
+external knowledge graphs and uses RAG, demonstrating that Co-
+laCare performs better.
+• M3Care [53]: Learning with Missing Modalities in Multimodal
+Healthcare Data
+• AICare [33]: Mortality prediction with adaptive feature impor-
+tance recalibration for peritoneal dialysis patients
+• PRISM [59]: Mitigating EHR Data Sparsity via Learning from
+Missing Feature Calibrated Prototype Patient Representations
+• EMERGE [56]: Enhancing Multimodal Electronic Health Records
+Predictive Modeling with Retrieval-Augmented Generation
+C Example Prompt Templates
+C.1 Prompt Template of DoctorAgent’s Initial
+Review
+1. Here is the relevant evidence (Ð Docs):
+Document [0] (Title: Diabetic Nephropathy - Genitourinary Dis-
+orders ...
+Document [1] ......
+...
+
+===== PAGE 11 =====
+ColaCare: Enhancing EHR Modeling through LLM-Driven Multi-Agent Collaboration WWW ’25, April 28–May 2, 2025, Sydney, NSW, Australia.
+Table 7: Overall performance of in-hospital mortality and 30-day readmission prediction results on MIMIC-IV, CDSL, and ESRD
+datasets.
+Methods MIMIC-IV Outcome MIMIC-IV Readmission CDSL Outcome ESRD Outcome
+AUPRC (↑) AUROC ( ↑) min(+P, Se) (↑) AUPRC (↑) AUROC ( ↑) min(+P, Se) (↑) AUPRC (↑) AUROC ( ↑) min(+P, Se) (↑) AUPRC (↑) AUROC ( ↑) min(+P, Se) (↑)
+M3Care 52.77±4.57 87.45 ±1.28 53.26 ±3.79 50.62±4.30 80.14 ±1.84 51.59 ±3.46 76.17±3.96 93.91 ±1.19 70.69 ±3.64 56.52±6.86 71.97 ±4.12 54.81 ±5.36
+AICare 50.20±4.58 87.66 ±1.41 48.77 ±3.74 49.51±4.13 80.35 ±1.84 49.87 ±3.39 83.69±3.08 94.19 ±0.98 76.78 ±2.97 62.37±6.26 75.35 ±3.86 59.23 ±5.42
+PRISM 52.23±4.22 87.68 ±1.23 53.01 ±3.59 50.95±4.05 80.38 ±1.93 52.01 ±3.41 84.28±3.14 95.16 ±0.87 78.05 ±2.86 62.13±5.84 73.11 ±3.87 54.16 ±4.93
+EnsembleMean 54.54±4.45 88.80 ±1.25 54.19 ±3.77 51.13±4.18 80.90 ±1.84 50.75 ±3.43 86.04±3.19 96.71 ±0.83 79.39 ±2.91 63.40±6.20 76.90 ±3.62 63.48 ±4.70
+EnsembleWeightedMean 54.61±4.45 88.82 ±1.24 54.22 ±3.81 51.12±4.18 80.89 ±1.84 50.79 ±3.43 86.19±3.17 96.73 ±0.83 79.38 ±2.98 63.16±6.18 77.15±3.61 64.05 ±4.75
+EnsembleTemperature 54.78±4.45 88.83 ±1.24 54.47 ±3.85 51.22±4.18 80.89 ±1.85 51.07 ±3.37 85.65±3.19 96.57 ±0.85 78.79 ±2.82 64.74±6.45 74.41 ±3.71 60.89 ±4.71
+EnsembleDeep 54.43±4.55 88.41 ±1.27 54.22 ±3.77 51.09±4.15 80.67 ±1.85 50.76 ±3.40 86.78±2.92 96.83 ±0.80 79.12 ±2.88 65.50±6.18 73.96 ±3.61 63.49 ±4.59
+MC-Dropout 54.62±4.49 88.10 ±1.69 54.77 ±4.00 51.02±4.65 83.75 ±2.05 50.62 ±3.99 86.29±4.25 96.58 ±1.46 78.36 ±3.41 65.62±5.74 74.29 ±4.27 63.23 ±5.37
+EMERGE 53.08±4.65 88.09 ±1.26 53.94 ±3.73 51.35±3.89 82.27±1.88 51.44 ±3.37 81.56±4.34 95.92 ±1.53 46.03 ±19.15 56.45±6.80 75.14 ±3.47 57.26 ±4.96
+ColaCare 55.24±4.60 89.40 ±1.20 54.99 ±3.66 50.68±4.08 84.22±1.82 52.51 ±3.42 87.55±3.28 97.62 ±0.98 80.68 ±2.99 68.62±6.23 74.51±4.08 62.78 ±5.15
+2. Here is the patient record, including the patient’s basic
+information and analysis results of AI models (𝒙𝑟𝑒𝑐𝑜𝑟𝑑 ):
+(𝐼𝑛𝑓 𝑜 𝑝𝑎𝑡𝑖𝑒𝑛𝑡 ) This male patient, aged 65.73, is an End-Stage Renal
+Disease (ESRD) patient with original disease Diabetic Nephropa-
+thy, and basic disease Diabetes ...
+(Logit 𝒛) The mortality prediction risk for the patient from
+AdaCare model is 0.01 out of 1.0 .
+(Feature 𝜶 ) We pay great attention to these features: Carbon
+dioxide binding power: with shap value of 0.165. The feature
+value ...
+3. You need to analyze the patient’s condition based on
+the above information and generate an analytical review
+(𝒓𝑚𝑒𝑡𝑎 ).
+C.2 Prompt Template of MetaAgent’s
+Synthesized Report
+1. First, please read the patient’s basic information care-
+fully (𝐼𝑛𝑓 𝑜 𝑝𝑎𝑡𝑖𝑒𝑛𝑡 ):
+This male patient, aged 65.73, is an End-Stage Renal Disease
+(ESRD) patient with original disease Diabetic Nephropathy, and
+basic disease Diabetes.
+2. All doctors made a diagnosis on the patient’s condition
+and gave their reasons as follows (Í 𝒓𝑑𝑜𝑐𝑡𝑜𝑟 ):
+Doctor 0: The mortality risk of the patient is: 0.01. The patient’s
+basic condition is: a 65-year-old male with End-Stage Renal Dis-
+ease due to ... The retrieved evidence: ...
+Doctor 1: ...
+3. You need to consider all doctors’ opinions carefully and
+write a synthesized report (𝒓𝑚𝑒𝑡𝑎 ).
+C.3 Prompt Template of DoctorAgents’
+Collaboration
+1. Here is your initial review, you may adjust it based on
+the meta doctor’s report(𝒓 𝑗 −1
+𝑑𝑜𝑐𝑡𝑜𝑟 ) :
+The patient’s basic condition is: a 65-year-old male with End-
+Stage Renal Disease due to ...
+2. Here is the synthesized report generated by the meta
+doctor (𝒓 𝑗 −1
+𝑚𝑒𝑡𝑎 ):
+(1) In my opinion, the patient has a high risk of mortality.
+(2) The patient exhibits significant clinical markers of severe
+renal dysfunction and metabolic imbalances......
+3. Here is the relevant document newly retrieved by the
+retriever module (Ð 𝐷𝑜𝑐𝑠 ):
+Document [0] (Title: Hemodialysis ...
+Document [1] ...
+4. You need to consider the synthesized report carefully
+and provide your own opinions (𝒓 𝑗
+𝑑𝑜𝑐𝑡𝑜𝑟 ).
+C.4 Prompt Template of MetaAgent’s Next
+Action
+1. Several doctors put forward their own opinions and rea-
+sons (Í 𝒓 𝑗 −1
+𝑑𝑜𝑐𝑡𝑜𝑟 ):
+Doctor 0’s statement is: Iagree with the meta doctor. The reason
+is: the patient’s condition, as described in the report, aligns with
+the high risk...
+Doctor 1’s statement is: Idisagree with the meta doctor. The
+reason is ... The evidence is ...
+2. Next, you need to judge whether the next round of discus-
+sion is needed based on each doctor’s statement (Action𝑗 ).
+C.5 Prompt Template of MetaAgent’s Revised
+Report
+1. In the previous discussion, you gave the report (𝒓 𝑗 −1
+𝑚𝑒𝑡𝑎 ):
+The patient has a high risk of mortality. Key concerns include
+significantly low systolic and diastolic blood pressures...
+2. All the doctors offered new perspectives (Í 𝒓 𝑗 −1
+𝑑𝑜𝑐𝑡𝑜𝑟 ):
+Doctor 0’s statement is: the mortality risk of the patient is 0.15.
+The patient shows a low mortality risk of ... The supporting
+evidence is: Document [3] (Title: Anemia of Renal Disease ...
+Document ...
+Doctor 1’s statement is: ......
+3. You need to consider all the doctors’ new ideas and mod-
+ify your original report (𝒓 𝑗
+𝑚𝑒𝑡𝑎 ).
+D Detailed Dataset Description
+We adopt three real-world datasets: MIMIC-IV, CDSL, and ESRD
+datasets and additionally introduce the MSD (Merck Manual of
+Diagnosis and Therapy) medical guideline to enhance our experi-
+mental framework.
+• MIMIC-IV [24]: MIMIC-IV is part of the Medical Information
+Mart for Intensive Care project. It contains comprehensive EHR
+
+===== PAGE 12 =====
+WWW ’25, April 28–May 2, 2025, Sydney, NSW, Australia. Zixiang Wang et al.
+data for intensive care unit patients, including demographic infor-
+mation, vital signs, laboratory results, procedures, medications,
+clinical notes, and mortality statistics. For our study, we focus on
+the clinical notes, demographic data, and laboratory test features.
+• CDSL [20]: This dataset is derived from the HM Hospitales EHR
+system and consists of anonymized records of 4,479 patients
+admitted with a confirmed or suspected diagnosis of COVID-
+19. CDSL offers a rich variety of medical features, including
+comprehensive details on diagnoses, treatments, admissions, ICU
+stays, diagnostic imaging tests, laboratory results, and patient
+discharge or death status.
+• ESRD [33]: The end-stage renal disease (ESRD) dataset comprises
+data from 656 patients, including 13,091 visit records collected
+over a 12-year period, from January 1, 2006, to January 1, 2018.
+This longitudinal dataset features patients’ baseline information,
+visit records, and clinical outcomes.
+We incorporate the Merck Manual of Diagnosis and Therapy
+(MSD) medical guideline [40] into our framework ColaCare. The
+MSD guideline is a comprehensive medical reference that provides
+detailed information on various diseases, corresponding diagnoses,
+and treatment protocols.

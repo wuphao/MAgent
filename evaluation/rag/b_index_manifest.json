@@ -1,0 +1,121 @@
+{
+  "schema_version": "rag_b_index_build/1",
+  "index_id": "knowledge_index_f0b477f110d47905a5d8",
+  "db": "evaluation\\rag\\knowledge_index.sqlite3",
+  "manifest": {
+    "schema_version": "knowledge_index_manifest/1",
+    "strategy_version": "structured-markdown-parent-child/1",
+    "documents": [
+      {
+        "document_id": "xx_v1_dictionary",
+        "version": "2026-09-07",
+        "content_hash": "e2c76084248402532a896ddea60556171e6028bfae701be2f024d94faf67053a",
+        "chunk_count": 3
+      }
+    ]
+  },
+  "chunk_count": 3,
+  "child_chunk_count": 2,
+  "parent_chunk_count": 1,
+  "sample_chunks": [
+    {
+      "chunk_id": "parent_0ab8d58f7f6dbd9ff94c",
+      "document_id": "xx_v1_dictionary",
+      "document_version": "2026-09-07",
+      "title": "XX-v1 测试量表说明",
+      "text": "# XX-v1 测试量表说明\n\nXX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。\n\n缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+      "locator": "section:XX-v1 测试量表说明",
+      "keywords": [
+        "xx-v1",
+        "total",
+        "条目",
+        "缺失"
+      ],
+      "chunk_kind": "parent",
+      "parent_chunk_id": null,
+      "section_path": [
+        "XX-v1 测试量表说明"
+      ],
+      "page": null,
+      "char_start": 0,
+      "char_end": 170,
+      "content_hash": "cd0e3eb9e0f8ac934b3ed41582abdc12f79227568cecfa640bcd85e15c85325e",
+      "metadata": {
+        "applies_to": [
+          "XX-v1"
+        ],
+        "instrument_versions": [
+          "xx-v1"
+        ],
+        "effective_from": null,
+        "effective_to": null,
+        "review_status": "draft"
+      }
+    },
+    {
+      "chunk_id": "chunk_20735f547427e2ac2d2d",
+      "document_id": "xx_v1_dictionary",
+      "document_version": "2026-09-07",
+      "title": "XX-v1 测试量表说明",
+      "text": "XX-v1 total 表示四个条目的求和。若来源字段名为 total 但数值与条目和不一致，应先复核字段定义和记录定位，不能直接覆盖原始值。",
+      "locator": "section:XX-v1 测试量表说明:child:0",
+      "keywords": [
+        "xx-v1",
+        "total",
+        "条目"
+      ],
+      "chunk_kind": "child",
+      "parent_chunk_id": "parent_0ab8d58f7f6dbd9ff94c",
+      "section_path": [
+        "XX-v1 测试量表说明"
+      ],
+      "page": null,
+      "char_start": null,
+      "char_end": null,
+      "content_hash": "0fdca2bf374f289eda8ea116c9ad2f7100dde91343b390c3304b2c24019c699d",
+      "metadata": {
+        "applies_to": [
+          "XX-v1"
+        ],
+        "instrument_versions": [
+          "xx-v1"
+        ],
+        "effective_from": null,
+        "effective_to": null,
+        "review_status": "draft"
+      }
+    },
+    {
+      "chunk_id": "chunk_6c222e7a99d1183a5e3b",
+      "document_id": "xx_v1_dictionary",
+      "document_version": "2026-09-07",
+      "title": "XX-v1 测试量表说明",
+      "text": "缺失条目不能按 0 自动填补。缺失原因应保留到 observation metadata，并由评分能力返回 insufficient 或 limitation。",
+      "locator": "section:XX-v1 测试量表说明:child:1",
+      "keywords": [
+        "条目",
+        "缺失"
+      ],
+      "chunk_kind": "child",
+      "parent_chunk_id": "parent_0ab8d58f7f6dbd9ff94c",
+      "section_path": [
+        "XX-v1 测试量表说明"
+      ],
+      "page": null,
+      "char_start": null,
+      "char_end": null,
+      "content_hash": "9aa77d2a28bb280825e85706e8125bc4eeef5383de75c9c7b8ecda5278baef33",
+      "metadata": {
+        "applies_to": [
+          "XX-v1"
+        ],
+        "instrument_versions": [
+          "xx-v1"
+        ],
+        "effective_from": null,
+        "effective_to": null,
+        "review_status": "draft"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "knowledge_rag_config/1",
+  "embedding": {
+    "provider": "ollama",
+    "base_url": "http://localhost:11434",
+    "model": "qwen3-embedding:0.6b",
+    "document_template_version": "rag-doc-embedding/1",
+    "query_template_version": "rag-query-embedding/1",
+    "query_instruction": "Instruct: Retrieve reference passages that answer the question, including relevant conditions and exceptions.\nQuery: {query}",
+    "truncate": false,
+    "batch_size": 8,
+    "concurrency": 1
+  }
+}

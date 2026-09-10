@@ -3,6 +3,22 @@ from __future__ import annotations
 from multi_agent.domain.tasks import RetryPolicy, TaskDependency, TaskSpec
 
 
+def rwe_patient_tasks() -> list[TaskSpec]:
+    specialists = [
+        TaskSpec(task_id=task_id, agent_name=agent, required=False,
+            depends_on=[TaskDependency(task_id="rwe_quality", mode="required_success")])
+        for task_id, agent in (
+            ("rwe_assessment", "RWEAssessmentAgent"),
+            ("rwe_longitudinal", "RWELongitudinalAgent"),
+            ("rwe_laboratory", "RWELaboratoryAgent"),
+            ("rwe_modalities", "RWEModalitiesAgent"),
+        )
+    ]
+    return [TaskSpec(task_id="rwe_quality", agent_name="RWEQualityAgent"), *specialists,
+        TaskSpec(task_id="synthesis_report", agent_name="SynthesisAgent",
+            depends_on=[TaskDependency(task_id=t.task_id, mode="terminal") for t in specialists])]
+
+
 def source_inventory_tasks() -> list[TaskSpec]:
     return [
         TaskSpec(task_id="inventory", capability_id="source_inventory", capability_version="stage01/1", resource_class="cpu")

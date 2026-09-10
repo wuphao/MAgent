@@ -1,0 +1,18 @@
+{
+  "schema_version": "rag_a1_ollama_embedding_probe/1",
+  "model": "qwen3-embedding:0.6b",
+  "base_url": "http://localhost:11434",
+  "status": "success",
+  "checks": [
+    {
+      "name": "document_batch",
+      "count": 2,
+      "dimension": 1024
+    },
+    {
+      "name": "query_single",
+      "count": 1,
+      "dimension": 1024
+    }
+  ]
+}
